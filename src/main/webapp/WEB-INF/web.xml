@@ -1,0 +1,5 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+    <!--<welcome-file>
+        index.jsp
+    </welcome-file>-->
+</web-app>
