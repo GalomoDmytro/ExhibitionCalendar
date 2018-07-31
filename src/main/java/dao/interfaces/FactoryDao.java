@@ -1,15 +1,17 @@
 package dao.interfaces;
 
-public interface FactoryDao extends DBHelperDao {
+import java.sql.Connection;
 
-    UserDao createUser();
+public interface FactoryDao{
 
-    ExhibitionDao createExhibition();
+    UserDao createUser(Connection connection);
 
-    ExhibitionCenterDao createExhibitionCenter();
+    ExhibitionDao createExhibition(Connection connection);
 
-    ExhibitionContractDao createExhibitionContract();
+    ExhibitionCenterDao createExhibitionCenter(Connection connection);
 
-    TicketDao createTicket();
+    ExhibitionContractDao createExhibitionContract(Connection connection);
+
+    TicketDao createTicket(Connection connection);
 
 }

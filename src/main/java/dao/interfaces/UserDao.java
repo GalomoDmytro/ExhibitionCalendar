@@ -1,22 +1,23 @@
 package dao.interfaces;
 
 import entities.User;
+import exceptions.DBException;
 
 import java.util.List;
 
-public interface UserDao extends DBHelperDao {
+public interface UserDao {
 
-    User getById(Integer id);
+    User getById(Integer id) throws DBException;
 
-    User getByName(String name);
+    User getByName(String name) throws DBException;
 
-    User getByMail(String eMail);
+    User getByMail(String eMail) throws DBException;
 
-    List<User> getAllUsers();
+    List<User> getAllUsers() throws DBException;
 
-    User updateUser(User user);
+    void updateUser(User user) throws DBException;
 
-    User createUser(User user);
+    void insertUser(User user) throws DBException;
 
-    boolean deleteUser(User user);
+    void deleteUser(String mail) throws DBException;
 }

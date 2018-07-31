@@ -11,8 +11,8 @@ public class User {
     private List<String> phone;
     private String firstName;
     private String lastName;
-    private String password;
-    private List<Role> role;
+    private Integer password;
+    private Role role;
 
     public Integer getId() {
         return id;
@@ -30,11 +30,11 @@ public class User {
         this.name = name;
     }
 
-    public String geteMail() {
+    public String getMail() {
         return eMail;
     }
 
-    public void seteMail(String eMail) {
+    public void setMail(String eMail) {
         this.eMail = eMail;
     }
 
@@ -62,19 +62,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
+    public Integer getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Integer password) {
         this.password = password;
     }
 
-    public List<Role> getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(List<Role> role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -129,8 +129,8 @@ public class User {
             return this;
         }
 
-        public Builder seteMail(String eMail) {
-            user.seteMail(eMail);
+        public Builder setMail(String eMail) {
+            user.setMail(eMail);
             return this;
         }
 
@@ -149,12 +149,12 @@ public class User {
             return this;
         }
 
-        public Builder setPassword(String password) {
+        public Builder setPassword(Integer password) {
             user.setPassword(password);
             return this;
         }
 
-        public Builder setRole(List<Role> role) {
+        public Builder setRole(Role role) {
             user.setRole(role);
             return this;
         }
