@@ -16,4 +16,6 @@ public interface FactoryDao{
 
     RoleDao createRole(Connection connection);
 
+    UserPhonesDao createUserePhones(Connection connection);
+
 }
