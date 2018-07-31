@@ -123,7 +123,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     public void updateContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.updateUser"))) {
             prepareStatementToUpdate(statement, contract);
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeQuery();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -132,7 +132,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     @Override
     public void insertContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement
-                (QUERIES.getString("ticket.create"), Statement.RETURN_GENERATED_KEYS)) {
+                (QUERIES.getString("contract.insertContract"), Statement.RETURN_GENERATED_KEYS)) {
             prepareStatementToInsert(statement, contract);
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
@@ -155,9 +155,10 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
     @Override
     public void deleteContract(Contract contract) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.updateUser"))) {
-            prepareStatementToUpdate(statement, contract);
-            ResultSet resultSet = statement.executeQuery();
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.deleteContract"))) {
+            statement.setInt(1, contract.getId());
+            statement.executeQuery();
+            statement.executeQuery();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

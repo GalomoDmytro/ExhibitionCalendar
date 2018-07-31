@@ -2,6 +2,7 @@ package dao.mysql;
 
 import dao.interfaces.RoleDao;
 import entities.Role;
+import entities.User;
 import exceptions.DBException;
 
 import java.sql.Connection;
@@ -40,9 +41,30 @@ public class RoleMySQL implements RoleDao {
         return role;
     }
 
+    @Override
+    public void insertRole(User user, Role role) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.insert"))) {
+            statement.setInt(1, user.getId());
+            statement.setString(2, role.toString());
+            statement.executeQuery();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void delete(User user) throws DBException{
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.delete"))) {
+            statement.setInt(1, user.getId());
+            statement.executeQuery();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
     private void setRole(Role role, String stringRole) {
         switch (stringRole) {
-            case "ADMINT":
+            case "ADMIN":
                 role = Role.ADMIN;
                 return;
 

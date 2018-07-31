@@ -6,7 +6,6 @@ public class Exhibition {
 
     private Integer id;
     private String title;
-    private String description;
     private String imgSrc;
 
     public Integer getId() {
@@ -25,13 +24,6 @@ public class Exhibition {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getImgSrc() {
         return imgSrc;
@@ -46,7 +38,6 @@ public class Exhibition {
         return "Exhibition{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
                 ", imgSrc='" + imgSrc + '\'' +
                 '}';
     }
@@ -58,13 +49,12 @@ public class Exhibition {
         Exhibition that = (Exhibition) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(title, that.title) &&
-                Objects.equals(description, that.description) &&
                 Objects.equals(imgSrc, that.imgSrc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, imgSrc);
+        return Objects.hash(id, title, imgSrc);
     }
 
     public static class Builder {
@@ -81,16 +71,6 @@ public class Exhibition {
 
         public Builder setTitle(String title) {
             exhibition.setTitle(title);
-            return this;
-        }
-
-        public Builder setDescription(String description) {
-            exhibition.setDescription(description);
-            return this;
-        }
-
-        public Builder setImgSrc(String imgSrc) {
-            exhibition.setDescription(imgSrc);
             return this;
         }
 
