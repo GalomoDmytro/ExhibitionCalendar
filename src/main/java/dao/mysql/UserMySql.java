@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 
 public class UserMySql implements UserDao {
 
-    private ConnectionManagerMySQL query = new ConnectionManagerMySQL();
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
 

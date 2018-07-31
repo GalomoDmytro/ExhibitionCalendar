@@ -14,4 +14,6 @@ public interface FactoryDao{
 
     TicketDao createTicket(Connection connection);
 
+    RoleDao createRole(Connection connection);
+
 }
