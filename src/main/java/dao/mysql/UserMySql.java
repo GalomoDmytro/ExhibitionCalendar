@@ -29,53 +29,6 @@ public class UserMySql implements UserDao {
         this.connection = connection;
     }
 
-    private List<User> parseUsersSet(ResultSet resultSet) throws DBException {
-        List<User> users = new ArrayList<>();
-
-        try {
-            while (resultSet.next()) {
-                User user = new User.Builder()
-                        .setId(resultSet.getInt(FIELD_ID))
-                        .setName(resultSet.getString(FIELD_NAME))
-                        .setMail(resultSet.getString(FIELD_MAIL))
-                        .setFirstName(resultSet.getString(FIELD_FIRST_NAME))
-                        .setLastName(resultSet.getString(FIELD_LAST_NAME))
-                        .setPassword(resultSet.getInt(FIELD_PASSWORD))
-                        .build();
-                users.add(user);
-            }
-        } catch (SQLException exception) {
-            throw new DBException(exception);
-        }
-
-        return users;
-    }
-
-    private void prepareStatementToInsert(PreparedStatement statement, User user) throws DBException {
-        try {
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getMail());
-            statement.setString(3, user.getFirstName());
-            statement.setString(4, user.getLastName());
-            statement.setInt(5, user.getPassword());
-        } catch (SQLException exception) {
-            throw new DBException(exception);
-        }
-    }
-
-    private void prepareStatementToUpdate(PreparedStatement statement, User user) throws DBException {
-        try {
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getMail());
-            statement.setString(3, user.getFirstName());
-            statement.setString(4, user.getLastName());
-            statement.setInt(5, user.getPassword());
-            statement.setInt(6, user.getId());
-        } catch (SQLException exception) {
-            throw new DBException(exception);
-        }
-    }
-
     @Override
     public User getById(Integer id) throws DBException {
         List<User> user = null;
@@ -187,7 +140,53 @@ public class UserMySql implements UserDao {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.delete"))) {
             statement.setString(1, mail);
             ResultSet resultSet = statement.executeQuery();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
 
+    private List<User> parseUsersSet(ResultSet resultSet) throws DBException {
+        List<User> users = new ArrayList<>();
+
+        try {
+            while (resultSet.next()) {
+                User user = new User.Builder()
+                        .setId(resultSet.getInt(FIELD_ID))
+                        .setName(resultSet.getString(FIELD_NAME))
+                        .setMail(resultSet.getString(FIELD_MAIL))
+                        .setFirstName(resultSet.getString(FIELD_FIRST_NAME))
+                        .setLastName(resultSet.getString(FIELD_LAST_NAME))
+                        .setPassword(resultSet.getInt(FIELD_PASSWORD))
+                        .build();
+                users.add(user);
+            }
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        return users;
+    }
+
+    private void prepareStatementToInsert(PreparedStatement statement, User user) throws DBException {
+        try {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getMail());
+            statement.setString(3, user.getFirstName());
+            statement.setString(4, user.getLastName());
+            statement.setInt(5, user.getPassword());
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    private void prepareStatementToUpdate(PreparedStatement statement, User user) throws DBException {
+        try {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getMail());
+            statement.setString(3, user.getFirstName());
+            statement.setString(4, user.getLastName());
+            statement.setInt(5, user.getPassword());
+            statement.setInt(6, user.getId());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

@@ -26,7 +26,7 @@ public class UserPhoneMySql implements UserPhonesDao {
     public List<String> getPhones(String eMail) throws DBException{
         List<String> phones = new ArrayList<>();
 
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.getPhones"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("phone.getPhones"))) {
             statement.setString(1, eMail);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {

@@ -1,6 +1,6 @@
 package entities;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Ticket {
@@ -9,7 +9,7 @@ public class Ticket {
     private Date dateToApply;
     private Integer contractId;
     private Date dateTransaction;
-    private String userName;
+    private String userEMail;
 
     public Integer getId() {
         return id;
@@ -43,12 +43,12 @@ public class Ticket {
         this.dateTransaction = dateTransaction;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserMail() {
+        return userEMail;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userEMail = userName;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Ticket {
                 ", dateToApply=" + dateToApply +
                 ", contractId=" + contractId +
                 ", dateTransaction=" + dateTransaction +
-                ", userName='" + userName + '\'' +
+                ", userName='" + userEMail + '\'' +
                 '}';
     }
 
@@ -71,12 +71,12 @@ public class Ticket {
                 Objects.equals(dateToApply, ticket.dateToApply) &&
                 Objects.equals(contractId, ticket.contractId) &&
                 Objects.equals(dateTransaction, ticket.dateTransaction) &&
-                Objects.equals(userName, ticket.userName);
+                Objects.equals(userEMail, ticket.userEMail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dateToApply, contractId, dateTransaction, userName);
+        return Objects.hash(id, dateToApply, contractId, dateTransaction, userEMail);
     }
 
     public static class Builder {
@@ -107,8 +107,8 @@ public class Ticket {
             return this;
         }
 
-        public Builder setUserName(String userName) {
-            ticket.setUserName(userName);
+        public Builder setUserMail(String email) {
+            ticket.setUserName(email);
             return this;
         }
 
