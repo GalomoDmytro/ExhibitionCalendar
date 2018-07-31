@@ -198,7 +198,7 @@ public class TicketMySql implements TicketDao {
             statement.setInt(2, ticket.getContractId());
             statement.setDate(3, ticket.getDateTransaction());
             statement.setString(4, ticket.getUserMail());
-            statement.setInt(4, ticket.getId());
+            statement.setInt(5, ticket.getId());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

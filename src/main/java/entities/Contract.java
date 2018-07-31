@@ -1,7 +1,6 @@
 package entities;
 
-import java.math.BigInteger;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Contract {
@@ -11,7 +10,7 @@ public class Contract {
     private Integer exCenterId;
     private Date dateFrom;
     private Date dateTo;
-    private BigInteger ticketPrice;
+    private Double ticketPrice;
     private String workTime;
     private Integer maxTicketPerDay;
 
@@ -55,11 +54,11 @@ public class Contract {
         this.dateTo = dateTo;
     }
 
-    public BigInteger getTicketPrice() {
+    public Double getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(BigInteger ticketPrice) {
+    public void setTicketPrice(Double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 
@@ -146,7 +145,7 @@ public class Contract {
             return this;
         }
 
-        public Builder setTicketPrice(BigInteger ticketPrice) {
+        public Builder setTicketPrice(Double ticketPrice) {
             contract.setTicketPrice(ticketPrice);
             return this;
         }

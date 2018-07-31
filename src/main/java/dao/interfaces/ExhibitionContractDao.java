@@ -19,11 +19,11 @@ public interface ExhibitionContractDao {
 
     List<Contract> getAllContracts() throws DBException;
 
-    Contract updateContract(Contract contract) throws DBException;
+    void updateContract(Contract contract) throws DBException;
 
-    Contract createContract(Contract contract) throws DBException;
+    void insertContract(Contract contract) throws DBException;
 
-    boolean deleteContract(Contract contract) throws DBException;
+    void deleteContract(Contract contract) throws DBException;
 
 
 }
