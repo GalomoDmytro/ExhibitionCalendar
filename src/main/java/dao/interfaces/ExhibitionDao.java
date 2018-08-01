@@ -11,11 +11,11 @@ public interface ExhibitionDao {
 
     Exhibition getExhibitionByTitle(String title) throws DBException;
 
-    void insertExhibition(Exhibition exhibitionCenter) throws DBException;
+    void insertExhibition(Exhibition exhibition) throws DBException;
 
-    void updateExhibition(Exhibition exhibitionCenter) throws DBException;
+    void updateExhibition(Exhibition exhibition) throws DBException;
 
     List<Exhibition> getAllExhibition() throws DBException;
 
-    void deleteExhibition(Exhibition exhibitionCenter) throws DBException;
+    void deleteExhibition(Exhibition exhibition) throws DBException;
 }

@@ -13,11 +13,12 @@ public interface ExhibitionCenterDao {
 
     ExhibitionCenter getExhibitionCenterByMail(String eMail) throws DBException;
 
-    ExhibitionCenter createExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
-
-    ExhibitionCenter updateExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
-
     List<ExhibitionCenter> getAllExhibitionCenter() throws DBException;
 
-    boolean deleteExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
+    void deleteExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
+
+    void createExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
+
+    void updateExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
+
 }

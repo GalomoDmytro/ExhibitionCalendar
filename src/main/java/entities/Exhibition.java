@@ -8,6 +8,8 @@ public class Exhibition {
     private String title;
     private String imgSrc;
 
+    public Exhibition(){}
+
     public Integer getId() {
         return id;
     }
@@ -35,7 +37,7 @@ public class Exhibition {
 
     @Override
     public String toString() {
-        return "Exhibition{" +
+        return "ExhibitionMySql{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", imgSrc='" + imgSrc + '\'' +
@@ -60,7 +62,7 @@ public class Exhibition {
     public static class Builder {
         private Exhibition exhibition;
 
-        Builder() {
+        public Builder() {
             exhibition = new Exhibition();
         }
 
@@ -71,6 +73,11 @@ public class Exhibition {
 
         public Builder setTitle(String title) {
             exhibition.setTitle(title);
+            return this;
+        }
+
+        public Builder setImgSrc(String src) {
+            exhibition.setImgSrc(src);
             return this;
         }
 
