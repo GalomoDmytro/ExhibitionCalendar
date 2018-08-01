@@ -4,7 +4,7 @@ import exceptions.DBException;
 
 import java.util.List;
 
-public interface UserPhonesDao {
+public interface UserPhoneDao {
 
     List<String>  getPhones(String eMail) throws DBException;
     void insertPhone(String mail, String phone) throws DBException;

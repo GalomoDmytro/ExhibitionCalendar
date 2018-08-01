@@ -104,8 +104,7 @@ public class UserMySql implements UserDao {
     public void updateUser(User user) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.updateUser"))) {
             prepareStatementToUpdate(statement, user);
-            ResultSet resultSet = statement.executeQuery();
-
+            statement.executeQuery();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -139,7 +138,7 @@ public class UserMySql implements UserDao {
     public void deleteUser(String mail) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.delete"))) {
             statement.setString(1, mail);
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeQuery();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

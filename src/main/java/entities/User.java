@@ -84,7 +84,7 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", eMail='" + eMail + '\'' +
-                ", phone='" + phone.toString() + '\'' +
+//                ", phone='" + phone.toString() + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", role=" + role +

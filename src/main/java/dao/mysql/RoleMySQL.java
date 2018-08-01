@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RoleMySQL implements RoleDao {
+public class RoleMySql implements RoleDao {
 
     private static final String FIELD_ID = "id";
 
@@ -19,7 +19,7 @@ public class RoleMySQL implements RoleDao {
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
 
 
-    public RoleMySQL(Connection connection) {
+    public RoleMySql(Connection connection) {
         this.connection = connection;
     }
 

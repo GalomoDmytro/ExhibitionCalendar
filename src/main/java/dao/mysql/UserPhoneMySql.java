@@ -1,9 +1,8 @@
 package dao.mysql;
 
-import dao.interfaces.UserPhonesDao;
+import dao.interfaces.UserPhoneDao;
 import exceptions.DBException;
 
-import javax.management.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class UserPhoneMySql implements UserPhonesDao {
+public class UserPhoneMySql implements UserPhoneDao {
 
     private static final String FIELD_MAIL = "email";
     private static final String FIELD_PHONE = "phone";
