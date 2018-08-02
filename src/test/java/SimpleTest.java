@@ -1,10 +1,10 @@
+import dao.Connection.MySqlConnectionPool;
 import dao.mysql.FactoryMySql;
 import dao.mysql.UserMySql;
 import entities.User;
 import org.junit.Test;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -24,7 +24,7 @@ public class SimpleTest {
         Statement statement = null;
         ResultSet resultSet = null;
         try {
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = MySqlConnectionPool.getDbConection().getConnection();
             FactoryMySql factoryMySql = new FactoryMySql();
             UserMySql userMySql = (UserMySql) factoryMySql.createUser(conn);
             User user = userMySql.getById(1);

@@ -175,7 +175,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                         .setExCenterId(resultSet.getInt(FIELD_CENTER_ID))
                         .setDateFrom(resultSet.getDate(FIELD_DATE_FROM))
                         .setDateTo(resultSet.getDate(FIELD_DATE_TO))
-                        .setTicketPrice(resultSet.getDouble(FIELD_TICKET_PRICE))
+                        .setTicketPrice(resultSet.getBigDecimal(FIELD_TICKET_PRICE))
                         .setWorkTime(resultSet.getString(FIELD_WORK_TIME_EXHIBITION))
                         .setMaxTicketPerDay(resultSet.getInt(FIELD_MAX_TICKET_PER_DAY))
                         .build();
@@ -195,7 +195,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setInt(2, contract.getExhibitionId());
             statement.setDate(3, contract.getDateFrom());
             statement.setDate(4, contract.getDateTo());
-            statement.setDouble(5, contract.getTicketPrice());
+            statement.setBigDecimal(5, contract.getTicketPrice());
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
         } catch (SQLException exception) {
@@ -209,7 +209,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setInt(2, contract.getExhibitionId());
             statement.setDate(3, contract.getDateFrom());
             statement.setDate(4, contract.getDateTo());
-            statement.setDouble(5, contract.getTicketPrice());
+            statement.setBigDecimal(5, contract.getTicketPrice());
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
         } catch (SQLException exception) {

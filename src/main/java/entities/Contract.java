@@ -1,5 +1,6 @@
 package entities;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ public class Contract {
     private Integer exCenterId;
     private Date dateFrom;
     private Date dateTo;
-    private Double ticketPrice;
+    private BigDecimal ticketPrice;
     private String workTime;
     private Integer maxTicketPerDay;
 
@@ -54,11 +55,11 @@ public class Contract {
         this.dateTo = dateTo;
     }
 
-    public Double getTicketPrice() {
+    public BigDecimal getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(Double ticketPrice) {
+    public void setTicketPrice(BigDecimal ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 
@@ -145,7 +146,7 @@ public class Contract {
             return this;
         }
 
-        public Builder setTicketPrice(Double ticketPrice) {
+        public Builder setTicketPrice(BigDecimal ticketPrice) {
             contract.setTicketPrice(ticketPrice);
             return this;
         }
