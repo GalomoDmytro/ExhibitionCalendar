@@ -1,4 +1,4 @@
-import dao.Connection.MySqlConnectionPool;
+import dao.Connection.MySqlConnection;
 import dao.mysql.FactoryMySql;
 import dao.mysql.UserMySql;
 import entities.User;
@@ -24,7 +24,7 @@ public class SimpleTest {
         Statement statement = null;
         ResultSet resultSet = null;
         try {
-            conn = MySqlConnectionPool.getDbConection().getConnection();
+            conn = MySqlConnection.getDbConection().getConnection();
             FactoryMySql factoryMySql = new FactoryMySql();
             UserMySql userMySql = (UserMySql) factoryMySql.createUser(conn);
             User user = userMySql.getById(1);
