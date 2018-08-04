@@ -4,7 +4,6 @@ import exceptions.DBException;
 
 import java.sql.Connection;
 
-public interface ConnectionHelper {
-
+public interface ConnectionPool {
     Connection getConnection() throws DBException;
 }
