@@ -18,7 +18,6 @@ dao\interfaces\UserPhoneDao.class
 dao\interfaces\ExhibitionCenterDao.class
 entities\Contract$Builder.class
 entities\ExhibitionCenter$Builder.class
-dao\interfaces\ConnectionHelper.class
 dao\mysql\UserPhoneMySql.class
 dao\interfaces\FactoryDao.class
 dao\interfaces\ExhibitionContractDao.class
@@ -36,3 +35,4 @@ dao\mysql\ExhibitionCenterMySql.class
 dao\interfaces\UserDao.class
 dao\mysql\DescriptionMySql.class
 exceptions\DBException.class
+dao\interfaces\ConnectionPool.class

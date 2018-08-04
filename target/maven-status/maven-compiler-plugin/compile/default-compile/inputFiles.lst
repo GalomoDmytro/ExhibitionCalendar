@@ -6,7 +6,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\UserMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionCenterMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Role.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionDao.java
-D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ConnectionHelper.java
+D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ConnectionPool.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionCenterDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Contract.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\PhoneExhibitionCenterDao.java
