@@ -190,4 +190,12 @@ public class UserMySql implements UserDao {
             throw new DBException(exception);
         }
     }
+
+    private void closeConnection() throws DBException{
+        try {
+            if(connection != null) connection.close();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
 }
