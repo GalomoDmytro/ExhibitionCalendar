@@ -5,14 +5,11 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
 
-    <servlet>
-        <servlet-name>list</servlet-name>
-        <servlet-class>temp.MyServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>list</servlet-name>
-        <url-pattern>/list</url-pattern>
-    </servlet-mapping>
 
 
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/Error.jsp</location>
+    </error-page>
 </web-app>
