@@ -6,11 +6,13 @@
 <h1>
 
 <!-- login/ logout -->
-
+<a href="${pageContext.request.contextPath}/login">login</a>
 
 <br/><hr>
 
 <!-- all available exhibition -->
+
+
 
 </body>
 </html>
