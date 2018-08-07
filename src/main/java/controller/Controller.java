@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/*", "admin/*", "moderator/*", "user/*"})
+//@WebServlet(urlPatterns = {"/*", "admin/*", "moderator/*", "user/*"})
 public class Controller extends HttpServlet {
 
     private ControllerHelper controllerHelper = new ControllerHelper();

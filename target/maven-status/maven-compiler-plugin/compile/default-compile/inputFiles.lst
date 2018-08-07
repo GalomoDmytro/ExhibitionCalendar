@@ -1,12 +1,12 @@
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\RoleDao.java
-D:\epam_project\Exhibition Calendar\src\main\java\password\PasswordHelper.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\User.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\UserDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\UserMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionCenterMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Role.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\Command.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionDao.java
-D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ConnectionPool.java
+D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ConnectionPoolDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionCenterDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Contract.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\PhoneExhibitionCenterDao.java
@@ -14,9 +14,11 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\PhoneExhibitonCenter
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\UserPhoneMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\temp\MyServlet.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\FactoryMySql.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\ControllerHelper.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\DescriptionMySql.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\PageRedirectSecurityFilter.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\SessionFilter.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\FactoryDao.java
-D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ConnectionDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Exhibition.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\RoleMySql.java
@@ -30,4 +32,6 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\QueryHelper.jav
 D:\epam_project\Exhibition Calendar\src\main\java\entities\ExhibitionCenter.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\DescriptionTableDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\exceptions\DBException.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\Controller.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\TicketMySql.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\EncodingFilter.java
