@@ -7,6 +7,7 @@ dao\interfaces\ConnectionPoolDao.class
 controller\filter\PageRedirectSecurityFilter.class
 dao\mysql\TicketMySql.class
 dao\interfaces\PhoneExhibitionCenterDao.class
+controller\command\Home.class
 controller\command\Command.class
 entities\Contract.class
 entities\Exhibition$Builder.class
@@ -14,6 +15,7 @@ dao\mysql\UserMySql.class
 controller\filter\SessionFilter.class
 entities\Exhibition.class
 dao\mysql\FactoryMySql.class
+utility\ResponseSearch.class
 dao\interfaces\QueryHelper.class
 dao\interfaces\TicketDao.class
 entities\Ticket.class
@@ -40,3 +42,4 @@ dao\mysql\ExhibitionCenterMySql.class
 dao\interfaces\UserDao.class
 dao\mysql\DescriptionMySql.class
 exceptions\DBException.class
+controller\command\TestCl.class

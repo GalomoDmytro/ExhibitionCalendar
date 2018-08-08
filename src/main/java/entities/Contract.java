@@ -15,6 +15,8 @@ public class Contract {
     private String workTime;
     private Integer maxTicketPerDay;
 
+    public Contract(){}
+
     public Integer getId() {
         return id;
     }
