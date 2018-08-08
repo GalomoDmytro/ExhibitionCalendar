@@ -18,14 +18,18 @@ public class ConnectionPoolMySql implements ConnectionPoolDao {
     //    private static String URL = "jdbc:mysql://localhost:3306/bookstore?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     private GenericObjectPool connectionPool = null;
 
-    private static ConnectionPoolMySql instance = null;
+    private volatile static ConnectionPoolMySql instance = null;
 
     private ConnectionPoolMySql() {
     }
 
     public static ConnectionPoolMySql getInstance() {
         if (instance == null) {
-            instance = new ConnectionPoolMySql();
+            synchronized (ConnectionPoolMySql.class) {
+                if(instance == null) {
+                    instance = new ConnectionPoolMySql();
+                }
+            }
         }
         return instance;
     }

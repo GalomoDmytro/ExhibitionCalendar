@@ -10,7 +10,12 @@
    <body>
       <center>
         <h1>Exhibition calendar</h1>
+         <br/>
+            <p>Test ${my}</p>
 
+            <br/>
+
+         <br/>
         <a  href="${pageContext.request.contextPath}/controller?command=home">show</a>
 		<hr>
 		<p>Search</p>
@@ -28,18 +33,12 @@
                 <th>Expo Center</th>
                 <th>Addr</th>
             </tr>
-            <c:forEach var="ll" items="${listM}">
+            <c:forEach var="list2" items="${list}">
                 <tr>
-                    <td><c:out value="${ll.id}" /></td>
-                    <td><c:out value="${ll.name}" /></td>
-                    <td><c:out value="${}" /></td>
-                    <td><c:out value="${}" /></td>
-                    <td><c:out value="${}" /></td>
-                    <td>
-                    	<a href="/Info?id=<c:out value='${}' />">Info</a>
-                        &nbsp;&nbsp;
-                        <a href="/Buy?id=<c:out value='${}' />">Buy</a>
-                    </td>
+                    <td><c:out value="${list2.id}" /></td>
+                    <td><c:out value="${list2.name}" /></td>
+
+
                 </tr>
             </c:forEach>
         </table>
