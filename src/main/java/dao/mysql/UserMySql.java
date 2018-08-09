@@ -144,6 +144,38 @@ public class UserMySql implements UserDao {
         }
     }
 
+    @Override
+    public boolean isNameInTable(String name) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.nameInTable"))) {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public boolean isMailInTable(String eMail) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.mailInTable"))) {
+            statement.setString(1, eMail);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
     private List<User> parseUsersSet(ResultSet resultSet) throws DBException {
         List<User> users = new ArrayList<>();
 

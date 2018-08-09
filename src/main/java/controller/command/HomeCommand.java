@@ -15,10 +15,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home implements Command {
+public class HomeCommand implements Command {
     private List<User> usersList = new ArrayList<>();
 
-    private static final Logger log = Logger.getLogger(Home.class);
+    private static final Logger log = Logger.getLogger(HomeCommand.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class Home implements Command {
 
         req.setAttribute("list", usersList);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/home.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         dispatcher.forward(req, resp);
 
     }

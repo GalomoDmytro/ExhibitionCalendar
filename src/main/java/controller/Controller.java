@@ -28,7 +28,6 @@ public class Controller extends HttpServlet {
     private void manageRequest(HttpServletRequest req, HttpServletResponse resp)  {
         command = controllerHelper.getCommand(req, resp);
 
-
         try {
             command.execute(req, resp);
         } catch (ServletException servletException){

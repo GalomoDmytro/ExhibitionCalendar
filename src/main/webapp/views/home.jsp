@@ -10,8 +10,10 @@
    <body>
       <center>
         <h1>Exhibition calendar</h1>
+        <h2>${role}</h2>
          <br/>
-             <a  href="${pageContext.request.contextPath}/controller?command=login">show</a>
+             <a  href="${pageContext.request.contextPath}/controller?command=login">login</a><br>
+             <a  href="${pageContext.request.contextPath}/controller?command=registration">registration</a>
 
             <br/>
 
