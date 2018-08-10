@@ -189,6 +189,10 @@ public class RegistrationCommand implements Command {
     private void declareRole(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession(true);
         session.setAttribute("role", Role.USER);
+
+        if(user.getId() != null) {
+            session.setAttribute("userId", user.getId());
+        }
     }
 
     private void addNewUserToDB() {
@@ -203,7 +207,6 @@ public class RegistrationCommand implements Command {
                     .build();
             // todo make save phone
             factoryMySql.createUser(connection).insertUser(user);
-            log.info("add new user " + user);
         } catch (Exception exception) {
             log.error(exception);
         }

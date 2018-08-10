@@ -1,9 +1,6 @@
 package controller;
 
-import controller.command.Command;
-import controller.command.HomeCommand;
-import controller.command.LoginCommand;
-import controller.command.RegistrationCommand;
+import controller.command.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +27,7 @@ public class ControllerHelper {
         commandMap.put("home", new HomeCommand());
         commandMap.put("login", new LoginCommand());
         commandMap.put("registration", new RegistrationCommand());
+        commandMap.put("logout", new LogoutCommand());
     }
 
 

@@ -12,8 +12,9 @@
             <h1>Login</h1>
             <h2>${role}</h2>
             <form action="${pageContext.request.contextPath}/controller?command=login" method="post">
-                Email:<input type="text" name="name"/><br/><br/>
+                Email:<input type="text" name="eMail"/><br/><br/>
                 Password:<input type="password" name="password"/><br/>
+                ${errorLogin}<br>
                 <input type="submit" value="login"/>
             </form>
             <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">

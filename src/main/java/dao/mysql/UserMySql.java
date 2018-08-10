@@ -78,6 +78,8 @@ public class UserMySql implements UserDao {
 
         if (user == null) {
             return null;
+        } else if (user.size() < 1) {
+            return null;
         } else {
             return user.get(0);
         }
@@ -149,7 +151,7 @@ public class UserMySql implements UserDao {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.nameInTable"))) {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 return true;
             } else {
                 return false;
@@ -165,7 +167,7 @@ public class UserMySql implements UserDao {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.mailInTable"))) {
             statement.setString(1, eMail);
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 return true;
             } else {
                 return false;
@@ -223,9 +225,9 @@ public class UserMySql implements UserDao {
         }
     }
 
-    private void closeConnection() throws DBException{
+    private void closeConnection() throws DBException {
         try {
-            if(connection != null) connection.close();
+            if (connection != null) connection.close();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

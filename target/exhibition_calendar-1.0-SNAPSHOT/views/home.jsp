@@ -14,7 +14,8 @@
          <br/>
              <a  href="${pageContext.request.contextPath}/controller?command=login">login</a><br>
              <a  href="${pageContext.request.contextPath}/controller?command=registration">registration</a>
-
+             <br/>
+             <a  href="${pageContext.request.contextPath}/controller?command=logout">logout</a>
             <br/>
 
          <br/>

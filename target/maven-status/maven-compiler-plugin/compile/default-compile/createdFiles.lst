@@ -13,10 +13,12 @@ dao\interfaces\ExhibitionCenterDao.class
 entities\Contract$Builder.class
 dao\mysql\UserPhoneMySql.class
 dao\interfaces\ExhibitionContractDao.class
+controller\command\LogoutCommand.class
 controller\command\RegistrationCommand.class
 dao\interfaces\RoleDao.class
 dao\mysql\ExhibitionContractMySql.class
 controller\filter\EncodingFilter.class
+controller\command\ErrorHandler.class
 dao\interfaces\UserDao.class
 dao\mysql\DescriptionMySql.class
 dao\mysql\RoleMySql.class
