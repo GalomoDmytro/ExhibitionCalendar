@@ -2,7 +2,6 @@ package controller.command;
 
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
-import dao.mysql.UserMySql;
 import entities.Role;
 import entities.User;
 import org.apache.log4j.Logger;
@@ -20,6 +19,7 @@ public class RegistrationCommand implements Command {
 
     private static final Logger log = Logger.getLogger(RegistrationCommand.class);
 
+    // todo make checking pattern for all attributes
     private String name;
     private String password;
     private String passwordRepeat;
@@ -46,7 +46,7 @@ public class RegistrationCommand implements Command {
     private final String ERROR_EMAIL_PATTERN = "Not valid form";
     private final String ERROR_MISS_EMAIL = "Missed email";
     private final String ERROR_MISS_NAME = "Missed name";
-    private final String ERROR_NAME_ALREADY_EXIST = "Thie name already exist";
+    private final String ERROR_NAME_ALREADY_EXIST = "The name already exist";
     private final String ERROR_MISS_PATTERN = "The name must begin with a letter and contain between 2 and 20";
 
     /*start-of-string
@@ -60,7 +60,8 @@ public class RegistrationCommand implements Command {
     //    private final String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
     private final String EMAIL_PATTERN = "^[^@]*@[^@]+.[^@]+$"; // contain one '@' and after, one '.'
     private final String NAME_PATTERN = "^[a-zA-Z][a-zA-Z0-9-_\\.]{1,20}$"; // first letter, with 2-20 chars
-
+    private final String EMAIL_LANGTH_PATTERN = "[.]{4,254}";
+    // todo pattern length email 255
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -68,17 +69,24 @@ public class RegistrationCommand implements Command {
 
         handleConnection();
 
+        RequestDispatcher dispatcher;
         if (isDataGood(req, resp)) {
             addNewUserToDB();
+            user.setRole(Role.USER);
             declareRole(req, resp);
+            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
+        } else {
+            dispatcher = req.getRequestDispatcher(Links.REGISTRATION_PAGE);
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.REGISTRATION_PAGE);
         dispatcher.forward(req, resp);
-
     }
 
     private boolean isDataGood(HttpServletRequest req, HttpServletResponse resp) {
+        if (primaryIsEmpty()) {
+            return false;
+        }
+
         if (!passwordIsGood(req)) {
             return false;
         }
@@ -91,6 +99,15 @@ public class RegistrationCommand implements Command {
             return false;
         }
 
+        return true;
+    }
+
+    private boolean primaryIsEmpty() {
+        if (name == null
+                && password == null
+                && eMail == null) {
+            return false;
+        }
         return true;
     }
 
@@ -190,26 +207,43 @@ public class RegistrationCommand implements Command {
         HttpSession session = req.getSession(true);
         session.setAttribute("role", Role.USER);
 
-        if(user.getId() != null) {
+        if (user.getId() != null) {
             session.setAttribute("userId", user.getId());
         }
     }
 
     private void addNewUserToDB() {
         try {
-            user = new User.Builder()
-                    .setName(name)
-                    .setFirstName(firstName)
-                    .setLastName(lastName)
-                    .setPassword(new PasswordHandler().encryptPassword(password))
-                    .setMail(eMail)
-                    .setRole(Role.USER)
-                    .build();
+            addUserToDbUser();
             // todo make save phone
-            factoryMySql.createUser(connection).insertUser(user);
+            setUserRoleInDB();
         } catch (Exception exception) {
             log.error(exception);
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception exception) {
+
+            }
         }
+    }
+
+    private void addUserToDbUser() throws Exception {
+        user = new User.Builder()
+                .setName(name)
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setPassword(new PasswordHandler().encryptPassword(password))
+                .setMail(eMail)
+                .setRole(Role.USER)
+                .build();
+        factoryMySql.createUser(connection).insertUser(user);
+    }
+
+    private void setUserRoleInDB() throws Exception {
+        user = factoryMySql.createUser(connection).getByMail(user.getMail());
+//        log.info(user.toString());
+        factoryMySql.createRole(connection).insertRole(user, Role.USER);
     }
 
 }

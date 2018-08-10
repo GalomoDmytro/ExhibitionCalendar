@@ -1,9 +1,11 @@
 package dao.mysql;
 
+import controller.command.RegistrationCommand;
 import dao.interfaces.RoleDao;
 import entities.Role;
 import entities.User;
 import exceptions.DBException;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +15,11 @@ import java.util.ResourceBundle;
 
 public class RoleMySql implements RoleDao {
 
+    private static final Logger log = Logger.getLogger(RegistrationCommand.class);
     private static final String FIELD_ID = "id";
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
-
 
     public RoleMySql(Connection connection) {
         this.connection = connection;
@@ -46,8 +48,10 @@ public class RoleMySql implements RoleDao {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.insert"))) {
             statement.setInt(1, user.getId());
             statement.setString(2, role.toString());
-            statement.executeQuery();
+            statement.executeUpdate();
+            log.info(user + " role " + role.toString());
         } catch (SQLException exception) {
+            log.error(exception);
             throw new DBException(exception);
         }
     }
