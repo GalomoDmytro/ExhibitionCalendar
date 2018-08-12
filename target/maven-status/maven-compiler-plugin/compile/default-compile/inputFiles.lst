@@ -1,4 +1,3 @@
-D:\epam_project\Exhibition Calendar\src\main\java\controller\command\TestCl.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\RoleDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\User.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\LoginCommand.java
@@ -28,6 +27,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\RoleMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Ticket.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\TicketDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionContractMySql.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\AdminCommand.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\UserPhoneDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\RegistrationCommand.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionContractDao.java

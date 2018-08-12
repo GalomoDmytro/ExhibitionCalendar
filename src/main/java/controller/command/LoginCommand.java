@@ -2,7 +2,6 @@ package controller.command;
 
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
-import dao.mysql.UserMySql;
 import entities.User;
 import org.apache.log4j.Logger;
 import utility.PasswordHandler;
@@ -38,7 +37,9 @@ public class LoginCommand implements Command {
             req.setAttribute("errorLogin", "");
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         } else {
-            req.setAttribute("errorLogin", WRONG);
+            if(eMail == null && password == null) {
+                req.setAttribute("errorLogin", WRONG);
+            }
             dispatcher = req.getRequestDispatcher(Links.LOGIN_PAGE);
         }
 
@@ -65,17 +66,20 @@ public class LoginCommand implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
         }
     }
 
     private User getUserFromDB() {
         try {
             user = factoryMySql.createUser(connection).getByMail(eMail);
-            log.info("user : " + user);
+            user.setRole(factoryMySql.createRole(connection).getRoleById(user.getId()));
             return user;
         } catch (Exception exception) {
             log.error(exception);
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception exception) {};
         }
 
         return null;
@@ -99,6 +103,6 @@ public class LoginCommand implements Command {
     private void collectParamsFromRequest(HttpServletRequest request) {
         eMail = request.getParameter("eMail");
         password = request.getParameter("password");
-        log.info("get param " + eMail + " pas " + password);
+//        log.info("get param " + eMail + " pas " + password);
     }
 }

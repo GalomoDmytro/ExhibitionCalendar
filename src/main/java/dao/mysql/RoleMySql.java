@@ -17,6 +17,8 @@ public class RoleMySql implements RoleDao {
 
     private static final Logger log = Logger.getLogger(RegistrationCommand.class);
     private static final String FIELD_ID = "id";
+    private static final String FIELD_ROLE = "role";
+    private Role role;
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
@@ -27,15 +29,15 @@ public class RoleMySql implements RoleDao {
 
     @Override
     public Role getRoleById(Integer id) throws DBException {
-        Role role = null;
+
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.getRole"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             resultSet.next();
-            String stringRole = resultSet.getString("FIELD_ID");
-            setRole(role, stringRole);
-
+            String stringRole = resultSet.getString(FIELD_ROLE);
+            setRole(stringRole);
+            log.info("Role info form mysql " + role.toString());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -49,7 +51,6 @@ public class RoleMySql implements RoleDao {
             statement.setInt(1, user.getId());
             statement.setString(2, role.toString());
             statement.executeUpdate();
-            log.info(user + " role " + role.toString());
         } catch (SQLException exception) {
             log.error(exception);
             throw new DBException(exception);
@@ -66,7 +67,19 @@ public class RoleMySql implements RoleDao {
         }
     }
 
-    private void setRole(Role role, String stringRole) {
+    @Override
+    public void updateRole(Integer id, Role role) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.updateById"))) {
+            statement.setString(1, role.toString());
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            log.error(exception);
+            throw new DBException(exception);
+        }
+    }
+
+    private void setRole(String stringRole) {
         switch (stringRole) {
             case "ADMIN":
                 role = Role.ADMIN;

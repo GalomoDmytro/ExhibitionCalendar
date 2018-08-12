@@ -14,19 +14,20 @@
 
             <!-- Registration form-->
             <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
-                Name profile:<input type="text" name="name"/><br/>
+                *Name profile:<input type="text" name="name"/><br/>
                 ${errorNameProfile}<br/>
 
-                Password:<input type="password" name="password"/><br/>
-                Repeat password:<input type="password" name="passwordRepeat"/> <br/>
+                *Password:<input type="password" name="password"/><br/>
+                *Repeat password:<input type="password" name="passwordRepeat"/> <br/>
                 ${errorPassword}<br/>
 
                 First name:<input type="text" name="firstName"/><br/><br/>
                 Last name:<input type="text" name="lastName"/><br/><br/>
-                eMail:<input type="text" name="eMail"/> <br/>
-                Repeat eMail:<input type="text" name="eMailRepeat"/> <br/>
+                *eMail:<input type="text" name="eMail"/> <br/>
+                *Repeat eMail:<input type="text" name="eMailRepeat"/> <br/>
                 ${errorMail}<br/>
-                Phone number:<input type="text" name="phone"/><br/><br/>
+                Phone number 1:<input type="text" name="phone1"/><br/><br/>
+                Phone number 2:<input type="text" name="phone2"/><br/><br/>
 
                 <button type="submit" value="Submit">Submit</button>
                 <button type="reset" value="Reset">Reset</button>

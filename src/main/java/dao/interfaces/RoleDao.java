@@ -8,4 +8,5 @@ public interface RoleDao {
     Role getRoleById(Integer id) throws DBException;
     void insertRole(User user, Role role) throws DBException;
     void delete(User user) throws DBException;
+    void updateRole(Integer id, Role role) throws  DBException;
 }

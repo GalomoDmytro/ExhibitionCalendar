@@ -27,7 +27,8 @@ public class RegistrationCommand implements Command {
     private String lastName;
     private String eMail;
     private String eMailRepeat;
-    private String phone;
+    private String phone1;
+    private String phone2;
 
     private Connection connection;
     private FactoryMySql factoryMySql;
@@ -106,9 +107,9 @@ public class RegistrationCommand implements Command {
         if (name == null
                 && password == null
                 && eMail == null) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private boolean nameIsGood(HttpServletRequest req) {
@@ -162,7 +163,8 @@ public class RegistrationCommand implements Command {
         lastName = req.getParameter("lastName");
         eMail = req.getParameter("eMail");
         eMailRepeat = req.getParameter("eMailRepeat");
-        phone = req.getParameter("phone");
+        phone1 = req.getParameter("phone1");
+        phone2 = req.getParameter("phone2");
     }
 
     private boolean eMailIsGood(HttpServletRequest request) {
@@ -215,8 +217,8 @@ public class RegistrationCommand implements Command {
     private void addNewUserToDB() {
         try {
             addUserToDbUser();
-            // todo make save phone
             setUserRoleInDB();
+            insertUserPhones();
         } catch (Exception exception) {
             log.error(exception);
         } finally {
@@ -242,8 +244,16 @@ public class RegistrationCommand implements Command {
 
     private void setUserRoleInDB() throws Exception {
         user = factoryMySql.createUser(connection).getByMail(user.getMail());
-//        log.info(user.toString());
         factoryMySql.createRole(connection).insertRole(user, Role.USER);
+    }
+
+    private void insertUserPhones() throws Exception {
+        if(phone1 != null) {
+            factoryMySql.createUserPhones(connection).insertPhone(user.getMail(), phone1);
+        }
+        if(phone2 != null) {
+            factoryMySql.createUserPhones(connection).insertPhone(user.getMail(), phone2);
+        }
     }
 
 }

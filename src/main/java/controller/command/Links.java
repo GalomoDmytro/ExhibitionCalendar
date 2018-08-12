@@ -6,4 +6,5 @@ public class Links {
     public static final String LOGIN_PAGE = "/views/common/login.jsp";
     public static final String REGISTRATION_PAGE = "/views/common/registration.jsp";
     public static final String ERROR_PAGE = "/views/utility/error.jsp";
+    public static final String ADMIN_PAGE = "/views/admin/changeRoleAdmin.jsp";
 }

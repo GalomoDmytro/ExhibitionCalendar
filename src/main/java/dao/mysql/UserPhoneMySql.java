@@ -1,7 +1,9 @@
 package dao.mysql;
 
+import controller.command.RegistrationCommand;
 import dao.interfaces.UserPhoneDao;
 import exceptions.DBException;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ public class UserPhoneMySql implements UserPhoneDao {
 
     private static final String FIELD_MAIL = "email";
     private static final String FIELD_PHONE = "phone";
+    private static final Logger log = Logger.getLogger(RegistrationCommand.class);
 
 
     private Connection connection;
@@ -34,8 +37,8 @@ public class UserPhoneMySql implements UserPhoneDao {
             while(resultSet.next()) {
                 phones.add(resultSet.getString(FIELD_PHONE));
             }
-        } catch (SQLException exeption) {
-            throw new DBException(exeption);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
         }
         return phones;
     }
@@ -45,6 +48,7 @@ public class UserPhoneMySql implements UserPhoneDao {
         try(PreparedStatement statement = connection.prepareStatement(QUERIES.getString("userPhone.insertPhone"))) {
             statement.setString(1, phone);
             statement.setString(2, mail);
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

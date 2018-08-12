@@ -30,6 +30,7 @@ controller\command\Command.class
 dao\mysql\UserMySql.class
 controller\filter\SessionFilter.class
 dao\mysql\FactoryMySql.class
+controller\command\AdminCommand.class
 dao\interfaces\TicketDao.class
 entities\User.class
 dao\interfaces\UserPhoneDao.class
@@ -46,4 +47,3 @@ entities\Ticket$Builder.class
 dao\interfaces\ExhibitionDao.class
 dao\mysql\ExhibitionCenterMySql.class
 exceptions\DBException.class
-controller\command\TestCl.class
