@@ -1,7 +1,8 @@
 package controller;
 
 import controller.command.*;
-import org.apache.log4j.Logger;
+import controller.command.moderatorCommand.ModeratorExpoCenter;
+import controller.command.moderatorCommand.ModeratorHome;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +32,8 @@ public class ControllerHelper {
         commandMap.put("registration", new RegistrationCommand());
         commandMap.put("logout", new LogoutCommand());
         commandMap.put("admin", new AdminCommand());
+        commandMap.put("moderatorHome", new ModeratorHome());
+        commandMap.put("moderatorExpoCenter", new ModeratorExpoCenter());
     }
 
 

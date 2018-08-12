@@ -15,6 +15,7 @@
              <a  href="${pageContext.request.contextPath}/controller?command=login">login</a><br>
              <a  href="${pageContext.request.contextPath}/controller?command=registration">registration</a>
              <a  href="${pageContext.request.contextPath}/controller?command=admin">admin page</a>
+             <a  href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator page</a>
              <br/>
              <a  href="${pageContext.request.contextPath}/controller?command=logout">logout</a>
             <br/>

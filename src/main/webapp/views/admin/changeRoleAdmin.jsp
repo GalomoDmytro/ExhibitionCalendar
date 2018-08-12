@@ -4,7 +4,7 @@
 
 <html>
    <head>
-      <title>LogIn</title>
+      <title>Admin</title>
    </head>
 
    <body>

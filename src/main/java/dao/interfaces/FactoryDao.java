@@ -1,5 +1,7 @@
 package dao.interfaces;
 
+import dao.mysql.PhoneExhibitionCenterMySql;
+
 import java.sql.Connection;
 
 public interface FactoryDao{
@@ -9,6 +11,8 @@ public interface FactoryDao{
     ExhibitionDao createExhibition(Connection connection);
 
     ExhibitionCenterDao createExhibitionCenter(Connection connection);
+
+    PhoneExhibitionCenterMySql createExhibitionCenterPhone(Connection connection);
 
     ExhibitionContractDao createExhibitionContract(Connection connection);
 

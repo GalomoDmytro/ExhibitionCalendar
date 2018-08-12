@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PhoneExhibitonCenterMySql implements PhoneExhibitionCenterDao {
+public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
 
     private static final String FIELD_EXHIBITION_ID = "exhibition_id";
     private static final String FIELD_PHONE = "phone";
@@ -19,7 +19,7 @@ public class PhoneExhibitonCenterMySql implements PhoneExhibitionCenterDao {
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
 
-    PhoneExhibitonCenterMySql(Connection connection) {
+    PhoneExhibitionCenterMySql(Connection connection) {
         this.connection = connection;
     }
 
@@ -40,20 +40,22 @@ public class PhoneExhibitonCenterMySql implements PhoneExhibitionCenterDao {
     }
 
     @Override
-    public void insertPhone(String id, String phone) throws DBException {
+    public void insertPhone(Integer id, String phone) throws DBException {
         try(PreparedStatement statement = connection.prepareStatement(QUERIES.getString("centerPhone.insertPhone"))) {
             statement.setString(1, phone);
-            statement.setString(2, id);
+            statement.setInt(2, id);
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
     }
 
     @Override
-    public void deletePhone(String id, String phone) throws DBException {
+    public void deletePhone(Integer id, String phone) throws DBException {
         try(PreparedStatement statement = connection.prepareStatement(QUERIES.getString("centerPhone.delete"))) {
-            statement.setString(1, id);
+            statement.setInt(1, id);
             statement.setString(2, phone);
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

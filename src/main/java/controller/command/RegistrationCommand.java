@@ -6,6 +6,7 @@ import entities.Role;
 import entities.User;
 import org.apache.log4j.Logger;
 import utility.PasswordHandler;
+import utility.Patterns;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,20 +50,6 @@ public class RegistrationCommand implements Command {
     private final String ERROR_MISS_NAME = "Missed name";
     private final String ERROR_NAME_ALREADY_EXIST = "The name already exist";
     private final String ERROR_MISS_PATTERN = "The name must begin with a letter and contain between 2 and 20";
-
-    /*start-of-string
-    * a digit must occur at least once
-    * a lower case letter must occur at least once
-    * an upper case letter must occur at least once
-    * no whitespace allowed in the entire string
-    * anything, at least 6 places though
-    end-of-string */
-    private final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$";
-    //    private final String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-    private final String EMAIL_PATTERN = "^[^@]*@[^@]+.[^@]+$"; // contain one '@' and after, one '.'
-    private final String NAME_PATTERN = "^[a-zA-Z][a-zA-Z0-9-_\\.]{1,20}$"; // first letter, with 2-20 chars
-    private final String EMAIL_LANGTH_PATTERN = "[.]{4,254}";
-    // todo pattern length email 255
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -118,19 +105,25 @@ public class RegistrationCommand implements Command {
             return false;
         }
 
-        if (!name.matches(NAME_PATTERN)) {
+        if (!name.matches(Patterns.NAME)) {
             req.setAttribute("errorNameProfile", ERROR_MISS_PATTERN);
             return false;
         }
 
         // check if name already in table
+        boolean alredyEx = false;
         try {
             if (factoryMySql.createUser(connection).isNameInTable(name)) {
+                alredyEx = true;
                 req.setAttribute("errorNameProfile", ERROR_NAME_ALREADY_EXIST);
                 return false;
             }
         } catch (Exception exception) {
             return false;
+        } finally {
+            if(alredyEx) {
+                closeConnection();
+            }
         }
 
         return true;
@@ -147,7 +140,7 @@ public class RegistrationCommand implements Command {
             return false;
         }
 
-        if (!password.matches(PASSWORD_PATTERN)) {
+        if (!password.matches(Patterns.PASSWORD)) {
             req.setAttribute("errorPassword", ERROR_PASSWORD_PATTERN);
             return false;
         }
@@ -178,7 +171,12 @@ public class RegistrationCommand implements Command {
             return false;
         }
 
-        if (!eMail.matches(EMAIL_PATTERN)) {
+        if (!eMail.matches(Patterns.EMAIL)) {
+            request.setAttribute("errorMail", ERROR_EMAIL_PATTERN);
+            return false;
+        }
+
+        if (!eMail.matches(Patterns.EMAIL_LENGTH)) {
             request.setAttribute("errorMail", ERROR_EMAIL_PATTERN);
             return false;
         }
@@ -222,11 +220,7 @@ public class RegistrationCommand implements Command {
         } catch (Exception exception) {
             log.error(exception);
         } finally {
-            try {
-                connection.close();
-            } catch (Exception exception) {
-
-            }
+            closeConnection();
         }
     }
 
@@ -253,6 +247,16 @@ public class RegistrationCommand implements Command {
         }
         if(phone2 != null) {
             factoryMySql.createUserPhones(connection).insertPhone(user.getMail(), phone2);
+        }
+    }
+
+    private void closeConnection() {
+        try {
+            if(connection != null) {
+                connection.close();
+            }
+        } catch (Exception exception) {
+
         }
     }
 

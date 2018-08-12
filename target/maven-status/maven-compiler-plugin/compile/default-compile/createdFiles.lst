@@ -9,6 +9,7 @@ entities\Exhibition$Builder.class
 entities\Exhibition.class
 dao\interfaces\QueryHelper.class
 entities\Ticket.class
+utility\Patterns.class
 dao\interfaces\ExhibitionCenterDao.class
 entities\Contract$Builder.class
 dao\mysql\UserPhoneMySql.class
@@ -32,15 +33,18 @@ controller\filter\SessionFilter.class
 dao\mysql\FactoryMySql.class
 controller\command\AdminCommand.class
 dao\interfaces\TicketDao.class
+controller\command\moderatorCommand\ModeratorHome.class
 entities\User.class
 dao\interfaces\UserPhoneDao.class
 controller\command\LoginCommand.class
 controller\ControllerHelper.class
+controller\command\moderatorCommand\ModeratorExpoCenter.class
+utility\JSPError.class
 controller\command\Links.class
+dao\mysql\PhoneExhibitionCenterMySql.class
 entities\ExhibitionCenter$Builder.class
 dao\interfaces\FactoryDao.class
 entities\Role.class
-dao\mysql\PhoneExhibitonCenterMySql.class
 entities\User$Builder.class
 dao\Connection\ConnectionPoolMySql.class
 entities\Ticket$Builder.class

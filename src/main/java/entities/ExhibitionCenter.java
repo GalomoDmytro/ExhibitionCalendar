@@ -1,5 +1,8 @@
 package entities;
 
+import dao.mysql.ExhibitionCenterMySql;
+import org.apache.log4j.Logger;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -68,7 +71,6 @@ public class ExhibitionCenter {
                 ", address='" + address + '\'' +
                 ", eMail='" + eMail + '\'' +
                 ", webPage='" + webPage + '\'' +
-                ", phone=" + phone.toString() +
                 '}';
     }
 
@@ -92,7 +94,7 @@ public class ExhibitionCenter {
 
     public static class Builder {
 
-        ExhibitionCenter exhibitionCenter;
+        private ExhibitionCenter exhibitionCenter;
 
         public Builder() {
             exhibitionCenter = new ExhibitionCenter();

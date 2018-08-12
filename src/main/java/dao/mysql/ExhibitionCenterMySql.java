@@ -1,8 +1,10 @@
 package dao.mysql;
 
+import controller.command.RegistrationCommand;
 import dao.interfaces.ExhibitionCenterDao;
 import entities.ExhibitionCenter;
 import exceptions.DBException;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,14 +13,17 @@ import java.util.ResourceBundle;
 
 public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
+    private Connection connection;
+
     private final String FIELD_ID = "id";
     private final String FIELD_TITLE = "title";
     private final String FIELD_ADDRES = "address";
     private final String FIELD_MAIL = "email";
     private final String FIELD_WEB_PAGE = "web_page";
 
-    private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
+    private static final Logger log = Logger.getLogger(ExhibitionCenterMySql.class);
+
 
     ExhibitionCenterMySql(Connection connection) {
         this.connection = connection;
@@ -44,12 +49,13 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
     @Override
     public ExhibitionCenter getExhibitionCenterByTitle(String title) throws DBException {
-        List<ExhibitionCenter> exhibitionCenters = null;
+        List<ExhibitionCenter> exhibitionCenters;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getByTitle"))) {
             statement.setString(1, title);
             ResultSet resultSet = statement.executeQuery();
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
+            log.error(exception);
             throw new DBException(exception);
         }
 
@@ -125,6 +131,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             }
 
         } catch (SQLException exception) {
+            log.error(exception);
             throw new DBException(exception);
         }
     }
@@ -139,19 +146,37 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    @Override
+    public boolean isTitleInTable(String title) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getByTitle"))) {
+            statement.setString(1, title);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
     private List<ExhibitionCenter> parseExhibitionCenterSet(ResultSet resultSet) throws DBException {
         List<ExhibitionCenter> exhibitionCenters = new ArrayList<>();
 
+        log.info("bifore parse in parseExhibitionCenterSet");
         try {
             while (resultSet.next()) {
-                ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
+
+                ExhibitionCenter exCenter = new ExhibitionCenter.Builder()
                         .setId(resultSet.getInt(FIELD_ID))
                         .setTitle(resultSet.getString(FIELD_TITLE))
                         .setAddress(resultSet.getString(FIELD_ADDRES))
                         .seteMail(resultSet.getString(FIELD_MAIL))
                         .setWebPage(resultSet.getString(FIELD_WEB_PAGE))
                         .build();
-                exhibitionCenters.add(exhibitionCenter);
+                exhibitionCenters.add(exCenter);
             }
         } catch (SQLException exception) {
             throw new DBException(exception);

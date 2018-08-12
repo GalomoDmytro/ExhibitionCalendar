@@ -24,6 +24,11 @@ public class FactoryMySql implements FactoryDao {
     }
 
     @Override
+    public PhoneExhibitionCenterMySql createExhibitionCenterPhone(Connection connection) {
+        return new PhoneExhibitionCenterMySql(connection);
+    }
+
+    @Override
     public ExhibitionContractDao createExhibitionContract(Connection connection) {
         return new ExhibitionContractMySql(connection);
     }
@@ -42,4 +47,6 @@ public class FactoryMySql implements FactoryDao {
     public UserPhoneDao createUserPhones(Connection connection) {
         return new UserPhoneMySql(connection);
     }
+
+
 }
