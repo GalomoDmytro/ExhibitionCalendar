@@ -105,7 +105,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     public void deleteExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.delete"))) {
             statement.setInt(1, exhibitionCenter.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -162,10 +162,19 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    @Override
+    public void deleteExhibitionCenterById(Integer id) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.delete"))) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
     private List<ExhibitionCenter> parseExhibitionCenterSet(ResultSet resultSet) throws DBException {
         List<ExhibitionCenter> exhibitionCenters = new ArrayList<>();
 
-        log.info("bifore parse in parseExhibitionCenterSet");
         try {
             while (resultSet.next()) {
 

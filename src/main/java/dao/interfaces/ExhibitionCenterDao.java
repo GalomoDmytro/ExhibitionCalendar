@@ -19,6 +19,8 @@ public interface ExhibitionCenterDao {
 
     void deleteExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
 
+    void deleteExhibitionCenterById(Integer id) throws DBException;
+
     void insertExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;
 
     void updateExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;

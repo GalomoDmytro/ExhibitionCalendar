@@ -1,7 +1,8 @@
 package controller;
 
 import controller.command.*;
-import controller.command.moderatorCommand.ModeratorExpoCenter;
+import controller.command.moderatorCommand.ExpoCenterManagement;
+import controller.command.moderatorCommand.AddingExpoCenter;
 import controller.command.moderatorCommand.ModeratorHome;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,8 @@ public class ControllerHelper {
         commandMap.put("logout", new LogoutCommand());
         commandMap.put("admin", new AdminCommand());
         commandMap.put("moderatorHome", new ModeratorHome());
-        commandMap.put("moderatorExpoCenter", new ModeratorExpoCenter());
+        commandMap.put("addExpoCenter", new AddingExpoCenter());
+        commandMap.put("expoCenterManagement", new ExpoCenterManagement());
     }
 
 

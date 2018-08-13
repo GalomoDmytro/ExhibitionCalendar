@@ -13,7 +13,7 @@
             <h2>${role}</h2>
             <br><br>
 
-            <form action="${pageContext.request.contextPath}/controller?command=moderatorExpoCenter" method="post">
+            <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
                 Expo Center Title:<input type="text" name="title"/><br/>
                 Expo Center Address:<input type="text" name="address"/><br/>
                 Expo Center eMail:<input type="text" name="eMail"/><br/>

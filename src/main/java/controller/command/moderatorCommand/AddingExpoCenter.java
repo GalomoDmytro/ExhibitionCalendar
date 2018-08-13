@@ -5,7 +5,6 @@ import controller.command.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.ExhibitionCenter;
-import entities.Role;
 import org.apache.log4j.Logger;
 import utility.JSPError;
 import utility.Patterns;
@@ -14,11 +13,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 
-public class ModeratorExpoCenter implements Command {
+public class AddingExpoCenter implements Command {
 
     private Connection connection;
     private FactoryMySql factoryMySql;
@@ -32,7 +30,7 @@ public class ModeratorExpoCenter implements Command {
     private HttpServletRequest req;
     private ExhibitionCenter exCenter;
 
-    private static final Logger log = Logger.getLogger(ModeratorExpoCenter.class);
+    private static final Logger log = Logger.getLogger(AddingExpoCenter.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +41,7 @@ public class ModeratorExpoCenter implements Command {
         if (!rolePermit(req)) {
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_EXPO_CENTER_PAGE);
+            dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_CENTER_PAGE);
         }
 
         collectParamsFromRequest(req);

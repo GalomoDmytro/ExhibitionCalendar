@@ -13,8 +13,9 @@
             <h2>${role}</h2>
             <br><br>
 
+            <a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement">expo center management</a>
             <br>
-            <a href="${pageContext.request.contextPath}/controller?command=moderatorExpoCenter">go create or edit expo center</a>
+            <a href="${pageContext.request.contextPath}/controller?command=addExpoCenter">go createexpo center</a>
             <br>
             <a href="${pageContext.request.contextPath}/controller?command=home">go home</a>
             <br>
