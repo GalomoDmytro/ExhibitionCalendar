@@ -39,7 +39,7 @@
                         <td><c:out value="${expoCenter.webPage}" /></td>
                         <td></td>
                         <td></td>
-                        <td><a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement&idEdit=<c:out value='${expoCenter.id}'/>">Edit</a>
+                        <td><a href="${pageContext.request.contextPath}/controller?command=editExpositionCenter&idEdit=<c:out value='${expoCenter.id}'/>&expoCTitle=<c:out value='${expoCenter.title}'/>&expoCAddress=<c:out value='${expoCenter.address}'/>&expoCWebPage=<c:out value='${expoCenter.webPage}'/>&expoCMail=<c:out value='${expoCenter.eMail}'/>">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement&idDelete=<c:out value='${expoCenter.id}'/>">Delete</a>
                         </td>

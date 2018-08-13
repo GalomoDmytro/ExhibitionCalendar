@@ -10,4 +10,5 @@ public class Links {
     public static final String MODERATOR_PAGE = "/views/moderator/moderatorHome.jsp";
     public static final String MODERATOR_ADD_EXPO_CENTER_PAGE = "/views/moderator/addExpoCenter.jsp";
     public static final String MODERATOR_MANAGE_CENTER_PAGE = "/views/moderator/expoCenterManagement.jsp";
+    public static final String MODERATOR_EDIT_CENTER_PAGE = "/views/moderator/editExpositionCenter.jsp";
 }

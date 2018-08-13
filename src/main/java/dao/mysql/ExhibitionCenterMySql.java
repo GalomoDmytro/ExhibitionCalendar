@@ -140,7 +140,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     public void updateExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.update"))) {
             prepareStatementToUpdate(statement, exhibitionCenter);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -211,7 +211,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             statement.setString(2, exhibitionCenter.getAddress());
             statement.setString(3, exhibitionCenter.geteMail());
             statement.setString(4, exhibitionCenter.getWebPage());
-            statement.setInt(4, exhibitionCenter.getId());
+            statement.setInt(5, exhibitionCenter.getId());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

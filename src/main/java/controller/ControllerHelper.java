@@ -1,6 +1,7 @@
 package controller;
 
 import controller.command.*;
+import controller.command.moderatorCommand.EditCenter;
 import controller.command.moderatorCommand.ExpoCenterManagement;
 import controller.command.moderatorCommand.AddingExpoCenter;
 import controller.command.moderatorCommand.ModeratorHome;
@@ -36,6 +37,7 @@ public class ControllerHelper {
         commandMap.put("moderatorHome", new ModeratorHome());
         commandMap.put("addExpoCenter", new AddingExpoCenter());
         commandMap.put("expoCenterManagement", new ExpoCenterManagement());
+        commandMap.put("editExpositionCenter", new EditCenter());
     }
 
 

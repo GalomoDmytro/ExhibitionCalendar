@@ -37,6 +37,7 @@ controller\command\moderatorCommand\ModeratorHome.class
 entities\User.class
 dao\interfaces\UserPhoneDao.class
 controller\command\LoginCommand.class
+controller\command\moderatorCommand\EditCenter.class
 controller\ControllerHelper.class
 utility\JSPError.class
 controller\command\Links.class
