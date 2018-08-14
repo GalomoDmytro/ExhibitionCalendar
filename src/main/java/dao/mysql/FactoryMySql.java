@@ -48,5 +48,8 @@ public class FactoryMySql implements FactoryDao {
         return new UserPhoneMySql(connection);
     }
 
-
+    @Override
+    public DescriptionTableDao createDescriptionTable(Connection connection) {
+        return new DescriptionMySql(connection);
+    }
 }

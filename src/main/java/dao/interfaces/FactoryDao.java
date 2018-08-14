@@ -22,4 +22,6 @@ public interface FactoryDao{
 
     UserPhoneDao createUserPhones(Connection connection);
 
+    DescriptionTableDao createDescriptionTable(Connection connection);
+
 }

@@ -13,13 +13,15 @@
             <h2>${role}</h2>
             <br><br>
 
-            <a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement">expo center management</a>
+            <a href="${pageContext.request.contextPath}/controller?command=addExposition">Create Expo</a>
             <br>
-            <a href="${pageContext.request.contextPath}/controller?command=addExpoCenter">go createexpo center</a>
+            <a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement">Expo center management</a>
             <br>
-            <a href="${pageContext.request.contextPath}/controller?command=home">go home</a>
+            <a href="${pageContext.request.contextPath}/controller?command=addExpoCenter">Create Expo center</a>
             <br>
-            <a href="${pageContext.request.contextPath}/controller?command=logout">logout</a>
+            <a href="${pageContext.request.contextPath}/controller?command=home">Go home</a>
+            <br>
+            <a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a>
       </center>
    </body>
 </html>

@@ -1,10 +1,7 @@
 package controller;
 
 import controller.command.*;
-import controller.command.moderatorCommand.EditCenter;
-import controller.command.moderatorCommand.ExpoCenterManagement;
-import controller.command.moderatorCommand.AddingExpoCenter;
-import controller.command.moderatorCommand.ModeratorHome;
+import controller.command.moderatorCommand.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +35,8 @@ public class ControllerHelper {
         commandMap.put("addExpoCenter", new AddingExpoCenter());
         commandMap.put("expoCenterManagement", new ExpoCenterManagement());
         commandMap.put("editExpositionCenter", new EditCenter());
+        commandMap.put("addExposition", new AddExpo());
+        commandMap.put("expoManagement", new ExhibitionManagement());
     }
 
 

@@ -22,6 +22,8 @@ public class Patterns {
 
     public static final String TITLE_EXPO_CENTER = ".{1,254}";
 
+    public static final String TITLE_EXPO = ".{1,254}";
+
     public static final String NAME = "^[a-zA-Z][a-zA-Z0-9-_\\.]{1,20}$"; // first letter, with 2-20 chars
 
 

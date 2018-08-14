@@ -24,11 +24,11 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
     }
 
     @Override
-    public List<String> getPhones(String id) throws DBException {
+    public List<String> getPhones(Integer id) throws DBException {
         List<String> phones = new ArrayList<>();
 
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("centerPhone.getPhones"))) {
-            statement.setString(1, id);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
                 phones.add(resultSet.getString(FIELD_PHONE));
@@ -51,10 +51,9 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
     }
 
     @Override
-    public void deletePhone(Integer id, String phone) throws DBException {
+    public void deletePhone(Integer id) throws DBException {
         try(PreparedStatement statement = connection.prepareStatement(QUERIES.getString("centerPhone.delete"))) {
             statement.setInt(1, id);
-            statement.setString(2, phone);
             statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);

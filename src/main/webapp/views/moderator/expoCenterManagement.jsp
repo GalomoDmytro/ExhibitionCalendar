@@ -37,9 +37,11 @@
                         <td><c:out value="${expoCenter.address}" /></td>
                         <td><c:out value="${expoCenter.eMail}" /></td>
                         <td><c:out value="${expoCenter.webPage}" /></td>
-                        <td></td>
-                        <td></td>
-                        <td><a href="${pageContext.request.contextPath}/controller?command=editExpositionCenter&idEdit=<c:out value='${expoCenter.id}'/>&expoCTitle=<c:out value='${expoCenter.title}'/>&expoCAddress=<c:out value='${expoCenter.address}'/>&expoCWebPage=<c:out value='${expoCenter.webPage}'/>&expoCMail=<c:out value='${expoCenter.eMail}'/>">Edit</a>
+
+                            <td><c:out value="${expoCenter.phone.get(0)}" /></td>
+                            <td><c:out value="${expoCenter.phone.get(1)}" /></td>
+
+                        <td><a href="${pageContext.request.contextPath}/controller?command=editExpositionCenter&idEdit=<c:out value='${expoCenter.id}'/>&expoCTitle=<c:out value='${expoCenter.title}'/>&expoCAddress=<c:out value='${expoCenter.address}'/>&expoCWebPage=<c:out value='${expoCenter.webPage}'/>&expoCMail=<c:out value='${expoCenter.eMail}'/>&phone1=<c:out value='${expoCenter.phone.get(0)}'/>&phone1=<c:out value='${expoCenter.phone.get(1)}'/>">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement&idDelete=<c:out value='${expoCenter.id}'/>">Delete</a>
                         </td>

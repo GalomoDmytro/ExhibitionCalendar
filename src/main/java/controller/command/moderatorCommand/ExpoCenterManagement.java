@@ -4,7 +4,9 @@ import controller.command.Command;
 import controller.command.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
+import entities.Exhibition;
 import entities.ExhibitionCenter;
+import exceptions.DBException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpoCenterManagement implements Command {
@@ -37,7 +40,7 @@ public class ExpoCenterManagement implements Command {
         if(req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
         } else if(req.getParameter("search") != null) {
-            specificSearch( req);
+            specificSearch(req);
         }
 
         if(req.getParameter("idDelete") != null) {
@@ -49,8 +52,11 @@ public class ExpoCenterManagement implements Command {
 
     private void showAll(HttpServletRequest req) {
         try {
-            List<ExhibitionCenter> exhibitionCenterList =
-                    factoryMySql.createExhibitionCenter(connection).getAllExhibitionCenter();
+            List<ExhibitionCenter> exhibitionCenterList = getAllFromDb();
+
+            for(ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
+                exhibitionCenter.setPhone(factoryMySql.createExhibitionCenterPhone(connection).getPhones(exhibitionCenter.getId()));
+            }
             if(exhibitionCenterList != null) {
                 req.setAttribute("listExpoCenter", exhibitionCenterList);
             }
@@ -78,7 +84,40 @@ public class ExpoCenterManagement implements Command {
     }
 
     private void specificSearch(HttpServletRequest request) {
+        String looking = request.getParameter("searchField");
+        looking = looking.toLowerCase();
 
+        List<ExhibitionCenter> exhibitionCenterListResult = new ArrayList<>();
+        List<ExhibitionCenter> exhibitionCenterListAll;
+
+        try {
+            exhibitionCenterListAll = getAllFromDb();
+            for(ExhibitionCenter center : exhibitionCenterListAll) {
+                if(center.getTitle().toLowerCase().contains(looking) ||
+                    center.getAddress().toLowerCase().contains(looking) ||
+                    center.getWebPage().toLowerCase().contains(looking) ||
+                    String.valueOf(center.getId()).equals(looking)) {
+                    exhibitionCenterListResult.add(center);
+                }
+            }
+
+            if(exhibitionCenterListResult != null) {
+                request.setAttribute("listExpoCenter", exhibitionCenterListResult);
+            }
+        } catch (Exception exception) {
+
+        } finally {
+            closeConnection();
+        }
+
+    }
+
+    private List<ExhibitionCenter> getAllFromDb() throws DBException{
+        try {
+            return factoryMySql.createExhibitionCenter(connection).getAllExhibitionCenter();
+        } catch (Exception exception) {
+            throw new DBException(exception);
+        }
     }
 
     private boolean rolePermit(HttpServletRequest req) {

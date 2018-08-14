@@ -4,6 +4,7 @@ dao\mysql\ExhibitionMySql.class
 dao\interfaces\ConnectionPoolDao.class
 utility\PasswordHandler.class
 dao\interfaces\PhoneExhibitionCenterDao.class
+controller\command\moderatorCommand\AddExpo.class
 entities\Contract.class
 entities\Exhibition$Builder.class
 entities\Exhibition.class
@@ -12,6 +13,7 @@ entities\Ticket.class
 utility\Patterns.class
 dao\interfaces\ExhibitionCenterDao.class
 entities\Contract$Builder.class
+controller\command\moderatorCommand\ExhibitionManagement.class
 dao\mysql\UserPhoneMySql.class
 dao\interfaces\ExhibitionContractDao.class
 controller\command\LogoutCommand.class

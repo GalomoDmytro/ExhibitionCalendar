@@ -68,6 +68,9 @@ public class EditCenter implements Command {
         //todo handle phone
         try {
             factoryMySql.createExhibitionCenter(connection).updateExhibitionCenter(exhibitionCenter);
+            factoryMySql.createExhibitionCenterPhone(connection).deletePhone(exhibitionCenter.getId());
+            factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exhibitionCenter.getId(), phone1);
+            factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exhibitionCenter.getId(), phone2);
         } catch (Exception exception) {
 
         } finally {
@@ -83,8 +86,8 @@ public class EditCenter implements Command {
         address = req.getParameter("expoCAddress");
         webPage = req.getParameter("expoCMail");
         eMail = req.getParameter("expoCWebPage");
-        phone1 = req.getParameter("expoCPhone1");
-        phone2 = req.getParameter("expoCPhone2");
+        phone1 = req.getParameter("phone1");
+        phone2 = req.getParameter("phone2");
     }
 
     private void setExpoDataToReq(HttpServletRequest req) {

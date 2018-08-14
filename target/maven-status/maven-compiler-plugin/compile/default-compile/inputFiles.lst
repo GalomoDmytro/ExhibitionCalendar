@@ -4,6 +4,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\controller\command\LoginComman
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\UserDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\UserMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Role.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\AddExpo.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\PageRedirectSecurityFilter.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\FactoryDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\PhoneExhibitionCenterMySql.java
@@ -21,6 +22,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\utility\PasswordHandler.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\RoleDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionCenterMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\utility\JSPError.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\ExhibitionManagement.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\Command.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ConnectionPoolDao.java

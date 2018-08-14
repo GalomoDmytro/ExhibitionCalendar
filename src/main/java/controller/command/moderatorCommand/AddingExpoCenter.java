@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddingExpoCenter implements Command {
 
@@ -22,7 +24,7 @@ public class AddingExpoCenter implements Command {
     private FactoryMySql factoryMySql;
     private String title;
     private String address;
-    private String eMail;
+    private String eMail; // todo add check email
     private String eMail_repeat;
     private String webPage;
     private String phone1;
@@ -65,7 +67,6 @@ public class AddingExpoCenter implements Command {
 
             exCenter = factoryMySql.createExhibitionCenter(connection)
                     .getExhibitionCenterByTitle(exCenter.getTitle());
-//            log.info(exCenter.getTitle());
             if (phone1 != null) {
                 factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exCenter.getId(), phone1);
             }
@@ -87,6 +88,16 @@ public class AddingExpoCenter implements Command {
                 .build();
         if (webPage != null) {
             exCenter.setWebPage(webPage);
+        }
+        if(phone1 != null || phone2 != null) {
+            List<String> phones = new ArrayList<>();
+            if(phone1 != null) {
+                phones.add(phone1);
+            }
+            if(phone2 != null) {
+                phones.add(phone2);
+            }
+            exCenter.setPhone(phones);
         }
     }
 
