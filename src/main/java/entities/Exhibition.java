@@ -7,6 +7,7 @@ public class Exhibition {
     private Integer id;
     private String title;
     private String imgSrc;
+    private String languageTags;
 
     public Exhibition(){}
 
@@ -33,6 +34,14 @@ public class Exhibition {
 
     public void setImgSrc(String imgSrc) {
         this.imgSrc = imgSrc;
+    }
+
+    public String getLanguageTags() {
+        return languageTags;
+    }
+
+    public void setLanguageTags(String languageTags) {
+        this.languageTags = languageTags;
     }
 
     @Override
