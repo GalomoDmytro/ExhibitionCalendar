@@ -91,6 +91,7 @@ public class ExhibitionMySql implements ExhibitionDao {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.update"))) {
             statement.setString(1, exhibition.getTitle());
             statement.setString(2, exhibition.getImgSrc());
+            statement.setInt(3, exhibition.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);

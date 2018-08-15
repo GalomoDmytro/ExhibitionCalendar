@@ -15,6 +15,8 @@ public interface DescriptionTableDao {
 
     void insertDescription(String keyLanguage, String description, Exhibition exhibition) throws DBException;
 
+    void insertDescriptionById(String keyLanguage, String description, Integer id) throws DBException;
+
     void deleteAllDescriptionForExposition(Exhibition exhibition) throws DBException;
 
     void deleteDescriptionForLang(Exhibition exhibition, String keyLanguage) throws DBException;

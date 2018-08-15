@@ -20,10 +20,6 @@
                 Expo Description Lang:<select name="lang" size="1">
                     <option value="RU" selected="selected">Russian</option>
                     <option  value="ENG">English</option>
-                    <option value="UA">Ukrainian</option>
-                    <option value="ESP">Spain</option>
-                    <option value="PT">Portugal</option>
-                    <option value="PL">Poland</option>
                 </select><br/>
 
                 <button type="submit" name="addNewExpo" value="Submit">Add</button>

@@ -25,7 +25,7 @@ public class AddExpo implements Command {
     private String descriptionLang;
     private Exhibition exhibition;
 
-    private static final Logger log = Logger.getLogger(AddExpo.class);
+    private static final Logger LOGGER = Logger.getLogger(AddExpo.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class AddExpo implements Command {
 
     private void addNewExpo() {
         if (!inputDataIsValid()) {
-            log.error("input val is not valid");
+            LOGGER.error("input val is not valid");
             return;
         }
 
@@ -61,13 +61,14 @@ public class AddExpo implements Command {
 
     private void insertInDB() {
         try {
-            log.info("Exhibit: " + exhibition.toString());
             factoryMySql.createExhibition(connection).insertExhibition(exhibition);
-            log.info("exhibit id " + exhibition.getId());
+            if(descriptionLang.length() > 15) {
+                descriptionLang = descriptionLang.substring(0, 15);
+            }
             factoryMySql.createDescriptionTable(connection)
-                    .insertDescription(descriptionLang, expoDescription, exhibition);
+                    .insertDescription(expoDescription, descriptionLang,  exhibition);
         } catch (Exception exception) {
-            log.error(exception);
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -81,7 +82,7 @@ public class AddExpo implements Command {
 
     private boolean inputDataIsValid() {
         if (!titleValid()) {
-            log.error("title not valid");
+            LOGGER.error("title not valid");
             return false;
         }
 

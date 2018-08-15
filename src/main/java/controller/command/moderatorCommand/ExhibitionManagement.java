@@ -5,7 +5,6 @@ import controller.command.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Exhibition;
-import entities.ExhibitionCenter;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
 
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,7 @@ public class ExhibitionManagement implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
 
-    private static final Logger log = Logger.getLogger(ExhibitionManagement.class);
+    private static final Logger LOGGER = Logger.getLogger(ExhibitionManagement.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,13 +36,13 @@ public class ExhibitionManagement implements Command {
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_EXPO_PAGE);
         }
 
-        if(req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
+        if (req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
-        } else if(req.getParameter("search") != null) {
-//            specificSearch(req);
+        } else if (req.getParameter("search") != null) {
+            specificSearch(req);
         }
 
-        if(req.getParameter("idDelete") != null) {
+        if (req.getParameter("idDelete") != null) {
             deleteById(req);
         }
 
@@ -54,10 +53,10 @@ public class ExhibitionManagement implements Command {
         // todo make available only for admin
         String id = req.getParameter("idDelete");
         try {
-            log.info("try delete by id " + id);
+            LOGGER.info("try delete by id " + id);
             factoryMySql.createExhibition(connection).deleteById(Integer.valueOf(id));
         } catch (Exception exception) {
-            log.error(exception);
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -66,16 +65,9 @@ public class ExhibitionManagement implements Command {
     private void showAll(HttpServletRequest req) {
         try {
             List<Exhibition> exhibitionCenterList = getAllFromDb();
-            for(Exhibition exhibition : exhibitionCenterList) {
-                Map<String, String> expoLang = factoryMySql.createDescriptionTable(connection).getAllDescription(exhibition);
-                String langTags = "";
-                for(Map.Entry<String, String> entry : expoLang.entrySet()) {
-                    langTags += entry.getKey() + " ";
-                }
-                exhibition.setLanguageTags(langTags);
-            }
+            setLangTagsToExhibition(exhibitionCenterList);
 
-            if(exhibitionCenterList != null) {
+            if (exhibitionCenterList != null) {
                 req.setAttribute("listExpo", exhibitionCenterList);
             }
         } catch (Exception exception) {
@@ -85,6 +77,46 @@ public class ExhibitionManagement implements Command {
         }
     }
 
+    private void setLangTagsToExhibition(List<Exhibition> exhibitionCenterList) throws DBException {
+        for (Exhibition exhibition : exhibitionCenterList) {
+            Map<String, String> expoLang = factoryMySql.createDescriptionTable(connection).getAllDescription(exhibition);
+            String langTags = "";
+            for (Map.Entry<String, String> entry : expoLang.entrySet()) {
+                langTags += entry.getKey() + " ";
+            }
+            exhibition.setLanguageTags(langTags);
+        }
+    }
+
+    private void specificSearch(HttpServletRequest request) {
+        String looking = request.getParameter("searchField");
+        looking = looking.toLowerCase();
+        LOGGER.info("Search " + looking);
+        List<Exhibition> exhibitionList = new ArrayList<>();
+        List<Exhibition> allExhibitionFromDb;
+
+        try {
+            allExhibitionFromDb = getAllFromDb();
+            for(Exhibition exhibition : allExhibitionFromDb) {
+                LOGGER.info("fore each --------- " + exhibition.toString());
+                if(exhibition.getTitle().toLowerCase().contains(looking) ||
+                        String.valueOf(exhibition.getId()).equals(looking)) {
+                    exhibitionList.add(exhibition);
+                }
+            }
+
+            setLangTagsToExhibition(exhibitionList);
+
+            if(exhibitionList != null) {
+                request.setAttribute("listExpo", exhibitionList);
+            }
+        } catch (Exception exception) {
+            LOGGER.error(exception);
+        } finally {
+            closeConnection();
+        }
+
+    }
 
 
     private List<Exhibition> getAllFromDb() throws DBException {

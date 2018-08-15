@@ -81,9 +81,27 @@ public class DescriptionMySql implements DescriptionTableDao {
     public void insertDescription(String keyLanguage, String description, Exhibition exhibition) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.insert"),
                 Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, description);
-            statement.setInt(2, exhibition.getId());
-            statement.setString(3, keyLanguage);
+            statement.setString(1, keyLanguage);
+            statement.setString(2, description);
+            statement.setInt(3, exhibition.getId());
+
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void insertDescriptionById(String keyLanguage, String description, Integer exhibitionId) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.insert"),
+                Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, keyLanguage);
+            statement.setString(2, description);
+            statement.setInt(3, exhibitionId);
 
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
@@ -97,10 +115,9 @@ public class DescriptionMySql implements DescriptionTableDao {
 
     @Override
     public void deleteAllDescriptionForExposition(Exhibition exhibition) throws DBException {
-        String description;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.delete"))) {
             statement.setInt(1, exhibition.getId());
-            ResultSet resultSet = statement.executeQuery();
+            statement.execute();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
