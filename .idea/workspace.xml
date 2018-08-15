@@ -2,13 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bebe6f2d-17ec-42d8-8dce-6844d266036d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/moderator/editExposition.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditExposition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ControllerHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ControllerHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/command/Links.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/command/Links.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Exhibition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Exhibition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExpoCenterManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExpoCenterManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/DescriptionTableDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/DescriptionTableDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/moderator/editExposition.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/moderator/editExposition.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/ControllerHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/ControllerHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/command/moderatorCommand/EditCenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/command/moderatorCommand/EditCenter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/command/moderatorCommand/ExhibitionManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/command/moderatorCommand/ExhibitionManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/command/moderatorCommand/ExpoCenterManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/command/moderatorCommand/ExpoCenterManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/DescriptionTableDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/DescriptionTableDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/ExhibitionDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/ExhibitionDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/DescriptionMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/DescriptionMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/ControllerHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/ControllerHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/EditCenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/EditCenter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ExhibitionManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ExhibitionManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ExpoCenterManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ExpoCenterManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/DescriptionTableDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/DescriptionTableDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/ExhibitionDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/ExhibitionDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/DescriptionMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/DescriptionMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/ExhibitionMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/ExhibitionMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/editExposition.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/editExposition.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/expoManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/expoManagement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,7 +49,7 @@
     <session id="-1159804134">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="24" />
+          <entry key="project.closed" value="26" />
           <entry key="project.open.time.0" value="10" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
@@ -30,25 +57,25 @@
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="6" />
+          <entry key="project.open.time.6" value="7" />
           <entry key="project.open.time.7" value="5" />
           <entry key="project.open.time.8" value="2" />
-          <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="33" />
+          <entry key="project.open.time.9" value="4" />
+          <entry key="project.opened" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="27695" />
-          <entry key="jsp" value="3252" />
+          <entry key="java" value="28748" />
+          <entry key="jsp" value="3493" />
           <entry key="properties" value="2140" />
           <entry key="xml" value="225" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="27695" />
-          <entry key="JSP" value="3252" />
+          <entry key="JAVA" value="28748" />
+          <entry key="JSP" value="3493" />
           <entry key="Properties" value="2140" />
           <entry key="XML" value="225" />
         </counts>
@@ -57,8 +84,8 @@
         <counts>
           <entry key="class" value="2" />
           <entry key="iml" value="1" />
-          <entry key="java" value="369" />
-          <entry key="jsp" value="74" />
+          <entry key="java" value="387" />
+          <entry key="jsp" value="79" />
           <entry key="properties" value="33" />
           <entry key="xml" value="19" />
         </counts>
@@ -67,8 +94,8 @@
         <counts>
           <entry key="CLASS" value="2" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="369" />
-          <entry key="JSP" value="74" />
+          <entry key="JAVA" value="387" />
+          <entry key="JSP" value="79" />
           <entry key="Properties" value="33" />
           <entry key="XML" value="19" />
         </counts>
@@ -78,35 +105,62 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExpoCenterManagement.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="25" selection-start-line="25" selection-end-line="26" />
+            <state relative-caret-position="104">
+              <caret line="55" column="38" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="38" />
+              <folding>
+                <element signature="method#rolePermit#0;class#EditCenter#0" />
+                <element signature="method#closeConnection#0;class#EditCenter#0" />
+                <element signature="method#handleConnection#0;class#EditCenter#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditExposition.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#showAll#0;class#ExpoCenterManagement#0" />
-                <element signature="method#deleteById#0;class#ExpoCenterManagement#0" />
-                <element signature="method#specificSearch#0;class#ExpoCenterManagement#0" />
-                <element signature="method#getAllFromDb#0;class#ExpoCenterManagement#0" />
-                <element signature="method#rolePermit#0;class#ExpoCenterManagement#0" />
-                <element signature="method#closeConnection#0;class#ExpoCenterManagement#0" />
-                <element signature="method#handleConnection#0;class#ExpoCenterManagement#0" />
+                <element signature="method#readDataFromReq#0;class#EditExposition#0" />
+                <element signature="method#setDataToReq#0;class#EditExposition#0" />
+                <element signature="method#getDescription#0;class#EditExposition#0" />
+                <element signature="method#rolePermit#0;class#EditExposition#0" />
+                <element signature="method#closeConnection#0;class#EditExposition#0" />
+                <element signature="method#handleConnection#0;class#EditExposition#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/editExposition.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+            <state relative-caret-position="418">
+              <caret line="37" column="173" selection-start-line="37" selection-start-column="173" selection-end-line="37" selection-end-column="173" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/Links.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="13" column="61" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controller/ControllerHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="39" column="59" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getAllFromDb#0;class#ExhibitionManagement#0" />
-                <element signature="method#rolePermit#0;class#ExhibitionManagement#0" />
-                <element signature="method#closeConnection#0;class#ExhibitionManagement#0" />
-                <element signature="method#handleConnection#0;class#ExhibitionManagement#0" />
               </folding>
             </state>
           </provider>
@@ -115,22 +169,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="40" column="29" lean-forward="true" selection-start-line="34" selection-start-column="23" selection-end-line="40" selection-end-column="29" />
+            <state relative-caret-position="409">
+              <caret line="37" column="105" selection-start-line="37" selection-start-column="91" selection-end-line="37" selection-end-column="105" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entities/Exhibition.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="24" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="24" />
+            <state relative-caret-position="325">
+              <caret line="42" column="34" lean-forward="true" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
               <folding>
-                <element signature="e#646#647#0" expanded="true" />
-                <element signature="e#681#682#0" expanded="true" />
-                <element signature="e#737#738#0" expanded="true" />
-                <element signature="e#785#786#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#rolePermit#0;class#ExhibitionManagement#0" />
+                <element signature="method#closeConnection#0;class#ExhibitionManagement#0" />
+                <element signature="method#handleConnection#0;class#ExhibitionManagement#0" />
               </folding>
             </state>
           </provider>
@@ -171,10 +225,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utility/PasswordHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/LogoutCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/views/common/login.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/Error.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/ErrorHandler.java" />
@@ -205,7 +255,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/PhoneExhibitionCenterDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/editExpositionCenter.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/AddingExpoCenter.java" />
         <option value="$PROJECT_DIR$/src/main/java/utility/Patterns.java" />
@@ -213,15 +262,20 @@
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/addExposition.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/AddExpo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/ControllerHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/Links.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Exhibition.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExpoCenterManagement.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/ControllerHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/DescriptionTableDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/command/Links.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditExposition.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/editExposition.jsp" />
       </list>
     </option>
   </component>
@@ -260,7 +314,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -404,11 +457,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534257382970" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534262117862" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -477,12 +532,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SimpleTest_myTest - 2018.08.12 at 18h 42m 19s.xml">
-      <configuration name="SimpleTest.myTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SimpleTest_myTest - 2018.08.12 at 18h 48m 46s.xml">
-      <configuration name="SimpleTest.myTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="SimpleTest_myTest - 2018.08.12 at 20h 25m 47s.xml">
       <configuration name="SimpleTest.myTest" configurationId="JUnit" />
     </history-entry>
@@ -507,12 +556,26 @@
     <history-entry file="SimpleTest_myTest - 2018.08.14 at 11h 01m 40s.xml">
       <configuration name="SimpleTest.myTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="SimpleTest_myTest - 2018.08.14 at 18h 09m 31s.xml">
+      <configuration name="SimpleTest.myTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_myTest - 2018.08.14 at 22h 56m 41s.xml">
+      <configuration name="SimpleTest.myTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18070363" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18443497" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -521,15 +584,16 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49947917" visible="true" weight="0.28524947" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49947917" weight="0.25921908" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.329718" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005208" side_tool="true" weight="0.32943678" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3286334" />
+      <window_info anchor="bottom" id="Statistic" order="11" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -545,16 +609,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/RoleDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/common/expoinfo.jsp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/LoginCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1513">
@@ -734,30 +788,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="60" column="95" selection-start-line="60" selection-start-column="85" selection-end-line="60" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/AddingExpoCenter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
           <caret line="34" selection-start-line="34" selection-end-line="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#closeConnection#0;class#AddingExpoCenter#0" />
-            <element signature="method#collectParamsFromRequest#0;class#AddingExpoCenter#0" />
-            <element signature="method#rolePermit#0;class#AddingExpoCenter#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/DescriptionTableDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="13" column="65" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -791,13 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="19" column="68" lean-forward="true" selection-start-line="19" selection-start-column="68" selection-end-line="19" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/addExpoCenter.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -827,30 +854,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1016">
-          <caret line="27" column="25" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#rolePermit#0;class#EditCenter#0" />
-            <element signature="method#closeConnection#0;class#EditCenter#0" />
-            <element signature="method#handleConnection#0;class#EditCenter#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/expoCenterManagement.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" column="10" lean-forward="true" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -872,43 +879,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="89" selection-start-line="15" selection-start-column="89" selection-end-line="15" selection-end-column="89" />
+        <state relative-caret-position="396">
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/editExposition.jsp">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/editExpositionCenter.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="50" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+        <state relative-caret-position="308">
+          <caret line="14" lean-forward="true" selection-end-line="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/Links.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExpoCenterManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/ControllerHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="38" column="38" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="38" />
+        <state relative-caret-position="312">
+          <caret line="75" column="36" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#showAll#0;class#ExpoCenterManagement#0" />
+            <element signature="method#specificSearch#0;class#ExpoCenterManagement#0" />
+            <element signature="method#getAllFromDb#0;class#ExpoCenterManagement#0" />
+            <element signature="method#rolePermit#0;class#ExpoCenterManagement#0" />
+            <element signature="method#closeConnection#0;class#ExpoCenterManagement#0" />
+            <element signature="method#handleConnection#0;class#ExpoCenterManagement#0" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/PasswordHandler.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entities/Exhibition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="88">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="24" />
           <folding>
             <element signature="e#646#647#0" expanded="true" />
@@ -919,41 +925,108 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="40" column="29" lean-forward="true" selection-start-line="34" selection-start-column="23" selection-end-line="40" selection-end-column="29" />
+        <state relative-caret-position="226">
+          <caret line="129" column="37" selection-start-line="129" selection-start-column="37" selection-end-line="129" selection-end-column="37" />
+          <folding>
+            <element signature="method#getExhibitionById#0;class#ExhibitionMySql#0" />
+            <element signature="method#getExhibitionByTitle#0;class#ExhibitionMySql#0" />
+            <element signature="method#insertExhibition#0;class#ExhibitionMySql#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExpoCenterManagement.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="25" selection-start-line="25" selection-end-line="26" />
+        <state relative-caret-position="330">
+          <caret line="15" column="89" selection-start-line="15" selection-start-column="89" selection-end-line="15" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/DescriptionTableDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="46" column="45" lean-forward="true" selection-start-line="46" selection-start-column="45" selection-end-line="46" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="55" column="38" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#showAll#0;class#ExpoCenterManagement#0" />
-            <element signature="method#deleteById#0;class#ExpoCenterManagement#0" />
-            <element signature="method#specificSearch#0;class#ExpoCenterManagement#0" />
-            <element signature="method#getAllFromDb#0;class#ExpoCenterManagement#0" />
-            <element signature="method#rolePermit#0;class#ExpoCenterManagement#0" />
-            <element signature="method#closeConnection#0;class#ExpoCenterManagement#0" />
-            <element signature="method#handleConnection#0;class#ExpoCenterManagement#0" />
+            <element signature="method#rolePermit#0;class#EditCenter#0" />
+            <element signature="method#closeConnection#0;class#EditCenter#0" />
+            <element signature="method#handleConnection#0;class#EditCenter#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+        <state relative-caret-position="325">
+          <caret line="42" column="34" lean-forward="true" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getAllFromDb#0;class#ExhibitionManagement#0" />
             <element signature="method#rolePermit#0;class#ExhibitionManagement#0" />
             <element signature="method#closeConnection#0;class#ExhibitionManagement#0" />
             <element signature="method#handleConnection#0;class#ExhibitionManagement#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/ControllerHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="39" column="59" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/Links.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="61" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="37" column="105" selection-start-line="37" selection-start-column="91" selection-end-line="37" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditExposition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#readDataFromReq#0;class#EditExposition#0" />
+            <element signature="method#setDataToReq#0;class#EditExposition#0" />
+            <element signature="method#getDescription#0;class#EditExposition#0" />
+            <element signature="method#rolePermit#0;class#EditExposition#0" />
+            <element signature="method#closeConnection#0;class#EditExposition#0" />
+            <element signature="method#handleConnection#0;class#EditExposition#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/editExposition.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="37" column="173" selection-start-line="37" selection-start-column="173" selection-end-line="37" selection-end-column="173" />
         </state>
       </provider>
     </entry>

@@ -72,12 +72,8 @@ public class ExpoCenterManagement implements Command {
         // todo make available only for admin
         String id = req.getParameter("idDelete");
         try {
-            log.info("before del");
             factoryMySql.createExhibitionCenter(connection).deleteExhibitionCenterById(Integer.parseInt(id));
-            log.info("after del");
-
-        } catch (Exception exceptrion) {
-            log.error(exceptrion);
+        } catch (Exception exception) {
         } finally {
             closeConnection();
         }

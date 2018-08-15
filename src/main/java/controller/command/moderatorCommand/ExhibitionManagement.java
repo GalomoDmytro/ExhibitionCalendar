@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExhibitionManagement implements Command {
 
@@ -40,17 +42,38 @@ public class ExhibitionManagement implements Command {
         } else if(req.getParameter("search") != null) {
 //            specificSearch(req);
         }
-//
-//        if(req.getParameter("idDelete") != null) {
-//            deleteById(req);
-//        }
+
+        if(req.getParameter("idDelete") != null) {
+            deleteById(req);
+        }
 
         dispatcher.forward(req, resp);
+    }
+
+    private void deleteById(HttpServletRequest req) {
+        // todo make available only for admin
+        String id = req.getParameter("idDelete");
+        try {
+            log.info("try delete by id " + id);
+            factoryMySql.createExhibition(connection).deleteById(Integer.valueOf(id));
+        } catch (Exception exception) {
+            log.error(exception);
+        } finally {
+            closeConnection();
+        }
     }
 
     private void showAll(HttpServletRequest req) {
         try {
             List<Exhibition> exhibitionCenterList = getAllFromDb();
+            for(Exhibition exhibition : exhibitionCenterList) {
+                Map<String, String> expoLang = factoryMySql.createDescriptionTable(connection).getAllDescription(exhibition);
+                String langTags = "";
+                for(Map.Entry<String, String> entry : expoLang.entrySet()) {
+                    langTags += entry.getKey() + " ";
+                }
+                exhibition.setLanguageTags(langTags);
+            }
 
             if(exhibitionCenterList != null) {
                 req.setAttribute("listExpo", exhibitionCenterList);
@@ -61,6 +84,8 @@ public class ExhibitionManagement implements Command {
             closeConnection();
         }
     }
+
+
 
     private List<Exhibition> getAllFromDb() throws DBException {
         try {

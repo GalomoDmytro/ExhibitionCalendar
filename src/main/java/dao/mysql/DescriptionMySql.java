@@ -35,6 +35,26 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
 
         if (languageDescription == null) {
+            // todo not return null
+            return null;
+        } else {
+            return languageDescription;
+        }
+    }
+
+    @Override
+    public Map<String, String> getAllDescriptionById(Integer id) throws DBException {
+        Map<String, String> languageDescription;
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.getAll"))) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            languageDescription = parseResultSet(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if (languageDescription == null) {
+            // todo not return null
             return null;
         } else {
             return languageDescription;

@@ -117,7 +117,17 @@ public class ExhibitionMySql implements ExhibitionDao {
     public void deleteExhibition(Exhibition exhibition) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.delete"))) {
             statement.setInt(1, exhibition.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void deleteById(Integer id) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.delete"))) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

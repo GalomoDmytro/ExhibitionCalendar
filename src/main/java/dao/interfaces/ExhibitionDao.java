@@ -18,4 +18,6 @@ public interface ExhibitionDao {
     List<Exhibition> getAllExhibition() throws DBException;
 
     void deleteExhibition(Exhibition exhibition) throws DBException;
+
+    void deleteById(Integer id) throws DBException;
 }

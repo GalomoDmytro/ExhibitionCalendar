@@ -9,6 +9,8 @@ public interface DescriptionTableDao {
 
     Map<String, String> getAllDescription(Exhibition exhibition) throws DBException;
 
+    Map<String, String> getAllDescriptionById(Integer id) throws DBException;
+
     String getDescription(Exhibition exhibition, String keyLanguage) throws DBException;
 
     void insertDescription(String keyLanguage, String description, Exhibition exhibition) throws DBException;

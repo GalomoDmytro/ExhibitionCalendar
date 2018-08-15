@@ -27,6 +27,7 @@ dao\mysql\DescriptionMySql.class
 dao\mysql\RoleMySql.class
 controller\Controller.class
 controller\filter\PageRedirectSecurityFilter.class
+controller\command\moderatorCommand\EditExposition.class
 dao\mysql\TicketMySql.class
 controller\command\HomeCommand.class
 controller\command\Command.class

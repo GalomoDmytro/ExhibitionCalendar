@@ -30,6 +30,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionCente
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Contract.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\HomeCommand.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\PhoneExhibitionCenterDao.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\EditExposition.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\UserPhoneMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\FactoryMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\ControllerHelper.java

@@ -37,6 +37,7 @@ public class ControllerHelper {
         commandMap.put("editExpositionCenter", new EditCenter());
         commandMap.put("addExposition", new AddExpo());
         commandMap.put("expoManagement", new ExhibitionManagement());
+        commandMap.put("editExposition", new EditExposition());
     }
 
 

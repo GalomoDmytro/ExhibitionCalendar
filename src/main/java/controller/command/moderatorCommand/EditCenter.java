@@ -37,7 +37,7 @@ public class EditCenter implements Command {
         handleConnection();
 
         readDataFromReq(req);
-        setExpoDataToReq(req);
+        setExpoCenterDataToReq(req);
 
         if (!rolePermit(req)) {
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
@@ -50,7 +50,7 @@ public class EditCenter implements Command {
             changeExpoCenterData(req);
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
         } else if (req.getParameter("denieEdit") != null) {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
+            dispatcher = req.getRequestDispatcher(Links.MODERATOR_PAGE);
         }
 
         dispatcher.forward(req, resp);
@@ -90,7 +90,7 @@ public class EditCenter implements Command {
         phone2 = req.getParameter("phone2");
     }
 
-    private void setExpoDataToReq(HttpServletRequest req) {
+    private void setExpoCenterDataToReq(HttpServletRequest req) {
         req.setAttribute("idEdit", idCenter);
         req.setAttribute("expoCTitle", title);
         req.setAttribute("expoCAddress", address);
