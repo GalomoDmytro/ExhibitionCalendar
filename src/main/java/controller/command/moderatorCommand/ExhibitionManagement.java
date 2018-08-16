@@ -91,19 +91,13 @@ public class ExhibitionManagement implements Command {
     private void specificSearch(HttpServletRequest request) {
         String looking = request.getParameter("searchField");
         looking = looking.toLowerCase();
-        LOGGER.info("Search " + looking);
         List<Exhibition> exhibitionList = new ArrayList<>();
         List<Exhibition> allExhibitionFromDb;
 
         try {
             allExhibitionFromDb = getAllFromDb();
-            for(Exhibition exhibition : allExhibitionFromDb) {
-                LOGGER.info("fore each --------- " + exhibition.toString());
-                if(exhibition.getTitle().toLowerCase().contains(looking) ||
-                        String.valueOf(exhibition.getId()).equals(looking)) {
-                    exhibitionList.add(exhibition);
-                }
-            }
+            findMatchedWithLookingField(looking, exhibitionList, allExhibitionFromDb);
+
 
             setLangTagsToExhibition(exhibitionList);
 
@@ -111,11 +105,19 @@ public class ExhibitionManagement implements Command {
                 request.setAttribute("listExpo", exhibitionList);
             }
         } catch (Exception exception) {
-            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
 
+    }
+
+    private void findMatchedWithLookingField(String looking, List<Exhibition> exhibitionList, List<Exhibition> allExhibitionFromDb) {
+        for(Exhibition exhibition : allExhibitionFromDb) {
+            if(exhibition.getTitle().toLowerCase().contains(looking) ||
+                    String.valueOf(exhibition.getId()).equals(looking)) {
+                exhibitionList.add(exhibition);
+            }
+        }
     }
 
 

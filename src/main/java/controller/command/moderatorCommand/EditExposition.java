@@ -5,6 +5,7 @@ import controller.command.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Exhibition;
+import exceptions.DBException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,17 +24,15 @@ public class EditExposition implements Command {
     private Integer id;
     private String title;
     private String imgSrc;
-    private String langTag;
-    private String descriptLangText;
-    private Map<String, String> langDescription = new HashMap<>();
     private Map<String, String> description;
-    private Exhibition exhibition;
+    private Exhibition exhibition;    private static final Logger LOGGER = Logger.getLogger(EditExposition.class);
 
-    private static final Logger LOGGER = Logger.getLogger(EditExposition.class);
+
 
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
         readDataFromReq(req);
@@ -59,39 +57,51 @@ public class EditExposition implements Command {
     private void changeExpoData(HttpServletRequest req) {
         handleConnection();
         try {
-            exhibition = new Exhibition();
-            exhibition.setId(id);
-            exhibition.setTitle(title);
-            exhibition.setImgSrc(imgSrc);
-            LOGGER.info("exhibit: " + exhibition.toString());
-
+            prepareExhibition();
             Map<String, String> langTextToSave = new HashMap<>();
-//            req.setAttribute("langText", "langText");
-            // old tag to edit
-            for (Map.Entry<String, String> entry : description.entrySet()) {
-                langTextToSave.put(req.getParameter(entry.getKey()), req.getParameter(entry.getValue()));
-                LOGGER.info("will save" + req.getParameter(entry.getKey()) + " " + req.getParameter(entry.getValue()));
-            }
 
-            // new tag to save
-            if (req.getParameter("newTag") != null && req.getParameter("newTextDescription") != null) {
-                if (req.getParameter("newTag").length() > 0 && req.getParameter("newTextDescription").length() > 0) {
-                    langTextToSave.put(req.getParameter("newTag"), req.getParameter("newTextDescription"));
-                }
-            }
+            // will change language description witch exist, if necessary
+            forChangeDescription(req, langTextToSave);
+
+            // add new language tag and description
+            newTagToSave(req, langTextToSave);
 
             factoryMySql.createExhibition(connection).updateExhibition(exhibition);
 
-            factoryMySql.createDescriptionTable(connection).deleteAllDescriptionForExposition(exhibition);
-            for (Map.Entry<String, String> entry : langTextToSave.entrySet()) {
-                LOGGER.info("save" + req.getParameter(entry.getKey()) + " " + req.getParameter(entry.getValue()));
-                factoryMySql.createDescriptionTable(connection).insertDescriptionById(entry.getValue(), entry.getKey(),  id);
-            }
+            makeChangeInDescriptionTable(langTextToSave);
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
             closeConnection();
         }
+    }
+
+    private void makeChangeInDescriptionTable(Map<String, String> langTextToSave) throws DBException {
+        factoryMySql.createDescriptionTable(connection).deleteAllDescriptionForExposition(exhibition);
+        for (Map.Entry<String, String> entry : langTextToSave.entrySet()) {
+            factoryMySql.createDescriptionTable(connection).insertDescriptionById(entry.getValue(), entry.getKey(), id);
+        }
+    }
+
+    private void newTagToSave(HttpServletRequest req, Map<String, String> langTextToSave) {
+        if (req.getParameter("newTag") != null && req.getParameter("newTextDescription") != null) {
+            if (req.getParameter("newTag").length() > 0 && req.getParameter("newTextDescription").length() > 0) {
+                langTextToSave.put(req.getParameter("newTag"), req.getParameter("newTextDescription"));
+            }
+        }
+    }
+
+    private void forChangeDescription(HttpServletRequest req, Map<String, String> langTextToSave) {
+        for (Map.Entry<String, String> entry : description.entrySet()) {
+            langTextToSave.put(req.getParameter(entry.getKey()), req.getParameter(entry.getValue()));
+        }
+    }
+
+    private void prepareExhibition() {
+        exhibition = new Exhibition();
+        exhibition.setId(id);
+        exhibition.setTitle(title);
+        exhibition.setImgSrc(imgSrc);
     }
 
     private void readDataFromReq(HttpServletRequest req) {

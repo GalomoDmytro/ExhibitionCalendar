@@ -38,6 +38,8 @@
                         <td><a href="${pageContext.request.contextPath}/controller?command=editExposition&expoId=<c:out value='${expo.id}'/>&title=<c:out value='${expo.title}'/>&imgSrc=<c:out value='${expo.imgSrc}'/>">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath}/controller?command=expoManagement&idDelete=<c:out value='${expo.id}'/>">Delete</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="${pageContext.request.contextPath}/controller?command=combineExpoWithCenter&idExhibition=<c:out value='${expo.id}'/>">Form_contract</a>
                         </td>
                     </tr>
                 </c:forEach>

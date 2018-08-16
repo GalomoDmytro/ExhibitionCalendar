@@ -44,6 +44,8 @@
                         <td><a href="${pageContext.request.contextPath}/controller?command=editExpositionCenter&idEdit=<c:out value='${expoCenter.id}'/>&expoCTitle=<c:out value='${expoCenter.title}'/>&expoCAddress=<c:out value='${expoCenter.address}'/>&expoCWebPage=<c:out value='${expoCenter.webPage}'/>&expoCMail=<c:out value='${expoCenter.eMail}'/>&phone1=<c:out value='${expoCenter.phone.get(0)}'/>&phone1=<c:out value='${expoCenter.phone.get(1)}'/>">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement&idDelete=<c:out value='${expoCenter.id}'/>">Delete</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="${pageContext.request.contextPath}/controller?command=combineExpoWithCenter&expoCenterId=<c:out value='${expoCenter.id}' />">Form_contract</a>
                         </td>
                     </tr>
                 </c:forEach>

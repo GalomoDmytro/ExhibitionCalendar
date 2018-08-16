@@ -1,10 +1,12 @@
 package dao.mysql;
 
+import controller.command.moderatorCommand.CreateContract;
 import dao.interfaces.ExhibitionContractDao;
 import entities.Contract;
 import entities.Exhibition;
 import entities.ExhibitionCenter;
 import exceptions.DBException;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
+
+    private static final Logger LOGGER = Logger.getLogger(ExhibitionContractMySql.class);
 
     ExhibitionContractMySql(Connection connection) {
         this.connection = connection;
@@ -48,7 +52,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
-    public List<Contract> getAllContractsByExCenterWithExhibiton(ExhibitionCenter exhibitionCenter, Exhibition exhibition) throws DBException {
+    public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter, Exhibition exhibition) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getByCenterAndExhibition"))) {
             statement.setInt(1, exhibitionCenter.getId());
@@ -149,6 +153,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -157,7 +162,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     public void deleteContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.deleteContract"))) {
             statement.setInt(1, contract.getId());
-            statement.executeQuery();
             statement.executeQuery();
         } catch (SQLException exception) {
             throw new DBException(exception);
@@ -192,13 +196,14 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     private void prepareStatementToInsert(PreparedStatement statement, Contract contract) throws DBException {
         try {
             statement.setInt(1, contract.getExhibitionId());
-            statement.setInt(2, contract.getExhibitionId());
+            statement.setInt(2, contract.getExCenterId());
             statement.setDate(3, contract.getDateFrom());
             statement.setDate(4, contract.getDateTo());
             statement.setBigDecimal(5, contract.getTicketPrice());
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -206,13 +211,14 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     private void prepareStatementToUpdate(PreparedStatement statement, Contract contract) throws DBException {
         try {
             statement.setInt(1, contract.getExhibitionId());
-            statement.setInt(2, contract.getExhibitionId());
+            statement.setInt(2, contract.getExCenterId());
             statement.setDate(3, contract.getDateFrom());
             statement.setDate(4, contract.getDateTo());
             statement.setBigDecimal(5, contract.getTicketPrice());
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

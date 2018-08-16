@@ -11,7 +11,7 @@ public interface ExhibitionContractDao {
 
     Contract getExhibitionContractById(Integer id) throws DBException;
 
-    List<Contract> getAllContractsByExCenterWithExhibiton(ExhibitionCenter exhibitionCenter, Exhibition exhibition) throws DBException;
+    List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter, Exhibition exhibition) throws DBException;
 
     List<Contract> getAllContractsForCenter(ExhibitionCenter exhibitionCenter) throws DBException;
 

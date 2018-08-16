@@ -1,6 +1,5 @@
 package dao.mysql;
 
-import controller.command.moderatorCommand.AddExpo;
 import dao.interfaces.ExhibitionDao;
 import entities.Exhibition;
 import exceptions.DBException;
@@ -75,8 +74,7 @@ public class ExhibitionMySql implements ExhibitionDao {
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     exhibition.setId(generatedKeys.getInt(1));
-                }
-                else {
+                } else {
                     throw new SQLException("Creating user failed, no ID obtained.");
                 }
             }

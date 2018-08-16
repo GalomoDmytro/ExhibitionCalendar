@@ -50,9 +50,11 @@ entities\ExhibitionCenter$Builder.class
 dao\interfaces\FactoryDao.class
 entities\Role.class
 entities\User$Builder.class
+controller\command\moderatorCommand\combineExhibitionWithExhibionCenter.class
 dao\Connection\ConnectionPoolMySql.class
 entities\Ticket$Builder.class
 controller\command\moderatorCommand\AddingExpoCenter.class
 dao\interfaces\ExhibitionDao.class
 dao\mysql\ExhibitionCenterMySql.class
+controller\command\moderatorCommand\CreateContract.class
 exceptions\DBException.class
