@@ -26,4 +26,10 @@ public class Patterns {
 
     public static final String NAME = "^[a-zA-Z][a-zA-Z0-9-_\\.]{1,20}$"; // first letter, with 2-20 chars
 
+    public static final String DATE_PATTERN = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
+
+    public static final String PRICE_PATTERN = "^[0-9]+[.,]{0,1}[0-9]*$";
+
+    public static final String DATE_SQL_PATTERN = "yyyy-MM-dd";
+
 }

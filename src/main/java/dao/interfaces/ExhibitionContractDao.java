@@ -25,5 +25,7 @@ public interface ExhibitionContractDao {
 
     void deleteContract(Contract contract) throws DBException;
 
+    void deleteContractById(Integer id ) throws DBException;
+
 
 }

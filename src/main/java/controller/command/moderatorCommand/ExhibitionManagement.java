@@ -53,10 +53,8 @@ public class ExhibitionManagement implements Command {
         // todo make available only for admin
         String id = req.getParameter("idDelete");
         try {
-            LOGGER.info("try delete by id " + id);
             factoryMySql.createExhibition(connection).deleteById(Integer.valueOf(id));
         } catch (Exception exception) {
-            LOGGER.error(exception);
         } finally {
             closeConnection();
         }

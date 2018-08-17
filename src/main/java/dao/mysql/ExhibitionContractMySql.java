@@ -22,7 +22,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     private final String FIELD_DATE_TO = "date_to";
     private final String FIELD_TICKET_PRICE = "ticket_price";
     private final String FIELD_WORK_TIME_EXHIBITION = "work_time_exhibition";
-    private final String FIELD_MAX_TICKET_PER_DAY = "max_ticket";
+    private final String FIELD_MAX_TICKET_PER_DAY = "max_ticket_per_day";
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
@@ -125,9 +125,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
     @Override
     public void updateContract(Contract contract) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.updateUser"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.updateContract"))) {
             prepareStatementToUpdate(statement, contract);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -162,7 +162,17 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     public void deleteContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.deleteContract"))) {
             statement.setInt(1, contract.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void deleteContractById(Integer id) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.deleteContract"))) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -217,6 +227,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setBigDecimal(5, contract.getTicketPrice());
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
+            statement.setInt(8, contract.getId());
         } catch (SQLException exception) {
             LOGGER.error(exception);
             throw new DBException(exception);

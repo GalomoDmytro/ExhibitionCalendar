@@ -41,7 +41,6 @@ public class CreateContract implements Command {
     private static final String INSRT_SUCCESSFUL = "Insert successful";
     private static final Logger LOGGER = Logger.getLogger(CreateContract.class);
 
-
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher;

@@ -40,6 +40,8 @@ public class ControllerHelper {
         commandMap.put("editExposition", new EditExposition());
         commandMap.put("combineExpoWithCenter", new combineExhibitionWithExhibionCenter());
         commandMap.put("createContract", new CreateContract());
+        commandMap.put("contractManagement", new ContractManagement());
+        commandMap.put("editContract", new EditContract());
     }
 
 

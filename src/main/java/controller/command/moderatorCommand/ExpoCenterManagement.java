@@ -69,7 +69,8 @@ public class ExpoCenterManagement implements Command {
     }
 
     private void deleteById(HttpServletRequest req) {
-        // todo make available only for admin
+        // todo: make available only for admin
+        // TODO: make multi access safe
         String id = req.getParameter("idDelete");
         try {
             factoryMySql.createExhibitionCenter(connection).deleteExhibitionCenterById(Integer.parseInt(id));
@@ -80,6 +81,8 @@ public class ExpoCenterManagement implements Command {
     }
 
     private void specificSearch(HttpServletRequest request) {
+
+        // TODO: refactor search
         String looking = request.getParameter("searchField");
         looking = looking.toLowerCase();
 

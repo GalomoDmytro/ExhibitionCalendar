@@ -1,4 +1,5 @@
 entities\ExhibitionCenter.class
+controller\command\moderatorCommand\EditContract.class
 dao\interfaces\DescriptionTableDao.class
 dao\mysql\ExhibitionMySql.class
 dao\interfaces\ConnectionPoolDao.class
@@ -17,6 +18,7 @@ controller\command\moderatorCommand\ExhibitionManagement.class
 dao\mysql\UserPhoneMySql.class
 dao\interfaces\ExhibitionContractDao.class
 controller\command\LogoutCommand.class
+controller\command\moderatorCommand\ContractManagement.class
 controller\command\RegistrationCommand.class
 dao\interfaces\RoleDao.class
 dao\mysql\ExhibitionContractMySql.class

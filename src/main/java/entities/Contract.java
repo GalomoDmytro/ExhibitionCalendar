@@ -8,7 +8,9 @@ public class Contract {
 
     private Integer id;
     private Integer exhibitionId;
+    private String exhibitionTitle;
     private Integer exCenterId;
+    private String exhibitionCenterTitle;
     private Date dateFrom;
     private Date dateTo;
     private BigDecimal ticketPrice;
@@ -31,6 +33,22 @@ public class Contract {
 
     public void setExhibitionId(Integer exhibitionId) {
         this.exhibitionId = exhibitionId;
+    }
+
+    public String getExhibitionTitle() {
+        return exhibitionTitle;
+    }
+
+    public void setExhibitionTitle(String exhibitionTitle) {
+        this.exhibitionTitle = exhibitionTitle;
+    }
+
+    public String getExhibitionCenterTitle() {
+        return exhibitionCenterTitle;
+    }
+
+    public void setExhibitionCenterTitle(String exhibitionCenterTitle) {
+        this.exhibitionCenterTitle = exhibitionCenterTitle;
     }
 
     public Integer getExCenterId() {
@@ -133,8 +151,18 @@ public class Contract {
             return this;
         }
 
+        public Builder setExhibitionTitle(String title) {
+            contract.setExhibitionTitle(title);
+            return this;
+        }
+
         public Builder setExCenterId(Integer exCenterId) {
             contract.setExCenterId(exCenterId);
+            return this;
+        }
+
+        public Builder setExhibitionCetnterTitle(String title) {
+            contract.setExhibitionTitle(title);
             return this;
         }
 
