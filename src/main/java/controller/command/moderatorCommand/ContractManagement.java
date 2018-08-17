@@ -76,7 +76,7 @@ public class ContractManagement implements Command {
     private void deleteById(HttpServletRequest req) {
         handleConnection();
         try{
-            // todo make available only for admin
+            // TODO: make available only for admin
             String id = req.getParameter("idDelete");
             if(id != null) {
                 factoryMySql.createExhibitionContract(connection).deleteContractById(Integer.valueOf(id));
@@ -89,21 +89,24 @@ public class ContractManagement implements Command {
 
     private void specificSearch(HttpServletRequest req) {
         String looking = req.getParameter("searchField");
-        looking = looking.toLowerCase();
+//        looking = looking.toLowerCase();
 
-        List<Contract> contractList = new ArrayList<>();
-        List<Contract> allContractInDb;
+//        List<Contract> contractList = new ArrayList<>();
+//        List<Contract> allContractInDb;
 
         handleConnection();
         try {
-            allContractInDb = getAllContractsFromDb();
-            setSupportContractInfo(allContractInDb);
+            List<Contract> contractList = factoryMySql.createExhibitionContract(connection).getAllContractsBySearch(looking);
+//            allContractInDb = getAllContractsFromDb();
+//            setSupportContractInfo(allContractInDb);
+            setSupportContractInfo(contractList);
 
-            findMatchedWithLookingField(looking, contractList, allContractInDb);
+//            findMatchedWithLookingField(looking, contractList, allContractInDb);
             if(contractList != null) {
                 req.setAttribute("listContract", contractList);
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }

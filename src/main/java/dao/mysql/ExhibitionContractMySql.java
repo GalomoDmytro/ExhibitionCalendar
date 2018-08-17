@@ -124,6 +124,32 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
+    public List<Contract> getAllContractsBySearch(String search) throws DBException {
+        search = "%" + search + "%";
+        List<Contract> contracts;
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.search"))) {
+            statement.setString(1, search);
+            statement.setString(2, search);
+            statement.setString(3, search);
+            statement.setString(4, search);
+            statement.setString(5, search);
+            statement.setString(6, search);
+            ResultSet resultSet = statement.executeQuery();
+            contracts = parseContractSet(resultSet);
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+
+            throw new DBException(exception);
+        }
+
+        if (contracts == null) {
+            return null;
+        } else {
+            return contracts;
+        }
+    }
+
+    @Override
     public void updateContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.updateContract"))) {
             prepareStatementToUpdate(statement, contract);

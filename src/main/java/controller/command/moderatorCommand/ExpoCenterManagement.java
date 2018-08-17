@@ -54,9 +54,7 @@ public class ExpoCenterManagement implements Command {
         try {
             List<ExhibitionCenter> exhibitionCenterList = getAllFromDb();
 
-            for(ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
-                exhibitionCenter.setPhone(factoryMySql.createExhibitionCenterPhone(connection).getPhones(exhibitionCenter.getId()));
-            }
+            setPhones(exhibitionCenterList);
             if(exhibitionCenterList != null) {
                 req.setAttribute("listExpoCenter", exhibitionCenterList);
             }
@@ -65,6 +63,12 @@ public class ExpoCenterManagement implements Command {
             log.error(exception);
         } finally {
             closeConnection();
+        }
+    }
+
+    private void setPhones(List<ExhibitionCenter> exhibitionCenterList) throws DBException {
+        for(ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
+            exhibitionCenter.setPhone(factoryMySql.createExhibitionCenterPhone(connection).getPhones(exhibitionCenter.getId()));
         }
     }
 
@@ -84,21 +88,24 @@ public class ExpoCenterManagement implements Command {
 
         // TODO: refactor search
         String looking = request.getParameter("searchField");
-        looking = looking.toLowerCase();
+//        looking = looking.toLowerCase();
 
-        List<ExhibitionCenter> exhibitionCenterListResult = new ArrayList<>();
-        List<ExhibitionCenter> exhibitionCenterListAll;
+//        List<ExhibitionCenter> exhibitionCenterListAll;
 
         try {
-            exhibitionCenterListAll = getAllFromDb();
-            for(ExhibitionCenter center : exhibitionCenterListAll) {
-                if(center.getTitle().toLowerCase().contains(looking) ||
-                    center.getAddress().toLowerCase().contains(looking) ||
-                    center.getWebPage().toLowerCase().contains(looking) ||
-                    String.valueOf(center.getId()).equals(looking)) {
-                    exhibitionCenterListResult.add(center);
-                }
-            }
+//            exhibitionCenterListAll = getAllFromDb();
+            List<ExhibitionCenter> exhibitionCenterListResult = factoryMySql.createExhibitionCenter(connection).getExhibitionCentersBySearch(looking);
+            setPhones(exhibitionCenterListResult);
+            //            for(ExhibitionCenter center : exhibitionCenterListAll) {
+//                if(center.getTitle().toLowerCase().contains(looking) ||
+//                    center.getAddress().toLowerCase().contains(looking) ||
+//                    center.getWebPage().toLowerCase().contains(looking) ||
+//                    String.valueOf(center.getId()).equals(looking)) {
+//                    exhibitionCenterListResult.add(center);
+//                }
+//            }
+
+
 
             if(exhibitionCenterListResult != null) {
                 request.setAttribute("listExpoCenter", exhibitionCenterListResult);

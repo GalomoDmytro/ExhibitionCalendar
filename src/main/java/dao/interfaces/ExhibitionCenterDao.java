@@ -15,6 +15,8 @@ public interface ExhibitionCenterDao {
 
     List<ExhibitionCenter> getAllExhibitionCenter() throws DBException;
 
+    List<ExhibitionCenter> getExhibitionCentersBySearch(String search) throws DBException;
+
     boolean isTitleInTable(String title) throws DBException;
 
     void deleteExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException;

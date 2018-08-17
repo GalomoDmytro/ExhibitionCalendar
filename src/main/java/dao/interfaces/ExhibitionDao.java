@@ -11,6 +11,8 @@ public interface ExhibitionDao {
 
     Exhibition getExhibitionByTitle(String title) throws DBException;
 
+    List<Exhibition> getExhibitionBySearch(String line) throws  DBException;
+
     void insertExhibition(Exhibition exhibition) throws DBException;
 
     void updateExhibition(Exhibition exhibition) throws DBException;

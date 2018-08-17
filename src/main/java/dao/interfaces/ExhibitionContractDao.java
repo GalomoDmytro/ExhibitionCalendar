@@ -17,6 +17,8 @@ public interface ExhibitionContractDao {
 
     List<Contract> getAllContractsForExhibition(Exhibition exhibition) throws DBException;
 
+    List<Contract> getAllContractsBySearch(String search) throws DBException;
+
     List<Contract> getAllContracts() throws DBException;
 
     void updateContract(Contract contract) throws DBException;

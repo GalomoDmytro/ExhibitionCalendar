@@ -43,6 +43,25 @@ public class ExhibitionMySql implements ExhibitionDao {
     }
 
     @Override
+    public List<Exhibition> getExhibitionBySearch(String line) throws DBException {
+        List<Exhibition> exhibitions;
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.search"))) {
+            line = "%" + line + "%";
+            statement.setString(1, line);
+            statement.setString(2, line);
+            ResultSet resultSet = statement.executeQuery();
+            exhibitions = parseExhibitionSet(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if (exhibitions != null) {
+            return exhibitions;
+        }
+        return null;
+    }
+
+    @Override
     public Exhibition getExhibitionByTitle(String title) throws DBException {
         List<Exhibition> exhibitions;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.getByTitle"))) {

@@ -67,6 +67,25 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     }
 
     @Override
+    public List<ExhibitionCenter> getExhibitionCentersBySearch(String search) throws DBException {
+        List<ExhibitionCenter> exhibitionCenters = new ArrayList<>();
+        search = "%" + search + "%";
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.search"))) {
+            statement.setString(1, search);
+            statement.setString(2, search);
+            statement.setString(3, search);
+            statement.setString(4, search);
+            statement.setString(5, search);
+            ResultSet resultSet = statement.executeQuery();
+            exhibitionCenters = parseExhibitionCenterSet(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        return exhibitionCenters;
+    }
+
+    @Override
     public ExhibitionCenter getExhibitionCenterByMail(String eMail) throws DBException {
         List<ExhibitionCenter> exhibitionCenters = null;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getByEMail"))) {
