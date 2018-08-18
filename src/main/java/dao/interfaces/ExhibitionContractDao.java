@@ -5,6 +5,7 @@ import entities.Exhibition;
 import entities.ExhibitionCenter;
 import exceptions.DBException;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ExhibitionContractDao {
@@ -16,6 +17,10 @@ public interface ExhibitionContractDao {
     List<Contract> getAllContractsForCenter(ExhibitionCenter exhibitionCenter) throws DBException;
 
     List<Contract> getAllContractsForExhibition(Exhibition exhibition) throws DBException;
+
+    List<Contract> galAllContactsWithExpoAndCenter(Date date) throws DBException;
+
+    List<Contract> getAllAfterDate(Date date) throws DBException;
 
     List<Contract> getAllContractsBySearch(String search) throws DBException;
 

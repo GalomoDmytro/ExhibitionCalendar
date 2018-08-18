@@ -18,5 +18,6 @@ public class Links {
     public static final String MODERATOR_CREATE_CONTRACT_PAGE = "/views/moderator/createContract.jsp";
     public static final String MODERATOR_CONTRACT_PAGE = "/views/moderator/contractManagement.jsp";
     public static final String MODERATOR_EDIT_CONTRACT_PAGE = "/views/moderator/editContract.jsp";
+    public static final String PURCHASE_PAGE = "/views/common/purchase.jsp";
 
 }

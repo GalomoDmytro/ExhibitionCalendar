@@ -22,15 +22,15 @@ public class ControllerHelper {
 
         if (commandName != null) {
             return commandMap.get(commandName);
-        } else return new HomeCommand();
+        } else return new Home();
     }
 
     private void initCommandMap() {
-        commandMap.put("home", new HomeCommand());
+        commandMap.put("home", new Home());
         commandMap.put("login", new LoginCommand());
         commandMap.put("registration", new RegistrationCommand());
         commandMap.put("logout", new LogoutCommand());
-        commandMap.put("admin", new AdminCommand());
+        commandMap.put("admin", new Admin());
         commandMap.put("moderatorHome", new ModeratorHome());
         commandMap.put("addExpoCenter", new AddingExpoCenter());
         commandMap.put("expoCenterManagement", new ExpoCenterManagement());
@@ -42,6 +42,7 @@ public class ControllerHelper {
         commandMap.put("createContract", new CreateContract());
         commandMap.put("contractManagement", new ContractManagement());
         commandMap.put("editContract", new EditContract());
+        commandMap.put("purchase", new Purchase());
     }
 
 

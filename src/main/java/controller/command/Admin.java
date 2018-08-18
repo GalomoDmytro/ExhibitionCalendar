@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 
-public class AdminCommand implements Command {
+public class Admin implements Command {
 
     private String id;
     private String eMail;

@@ -6,6 +6,7 @@ dao\interfaces\ConnectionPoolDao.class
 utility\PasswordHandler.class
 dao\interfaces\PhoneExhibitionCenterDao.class
 controller\command\moderatorCommand\AddExpo.class
+controller\command\Ticket.class
 entities\Contract.class
 entities\Exhibition$Builder.class
 entities\Exhibition.class
@@ -43,6 +44,7 @@ entities\User.class
 dao\interfaces\UserPhoneDao.class
 controller\command\LoginCommand.class
 controller\command\moderatorCommand\EditCenter.class
+controller\command\Purchase.class
 controller\ControllerHelper.class
 utility\JSPError.class
 controller\command\Links.class

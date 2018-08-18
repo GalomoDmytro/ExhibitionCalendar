@@ -23,26 +23,37 @@
          <br/>
         <a  href="${pageContext.request.contextPath}/controller?command=home">show</a>
 		<hr>
-		<p>Search</p>
+		<form action="${pageContext.request.contextPath}/controller?command=home" method="post">
+                        Search<input type="text" name="searchField">
+                        Date<input type="text" name="searchDate">
+                        <input type="submit" name="search" value="go" />
+                    </form>
 
 		<hr>
+
+
 		<div align="center">
+
         <table border="1" cellpadding="7">
             <caption><h2>Expo info</h2></caption>
             <tr>
 
                 <th>Name Expo</th>
-                <th>Author</th>
-                <th>Date From</th>
-                <th>Date To</th>
                 <th>Expo Center</th>
-                <th>Addr</th>
+                <th>Address</th>
+                <th>img</th>
+                <th></th>
+                <th></th>
             </tr>
-            <c:forEach var="list2" items="${list}">
+            <c:forEach var="list" items="${listForCustomer}">
                 <tr>
-                    <td><c:out value="${list2.id}" /></td>
-                    <td><c:out value="${list2.name}" /></td>
+                    <td><c:out value="${list.exhibitionTitle}" /></td>
+                    <td><c:out value="${list.exhibitionCenterTitle}" /></td>
+                    <td></td>
+                    <td></td>
 
+                    <td>btn: more info</td>
+                    <td><a href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket=">Buy</a></td>
 
                 </tr>
             </c:forEach>

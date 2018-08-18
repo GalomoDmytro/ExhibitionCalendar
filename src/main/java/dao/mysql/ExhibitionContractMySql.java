@@ -1,6 +1,5 @@
 package dao.mysql;
 
-import controller.command.moderatorCommand.CreateContract;
 import dao.interfaces.ExhibitionContractDao;
 import entities.Contract;
 import entities.Exhibition;
@@ -124,6 +123,42 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
+    public List<Contract> galAllContactsWithExpoAndCenter(Date date) throws DBException {
+        List<Contract> contracts;
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDateWithExpoCenterAndExhibition"))) {
+            statement.setDate(1, date);
+            ResultSet resultSet = statement.executeQuery();
+            contracts = parseContractSetWithExpo(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if (contracts == null) {
+            return null;
+        } else {
+            return contracts;
+        }
+    }
+
+    @Override
+    public List<Contract> getAllAfterDate(Date date) throws DBException {
+        List<Contract> contracts;
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDate"))) {
+            statement.setDate(1, date);
+            ResultSet resultSet = statement.executeQuery();
+            contracts = parseContractSet(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if (contracts == null) {
+            return null;
+        } else {
+            return contracts;
+        }
+    }
+
+    @Override
     public List<Contract> getAllContractsBySearch(String search) throws DBException {
         search = "%" + search + "%";
         List<Contract> contracts;
@@ -221,6 +256,33 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                         .build();
 
                 contracts.add(ticket);
+            }
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        return contracts;
+    }
+
+    private List<Contract> parseContractSetWithExpo(ResultSet resultSet) throws DBException {
+        List<Contract> contracts = new ArrayList<>();
+
+        try {
+            while (resultSet.next()) {
+                Contract contract = new Contract.Builder()
+                        .setId(resultSet.getInt(FIELD_ID))
+                        .setExhibitionId(resultSet.getInt(FIELD_EXHIBITION_ID))
+                        .setExCenterId(resultSet.getInt(FIELD_CENTER_ID))
+                        .setDateFrom(resultSet.getDate(FIELD_DATE_FROM))
+                        .setDateTo(resultSet.getDate(FIELD_DATE_TO))
+                        .setTicketPrice(resultSet.getBigDecimal(FIELD_TICKET_PRICE))
+                        .setWorkTime(resultSet.getString(FIELD_WORK_TIME_EXHIBITION))
+                        .setMaxTicketPerDay(resultSet.getInt(FIELD_MAX_TICKET_PER_DAY))
+                        .setExhibitionTitle(resultSet.getString(10))
+                        .setExhibitionCenterTitle(resultSet.getString(13))
+                        .build();
+                LOGGER.info("MYSQL ----- exh:" + resultSet.getString(10) + "center: " + resultSet.getString(13));
+                contracts.add(contract);
             }
         } catch (SQLException exception) {
             throw new DBException(exception);
