@@ -51,7 +51,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
-    public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter, Exhibition exhibition) throws DBException {
+    public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter
+            , Exhibition exhibition) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getByCenterAndExhibition"))) {
             statement.setInt(1, exhibitionCenter.getId());
@@ -66,6 +67,19 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             return null;
         } else {
             return contracts;
+        }
+    }
+
+    @Override
+    public void prepareCEC(Contract contract, Exhibition exhibition, ExhibitionCenter exhibitionCenter,
+                           Integer idContract) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                QUERIES.getString("contract.getContractCenterExhibition"))) {
+            statement.setInt(1, idContract);
+            ResultSet resultSet = statement.executeQuery();
+            fillCEC(resultSet, contract, exhibition, exhibitionCenter);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
         }
     }
 
@@ -141,6 +155,29 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
+    public List<Contract> searchContactsWithExpoAndCenter(String search, Date date) throws DBException {
+        List<Contract> contracts;
+        search = "%" + search + "%";
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.searchAfterDateWithExpoCenterAndExhibition"))) {
+            statement.setDate(1, date);
+            statement.setString(2, search);
+            statement.setString(3, search);
+            statement.setString(4, search);
+            ResultSet resultSet = statement.executeQuery();
+            contracts = parseContractSetWithExpo(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if (contracts == null) {
+            return null;
+        } else {
+            return contracts;
+        }
+    }
+
+    @Override
     public List<Contract> getAllAfterDate(Date date) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDate"))) {
@@ -172,7 +209,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
-            LOGGER.error(exception);
 
             throw new DBException(exception);
         }
@@ -214,7 +250,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             }
 
         } catch (SQLException exception) {
-            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -234,6 +269,34 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.deleteContract"))) {
             statement.setInt(1, id);
             statement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    private void fillCEC(ResultSet resultSet, Contract contract, Exhibition exhibition
+            , ExhibitionCenter exhibitionCenter) throws DBException {
+        try {
+            while (resultSet.next()) {
+                contract.setId(resultSet.getInt(1));
+                contract.setExhibitionId(resultSet.getInt(2));
+                contract.setExCenterId(resultSet.getInt(3));
+                contract.setDateFrom(resultSet.getDate(4));
+                contract.setDateTo(resultSet.getDate(5));
+                contract.setTicketPrice(resultSet.getBigDecimal(6));
+                contract.setWorkTime(resultSet.getString(7));
+                contract.setMaxTicketPerDay(resultSet.getInt(8));
+
+                exhibition.setId(resultSet.getInt(9));
+                exhibition.setTitle(resultSet.getString(10));
+                exhibition.setImgSrc(resultSet.getString(11));
+
+                exhibitionCenter.setId(resultSet.getInt(12));
+                exhibitionCenter.setTitle(resultSet.getString(13));
+                exhibitionCenter.setAddress(resultSet.getString(14));
+                exhibitionCenter.seteMail(resultSet.getString(15));
+                exhibitionCenter.setWebPage(resultSet.getString(16));
+            }
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -281,7 +344,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                         .setExhibitionTitle(resultSet.getString(10))
                         .setExhibitionCenterTitle(resultSet.getString(13))
                         .build();
-                LOGGER.info("MYSQL ----- exh:" + resultSet.getString(10) + "center: " + resultSet.getString(13));
                 contracts.add(contract);
             }
         } catch (SQLException exception) {
@@ -301,7 +363,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
         } catch (SQLException exception) {
-            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -317,7 +378,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setInt(7, contract.getMaxTicketPerDay());
             statement.setInt(8, contract.getId());
         } catch (SQLException exception) {
-            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

@@ -208,7 +208,7 @@ public class RegistrationCommand implements Command {
         session.setAttribute("role", Role.USER);
 
         if (user.getId() != null) {
-            session.setAttribute("userId", user.getId());
+            session.setAttribute("idUser", user.getId());
         }
     }
 

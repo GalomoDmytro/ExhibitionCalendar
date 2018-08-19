@@ -13,8 +13,9 @@
         <h2>${role}</h2>
          <br/>
              <a  href="${pageContext.request.contextPath}/controller?command=login">login</a><br>
-             <a  href="${pageContext.request.contextPath}/controller?command=registration">registration</a>
-             <a  href="${pageContext.request.contextPath}/controller?command=admin">admin page</a>
+             <a  href="${pageContext.request.contextPath}/controller?command=registration">registration</a><br>
+             <a  href="${pageContext.request.contextPath}/controller?command=admin">admin page</a><br>
+             <a  href="${pageContext.request.contextPath}/controller?command=userHome">user info</a><br>
              <a  href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator page</a>
              <br/>
              <a  href="${pageContext.request.contextPath}/controller?command=logout">logout</a>
@@ -25,10 +26,9 @@
 		<hr>
 		<form action="${pageContext.request.contextPath}/controller?command=home" method="post">
                         Search<input type="text" name="searchField">
-                        Date<input type="text" name="searchDate">
+                        Date<input type="date" name="searchDate">
                         <input type="submit" name="search" value="go" />
-                    </form>
-
+        </form>
 		<hr>
 
 
@@ -52,7 +52,7 @@
                     <td></td>
                     <td></td>
 
-                    <td>btn: more info</td>
+                    <td><a href="${pageContext.request.contextPath}/controller?command=expoInfo&idContract=<c:out value='${list.id}'/>">Expo info</a></td>
                     <td><a href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket=">Buy</a></td>
 
                 </tr>

@@ -2,6 +2,7 @@ package controller.command;
 
 public class Links {
 
+    public static final String INDEX_PAGE = "/index.jsp";
     public static final String HOME_PAGE = "/views/home.jsp";
     public static final String LOGIN_PAGE = "/views/common/login.jsp";
     public static final String REGISTRATION_PAGE = "/views/common/registration.jsp";
@@ -19,5 +20,8 @@ public class Links {
     public static final String MODERATOR_CONTRACT_PAGE = "/views/moderator/contractManagement.jsp";
     public static final String MODERATOR_EDIT_CONTRACT_PAGE = "/views/moderator/editContract.jsp";
     public static final String PURCHASE_PAGE = "/views/common/purchase.jsp";
+    public static final String EXHIBITION_INFO_PAGE = "/views/common/expoInfo.jsp";
+    public static final String USER_HOME_PAGE = "/views/user/userHome.jsp";
+    public static final String USER_EDIT_PAGE = "/views/user/editUser.jsp";
 
 }

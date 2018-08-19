@@ -2,6 +2,7 @@ package controller;
 
 import controller.command.*;
 import controller.command.moderatorCommand.*;
+import controller.command.user.UserHome;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,8 @@ public class ControllerHelper {
         commandMap.put("contractManagement", new ContractManagement());
         commandMap.put("editContract", new EditContract());
         commandMap.put("purchase", new Purchase());
+        commandMap.put("expoInfo", new ExpoInfo());
+        commandMap.put("userHome", new UserHome());
     }
 
 

@@ -20,6 +20,11 @@ public interface ExhibitionContractDao {
 
     List<Contract> galAllContactsWithExpoAndCenter(Date date) throws DBException;
 
+    void prepareCEC(Contract contract, Exhibition exhibition,
+                    ExhibitionCenter exhibitionCenter, Integer idContract) throws DBException;
+
+    List<Contract> searchContactsWithExpoAndCenter(String search, Date date) throws DBException;
+
     List<Contract> getAllAfterDate(Date date) throws DBException;
 
     List<Contract> getAllContractsBySearch(String search) throws DBException;

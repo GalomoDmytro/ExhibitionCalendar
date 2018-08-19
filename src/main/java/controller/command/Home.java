@@ -21,6 +21,8 @@ import java.util.Locale;
 public class Home implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
+    private String dateLine;
+    private String searchLine;
 
     private static final Logger LOGGER = Logger.getLogger(Home.class);
 
@@ -30,14 +32,35 @@ public class Home implements Command {
 
         showAll(req);
 
+        if (req.getParameter("searchField") != null) {
+
+            specificSearch(req);
+        }
+
         if (req.getParameter("editExpoCenter") != null) {
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         }
-//        getExpoInfoFromDB();
-//        req.setAttribute("list", usersList);
-//        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        dispatcher.forward(req, resp);
 
+        dispatcher.forward(req, resp);
+    }
+
+    private void specificSearch(HttpServletRequest req) {
+
+        handleConnection();
+
+        try {
+            // TODO: change date
+            searchLine = req.getParameter("searchField");
+            List<Contract> contractList = factoryMySql.createExhibitionContract(connection)
+                    .searchContactsWithExpoAndCenter(searchLine, java.sql.Date.valueOf(getTodayDate()));
+
+            req.setAttribute("listForCustomer", contractList);
+
+        } catch (Exception exception) {
+
+        } finally {
+            closeConnection();
+        }
     }
 
     private void showAll(HttpServletRequest req) {
@@ -46,12 +69,11 @@ public class Home implements Command {
 
         try {
             List<Contract> listContract = getAllContractFromToday();
-            for(Contract contract : listContract) {
+            for (Contract contract : listContract) {
                 LOGGER.info(contract.getExhibitionTitle() + " ******** " + contract.getExhibitionCenterTitle());
             }
             req.setAttribute("listForCustomer", listContract);
         } catch (Exception exception) {
-            LOGGER.error(exception);
         } finally {
             closeConnection();
         }

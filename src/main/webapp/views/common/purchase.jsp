@@ -41,8 +41,8 @@
 
 
             <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post">
-                eMail<input type="text" name="eMail"><br>
-                Quantity<input type="text" name="quantity"><br>
+                eMail<input type="text" name="eMail" value="${eMailHold}"><br>
+                Quantity<input type="number" name="quantity" min="0"><br>
                 <input type="submit" name="search" value="buy" />
                 <input type="submit" name="cancel" value="cancel"/>
             </form>
