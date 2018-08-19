@@ -17,15 +17,14 @@
             <br/>
 
          <br/>
-        <a  href="${pageContext.request.contextPath}/controller?command=home">show</a>
 
 		<hr>
-		nickname
-		eMail
-		First name
-		Last name
-		Phone 1
-		Phone 2
+		nickname<br/>
+		eMail<br/>
+		First name<br/>
+		Last name<br/>
+		Phone 1<br/>
+		Phone 2<br/>
 
 		<hr>
 

@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isErrorPage="true" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>Error</title>
 </head>
 <body>
     <center>
-        <h1>Error</h1>
+        <h1>Oops, something went wrong...</h1>
+        <br>
+        <p>You can go to<a href="${pageContext.request.contextPath}/controller?command=home"> main</a> page.</p>
+        <br>
+        <img src="${pageContext.request.contextPath}/resources/images/errorImg.jpg" alt="Page error." style="position: absolute; left: 50%; top: 50%; margin-left: -285px; margin-top: -190px;">
 
     </center>
 </body>

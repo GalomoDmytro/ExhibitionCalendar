@@ -19,6 +19,7 @@ dao\interfaces\ExhibitionCenterDao.class
 entities\Contract$Builder.class
 controller\command\moderatorCommand\ExhibitionManagement.class
 dao\mysql\UserPhoneMySql.class
+controller\command\EditUser.class
 controller\command\ExpoInfo.class
 dao\interfaces\ExhibitionContractDao.class
 controller\command\LogoutCommand.class
