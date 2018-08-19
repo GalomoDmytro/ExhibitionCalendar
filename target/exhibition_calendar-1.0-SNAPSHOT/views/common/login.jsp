@@ -23,15 +23,23 @@
                 <input type="email" name="eMail" placeholder="Email"/><br/><br/>
                 <input type="password" name="password" placeholder="Password"/><br/>
                 ${errorLogin}<br>
-                <input class="submitBtn" type="submit" value="login"/>
-             </form>
-             <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
-                <input type="submit" value="registration"/>
+                <input  class="submitBtn" class="submitBtn" type="submit" value="login"/>
              </form>
              <br>
-             <a href="${pageContext.request.contextPath}/controller?command=home">go home</a>
+             <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
+                <input  class="blueButton" type="submit" value="registration"/>
+             </form>
+             <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
+                <input  class="blueButton" type="submit" value="go home"/>
+             </form>
+
           </ section>
       </div>
+
       </center>
+
+      <footer>
+        <jsp:include page="../utility/footer.jsp" />
+      </footer>
    </body>
 </html>

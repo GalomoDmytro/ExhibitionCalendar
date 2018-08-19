@@ -21,7 +21,7 @@
                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
                   <input type="text" name="searchField" placeholder="Search">
                   Date<input type="date" name="searchDate">
-                  <input  class="submitBtn" type="submit" name="search" value="Search" />
+                  <input class="submitBtn" type="submit" name="search" value="Search" />
                   <input class="resetBtn" type="reset" name="search" value="reset" />
                </form>
                <hr>
@@ -57,15 +57,9 @@
       </div>
       </section>
 
-	  <section class="about">
-      <p class="about-links">
-      <a href="">Useful link</a>
-      <a href="">Very useful link</a>
-      </p>
-      <p class="about-author">
-      &copy; 2018 <a href="">Galomko Dmytro</a>
-      <a href="http://www.cssflow.com/mit-license" target="_blank"></a><br>
-      </section>
+	  <footer>
+        <jsp:include page="utility/footer.jsp" />
+	  </footer>
 
       </center>
    </body>

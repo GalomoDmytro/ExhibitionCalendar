@@ -1,41 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
    <head>
-      <title>LogIn</title>
+      <title>Registration</title>
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
    </head>
-
    <body>
+      <header>
+         <div>
+            <jsp:include page="../utility/header.jsp" />
+         </div>
+      </header>
       <center>
-            <h1>Registration</h1>
-            <h2>${role}</h2>
-
-            <!-- Registration form-->
-            <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
-                *Name profile:<input type="text" name="name"/><br/>
-                ${errorNameProfile}<br/>
-
-                *Password:<input type="password" name="password"/><br/>
-                *Repeat password:<input type="password" name="passwordRepeat"/> <br/>
-                ${errorPassword}<br/>
-
-                First name:<input type="text" name="firstName"/><br/><br/>
-                Last name:<input type="text" name="lastName"/><br/><br/>
-                *eMail:<input type="text" name="eMail"/> <br/>
-                *Repeat eMail:<input type="text" name="eMailRepeat"/> <br/>
-                ${errorMail}<br/>
-                Phone number 1:<input type="text" name="phone1"/><br/><br/>
-                Phone number 2:<input type="text" name="phone2"/><br/><br/>
-
-                <button type="submit" value="Submit">Submit</button>
-                <button type="reset" value="Reset">Reset</button>
-            </form>
-            <!-- /Registration form-->
-
-            <br>
-            <a href="${pageContext.request.contextPath}/controller?command=home">go home</a>
+         <div class="content">
+            <section class="main">
+               <h2>${role}</h2>
+               <!-- Registration form-->
+               <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
+                  <input type="text" name="name" placeholder="*Profile Name"/><br/>
+                  ${errorNameProfile}<br/>
+                  <input type="password" name="password" placeholder="*Password"/><br/>
+                  <input type="password" name="passwordRepeat" placeholder="*Repeat password"/><br/>
+                  ${errorPassword}<br/>
+                  <input type="text" name="firstName" placeholder="First name"/><br/>
+                  <input type="text" name="lastName" placeholder="Last name"/><br/><br/>
+                  <input type="email" name="eMail" placeholder="*eMail"/><br/>
+                  <input type="email" name="eMailRepeat" placeholder="*Repeat eMail"/><br/>
+                  ${errorMail}<br/>
+                  <input type="text" name="phone1" placeholder="Phone number 1"/><br/>
+                  <input type="text" name="phone2" placeholder="Phone number 2"/><br/><br/>
+                  <button class="submitBtn" type="submit" value="Submit">Submit</button>
+                  <button class="resetBtn" type="reset" value="Reset">Reset</button>
+               </form>
+               <!-- /Registration form-->
+               <br>
+               <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=home">go home</a>
+         </div>
+         </section>
       </center>
+      <footer>
+         <jsp:include page="../utility/footer.jsp" />
+      </footer>
    </body>
 </html>
