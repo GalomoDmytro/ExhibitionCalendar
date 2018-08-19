@@ -199,6 +199,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     public List<Contract> getAllContractsBySearch(String search) throws DBException {
         search = "%" + search + "%";
         List<Contract> contracts;
+        // TODO make search with exhibition table and center table
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.search"))) {
             statement.setString(1, search);
             statement.setString(2, search);

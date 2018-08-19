@@ -1,39 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
    <head>
       <title>ExpoCenter</title>
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
    </head>
-
    <body>
+      <header>
+         <div>
+            <jsp:include page="../utility/header.jsp" />
+         </div>
+      </header>
       <center>
-            <h1>Moderator: ExpoCenter</h1>
-            <h2>${role}</h2>
-            <br><br>
-
-            <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
-                Expo Center Title:<input type="text" name="title"/><br/>
-                Expo Center Address:<input type="text" name="address"/><br/>
-                Expo Center eMail:<input type="text" name="eMail"/><br/>
-                Repeat eMail:<input type="text" name="eMail_repeat"/><br/>
-                Expo Center webPage:<input type="text" name="webPage"/><br/>
-                Expo Center Phone 1:<input type="text" name="phone1"/><br/>
-                Expo Center Phone 2:<input type="text" name="phone2"/><br/>
-
-                <button type="submit" name="addNewExpoCenter" value="Submit">Add</button>
-                <button type="reset" value="Reset">Reset</button>
-                <br> ${error}
-            </form>
-
-
-            <br>
-            <a href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>
-            <br>
-            <a href="${pageContext.request.contextPath}/controller?command=home">go home</a>
-            <br>
-            <a href="${pageContext.request.contextPath}/controller?command=logout">logout</a>
+         <div class="content">
+            <section class="main">
+               <h1>Add Exhibition Center</h1>
+               <br><br>
+               <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
+                  <input type="text" name="title"  placeholder="Expo Center Title"/><br/>
+                  <input type="text" name="address" placeholder="Expo Center Address"/><br/>
+                  <input type="email" name="eMail" placeholder="eMail"/><br/>
+                  <input type="email" name="eMail_repeat" placeholder="Repeat eMail"/><br/>
+                  <input type="text" name="webPage" placeholder="webPage"/><br/>
+                  <input type="text" name="phone1" placeholder="Phone 1"/><br/>
+                  <input type="text" name="phone2" placeholder="Phone 2"/><br/>
+                  <button class="submitBtn" type="submit" name="addNewExpoCenter" value="Submit">Add</button>
+                  <button class="resetBtn" type="reset" value="Reset">Reset</button>
+                  <br> ${error}
+               </form>
+               <br>
+               <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>
+               <br>
+         </div>
+         </section>
+         <footer>
+            <jsp:include page="../utility/footer.jsp" />
+         </footer>
       </center>
    </body>
 </html>

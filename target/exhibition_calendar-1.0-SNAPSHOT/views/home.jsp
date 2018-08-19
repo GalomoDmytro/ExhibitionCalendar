@@ -9,14 +9,16 @@
       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
    </head>
    <body>
-        <header> <div><jsp:include page="utility/header.jsp" /> </div></header>
-		<center>
-
-      <div class="content">
-
+      <header>
+         <div>
+            <jsp:include page="utility/header.jsp" />
+         </div>
+      </header>
+      <center>
+         <div class="content">
             <section class="main">
                <h1>EXHIBITION CALENDAR</h1>
-                <br/>
+               <br/>
                <hr>
                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
                   <input type="text" name="searchField" placeholder="Search">
@@ -54,13 +56,11 @@
                      </c:forEach>
                   </table>
                </div>
-      </div>
-      </section>
-
-	  <footer>
-        <jsp:include page="utility/footer.jsp" />
-	  </footer>
-
+         </div>
+         </section>
+         <footer>
+            <jsp:include page="utility/footer.jsp" />
+         </footer>
       </center>
    </body>
 </html>

@@ -29,6 +29,7 @@
              <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
                 <input  class="blueButton" type="submit" value="registration"/>
              </form>
+             <br/>
              <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
                 <input  class="blueButton" type="submit" value="go home"/>
              </form>

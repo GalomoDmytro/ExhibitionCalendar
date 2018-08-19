@@ -96,6 +96,7 @@ public class ContractManagement implements Command {
 
         handleConnection();
         try {
+            // TODO make search with exhibition table and center table
             List<Contract> contractList = factoryMySql.createExhibitionContract(connection).getAllContractsBySearch(looking);
 //            allContractInDb = getAllContractsFromDb();
 //            setSupportContractInfo(allContractInDb);
