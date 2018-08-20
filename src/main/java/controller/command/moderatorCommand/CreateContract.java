@@ -45,18 +45,14 @@ public class CreateContract implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_CREATE_CONTRACT_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_CREATE_CONTRACT_PAGE);
 
         collectDataFromRequest(req);
 
         showExhibitionInfo(req);
         showExhibitionCenterInfo(req);
 
-        if(req.getParameter("addNewContract") != null) {
+        if (req.getParameter("addNewContract") != null) {
             saveContract(req);
         }
 
@@ -64,7 +60,7 @@ public class CreateContract implements Command {
     }
 
     private void saveContract(HttpServletRequest req) {
-        if(!contractDataIsValid()) {
+        if (!contractDataIsValid()) {
             return;
         }
         handleConnection();
@@ -97,14 +93,14 @@ public class CreateContract implements Command {
         Integer ticketPerDay = Integer.parseInt(maxTicketDayLine);
 
         return new Contract.Builder()
-                        .setExhibitionId(idExhibition)
-                        .setExCenterId(idExhibitionCenter)
-                        .setDateFrom(new java.sql.Date(dateFrom.getTime()))
-                        .setDateTo(new java.sql.Date(dateTo.getTime()))
-                        .setTicketPrice(price)
-                        .setWorkTime(workTimeLine)
-                        .setMaxTicketPerDay(ticketPerDay)
-                        .build();
+                .setExhibitionId(idExhibition)
+                .setExCenterId(idExhibitionCenter)
+                .setDateFrom(new java.sql.Date(dateFrom.getTime()))
+                .setDateTo(new java.sql.Date(dateTo.getTime()))
+                .setTicketPrice(price)
+                .setWorkTime(workTimeLine)
+                .setMaxTicketPerDay(ticketPerDay)
+                .build();
     }
 
     private void showExhibitionInfo(HttpServletRequest req) {
@@ -150,8 +146,8 @@ public class CreateContract implements Command {
 
     private String getPhonesExhibitionCenter(ExhibitionCenter exhibitionCenter, String phones) throws DBException {
         List<String> phonesExhibitionCenter = factoryMySql.createExhibitionCenterPhone(connection).getPhones(exhibitionCenter.getId());
-        if(phonesExhibitionCenter != null) {
-            for(String expoPhone : phonesExhibitionCenter) {
+        if (phonesExhibitionCenter != null) {
+            for (String expoPhone : phonesExhibitionCenter) {
                 phones += expoPhone + "; \n";
             }
         }
@@ -191,20 +187,6 @@ public class CreateContract implements Command {
         workTimeLine = req.getParameter("workTime");
         maxTicketDayLine = req.getParameter("maxTicketDay");
 
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {

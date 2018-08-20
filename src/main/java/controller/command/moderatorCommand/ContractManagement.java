@@ -30,11 +30,7 @@ public class ContractManagement implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_CONTRACT_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_CONTRACT_PAGE);
 
         if (req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
@@ -64,8 +60,8 @@ public class ContractManagement implements Command {
     }
 
     // get and set title from exhibition and exhibition center
-    private void setSupportContractInfo(List<Contract> contractList) throws DBException{
-        for(Contract contract : contractList) {
+    private void setSupportContractInfo(List<Contract> contractList) throws DBException {
+        for (Contract contract : contractList) {
             Exhibition exhibition = factoryMySql.createExhibition(connection).getExhibitionById(contract.getExhibitionId());
             contract.setExhibitionTitle(exhibition.getTitle());
             ExhibitionCenter center = factoryMySql.createExhibitionCenter(connection).getExhibitionCenterById(contract.getExCenterId());
@@ -75,10 +71,10 @@ public class ContractManagement implements Command {
 
     private void deleteById(HttpServletRequest req) {
         handleConnection();
-        try{
+        try {
             // TODO: make available only for admin
             String id = req.getParameter("idDelete");
-            if(id != null) {
+            if (id != null) {
                 factoryMySql.createExhibitionContract(connection).deleteContractById(Integer.valueOf(id));
             }
         } catch (Exception exception) {
@@ -103,7 +99,7 @@ public class ContractManagement implements Command {
             setSupportContractInfo(contractList);
 
 //            findMatchedWithLookingField(looking, contractList, allContractInDb);
-            if(contractList != null) {
+            if (contractList != null) {
                 req.setAttribute("listContract", contractList);
             }
         } catch (Exception exception) {
@@ -115,8 +111,8 @@ public class ContractManagement implements Command {
 
     private void findMatchedWithLookingField(String looking, List<Contract> contractList,
                                              List<Contract> allContract) {
-        for(Contract contract : allContract) {
-            if(contract.getExCenterId().toString().equals(looking) ||
+        for (Contract contract : allContract) {
+            if (contract.getExCenterId().toString().equals(looking) ||
                     contract.getExhibitionId().toString().equals(looking) ||
                     contract.getExhibitionTitle().contains(looking) ||
                     contract.getExhibitionCenterTitle().contains(looking) ||
@@ -129,20 +125,6 @@ public class ContractManagement implements Command {
 
     private List<Contract> getAllContractsFromDb() throws DBException {
         return factoryMySql.createExhibitionContract(connection).getAllContracts();
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {

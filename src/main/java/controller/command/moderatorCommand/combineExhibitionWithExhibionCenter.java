@@ -29,11 +29,7 @@ public class combineExhibitionWithExhibionCenter implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_COMBO_EXPO_WITH_HALL_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_COMBO_EXPO_WITH_HALL_PAGE);
 
         if (req.getParameter("expoCenterId") != null) {
             combineWithCenter(req);
@@ -76,20 +72,6 @@ public class combineExhibitionWithExhibionCenter implements Command {
         } finally {
             closeConnection();
         }
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {

@@ -39,12 +39,7 @@ public class EditCenter implements Command {
         readDataFromReq(req);
         setExpoCenterDataToReq(req);
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CENTER_PAGE);
-        }
-
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CENTER_PAGE);
 
         if (req.getParameter("editExpoCenter") != null) {
             changeExpoCenterData(req);
@@ -98,20 +93,6 @@ public class EditCenter implements Command {
         req.setAttribute("expoCMail", eMail);
         req.setAttribute("expoCPhone1", phone1);
         req.setAttribute("expoCPhone2", phone2);
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {

@@ -31,19 +31,15 @@ public class ExpoCenterManagement implements Command {
         RequestDispatcher dispatcher;
         handleConnection();
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
 
-        if(req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
+        if (req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
-        } else if(req.getParameter("search") != null) {
+        } else if (req.getParameter("search") != null) {
             specificSearch(req);
         }
 
-        if(req.getParameter("idDelete") != null) {
+        if (req.getParameter("idDelete") != null) {
             deleteById(req);
         }
 
@@ -55,7 +51,7 @@ public class ExpoCenterManagement implements Command {
             List<ExhibitionCenter> exhibitionCenterList = getAllFromDb();
 
             setPhones(exhibitionCenterList);
-            if(exhibitionCenterList != null) {
+            if (exhibitionCenterList != null) {
                 req.setAttribute("listExpoCenter", exhibitionCenterList);
             }
 
@@ -67,7 +63,7 @@ public class ExpoCenterManagement implements Command {
     }
 
     private void setPhones(List<ExhibitionCenter> exhibitionCenterList) throws DBException {
-        for(ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
+        for (ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
             exhibitionCenter.setPhone(factoryMySql.createExhibitionCenterPhone(connection).getPhones(exhibitionCenter.getId()));
         }
     }
@@ -106,8 +102,7 @@ public class ExpoCenterManagement implements Command {
 //            }
 
 
-
-            if(exhibitionCenterListResult != null) {
+            if (exhibitionCenterListResult != null) {
                 request.setAttribute("listExpoCenter", exhibitionCenterListResult);
             }
         } catch (Exception exception) {
@@ -118,26 +113,12 @@ public class ExpoCenterManagement implements Command {
 
     }
 
-    private List<ExhibitionCenter> getAllFromDb() throws DBException{
+    private List<ExhibitionCenter> getAllFromDb() throws DBException {
         try {
             return factoryMySql.createExhibitionCenter(connection).getAllExhibitionCenter();
         } catch (Exception exception) {
             throw new DBException(exception);
         }
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {

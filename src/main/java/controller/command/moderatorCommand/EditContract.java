@@ -48,11 +48,7 @@ public class EditContract implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
 
         collectDataFromReq(req);
         setDataInForm(req);
@@ -249,20 +245,6 @@ public class EditContract implements Command {
             langTags += entry.getKey() + " ";
         }
         exhibition.setLanguageTags(langTags);
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {

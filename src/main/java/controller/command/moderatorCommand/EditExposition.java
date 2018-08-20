@@ -25,10 +25,8 @@ public class EditExposition implements Command {
     private String title;
     private String imgSrc;
     private Map<String, String> description;
-    private Exhibition exhibition;    private static final Logger LOGGER = Logger.getLogger(EditExposition.class);
-
-
-
+    private Exhibition exhibition;
+    private static final Logger LOGGER = Logger.getLogger(EditExposition.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
@@ -38,11 +36,7 @@ public class EditExposition implements Command {
         readDataFromReq(req);
         setDataToReq(req);
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_EXHIBITION_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_EXHIBITION_PAGE);
 
         if (req.getParameter("editExpo") != null) {
             changeExpoData(req);
@@ -133,20 +127,6 @@ public class EditExposition implements Command {
         }
 
         return description;
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {

@@ -32,33 +32,18 @@ public class Admin implements Command {
         req.setAttribute("mess", "");
         req.setAttribute("showRole", "");
 
-        if (!roleIsAdmin(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            collectParamsFromRequest(req);
-            connectionHandler();
-            if (req.getParameter("action") != null) {
-                if (req.getParameter("action").equals("changeRole")) {
-                    changeRoleHandler(req);
-                } else if (req.getParameter("action").equals("getRole")) {
-                    showRole(req);
-                }
+        collectParamsFromRequest(req);
+        connectionHandler();
+        if (req.getParameter("action") != null) {
+            if (req.getParameter("action").equals("changeRole")) {
+                changeRoleHandler(req);
+            } else if (req.getParameter("action").equals("getRole")) {
+                showRole(req);
             }
-            dispatcher = req.getRequestDispatcher(Links.ADMIN_PAGE);
         }
+        dispatcher = req.getRequestDispatcher(Links.ADMIN_PAGE);
 
         dispatcher.forward(req, resp);
-    }
-
-    private boolean roleIsAdmin(HttpServletRequest req) {
-        HttpSession session = req.getSession(true);
-        if (session.getAttribute("role") == null) {
-            return false;
-        }
-        if (session.getAttribute("role").equals(Role.ADMIN)) {
-            return true;
-        }
-        return false;
     }
 
     private void collectParamsFromRequest(HttpServletRequest req) {

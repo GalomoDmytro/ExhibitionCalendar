@@ -33,11 +33,7 @@ public class AddExpo implements Command {
         RequestDispatcher dispatcher;
         handleConnection();
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_PAGE);
 
         collectParamsFromRequest(req);
 
@@ -62,11 +58,11 @@ public class AddExpo implements Command {
     private void insertInDB() {
         try {
             factoryMySql.createExhibition(connection).insertExhibition(exhibition);
-            if(descriptionLang.length() > 15) {
+            if (descriptionLang.length() > 15) {
                 descriptionLang = descriptionLang.substring(0, 15);
             }
             factoryMySql.createDescriptionTable(connection)
-                    .insertDescription(expoDescription, descriptionLang,  exhibition);
+                    .insertDescription(expoDescription, descriptionLang, exhibition);
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
@@ -138,17 +134,4 @@ public class AddExpo implements Command {
         descriptionLang = req.getParameter("lang");
     }
 
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
-    }
 }

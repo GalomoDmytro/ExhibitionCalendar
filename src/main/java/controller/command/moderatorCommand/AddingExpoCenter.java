@@ -40,11 +40,9 @@ public class AddingExpoCenter implements Command {
         RequestDispatcher dispatcher;
         handleConnection();
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_CENTER_PAGE);
-        }
+
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_CENTER_PAGE);
+
 
         collectParamsFromRequest(req);
 
@@ -89,12 +87,12 @@ public class AddingExpoCenter implements Command {
         if (webPage != null) {
             exCenter.setWebPage(webPage);
         }
-        if(phone1 != null || phone2 != null) {
+        if (phone1 != null || phone2 != null) {
             List<String> phones = new ArrayList<>();
-            if(phone1 != null) {
+            if (phone1 != null) {
                 phones.add(phone1);
             }
-            if(phone2 != null) {
+            if (phone2 != null) {
                 phones.add(phone2);
             }
             exCenter.setPhone(phones);
@@ -197,7 +195,7 @@ public class AddingExpoCenter implements Command {
         } catch (Exception exception) {
             log.error(exception);
         } finally {
-            if(isMatch){
+            if (isMatch) {
                 closeConnection();
             }
         }
@@ -224,17 +222,4 @@ public class AddingExpoCenter implements Command {
         phone2 = req.getParameter("phone2");
     }
 
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
-    }
 }

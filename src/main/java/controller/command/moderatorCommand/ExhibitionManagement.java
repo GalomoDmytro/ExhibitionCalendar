@@ -30,11 +30,7 @@ public class ExhibitionManagement implements Command {
         RequestDispatcher dispatcher;
         handleConnection();
 
-        if (!rolePermit(req)) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_EXPO_PAGE);
-        }
+        dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_EXPO_PAGE);
 
         if (req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
@@ -105,7 +101,7 @@ public class ExhibitionManagement implements Command {
             LOGGER.info("try search");
             List<Exhibition> exhibitionList = factoryMySql.createExhibition(connection).getExhibitionBySearch(looking);
             setLangTagsToExhibition(exhibitionList);
-            if(exhibitionList != null) {
+            if (exhibitionList != null) {
                 request.setAttribute("listExpo", exhibitionList);
             }
         } catch (Exception exception) {
@@ -116,8 +112,8 @@ public class ExhibitionManagement implements Command {
     }
 
     private void findMatchedWithLookingField(String looking, List<Exhibition> exhibitionList, List<Exhibition> allExhibitionFromDb) {
-        for(Exhibition exhibition : allExhibitionFromDb) {
-            if(exhibition.getTitle().toLowerCase().contains(looking) ||
+        for (Exhibition exhibition : allExhibitionFromDb) {
+            if (exhibition.getTitle().toLowerCase().contains(looking) ||
                     String.valueOf(exhibition.getId()).equals(looking)) {
                 exhibitionList.add(exhibition);
             }
@@ -131,20 +127,6 @@ public class ExhibitionManagement implements Command {
         } catch (Exception exception) {
             throw new DBException(exception);
         }
-    }
-
-    private boolean rolePermit(HttpServletRequest req) {
-//        HttpSession session = req.getSession(true);
-//        if (session.getAttribute("role") == null) {
-//            return false;
-//        }
-//        if (session.getAttribute("role").equals(Role.ADMIN) ||
-//                session.getAttribute("role").equals(Role.MODERATOR)) {
-//            return true;
-//        }
-//
-//        return false;
-        return true;
     }
 
     private void closeConnection() {
