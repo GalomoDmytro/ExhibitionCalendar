@@ -1,12 +1,14 @@
 package controller.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebFilter(urlPatterns = {"/*"},
-//        initParams = {@WebInitParam(name = "INDEX_PATH", value = "/views/home.jsp")})
+@WebFilter(urlPatterns = {"/views/*"},
+        initParams = {@WebInitParam(name = "INDEX_PATH", value = "/index.jsp")})
 public class PageRedirectSecurityFilter implements Filter {
     private String indexPath;
 
@@ -19,10 +21,8 @@ public class PageRedirectSecurityFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(indexPath);
-        requestDispatcher.forward(request, response);
-//        httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
-//        chain.doFilter(request, response);
+        httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
+        chain.doFilter(request, response);
     }
 
     public void destroy() {

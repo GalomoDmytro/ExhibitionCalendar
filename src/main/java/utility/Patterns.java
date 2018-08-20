@@ -10,7 +10,7 @@ public class Patterns {
    * anything, at least 6 places though
    * end-of-string
    */
-    public static final String PASSWORD = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$";
+    public static final String PASSWORD = "^(?=.*[0-9])(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=\\S+$).{6,}$";
 
     public static final String EMAIL = "^[^@]*@[^@]+.[^@]+$"; // contain one '@' and after, one '.'
 

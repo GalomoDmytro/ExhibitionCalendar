@@ -40,7 +40,7 @@
                   </table>
                   <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post">
                      eMail<input type="text" name="eMail" value="${eMailHold}"><br>
-                     Quantity<input type="number" name="quantity" min="0"><br>
+                     Quantity<input type="number" name="quantity" min="0"><br><br>
                      <input class="submitBtn"  type="submit" name="search" value="buy" />
                      <input class="resetBtn" type="submit" name="cancel" value="cancel"/>
                   </form>

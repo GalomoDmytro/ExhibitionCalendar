@@ -33,7 +33,6 @@ public class Home implements Command {
         showAll(req);
 
         if (req.getParameter("searchField") != null) {
-
             specificSearch(req);
         }
 

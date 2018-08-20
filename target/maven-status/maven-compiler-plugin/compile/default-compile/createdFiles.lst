@@ -39,7 +39,6 @@ controller\command\moderatorCommand\EditExposition.class
 dao\mysql\TicketMySql.class
 controller\command\Command.class
 dao\mysql\UserMySql.class
-controller\filter\SessionFilter.class
 dao\mysql\FactoryMySql.class
 dao\interfaces\TicketDao.class
 controller\command\moderatorCommand\ModeratorHome.class
@@ -65,3 +64,4 @@ dao\interfaces\ExhibitionDao.class
 dao\mysql\ExhibitionCenterMySql.class
 controller\command\moderatorCommand\CreateContract.class
 exceptions\DBException.class
+controller\filter\AcessSecurityFilter.class
