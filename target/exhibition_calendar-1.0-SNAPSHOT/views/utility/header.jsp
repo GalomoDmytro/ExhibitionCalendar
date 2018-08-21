@@ -7,14 +7,14 @@
    <body>
         <c:choose>
             <c:when test="${role == 'MODERATOR' || role == 'ADMIN'}">
-               <a  href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator page</a>
+               <a  href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator</a>
             </c:when>
 
          </c:choose>
 
         <c:choose>
             <c:when test="${role == 'ADMIN'}">
-               <a  href="${pageContext.request.contextPath}/controller?command=admin">admin page</a>
+               <a  href="${pageContext.request.contextPath}/controller?command=admin">admin</a>
             </c:when>
 
          </c:choose>

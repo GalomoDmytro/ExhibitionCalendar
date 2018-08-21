@@ -126,6 +126,9 @@ public class AcessSecurityFilter implements Filter {
                     req.getRequestDispatcher(Links.HOME_PAGE).forward(req, resp);
                     break;
             }
+        } else {
+            req.setAttribute("command", req.getParameter("command"));
+            req.getRequestDispatcher(Links.HOME_PAGE).forward(req, resp);
         }
     }
 

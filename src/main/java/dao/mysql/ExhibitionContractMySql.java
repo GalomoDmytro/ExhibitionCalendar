@@ -51,8 +51,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
-    public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter
-            , Exhibition exhibition) throws DBException {
+    public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter,
+                                                                  Exhibition exhibition) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getByCenterAndExhibition"))) {
             statement.setInt(1, exhibitionCenter.getId());
@@ -124,7 +124,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
-            contracts = parseContractSet(resultSet);
+            contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -199,7 +199,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     public List<Contract> getAllContractsBySearch(String search) throws DBException {
         search = "%" + search + "%";
         List<Contract> contracts;
-        // TODO make search with exhibition table and center table
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.search"))) {
             statement.setString(1, search);
             statement.setString(2, search);
@@ -207,8 +206,10 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setString(4, search);
             statement.setString(5, search);
             statement.setString(6, search);
+            statement.setString(7, search);
+            statement.setString(8, search);
             ResultSet resultSet = statement.executeQuery();
-            contracts = parseContractSet(resultSet);
+            contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
 
             throw new DBException(exception);

@@ -61,9 +61,6 @@ public class ExpoInfo implements Command {
                 factoryMySql.createExhibitionContract(connection).prepareCEC(contract, exhibition,
                         exhibitionCenter, idContact);
 
-                LOGGER.info(contract);
-                LOGGER.info(exhibitionCenter);
-                LOGGER.info(exhibition);
             }
         } catch (Exception exception) {
             LOGGER.error(exception);

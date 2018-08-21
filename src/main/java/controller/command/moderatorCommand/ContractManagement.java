@@ -32,7 +32,8 @@ public class ContractManagement implements Command {
 
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_CONTRACT_PAGE);
 
-        if (req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
+        if (req.getParameter("search") != null && (req.getParameter("searchField") == null
+                || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
         } else if (req.getParameter("search") != null) {
             specificSearch(req);
@@ -50,22 +51,11 @@ public class ContractManagement implements Command {
         try {
             List<Contract> contracts = getAllContractsFromDb();
             if (contracts != null) {
-                setSupportContractInfo(contracts);
                 req.setAttribute("listContract", contracts);
             }
         } catch (Exception exception) {
         } finally {
             closeConnection();
-        }
-    }
-
-    // get and set title from exhibition and exhibition center
-    private void setSupportContractInfo(List<Contract> contractList) throws DBException {
-        for (Contract contract : contractList) {
-            Exhibition exhibition = factoryMySql.createExhibition(connection).getExhibitionById(contract.getExhibitionId());
-            contract.setExhibitionTitle(exhibition.getTitle());
-            ExhibitionCenter center = factoryMySql.createExhibitionCenter(connection).getExhibitionCenterById(contract.getExCenterId());
-            contract.setExhibitionCenterTitle(center.getTitle());
         }
     }
 
@@ -88,16 +78,13 @@ public class ContractManagement implements Command {
 
         handleConnection();
         try {
-            // TODO make search with exhibition table and center table
-            List<Contract> contractList = factoryMySql.createExhibitionContract(connection).getAllContractsBySearch(looking);
-
-            setSupportContractInfo(contractList);
+            List<Contract> contractList = factoryMySql.createExhibitionContract(connection)
+                    .getAllContractsBySearch(looking);
 
             if (contractList != null) {
                 req.setAttribute("listContract", contractList);
             }
         } catch (Exception exception) {
-            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
