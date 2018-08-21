@@ -30,6 +30,12 @@ public class AcessSecurityFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        String path = httpRequest.getRequestURI();
+        if(path.endsWith(".css")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         getCommand(httpRequest);
 
         if (!allowAccess(httpRequest)) {
@@ -129,6 +135,7 @@ public class AcessSecurityFilter implements Filter {
         } else {
             req.setAttribute("command", req.getParameter("command"));
             req.getRequestDispatcher(Links.HOME_PAGE).forward(req, resp);
+
         }
     }
 
