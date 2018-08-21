@@ -23,7 +23,7 @@
                 <input type="email" name="eMail" placeholder="Email"/><br/><br/>
                 <input type="password" name="password" placeholder="Password"/><br/>
                 ${errorLogin}<br>
-                <input  class="submitBtn" class="submitBtn" type="submit" value="login"/>
+                <input  class="submitBtn" class="submitBtn" type="submit" value="login" name="loginBtn"/>
              </form>
              <br>
              <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">

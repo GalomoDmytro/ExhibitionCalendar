@@ -84,20 +84,8 @@ public class ExhibitionManagement implements Command {
 
     private void specificSearch(HttpServletRequest request) {
         String looking = request.getParameter("searchField");
-//        looking = looking.toLowerCase();
-//        List<Exhibition> exhibitionList = new ArrayList<>();
-//        List<Exhibition> allExhibitionFromDb;
 
         try {
-//            allExhibitionFromDb = getAllFromDb();
-//            findMatchedWithLookingField(looking, exhibitionList, allExhibitionFromDb);
-//
-//
-//
-//
-//            if(exhibitionList != null) {
-//                request.setAttribute("listExpo", exhibitionList);
-//            }
             LOGGER.info("try search");
             List<Exhibition> exhibitionList = factoryMySql.createExhibition(connection).getExhibitionBySearch(looking);
             setLangTagsToExhibition(exhibitionList);
@@ -119,7 +107,6 @@ public class ExhibitionManagement implements Command {
             }
         }
     }
-
 
     private List<Exhibition> getAllFromDb() throws DBException {
         try {

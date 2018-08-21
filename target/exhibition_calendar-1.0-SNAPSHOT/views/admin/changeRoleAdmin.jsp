@@ -31,10 +31,13 @@
                   <button class="submitBtn" type="submit" name="action" value="changeRole">Change Role</button>
                   <button class="resetBtn" type="reset" value="Reset">Reset</button>
                   <button class="submitBtn" type="submit" name="action" value="getRole">Get User Role</button>
-                  <br> ${showRole} ${mess}
+                  <br><br> ${showRole} ${mess}
                </form>
                <!-- /Registration form-->
-               <br>
+               <br><br>
+               <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
+                   <input  class="blueButton" type="submit" value="go home"/>
+               </form>
             </section>
          </div>
       </center>

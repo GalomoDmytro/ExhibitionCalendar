@@ -16,7 +16,6 @@
          <div class="content">
             <section class="main">
                <h1>Purchase</h1>
-               <h2>${role}</h2>
                <br/>
                <hr>
                <div align="center">
@@ -44,6 +43,10 @@
                      <input class="submitBtn"  type="submit" name="search" value="buy" />
                      <input class="resetBtn" type="submit" name="cancel" value="cancel"/>
                   </form>
+            <br/><br/>
+                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
+                    <input  class="blueButton" type="submit" value="go home"/>
+                </form>
                </div>
             </section>
          </div>

@@ -13,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ResourceBundle;
 
 public class LoginCommand implements Command {
 
-    private static final Logger log = Logger.getLogger(RegistrationCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
     private Connection connection;
     private FactoryMySql factoryMySql;
 
@@ -25,22 +26,21 @@ public class LoginCommand implements Command {
     private User user;
     private PasswordHandler passwordHandler;
 
-    private static final String WRONG = "wrong password or eMail";
+    // TODO: make multi lang
+    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         collectParamsFromRequest(req);
-        handleConnection();
 
-        RequestDispatcher dispatcher;
-        if (identificateUser(req)) {
-            req.setAttribute("errorLogin", "");
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        } else {
-            if(eMail == null && password == null) {
-                req.setAttribute("errorLogin", WRONG);
+        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.LOGIN_PAGE);
+
+        if (req.getParameter("loginBtn") != null) {
+            if (identificateUser(req)) {
+                dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
+            } else {
+                req.setAttribute("errorLogin", QUERIES.getString("ERROR_LOGIN"));
             }
-            dispatcher = req.getRequestDispatcher(Links.LOGIN_PAGE);
         }
 
         dispatcher.forward(req, resp);
@@ -70,16 +70,14 @@ public class LoginCommand implements Command {
     }
 
     private User getUserFromDB() {
+        handleConnection();
         try {
             user = factoryMySql.createUser(connection).getByMail(eMail);
             user.setRole(factoryMySql.createRole(connection).getRoleById(user.getId()));
             return user;
         } catch (Exception exception) {
-            log.error(exception);
         } finally {
-            try {
-                connection.close();
-            } catch (Exception exception) {};
+            closeConnection();
         }
 
         return null;
@@ -87,7 +85,6 @@ public class LoginCommand implements Command {
 
     private boolean comparePassword() {
         passwordHandler = new PasswordHandler();
-        log.info("compare password " + passwordHandler.comparePassword(password, user.getPassword()));
         return passwordHandler.comparePassword(password, user.getPassword());
     }
 
@@ -103,6 +100,15 @@ public class LoginCommand implements Command {
     private void collectParamsFromRequest(HttpServletRequest request) {
         eMail = request.getParameter("eMail");
         password = request.getParameter("password");
-//        log.info("get param " + eMail + " pas " + password);
+    }
+
+    private void closeConnection() {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (Exception exception) {
+
+        }
     }
 }

@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class ControllerHelper {
 
-    private Command command;
     private Map<String, Command> commandMap = new HashMap<>();
 
     ControllerHelper() {
@@ -23,7 +22,9 @@ public class ControllerHelper {
 
         if (commandName != null) {
             return commandMap.get(commandName);
-        } else return new Home();
+        }
+
+        return new Home();
     }
 
     private void initCommandMap() {
@@ -47,6 +48,5 @@ public class ControllerHelper {
         commandMap.put("expoInfo", new ExpoInfo());
         commandMap.put("userHome", new UserHome());
     }
-
 
 }

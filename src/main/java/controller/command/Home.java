@@ -36,10 +36,6 @@ public class Home implements Command {
             specificSearch(req);
         }
 
-        if (req.getParameter("editExpoCenter") != null) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        }
-
         dispatcher.forward(req, resp);
     }
 
@@ -69,7 +65,7 @@ public class Home implements Command {
         try {
             List<Contract> listContract = getAllContractFromToday();
             for (Contract contract : listContract) {
-                LOGGER.info(contract.getExhibitionTitle() + " ******** " + contract.getExhibitionCenterTitle());
+//                LOGGER.info(contract.getExhibitionTitle() + " ******** " + contract.getExhibitionCenterTitle());
             }
             req.setAttribute("listForCustomer", listContract);
         } catch (Exception exception) {
@@ -88,21 +84,6 @@ public class Home implements Command {
         Date now = new Date();
         return format.format(now);
     }
-
-    // test code
-//    private void getExpoInfoFromDB() {
-//        try {
-//            Connection connection = ConnectionPoolMySql.getInstance().getConnection();
-//            FactoryMySql factoryMySql = new FactoryMySql();
-//            UserMySql userMySql
-//                    = (UserMySql) factoryMySql.createUser(connection);
-//
-//            usersList = userMySql.getAllUsers();
-//
-//        } catch (Exception exception) {
-//            LOGGER.error(exception);
-//        }
-//    }
 
     private void closeConnection() {
         try {

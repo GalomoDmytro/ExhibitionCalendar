@@ -2,32 +2,45 @@ package controller.filter;
 
 import controller.command.Links;
 import entities.Role;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {"/*"},
+        initParams = {
+                @WebInitParam(name = "INDEX_PATH", value = "/index.jsp")
+        })
 public class AcessSecurityFilter implements Filter {
+    private String indexPath;
+    private FilterConfig filterConfig;
+
+    private static final Logger LOGGER = Logger.getLogger(AcessSecurityFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        indexPath = filterConfig.getInitParameter("INDEX_PATH");
+        this.filterConfig = filterConfig;
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) servletRequest;
-        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.INDEX_PAGE);
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        if (!allowAccess(req)) {
-            dispatcher.forward(req, servletResponse);
+        if (!allowAccess(httpRequest)) {
+            httpRequest.setAttribute("command", httpRequest.getParameter("command"));
+
+            httpRequest.getRequestDispatcher(Links.INDEX_PAGE).forward(httpRequest, httpResponse);
             return;
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(request, response);
     }
 
     @Override
@@ -37,7 +50,6 @@ public class AcessSecurityFilter implements Filter {
 
     private boolean allowAccess(HttpServletRequest req) {
         HttpSession session = req.getSession();
-
         String command = req.getParameter("command");
 
         if (command != null) {

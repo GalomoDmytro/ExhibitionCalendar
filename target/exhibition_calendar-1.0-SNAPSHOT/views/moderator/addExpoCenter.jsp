@@ -32,6 +32,7 @@
                <br>
                <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>
                <br>
+
          </div>
          </section>
          <footer>

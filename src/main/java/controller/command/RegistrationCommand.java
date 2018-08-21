@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ResourceBundle;
 
 public class RegistrationCommand implements Command {
 
     private static final Logger log = Logger.getLogger(RegistrationCommand.class);
 
-    // todo make checking pattern for all attributes
     private String name;
     private String password;
     private String passwordRepeat;
@@ -35,21 +35,8 @@ public class RegistrationCommand implements Command {
     private FactoryMySql factoryMySql;
     private User user;
 
-    // todo put to another place
     // todo make multi lang
-    private final String ERROR_MATCHES_PASSWORD = "do not match passwords";
-    private final String ERROR_MISS_PASSWORD = "missing passwords";
-    private final String ERROR_PASSWORD_PATTERN = "at password: digit must occur at least once;\n"
-            + " a lower case letter must occur at least once;\n" +
-            " an upper case letter must occur at least once;\n" +
-            " no whitespace allowed, at least 6 characters;";
-    private final String ERROR_MATCHES_EMAIL = "do not match eMails";
-    private final String ERROR_EMAIL_ALREADY_EXIST = "This eMail already exist";
-    private final String ERROR_EMAIL_PATTERN = "Not valid form";
-    private final String ERROR_MISS_EMAIL = "Missed email";
-    private final String ERROR_MISS_NAME = "Missed name";
-    private final String ERROR_NAME_ALREADY_EXIST = "The name already exist";
-    private final String ERROR_MISS_PATTERN = "The name must begin with a letter and contain between 2 and 20";
+    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -87,6 +74,26 @@ public class RegistrationCommand implements Command {
             return false;
         }
 
+        if(!phoneIsGood(req)) {
+           return false;
+        }
+
+        return true;
+    }
+
+    private boolean phoneIsGood(HttpServletRequest req) {
+        if(phone1 != null) {
+            if(!phone1.matches(Patterns.PHONE_LENGTH)) {
+                return false;
+            }
+        }
+
+        if(phone2 != null) {
+            if(!phone2.matches(Patterns.PHONE_LENGTH)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -101,12 +108,12 @@ public class RegistrationCommand implements Command {
 
     private boolean nameIsGood(HttpServletRequest req) {
         if (name == null) {
-            req.setAttribute("errorNameProfile", ERROR_MISS_NAME);
+            req.setAttribute("errorNameProfile", QUERIES.getString("ERROR_MISS_NAME"));
             return false;
         }
 
         if (!name.matches(Patterns.NAME)) {
-            req.setAttribute("errorNameProfile", ERROR_MISS_PATTERN);
+            req.setAttribute("errorNameProfile", QUERIES.getString("ERROR_MISS_PATTERN"));
             return false;
         }
 
@@ -115,7 +122,7 @@ public class RegistrationCommand implements Command {
         try {
             if (factoryMySql.createUser(connection).isNameInTable(name)) {
                 alredyEx = true;
-                req.setAttribute("errorNameProfile", ERROR_NAME_ALREADY_EXIST);
+                req.setAttribute("errorNameProfile", QUERIES.getString("ERROR_NAME_ALREADY_EXIST"));
                 return false;
             }
         } catch (Exception exception) {
@@ -131,17 +138,17 @@ public class RegistrationCommand implements Command {
 
     private boolean passwordIsGood(HttpServletRequest req) {
         if (password == null || passwordRepeat == null) {
-            req.setAttribute("errorPassword", ERROR_MISS_PASSWORD);
+            req.setAttribute("errorPassword", QUERIES.getString("ERROR_MISS_PASSWORD"));
             return false;
         }
 
         if (!password.equals(passwordRepeat)) {
-            req.setAttribute("errorPassword", ERROR_MATCHES_PASSWORD);
+            req.setAttribute("errorPassword", QUERIES.getString("ERROR_MATCHES_PASSWORD"));
             return false;
         }
 
         if (!password.matches(Patterns.PASSWORD)) {
-            req.setAttribute("errorPassword", ERROR_PASSWORD_PATTERN);
+            req.setAttribute("errorPassword", QUERIES.getString("ERROR_PASSWORD_PATTERN"));
             return false;
         }
 
@@ -162,29 +169,29 @@ public class RegistrationCommand implements Command {
 
     private boolean eMailIsGood(HttpServletRequest request) {
         if (eMail == null || eMailRepeat == null) {
-            request.setAttribute("errorMail", ERROR_MISS_EMAIL);
+            request.setAttribute("errorMail", QUERIES.getString("ERROR_MISS_EMAIL"));
             return false;
         }
 
         if (!eMail.equals(eMailRepeat)) {
-            request.setAttribute("errorMail", ERROR_MATCHES_EMAIL);
+            request.setAttribute("errorMail", QUERIES.getString("ERROR_MATCHES_EMAIL"));
             return false;
         }
 
         if (!eMail.matches(Patterns.EMAIL)) {
-            request.setAttribute("errorMail", ERROR_EMAIL_PATTERN);
+            request.setAttribute("errorMail", QUERIES.getString("ERROR_EMAIL_PATTERN"));
             return false;
         }
 
         if (!eMail.matches(Patterns.EMAIL_LENGTH)) {
-            request.setAttribute("errorMail", ERROR_EMAIL_PATTERN);
+            request.setAttribute("errorMail", QUERIES.getString("ERROR_EMAIL_PATTERN"));
             return false;
         }
 
         // check if eMail already in table
         try {
             if (factoryMySql.createUser(connection).isMailInTable(eMail)) {
-                request.setAttribute("errorMail", ERROR_EMAIL_ALREADY_EXIST);
+                request.setAttribute("errorMail", QUERIES.getString("ERROR_EMAIL_ALREADY_EXIST"));
                 return false;
             }
         } catch (Exception exception) {

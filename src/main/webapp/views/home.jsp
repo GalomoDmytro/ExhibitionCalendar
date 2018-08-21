@@ -8,7 +8,7 @@
    <head>
       <meta charset="utf-8">
       <title>Exhibition Calendar</title>
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
    </head>
    <body>
       <header>
@@ -26,7 +26,6 @@
                   <input type="text" name="searchField" placeholder="Search">
                   <input type="date" name="searchDate">
                   <input class="submitBtn" type="submit" name="search" value="Search" />
-                  <input class="resetBtn" type="reset" name="search" value="reset" />
                </form>
                <hr>
                <div align="center">
@@ -39,7 +38,7 @@
                         <th>Expo Center</th>
                         <th>Address</th>
                         <th>img</th>
-                        <th></th>
+                        <th>To Date</th>
                         <th></th>
                      </tr>
                      <c:forEach var="list" items="${listForCustomer}">
@@ -50,8 +49,12 @@
                            <td>
                               <c:out value="${list.exhibitionCenterTitle}" />
                            </td>
-                           <td></td>
-                           <td></td>
+                           <td>
+
+                           </td>
+                           <td>
+
+                           </td>
                            <td>&nbsp;<a class="blueButton" href="${pageContext.request.contextPath}/controller?command=expoInfo&idContract=<c:out value='${list.id}'/>"> Expo info </a></td>
                            <td>&nbsp;<a class="blueButton" href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket="> Buy </a></td>
                         </tr>

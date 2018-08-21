@@ -85,20 +85,14 @@ public class ContractManagement implements Command {
 
     private void specificSearch(HttpServletRequest req) {
         String looking = req.getParameter("searchField");
-//        looking = looking.toLowerCase();
-
-//        List<Contract> contractList = new ArrayList<>();
-//        List<Contract> allContractInDb;
 
         handleConnection();
         try {
             // TODO make search with exhibition table and center table
             List<Contract> contractList = factoryMySql.createExhibitionContract(connection).getAllContractsBySearch(looking);
-//            allContractInDb = getAllContractsFromDb();
-//            setSupportContractInfo(allContractInDb);
+
             setSupportContractInfo(contractList);
 
-//            findMatchedWithLookingField(looking, contractList, allContractInDb);
             if (contractList != null) {
                 req.setAttribute("listContract", contractList);
             }
@@ -106,20 +100,6 @@ public class ContractManagement implements Command {
             LOGGER.error(exception);
         } finally {
             closeConnection();
-        }
-    }
-
-    private void findMatchedWithLookingField(String looking, List<Contract> contractList,
-                                             List<Contract> allContract) {
-        for (Contract contract : allContract) {
-            if (contract.getExCenterId().toString().equals(looking) ||
-                    contract.getExhibitionId().toString().equals(looking) ||
-                    contract.getExhibitionTitle().contains(looking) ||
-                    contract.getExhibitionCenterTitle().contains(looking) ||
-                    contract.getDateFrom().toString().equals(looking) ||
-                    contract.getDateTo().toString().equals(looking)) {
-                contractList.add(contract);
-            }
         }
     }
 
