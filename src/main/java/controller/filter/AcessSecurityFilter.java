@@ -17,15 +17,12 @@ import java.io.IOException;
                 @WebInitParam(name = "INDEX_PATH", value = "/index.jsp")
         })
 public class AcessSecurityFilter implements Filter {
-    private String indexPath;
-    private FilterConfig filterConfig;
+    private String command;
 
     private static final Logger LOGGER = Logger.getLogger(AcessSecurityFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        indexPath = filterConfig.getInitParameter("INDEX_PATH");
-        this.filterConfig = filterConfig;
     }
 
     @Override
@@ -33,10 +30,10 @@ public class AcessSecurityFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        if (!allowAccess(httpRequest)) {
-            httpRequest.setAttribute("command", httpRequest.getParameter("command"));
+        getCommand(httpRequest);
 
-            httpRequest.getRequestDispatcher(Links.INDEX_PAGE).forward(httpRequest, httpResponse);
+        if (!allowAccess(httpRequest)) {
+            redirect(httpRequest, httpResponse);
             return;
         }
 
@@ -50,7 +47,6 @@ public class AcessSecurityFilter implements Filter {
 
     private boolean allowAccess(HttpServletRequest req) {
         HttpSession session = req.getSession();
-        String command = req.getParameter("command");
 
         if (command != null) {
             switch (command) {
@@ -103,4 +99,38 @@ public class AcessSecurityFilter implements Filter {
 
         return false;
     }
+
+    private void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        if (command != null) {
+            switch (command) {
+                case "moderatorHome":
+                case "addExpoCenter":
+                case "expoCenterManagement":
+                case "editExpositionCenter":
+                case "addExposition":
+                case "expoManagement":
+                case "editExposition":
+                case "combineExpoWithCenter":
+                case "createContract":
+                case "contractManagement":
+                case "editContract":
+                case "admin":
+                case "userHome":
+                    req.setAttribute("command", req.getParameter("command"));
+                    req.getRequestDispatcher(Links.LOGIN_PAGE).forward(req, resp);
+                    break;
+
+                default:
+                    req.setAttribute("command", req.getParameter("command"));
+                    req.getRequestDispatcher(Links.HOME_PAGE).forward(req, resp);
+                    break;
+            }
+        }
+    }
+
+    private void getCommand(HttpServletRequest req) {
+        command = req.getParameter("command");
+    }
+
 }
