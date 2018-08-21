@@ -62,6 +62,7 @@ public class AcessSecurityFilter implements Filter {
                 case "logout":
                 case "purchase":
                 case "expoInfo":
+                case "changeLang":
                     return true;
 
                 case "moderatorHome":

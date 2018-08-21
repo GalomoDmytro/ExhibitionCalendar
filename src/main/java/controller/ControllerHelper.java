@@ -47,6 +47,7 @@ public class ControllerHelper {
         commandMap.put("purchase", new Purchase());
         commandMap.put("expoInfo", new ExpoInfo());
         commandMap.put("userHome", new UserHome());
+        commandMap.put("changeLang", new ChangeLanguage());
     }
 
 }

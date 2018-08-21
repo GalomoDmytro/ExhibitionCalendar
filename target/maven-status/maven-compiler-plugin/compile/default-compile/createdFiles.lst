@@ -33,6 +33,7 @@ controller\command\ErrorHandler.class
 dao\interfaces\UserDao.class
 dao\mysql\DescriptionMySql.class
 dao\mysql\RoleMySql.class
+controller\command\ChangeLanguage.class
 controller\Controller.class
 controller\filter\PageRedirectSecurityFilter.class
 controller\command\moderatorCommand\EditExposition.class

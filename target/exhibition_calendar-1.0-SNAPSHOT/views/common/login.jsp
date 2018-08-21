@@ -18,7 +18,6 @@
           <section class="login">
              <h1>Login</h1>
 
-             <h2>${role}</h2>
              <form action="${pageContext.request.contextPath}/controller?command=login" method="post">
                 <input type="email" name="eMail" placeholder="Email"/><br/><br/>
                 <input type="password" name="password" placeholder="Password"/><br/>

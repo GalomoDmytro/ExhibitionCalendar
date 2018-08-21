@@ -2,7 +2,14 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<fmt:setBundle basename="strings_ru"/>
+<c:choose>
+   <c:when test="${langBundle == null}">
+      <fmt:setBundle basename="strings_ru"/>
+   </c:when>
+   <c:otherwise>
+      <fmt:setBundle basename="${langBundle}"/>
+   </c:otherwise>
+</c:choose>
 <!DOCTYPE html>
 <html>
    <head>
@@ -19,26 +26,28 @@
       <center>
          <div class="content">
             <section class="main">
-               <h1><fmt:message key="home.title"/></h1>
+               <h1>
+                  <fmt:message key="home.title"/>
+               </h1>
                <br/>
                <hr>
                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
-                  <input type="text" name="searchField" placeholder="Search">
+                  <input type="text" name="searchField" placeholder='<fmt:message key="home.search"/>'>
                   <input type="date" name="searchDate">
-                  <input class="submitBtn" type="submit" name="search" value="Search" />
+                  <input class="submitBtn" type="submit" name="search" value='<fmt:message key="home.search"/>' />
                </form>
                <hr>
                <div align="center">
                   <table border="1" cellpadding="7">
                      <caption>
-                        <h2>Expo info</h2>
+
                      </caption>
                      <tr>
-                        <th>Name Expo</th>
-                        <th>Expo Center</th>
-                        <th>Address</th>
+                        <th><fmt:message key="home.NameExpo"/></th>
+                        <th><fmt:message key="home.ExpoCenter"/></th>
+                        <th><fmt:message key="home.Address"/></th>
                         <th>img</th>
-                        <th>To Date</th>
+                        <th><fmt:message key="home.toDate"/></th>
                         <th></th>
                      </tr>
                      <c:forEach var="list" items="${listForCustomer}">
@@ -50,13 +59,11 @@
                               <c:out value="${list.exhibitionCenterTitle}" />
                            </td>
                            <td>
-
                            </td>
                            <td>
-
                            </td>
-                           <td>&nbsp;<a class="blueButton" href="${pageContext.request.contextPath}/controller?command=expoInfo&idContract=<c:out value='${list.id}'/>"> Expo info </a></td>
-                           <td>&nbsp;<a class="blueButton" href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket="> Buy </a></td>
+                           <td>&nbsp;<a class="blueButton" href="${pageContext.request.contextPath}/controller?command=expoInfo&idContract=<c:out value='${list.id}'/>"> <fmt:message key="btn.expoInfo"/> </a></td>
+                           <td>&nbsp;<a class="blueButton" href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket="> <fmt:message key="btn.buy"/></a></td>
                         </tr>
                      </c:forEach>
                   </table>

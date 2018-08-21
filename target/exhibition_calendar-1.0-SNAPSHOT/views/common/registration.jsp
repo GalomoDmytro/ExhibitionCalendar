@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:choose>
+   <c:when test="${langBundle == null}">
+      <fmt:setBundle basename="strings_ru"/>
+   </c:when>
+   <c:otherwise>
+      <fmt:setBundle basename="${langBundle}"/>
+   </c:otherwise>
+</c:choose>
 <html>
    <head>
       <title>Registration</title>
@@ -15,7 +24,6 @@
       <center>
          <div class="content">
             <section class="main">
-               <h2>${role}</h2>
                <!-- Registration form-->
                <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
                   <input type="text" name="name" placeholder="*Profile Name"/><br/>
@@ -30,12 +38,12 @@
                   ${errorMail}<br/>
                   <input type="text" name="phone1" placeholder="Phone number 1"/><br/>
                   <input type="text" name="phone2" placeholder="Phone number 2"/><br/><br/>
-                  <button class="submitBtn" type="submit" value="Submit">Submit</button>
-                  <button class="resetBtn" type="reset" value="Reset">Reset</button>
+                  <button class="submitBtn" type="submit" value="Submit"><fmt:message key="btn.submit"/></button>
+                  <button class="resetBtn" type="reset" value="Reset"><fmt:message key="btn.reset"/></button>
                </form>
                <!-- /Registration form-->
                <br>
-               <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=home">go home</a>
+               <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=home"><fmt:message key="btn.goHome"/></a>
          </div>
          </section>
       </center>

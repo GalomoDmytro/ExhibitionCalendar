@@ -6,6 +6,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\UserMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\CreateContract.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Role.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\AddExpo.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\ChangeLanguage.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\user\UserHome.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\PageRedirectSecurityFilter.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\FactoryDao.java
