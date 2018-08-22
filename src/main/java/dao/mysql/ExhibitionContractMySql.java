@@ -178,6 +178,31 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
+    public List<Contract> searchContactsWithExpoAndCenterLimit(String search, Date date, int startLimit, int endLimit) throws DBException {
+        List<Contract> contracts;
+        search = "%" + search + "%";
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.searchAfterDateWithExpoCenterAndExhibitionLimit"))) {
+            statement.setDate(1, date);
+            statement.setString(2, search);
+            statement.setString(3, search);
+            statement.setString(4, search);
+            statement.setInt(5, startLimit);
+            statement.setInt(6, endLimit);
+            ResultSet resultSet = statement.executeQuery();
+            contracts = parseContractSetWithExpo(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if (contracts == null) {
+            return null;
+        } else {
+            return contracts;
+        }
+    }
+
+    @Override
     public List<Contract> getAllAfterDate(Date date) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDate"))) {
@@ -309,6 +334,28 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         } else {
             return contracts;
         }
+    }
+
+    @Override
+    public int getNumberOfContractsAfterSearch(String search, Date date) throws DBException {
+        int count = 0;
+        search = "%" + search + "%";
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.searchAfterDateWithExpoCenterAndExhibitionCount"))) {
+            statement.setDate(1, date);
+            statement.setString(2, search);
+            statement.setString(3, search);
+            statement.setString(4, search);
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+        } catch (SQLException exception) {
+            LOGGER.info(exception);
+            throw new DBException(exception);
+        }
+
+        return count;
     }
 
     private void fillCEC(ResultSet resultSet, Contract contract, Exhibition exhibition,

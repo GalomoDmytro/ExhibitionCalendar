@@ -21,11 +21,12 @@ import java.util.Locale;
 public class Home implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
-    private String dateLine;
+    private String date;
     private String searchLine;
     private int countExhibitions;
     private int numberOfPages;
     private int currentPage;
+    private int start;
 
     private static final int recordsPerPage = 2;
     private static final Logger LOGGER = Logger.getLogger(Home.class);
@@ -34,47 +35,64 @@ public class Home implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
 
-        if(req.getParameter("currentPage") == null) {
-            LOGGER.info("currentPage null");
-            currentPage = 1;
-        } else {
-            currentPage = Integer.valueOf(req.getParameter("currentPage"));
-            LOGGER.info("currentPage are" + currentPage);
-        }
+        toFindCurrentPage(req);
 
-        showAll(req);
+        getDate(req);
 
-//        if (req.getParameter("searchField") != null) {
-//            req.setAttribute("searchField", req.getParameter("searchField"));
-//            specificSearch(req);
-//        }
+        choseWhatToShow(req);
 
-        req.setAttribute("numberOfPages", numberOfPages);
+        saveAtrToReq(req);
 
         dispatcher.forward(req, resp);
     }
+
+    private void toFindCurrentPage(HttpServletRequest req) {
+        if (req.getParameter("currentPage") == null) {
+            currentPage = 1;
+        } else {
+            currentPage = Integer.valueOf(req.getParameter("currentPage"));
+        }
+    }
+
+    private void saveAtrToReq(HttpServletRequest req) {
+        req.setAttribute("searchDate", req.getParameter("searchDate"));
+        req.setAttribute("searchField", req.getParameter("searchField"));
+        req.setAttribute("numberOfPages", numberOfPages);
+    }
+
+    private void choseWhatToShow(HttpServletRequest req) {
+        if (req.getParameter("searchField") != null && req.getParameter("searchField").length() > 0) {
+            specificSearch(req);
+        } else {
+            showAll(req);
+        }
+    }
+
 
     private void specificSearch(HttpServletRequest req) {
 
         handleConnection();
 
         try {
-            // TODO: change date
+
             searchLine = req.getParameter("searchField");
-            countExhibitions = factoryMySql.createExhibitionContract(connection).getNumberOfContractsAfterDate(java.sql.Date.valueOf(getTodayDate()));
-            numberOfPages = countExhibitions / recordsPerPage;
-            if(countExhibitions % recordsPerPage > 0) {
-                numberOfPages++;
-            }
+            countExhibitions = factoryMySql.createExhibitionContract(connection).getNumberOfContractsAfterSearch(searchLine, java.sql.Date.valueOf(date));
+            countNumberOfPages();
             List<Contract> contractList = factoryMySql.createExhibitionContract(connection)
-                    .searchContactsWithExpoAndCenter(searchLine, java.sql.Date.valueOf(getTodayDate()));
+                    .searchContactsWithExpoAndCenterLimit(searchLine, java.sql.Date.valueOf(date), start, recordsPerPage);
 
             req.setAttribute("listForCustomer", contractList);
 
         } catch (Exception exception) {
-
         } finally {
             closeConnection();
+        }
+    }
+
+    private void countNumberOfPages() {
+        numberOfPages = countExhibitions / recordsPerPage;
+        if (countExhibitions % recordsPerPage > 0) {
+            numberOfPages++;
         }
     }
 
@@ -83,30 +101,27 @@ public class Home implements Command {
         handleConnection();
 
         try {
-            List<Contract> listContract = getAllContractFromToday();
-
-            for(Contract contract : listContract) {
-                LOGGER.info(contract);
-            }
+            List<Contract> listContract = getAllContract();
 
             req.setAttribute("listForCustomer", listContract);
         } catch (Exception exception) {
-            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
     }
 
-    private List<Contract> getAllContractFromToday() throws DBException {
-        String strDate = getTodayDate();
-        countExhibitions = factoryMySql.createExhibitionContract(connection).getNumberOfContractsAfterDate(java.sql.Date.valueOf(strDate));
-        numberOfPages = countExhibitions / recordsPerPage;
-        if(countExhibitions % recordsPerPage > 0) {
-            numberOfPages++;
-        } // remove form here
-        int start = currentPage * recordsPerPage - recordsPerPage;
-        LOGGER.info("cur page " + currentPage + " show from " + start + " record per page " + recordsPerPage);
-        return factoryMySql.createExhibitionContract(connection).getContractsAfterDateLimit(java.sql.Date.valueOf(strDate), start, recordsPerPage);
+    private List<Contract> getAllContract() throws DBException {
+        countExhibitions = factoryMySql.createExhibitionContract(connection).getNumberOfContractsAfterDate(java.sql.Date.valueOf(date));
+        countNumberOfPages();
+        start = currentPage * recordsPerPage - recordsPerPage;
+        return factoryMySql.createExhibitionContract(connection).getContractsAfterDateLimit(java.sql.Date.valueOf(date), start, recordsPerPage);
+    }
+
+    private void getDate(HttpServletRequest req) {
+        date = req.getParameter("searchDate");
+        if(date == null || date.length() < 1) {
+            date = getTodayDate();
+        }
     }
 
     private String getTodayDate() {

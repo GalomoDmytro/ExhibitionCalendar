@@ -22,7 +22,7 @@ public class ChangeLanguage implements Command {
 
         HttpSession session = req.getSession();
         if (session.getAttribute("langBundle") == null) {
-            session.setAttribute("langBundle", ruBundle);
+            session.setAttribute("langBundle", engBundle);
         } else if (session.getAttribute("langBundle") == ruBundle) {
             session.setAttribute("langBundle", engBundle);
 

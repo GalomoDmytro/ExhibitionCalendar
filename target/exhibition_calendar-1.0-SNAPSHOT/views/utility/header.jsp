@@ -16,13 +16,12 @@
    <body>
 
 <c:choose>
-   <c:when test="${langBundle == 'strings_ru'}">
-              <a  href="${pageContext.request.contextPath}/controller?command=changeLang">eng</a>
+   <c:when test="${langBundle == 'strings_eng'}">
+              <a  href="${pageContext.request.contextPath}/controller?command=changeLang">ru</a>
 
    </c:when>
    <c:otherwise>
-                    <a  href="${pageContext.request.contextPath}/controller?command=changeLang">ru</a>
-
+                    <a  href="${pageContext.request.contextPath}/controller?command=changeLang">eng</a>
    </c:otherwise>
 </c:choose>
 

@@ -25,6 +25,8 @@ public interface ExhibitionContractDao {
 
     List<Contract> searchContactsWithExpoAndCenter(String search, Date date) throws DBException;
 
+    List<Contract> searchContactsWithExpoAndCenterLimit(String search, Date date, int startLimit, int endLimit) throws DBException;
+
     List<Contract> getAllAfterDate(Date date) throws DBException;
 
     List<Contract> getAllContractsBySearch(String search) throws DBException;
@@ -40,6 +42,8 @@ public interface ExhibitionContractDao {
     void deleteContractById(Integer id ) throws DBException;
 
     int getNumberOfContractsAfterDate(Date date) throws DBException;
+
+    int getNumberOfContractsAfterSearch(String search, Date date) throws DBException;
 
     List<Contract> getContractsAfterDateLimit(Date date, int startLimit, int endLimit) throws DBException;
 
