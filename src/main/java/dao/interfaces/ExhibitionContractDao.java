@@ -39,5 +39,9 @@ public interface ExhibitionContractDao {
 
     void deleteContractById(Integer id ) throws DBException;
 
+    int getNumberOfContractsAfterDate(Date date) throws DBException;
+
+    List<Contract> getContractsAfterDateLimit(Date date, int startLimit, int endLimit) throws DBException;
+
 
 }

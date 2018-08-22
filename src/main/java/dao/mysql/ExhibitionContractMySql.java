@@ -276,8 +276,43 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
-    private void fillCEC(ResultSet resultSet, Contract contract, Exhibition exhibition
-            , ExhibitionCenter exhibitionCenter) throws DBException {
+    @Override
+    public int getNumberOfContractsAfterDate(Date date) throws DBException {
+        int count = 0;
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDateWithExpoCenterAndExhibitionCount"))) {
+            statement.setDate(1, date);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        return count;
+    }
+
+    @Override
+    public List<Contract> getContractsAfterDateLimit(Date date, int startLimit, int endLimit) throws DBException {
+        List<Contract> contracts;
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDateWithExpoCenterAndExhibitionLimit"))) {
+            statement.setDate(1, date);
+            statement.setInt(2, startLimit);
+            statement.setInt(3, endLimit);
+            ResultSet resultSet = statement.executeQuery();
+            contracts = parseContractSetWithExpo(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if (contracts == null) {
+            return null;
+        } else {
+            return contracts;
+        }
+    }
+
+    private void fillCEC(ResultSet resultSet, Contract contract, Exhibition exhibition,
+                         ExhibitionCenter exhibitionCenter) throws DBException {
         try {
             while (resultSet.next()) {
                 contract.setId(resultSet.getInt(1));
