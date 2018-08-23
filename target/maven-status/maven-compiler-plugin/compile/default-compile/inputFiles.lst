@@ -19,6 +19,8 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionContr
 D:\epam_project\Exhibition Calendar\src\main\java\dao\Connection\ConnectionPoolMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\QueryHelper.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\ExhibitionCenter.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\XSSRequestWrapper.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\XSSFilter.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\ErrorHandler.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\EditUser.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\AddingExpoCenter.java

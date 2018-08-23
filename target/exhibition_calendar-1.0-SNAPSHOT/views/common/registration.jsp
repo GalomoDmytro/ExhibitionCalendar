@@ -37,7 +37,8 @@
                   <input type="email" name="eMailRepeat" placeholder="*Repeat eMail"/><br/>
                   ${errorMail}<br/>
                   <input type="text" name="phone1" placeholder="Phone number 1"/><br/>
-                  <input type="text" name="phone2" placeholder="Phone number 2"/><br/><br/>
+                  <input type="text" name="phone2" placeholder="Phone number 2"/><br/>
+                  ${errorPhone}<br/>
                   <button class="submitBtn" type="submit" value="Submit"><fmt:message key="btn.submit"/></button>
                   <button class="resetBtn" type="reset" value="Reset"><fmt:message key="btn.reset"/></button>
                </form>

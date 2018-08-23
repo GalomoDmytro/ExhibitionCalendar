@@ -10,7 +10,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 
@@ -24,7 +23,7 @@ public class Admin implements Command {
     private FactoryMySql factoryMySql;
 
     private static final String MESSAGE_ROLE_CHANGE_TROUBLE = "Role hasn't changed";
-    private static final Logger log = Logger.getLogger(RegistrationCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(Admin.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -78,7 +77,7 @@ public class Admin implements Command {
                 factoryMySql.createRole(connection).updateRole(user.getId(), getRole());
             } else return false;
         } catch (Exception exception) {
-            log.error(exception);
+            LOGGER.error(exception);
             return false;
         } finally {
             try {

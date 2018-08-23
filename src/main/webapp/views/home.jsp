@@ -34,7 +34,8 @@
                <hr>
                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
                   <input type="text" name="searchField" value="${searchField}" placeholder='<fmt:message key="home.search"/>'>
-                  <input type="date" name="searchDate" value="${searchDate}">
+                  <jsp:useBean id="now" class="java.util.Date"/>
+                  <input type="date" name="searchDate" value="${searchDate}" min='<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />'/>
                   <input class="submitBtn" type="submit" name="search" value='<fmt:message key="home.search"/>' />
                </form>
                <hr>
@@ -80,7 +81,7 @@
                            </td>
                            <td>
                               &nbsp;
-                              <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket=">
+                              <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket=<c:out value='${searchDate}'/>">
                                  <fmt:message key="btn.buy"/>
                               </a>
                            </td>

@@ -3,6 +3,7 @@ package controller;
 import controller.command.*;
 import controller.command.moderatorCommand.*;
 import controller.command.user.UserHome;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import java.util.Map;
 public class ControllerHelper {
 
     private Map<String, Command> commandMap = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(ControllerHelper.class);
 
     ControllerHelper() {
         initCommandMap();

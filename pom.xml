@@ -81,5 +81,12 @@
             <version>3.7</version>
         </dependency>
 
+        <!-- provides a utility class for hashing -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+
     </dependencies>
 </project>

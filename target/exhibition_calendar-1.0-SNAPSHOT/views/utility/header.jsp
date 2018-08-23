@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <c:choose>
    <c:when test="${langBundle == null}">
       <fmt:setBundle basename="strings_ru"/>
@@ -18,7 +19,6 @@
 <c:choose>
    <c:when test="${langBundle == 'strings_eng'}">
               <a  href="${pageContext.request.contextPath}/controller?command=changeLang">ru</a>
-
    </c:when>
    <c:otherwise>
                     <a  href="${pageContext.request.contextPath}/controller?command=changeLang">eng</a>

@@ -18,7 +18,7 @@ public class Patterns {
 
     public static final String ADDRESS_LENGTH = ".{1,254}";
 
-    public static final String PHONE_LENGTH = ".{,44}";
+    public static final int PHONE_LENGTH = 45;
 
     public static final String TITLE_EXPO_CENTER = ".{1,254}";
 

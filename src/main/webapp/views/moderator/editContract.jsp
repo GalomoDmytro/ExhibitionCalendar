@@ -75,8 +75,8 @@
                <!-- Contract -->
                <h3>Contract :</h3>
                <form action="${pageContext.request.contextPath}/controller?command=editContract" method="post">
-                  Start date (yyyy-MM-dd):<input type="text" name="dateFrom" value='${dateFrom}'/><br/>
-                  End date:<input type="text" name="dateTo" value='${dateTo}'/><br/>
+                  Date from:<input type="date" name="dateFrom" value='${dateFrom}'/><br/>
+                  End date:<input type="date" name="dateTo" value='${dateTo}'/><br/>
                   Price:<input type="text" name="price" value='${price}'/><br/>
                   Work Time:<input type="text" name="workTime" value='${workTime}'/><br/>
                   Max Ticket per day:<input type="text" name="maxTicketDay" value='${maxTicketDay}'/><br/>

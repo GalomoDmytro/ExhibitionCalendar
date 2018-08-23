@@ -19,8 +19,6 @@ import java.util.ResourceBundle;
 
 public class RegistrationCommand implements Command {
 
-    private static final Logger log = Logger.getLogger(RegistrationCommand.class);
-
     private String name;
     private String password;
     private String passwordRepeat;
@@ -35,6 +33,8 @@ public class RegistrationCommand implements Command {
     private FactoryMySql factoryMySql;
     private User user;
 
+    private static final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
+
     // todo make multi lang
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
 
@@ -45,20 +45,23 @@ public class RegistrationCommand implements Command {
         handleConnection();
 
         RequestDispatcher dispatcher;
-        if (isDataGood(req, resp)) {
+        if (isDataGood(req)) {
             addNewUserToDB();
             user.setRole(Role.USER);
             declareRole(req, resp);
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         } else {
+
             dispatcher = req.getRequestDispatcher(Links.REGISTRATION_PAGE);
         }
+
 
         dispatcher.forward(req, resp);
     }
 
-    private boolean isDataGood(HttpServletRequest req, HttpServletResponse resp) {
+    private boolean isDataGood(HttpServletRequest req) {
         if (primaryIsEmpty()) {
+
             return false;
         }
 
@@ -69,40 +72,47 @@ public class RegistrationCommand implements Command {
         if (!eMailIsGood(req)) {
             return false;
         }
-
         if (!nameIsGood(req)) {
             return false;
         }
 
-        if(!phoneIsGood(req)) {
-           return false;
+        if(!phoneIsGood()) {
+            req.setAttribute("errorPhone", "bad phone number");
+            return false;
         }
-
         return true;
     }
 
-    private boolean phoneIsGood(HttpServletRequest req) {
+    private boolean phoneIsGood() {
+
         if(phone1 != null) {
-            if(!phone1.matches(Patterns.PHONE_LENGTH)) {
+            if(phone1.length() > Patterns.PHONE_LENGTH) {
+                return false;
+            }
+//            if(!phone1.matches(Patterns.PHONE_LENGTH)) {
+//                LOGGER.info("check 1");
+//                return false;
+//            }
+        }
+
+        if(phone2 != null) {
+            if(phone2.length() > Patterns.PHONE_LENGTH) {
                 return false;
             }
         }
 
-        if(phone2 != null) {
-            if(!phone2.matches(Patterns.PHONE_LENGTH)) {
-                return false;
-            }
-        }
 
         return true;
     }
 
     private boolean primaryIsEmpty() {
+
         if (name == null
-                && password == null
-                && eMail == null) {
+                || password == null
+                || eMail == null) {
             return true;
         }
+
         return false;
     }
 
@@ -156,15 +166,42 @@ public class RegistrationCommand implements Command {
     }
 
     private void collectParamsFromRequest(HttpServletRequest req) {
-        name = req.getParameter("name");
-        password = req.getParameter("password");
-        passwordRepeat = req.getParameter("passwordRepeat");
-        firstName = req.getParameter("firstName");
-        lastName = req.getParameter("lastName");
-        eMail = req.getParameter("eMail");
-        eMailRepeat = req.getParameter("eMailRepeat");
-        phone1 = req.getParameter("phone1");
-        phone2 = req.getParameter("phone2");
+        if(req.getParameter("name") != null) {
+            name = req.getParameter("name");
+        }
+
+        if(req.getParameter("password") != null) {
+            password = req.getParameter("password");
+        }
+
+        if(req.getParameter("passwordRepeat") != null) {
+            passwordRepeat = req.getParameter("passwordRepeat");
+        }
+
+        if(req.getParameter("firstName") != null) {
+            firstName = req.getParameter("firstName");
+        }
+
+        if(req.getParameter("lastName") != null) {
+            lastName = req.getParameter("lastName");
+        }
+
+        if(req.getParameter("eMail") != null) {
+            eMail = req.getParameter("eMail");
+        }
+
+        if(req.getParameter("eMailRepeat") != null) {
+            eMailRepeat = req.getParameter("eMailRepeat");
+        }
+
+        if(req.getParameter("phone1") != null) {
+            phone1 = req.getParameter("phone1");
+        }
+
+        if(req.getParameter("phone2") != null) {
+            phone2 = req.getParameter("phone2");
+        }
+
     }
 
     private boolean eMailIsGood(HttpServletRequest request) {
@@ -206,7 +243,6 @@ public class RegistrationCommand implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
         }
     }
 
@@ -225,7 +261,6 @@ public class RegistrationCommand implements Command {
             setUserRoleInDB();
             insertUserPhones();
         } catch (Exception exception) {
-            log.error(exception);
         } finally {
             closeConnection();
         }

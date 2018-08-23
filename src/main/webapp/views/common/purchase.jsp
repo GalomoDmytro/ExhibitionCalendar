@@ -38,8 +38,8 @@
                      </c:forEach>
                   </table>
                   <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post">
-                     eMail<input type="text" name="eMail" value="${eMailHold}"><br>
-                     Quantity<input type="number" name="quantity" min="0"><br><br>
+                     <input type="email" name="eMail" value="${eMailHold}" placeholder="eMail"/><br>
+                     Quantity<input type="number" name="quantity" min="1" max="10"/><br><br>
                      <input class="submitBtn"  type="submit" name="search" value="buy" />
                      <input class="resetBtn" type="submit" name="cancel" value="cancel"/>
                   </form>

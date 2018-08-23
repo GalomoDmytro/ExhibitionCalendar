@@ -44,6 +44,7 @@ public class Home implements Command {
         saveAtrToReq(req);
 
         dispatcher.forward(req, resp);
+
     }
 
     private void toFindCurrentPage(HttpServletRequest req) {
