@@ -18,6 +18,7 @@ utility\Patterns.class
 dao\interfaces\ExhibitionCenterDao.class
 entities\Contract$Builder.class
 controller\command\moderatorCommand\ExhibitionManagement.class
+controller\command\CheckOut.class
 controller\filter\XSSFilter.class
 controller\filter\XSSRequestWrapper.class
 dao\mysql\UserPhoneMySql.class

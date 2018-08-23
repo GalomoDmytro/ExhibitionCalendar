@@ -1,10 +1,15 @@
 package controller.filter;
 
+import controller.command.Purchase;
+import org.apache.log4j.Logger;
+
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 public class XSSRequestWrapper extends HttpServletRequestWrapper {
+
+    private static final Logger LOGGER = Logger.getLogger(XSSRequestWrapper.class);
 
     public XSSRequestWrapper(HttpServletRequest servletRequest) {
         super(servletRequest);
@@ -41,6 +46,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
     }
 
     private String stripXSS(String value) {
+
         if (value != null) {
             // NOTE: It's highly recommended to use the ESAPI library and uncomment the following line to
             // avoid encoded attacks.

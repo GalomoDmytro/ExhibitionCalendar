@@ -12,6 +12,7 @@
             <jsp:include page="../utility/header.jsp" />
          </div>
       </header>
+
       <center>
          <div class="content">
             <section class="main">
@@ -29,18 +30,23 @@
                         <th>Expo Center</th>
                         <th>Address</th>
                         <th>Price</th>
-                        <th></th>
+                        <th>ticket?</th>
                         <th></th>
                      </tr>
-                     <c:forEach var="list" items="${listForCustomer}">
-                        <tr>
-                        </tr>
-                     </c:forEach>
+                     <tr>
+                        <td>${dateBuy}</td>
+                        <td>${nameExpo}</td>
+                        <td>${nameExpoCen}</td>
+                        <td>${addressExpoCen}</td>
+                        <td>${price}</td>
+                        <td>${ticketsAvailable}</td>
+                        <td></td>
+                     </tr>
                   </table>
                   <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post">
                      <input type="email" name="eMail" value="${eMailHold}" placeholder="eMail"/><br>
-                     Quantity<input type="number" name="quantity" min="1" max="10"/><br><br>
-                     <input class="submitBtn"  type="submit" name="search" value="buy" />
+                     Quantity<input type="number" name="quantity" value="1" min="1" max="10"/><br><br>
+                     <input class="submitBtn"  type="submit" name="buy" value="buy" />
                      <input class="resetBtn" type="submit" name="cancel" value="cancel"/>
                   </form>
             <br/><br/>

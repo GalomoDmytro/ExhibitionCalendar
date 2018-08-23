@@ -50,6 +50,7 @@ public class ControllerHelper {
         commandMap.put("expoInfo", new ExpoInfo());
         commandMap.put("userHome", new UserHome());
         commandMap.put("changeLang", new ChangeLanguage());
+        commandMap.put("checkOut", new CheckOut());
     }
 
 }

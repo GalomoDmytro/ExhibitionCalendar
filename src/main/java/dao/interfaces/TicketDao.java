@@ -27,4 +27,6 @@ public interface TicketDao {
     void updateTicket(Ticket ticket) throws DBException;
 
     void deleteTicket(Ticket ticket) throws DBException;
+
+    int getCountSoldTicketForDate(Date date, Integer id_contract) throws DBException;
 }

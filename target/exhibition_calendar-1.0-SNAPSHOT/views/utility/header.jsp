@@ -13,6 +13,7 @@
 </c:choose>
 <html>
    <head>
+
    </head>
    <body>
 
