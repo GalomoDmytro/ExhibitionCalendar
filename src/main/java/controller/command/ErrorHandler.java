@@ -1,5 +1,8 @@
 package controller.command;
 
+import controller.filter.AccessSecurityFilter;
+import org.apache.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +14,12 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/errorHandler")
 public class ErrorHandler extends HttpServlet {
 
+    private static final Logger LOGGER = Logger.getLogger(ErrorHandler.class);
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOGGER.info("Error handler class ------");
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.ERROR_PAGE);
         dispatcher.forward(req, resp);
     }

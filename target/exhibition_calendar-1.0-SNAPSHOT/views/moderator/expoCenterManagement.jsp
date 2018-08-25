@@ -23,7 +23,7 @@
                </form>
                <!-- table -->
 
-               <table border="1" cellpadding="8">
+               <table border="1" cellpadding="8" style="table-layout: fixed; width: 100%;">
                   <caption>
                      <h2>List of Expo Centers</h2>
                   </caption>

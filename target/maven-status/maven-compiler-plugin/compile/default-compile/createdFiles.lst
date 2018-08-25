@@ -40,6 +40,7 @@ controller\command\ChangeLanguage.class
 controller\Controller.class
 controller\filter\PageRedirectSecurityFilter.class
 controller\command\moderatorCommand\EditExposition.class
+controller\filter\AccessSecurityFilter.class
 dao\mysql\TicketMySql.class
 controller\command\Command.class
 dao\mysql\UserMySql.class
@@ -69,4 +70,3 @@ dao\interfaces\ExhibitionDao.class
 dao\mysql\ExhibitionCenterMySql.class
 controller\command\moderatorCommand\CreateContract.class
 exceptions\DBException.class
-controller\filter\AcessSecurityFilter.class

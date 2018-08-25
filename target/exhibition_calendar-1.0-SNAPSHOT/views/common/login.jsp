@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page errorPage="../utility/error.jsp" %>
 <html>
    <head>
       <title>LogIn</title>
@@ -17,7 +18,6 @@
       <div class="content">
           <section class="login">
              <h1>Login</h1>
-
              <form action="${pageContext.request.contextPath}/controller?command=login" method="post">
                 <input type="email" name="eMail" placeholder="Email"/><br/><br/>
                 <input type="password" name="password" placeholder="Password" min="6"/><br/>

@@ -2,6 +2,8 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page errorPage="../utility/error.jsp" %>
+
 <c:choose>
    <c:when test="${langBundle == null}">
       <fmt:setBundle basename="strings_ru"/>
