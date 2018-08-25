@@ -11,7 +11,7 @@ public class User {
     private List<String> phone;
     private String firstName;
     private String lastName;
-    private Integer password;
+    private String password;
     private Role role;
 
     public Integer getId() {
@@ -62,11 +62,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -149,7 +149,7 @@ public class User {
             return this;
         }
 
-        public Builder setPassword(Integer password) {
+        public Builder setPassword(String password) {
             user.setPassword(password);
             return this;
         }

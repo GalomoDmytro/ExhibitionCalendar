@@ -41,7 +41,7 @@ public class RegistrationCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         collectParamsFromRequest(req);
-
+        // TODO: remove handleConnection from here
         handleConnection();
 
         RequestDispatcher dispatcher;
@@ -271,7 +271,7 @@ public class RegistrationCommand implements Command {
                 .setName(name)
                 .setFirstName(firstName)
                 .setLastName(lastName)
-                .setPassword(new PasswordHandler().encryptPassword(password))
+                .setPassword(new PasswordHandler().encrypt(password))
                 .setMail(eMail)
                 .setRole(Role.USER)
                 .build();

@@ -1,6 +1,5 @@
 package dao.mysql;
 
-import controller.command.RegistrationCommand;
 import dao.interfaces.ExhibitionCenterDao;
 import entities.ExhibitionCenter;
 import exceptions.DBException;
@@ -8,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -22,7 +22,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     private final String FIELD_WEB_PAGE = "web_page";
 
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
-    private static final Logger log = Logger.getLogger(ExhibitionCenterMySql.class);
+    private static final Logger LOGGER = Logger.getLogger(ExhibitionCenterMySql.class);
 
 
     ExhibitionCenterMySql(Connection connection) {
@@ -55,7 +55,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             ResultSet resultSet = statement.executeQuery();
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
-            log.error(exception);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -68,7 +68,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
     @Override
     public List<ExhibitionCenter> getExhibitionCentersBySearch(String search) throws DBException {
-        List<ExhibitionCenter> exhibitionCenters = new ArrayList<>();
+        List<ExhibitionCenter> exhibitionCenters = null;
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.search"))) {
             statement.setString(1, search);
@@ -80,6 +80,10 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
+        }
+
+        if(exhibitionCenters == null) {
+            return Collections.emptyList();
         }
 
         return exhibitionCenters;
@@ -114,7 +118,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
 
         if (exhibitionCenters == null) {
-            return null;
+            return Collections.emptyList();
         } else {
             return exhibitionCenters;
         }
@@ -150,7 +154,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             }
 
         } catch (SQLException exception) {
-            log.error(exception);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -161,6 +165,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             prepareStatementToUpdate(statement, exhibitionCenter);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

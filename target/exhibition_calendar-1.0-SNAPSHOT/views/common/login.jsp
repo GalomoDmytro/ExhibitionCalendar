@@ -20,7 +20,7 @@
 
              <form action="${pageContext.request.contextPath}/controller?command=login" method="post">
                 <input type="email" name="eMail" placeholder="Email"/><br/><br/>
-                <input type="password" name="password" placeholder="Password"/><br/>
+                <input type="password" name="password" placeholder="Password" min="6"/><br/>
                 ${errorLogin}<br>
                 <input  class="submitBtn" class="submitBtn" type="submit" value="login" name="loginBtn"/>
              </form>

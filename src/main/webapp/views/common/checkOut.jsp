@@ -16,7 +16,7 @@
                  </div>
               </header>
   <div class="checkout">
-  	<form>
+  	<form action="${pageContext.request.contextPath}/controller?command=purchaseProcessing" method="post">
       <div class="checkout-header">
         <h1 class="checkout-title">
           Checkout
@@ -24,20 +24,20 @@
         </h1>
       </div>
       <p>
-        <input type="text" class="checkout-input checkout-name" placeholder="Your name" autofocus>
-        <input type="text" class="checkout-input checkout-exp" placeholder="MM">
-        <input type="text" class="checkout-input checkout-exp" placeholder="YY">
+        <input type="text" class="checkout-input checkout-name" placeholder="Your name" autocomplete="off" autofocus>
+        <input type="text" class="checkout-input checkout-exp" placeholder="MM" maxlength="2" autocomplete="off">
+        <input type="text" class="checkout-input checkout-exp" placeholder="YY" maxlength="2" autocomplete="off">
       </p>
       <p>
-        <input type="text" class="checkout-input checkout-card" placeholder="4111 1111 1111 1111">
-        <input type="text" class="checkout-input checkout-cvc" placeholder="CVC">
+        <input type="text" class="checkout-input checkout-card" placeholder="1111 1111 1111 1111" autocomplete="off">
+        <input type="text" class="checkout-input checkout-cvc" style="font-size: 11px;" placeholder="CVC" maxlength="4" autocomplete="off">
       </p>
       <p>
         <input type="submit" value="Purchase" class="checkout-btn">
       </p>
     </form>
   	<br/>
-  	<form>
+  	<form action="${pageContext.request.contextPath}/controller?command=home" method="post">
   		<input type="submit" value="DENIE" class="denie-btn">
   	</form>
   	</div>

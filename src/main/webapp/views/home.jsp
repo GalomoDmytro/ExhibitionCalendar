@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:choose>
@@ -13,7 +12,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <meta charset="utf-8">
+   <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
       <title>Exhibition Calendar</title>
       <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
       <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">

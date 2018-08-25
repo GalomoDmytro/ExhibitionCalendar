@@ -36,6 +36,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCo
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\Command.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\EditContract.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionDao.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\PurchaseProcessing.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ConnectionPoolDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionCenterDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\Contract.java

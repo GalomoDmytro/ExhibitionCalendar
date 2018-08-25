@@ -4,7 +4,6 @@ import controller.command.Command;
 import controller.command.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
-import entities.Exhibition;
 import entities.ExhibitionCenter;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpoCenterManagement implements Command {
@@ -23,7 +21,7 @@ public class ExpoCenterManagement implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
 
-    private static final Logger log = Logger.getLogger(ExpoCenterManagement.class);
+    private static final Logger LOGGER = Logger.getLogger(ExpoCenterManagement.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,7 +54,6 @@ public class ExpoCenterManagement implements Command {
             }
 
         } catch (Exception exception) {
-            log.error(exception);
         } finally {
             closeConnection();
         }
@@ -92,6 +89,8 @@ public class ExpoCenterManagement implements Command {
 //            exhibitionCenterListAll = getAllFromDb();
             List<ExhibitionCenter> exhibitionCenterListResult = factoryMySql.createExhibitionCenter(connection).getExhibitionCentersBySearch(looking);
             setPhones(exhibitionCenterListResult);
+
+
             //            for(ExhibitionCenter center : exhibitionCenterListAll) {
 //                if(center.getTitle().toLowerCase().contains(looking) ||
 //                    center.getAddress().toLowerCase().contains(looking) ||
@@ -106,7 +105,6 @@ public class ExpoCenterManagement implements Command {
                 request.setAttribute("listExpoCenter", exhibitionCenterListResult);
             }
         } catch (Exception exception) {
-
         } finally {
             closeConnection();
         }

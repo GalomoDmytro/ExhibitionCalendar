@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
+<!DOCTYPE html>
    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>ExpoCenterManagement</title>
       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
    </head>
@@ -15,14 +15,15 @@
       <center>
          <div class="content">
             <section class="main">
-               <h1>Moderator: Expo Center Management</h1>
+               <h1>Exhibitions Centers Management</h1>
                <br>
                <form action="${pageContext.request.contextPath}/controller?command=expoCenterManagement" method="post">
                   Search<input type="text" name="searchField">
                   <input class="submitBtn" type="submit" name="search" value="Search" />
                </form>
                <!-- table -->
-               <table border="1" cellpadding="5">
+
+               <table border="1" cellpadding="8">
                   <caption>
                      <h2>List of Expo Centers</h2>
                   </caption>
@@ -54,12 +55,21 @@
                            <c:out value="${expoCenter.webPage}" />
                         </td>
                         <td>
-                           <c:out value="${expoCenter.phone.get(0)}" />
+                           <c:forEach var="expoCenterPhone" items="${expoCenter.phone}" >
+                                <c:out value="${expoCenterPhone}" />
+                           </c:forEach>
                         </td>
                         <td>
-                           <c:out value="${expoCenter.phone.get(1)}" />
-                        </td>
-                        <td><a class="submitBtn" href="${pageContext.request.contextPath}/controller?command=editExpositionCenter&idEdit=<c:out value='${expoCenter.id}'/>&expoCTitle=<c:out value='${expoCenter.title}'/>&expoCAddress=<c:out value='${expoCenter.address}'/>&expoCWebPage=<c:out value='${expoCenter.webPage}'/>&expoCMail=<c:out value='${expoCenter.eMail}'/>&phone1=<c:out value='${expoCenter.phone.get(0)}'/>&phone1=<c:out value='${expoCenter.phone.get(1)}'/>">Edit</a>
+                            <form action="${pageContext.request.contextPath}/controller?command=editExpositionCenter" method="post">
+                                <input type="hidden" name="idEdit" value="${expoCenter.id}">
+                                <%-- Comment
+                                <input type="hidden" name="expoCTitle" value="${expoCenter.title}">
+                                <input type="hidden" name="expoCAddress" value="${expoCenter.address}">
+                                <input type="hidden" name="expoCMail" value="${expoCenter.eMail}">
+                                <input type="hidden" name="expoCWebPage" value="${expoCenter.webPage}">--%>
+                                <input class="submitBtn" type="submit" name="Edit" value="Edit" />
+                            </form>
+                            <a class="submitBtn" href="${pageContext.request.contextPath}/controller?command=editExpositionCenter&idEdit=<c:out value='${expoCenter.id}'/>&expoCTitle=<c:out value='${expoCenter.title}'/>&expoCAddress=<c:out value='${expoCenter.address}'/>&expoCWebPage=<c:out value='${expoCenter.webPage}'/>&expoCMail=<c:out value='${expoCenter.eMail}'/>">Edit</a>
                            &nbsp;
                            <a class="resetBtn" href="${pageContext.request.contextPath}/controller?command=expoCenterManagement&idDelete=<c:out value='${expoCenter.id}'/>">Delete</a>
                            &nbsp;
@@ -68,6 +78,7 @@
                      </tr>
                   </c:forEach>
                </table>
+
                <!-- /table -->
                <br>
                <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>

@@ -43,7 +43,7 @@
                         <td></td>
                      </tr>
                   </table>
-                  <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post">
+                  <form action="${pageContext.request.contextPath}/controller?command=checkOut" method="post">
                      <input type="email" name="eMail" value="${eMailHold}" placeholder="eMail"/><br>
                      Quantity<input type="number" name="quantity" value="1" min="1" max="10"/><br><br>
                      <input class="submitBtn"  type="submit" name="buy" value="buy" />

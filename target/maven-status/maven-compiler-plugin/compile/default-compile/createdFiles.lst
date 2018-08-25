@@ -58,6 +58,7 @@ dao\mysql\PhoneExhibitionCenterMySql.class
 controller\command\moderatorCommand\ExpoCenterManagement.class
 entities\ExhibitionCenter$Builder.class
 dao\interfaces\FactoryDao.class
+controller\command\PurchaseProcessing.class
 entities\Role.class
 entities\User$Builder.class
 controller\command\moderatorCommand\combineExhibitionWithExhibionCenter.class

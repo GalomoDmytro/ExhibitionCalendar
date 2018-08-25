@@ -36,7 +36,7 @@ public class LoginCommand implements Command {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.LOGIN_PAGE);
 
         if (req.getParameter("loginBtn") != null) {
-            if (identificateUser(req)) {
+            if (identificationUser(req)) {
                 dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
             } else {
                 req.setAttribute("errorLogin", QUERIES.getString("ERROR_LOGIN"));
@@ -46,7 +46,7 @@ public class LoginCommand implements Command {
         dispatcher.forward(req, resp);
     }
 
-    private boolean identificateUser(HttpServletRequest req) {
+    private boolean identificationUser(HttpServletRequest req) {
         user = getUserFromDB();
         if (user == null) {
             return false;
@@ -76,6 +76,7 @@ public class LoginCommand implements Command {
             user.setRole(factoryMySql.createRole(connection).getRoleById(user.getId()));
             return user;
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -85,7 +86,7 @@ public class LoginCommand implements Command {
 
     private boolean comparePassword() {
         passwordHandler = new PasswordHandler();
-        return passwordHandler.comparePassword(password, user.getPassword());
+        return passwordHandler.encryptAndCompare(password, user.getPassword());
     }
 
     private void setRoleInSession(HttpServletRequest req) {

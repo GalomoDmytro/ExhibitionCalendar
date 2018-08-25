@@ -3,6 +3,7 @@ package entities;
 import dao.mysql.ExhibitionCenterMySql;
 import org.apache.log4j.Logger;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,6 +57,9 @@ public class ExhibitionCenter {
     }
 
     public List<String> getPhone() {
+        if(phone == null) {
+            return Collections.emptyList();
+        }
         return phone;
     }
 

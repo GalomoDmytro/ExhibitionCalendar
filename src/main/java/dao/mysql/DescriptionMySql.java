@@ -5,6 +5,7 @@ import entities.Exhibition;
 import exceptions.DBException;
 
 import java.sql.*;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -35,8 +36,7 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
 
         if (languageDescription == null) {
-            // todo not return null
-            return null;
+            return Collections.<String, String>emptyMap();
         } else {
             return languageDescription;
         }
@@ -54,8 +54,7 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
 
         if (languageDescription == null) {
-            // todo not return null
-            return null;
+            return Collections.<String, String>emptyMap();
         } else {
             return languageDescription;
         }
