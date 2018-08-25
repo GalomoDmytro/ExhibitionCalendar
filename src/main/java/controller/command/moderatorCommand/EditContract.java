@@ -180,7 +180,8 @@ public class EditContract implements Command {
 
         try {
             if (idContract != null) {
-                Contract contract = factoryMySql.createExhibitionContract(connection).getExhibitionContractById(idContract);
+                Contract contract = factoryMySql.createExhibitionContract(connection)
+                        .getExhibitionContractById(idContract);
                 Exhibition exhibition = factoryMySql.createExhibition(connection).getExhibitionById(contract
                         .getExhibitionId());
                 getLangTagsFroExhibition(exhibition);
@@ -198,7 +199,8 @@ public class EditContract implements Command {
         }
     }
 
-    private void setDataToForm(Contract contract, Exhibition exhibition, ExhibitionCenter exhibitionCenter, HttpServletRequest req) {
+    private void setDataToForm(Contract contract, Exhibition exhibition,
+                               ExhibitionCenter exhibitionCenter, HttpServletRequest req) {
         req.setAttribute("dateFrom", contract.getDateFrom());
         req.setAttribute("dateTo", contract.getDateTo());
         req.setAttribute("price", contract.getTicketPrice());

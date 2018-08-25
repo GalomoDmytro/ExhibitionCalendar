@@ -30,7 +30,6 @@ public class Purchase implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(Purchase.class);
 
-
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.PURCHASE_PAGE);
@@ -39,7 +38,6 @@ public class Purchase implements Command {
 
         getDataFromRequest(req);
         getDataFromTable();
-
 
         if (req.getParameter("cancel") != null) {
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
@@ -90,6 +88,7 @@ public class Purchase implements Command {
 //        req.setAttribute("nameExpoCen", exhibitionCenter.getTitle());
 //        req.setAttribute("addressExpoCen", exhibitionCenter.getAddress());
         req.setAttribute("price", contract.getTicketPrice());
+        req.setAttribute("idContract", contract.getId());
 //        req.setAttribute("ticketsAvailable", 0);
     }
 

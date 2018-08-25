@@ -19,7 +19,7 @@ public class PurchaseProcessing implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.PURCHASE_PROCESSING_PAGE);
+        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.PURCHASE_FINISH_PAGE);
 
         if(!inputDataValid()) {
             dispatcher = req.getRequestDispatcher(Links.CHECKOUT_PAGE);

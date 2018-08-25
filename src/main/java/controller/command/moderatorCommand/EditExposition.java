@@ -73,13 +73,15 @@ public class EditExposition implements Command {
     private void makeChangeInDescriptionTable(Map<String, String> langTextToSave) throws DBException {
         factoryMySql.createDescriptionTable(connection).deleteAllDescriptionForExposition(exhibition);
         for (Map.Entry<String, String> entry : langTextToSave.entrySet()) {
-            factoryMySql.createDescriptionTable(connection).insertDescriptionById(entry.getValue(), entry.getKey(), id);
+            factoryMySql.createDescriptionTable(connection).insertDescriptionById(entry.getValue(),
+                    entry.getKey(), id);
         }
     }
 
     private void newTagToSave(HttpServletRequest req, Map<String, String> langTextToSave) {
         if (req.getParameter("newTag") != null && req.getParameter("newTextDescription") != null) {
-            if (req.getParameter("newTag").length() > 0 && req.getParameter("newTextDescription").length() > 0) {
+            if (req.getParameter("newTag").length() > 0 &&
+                    req.getParameter("newTextDescription").length() > 0) {
                 langTextToSave.put(req.getParameter("newTag"), req.getParameter("newTextDescription"));
             }
         }

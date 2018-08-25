@@ -62,6 +62,5 @@ D:\epam_project\Exhibition Calendar\src\main\java\exceptions\DBException.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\Controller.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\LogoutCommand.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\EditCenter.java
-D:\epam_project\Exhibition Calendar\src\main\java\controller\command\Ticket.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\TicketMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\EncodingFilter.java

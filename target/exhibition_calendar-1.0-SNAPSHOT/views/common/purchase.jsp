@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page errorPage="../utility/error.jsp" %>
 <html>
    <head>
       <title>Purchase</title>
@@ -12,7 +13,6 @@
             <jsp:include page="../utility/header.jsp" />
          </div>
       </header>
-
       <center>
          <div class="content">
             <section class="main">
@@ -44,15 +44,25 @@
                      </tr>
                   </table>
                   <form action="${pageContext.request.contextPath}/controller?command=checkOut" method="post">
-                     <input type="email" name="eMail" value="${eMailHold}" placeholder="eMail"/><br>
-                     Quantity<input type="number" name="quantity" value="1" min="1" max="10"/><br><br>
+                     <table>
+                        <tr>
+                           <td></td>
+                           <td> <input type="email" name="eMail" value="${eMailHold}" placeholder="eMail" required/></td>
+                        </tr>
+                        <tr>
+                           <td>Quantity</td>
+                           <td><input type="number" name="quantity" value="1" min="1" max="10"/><br><br></td>
+                        </tr>
+                     </table>
+                     <input name="priceOneTicket" type="hidden" value="${price}">
+                     <input name="idContract" type="hidden" value="${idContract}">
                      <input class="submitBtn"  type="submit" name="buy" value="buy" />
                      <input class="resetBtn" type="submit" name="cancel" value="cancel"/>
                   </form>
-            <br/><br/>
-                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
-                    <input  class="blueButton" type="submit" value="go home"/>
-                </form>
+                  <br/><br/>
+                  <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
+                     <input  class="blueButton" type="submit" value="go home"/>
+                  </form>
                </div>
             </section>
          </div>

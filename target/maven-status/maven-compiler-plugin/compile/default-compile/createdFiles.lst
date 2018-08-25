@@ -8,7 +8,6 @@ utility\PasswordHandler.class
 dao\interfaces\PhoneExhibitionCenterDao.class
 controller\command\Home.class
 controller\command\moderatorCommand\AddExpo.class
-controller\command\Ticket.class
 entities\Contract.class
 entities\Exhibition$Builder.class
 entities\Exhibition.class

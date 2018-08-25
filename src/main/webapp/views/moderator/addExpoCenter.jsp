@@ -20,9 +20,9 @@
                <h1>Add Exhibition Center</h1>
                <br><br>
                <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
-                  <input type="text" name="title"  placeholder="Expo Center Title"/><br/>
-                  <input type="text" name="address" placeholder="Expo Center Address"/><br/>
-                  <input type="email" name="eMail" placeholder="eMail"/><br/>
+                  <input type="text" name="title"  placeholder="Expo Center Title" required/><br/>
+                  <input type="text" name="address" placeholder="Expo Center Address" required/><br/>
+                  <input type="email" name="eMail" placeholder="eMail" /><br/>
                   <input type="email" name="eMail_repeat" placeholder="Repeat eMail"/><br/>
                   <input type="text" name="webPage" placeholder="webPage"/><br/>
                   <input type="text" name="phone1" placeholder="Phone 1"/><br/>

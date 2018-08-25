@@ -77,10 +77,12 @@ public class Home implements Command {
         try {
 
             searchLine = req.getParameter("searchField");
-            countExhibitions = factoryMySql.createExhibitionContract(connection).getNumberOfContractsAfterSearch(searchLine, java.sql.Date.valueOf(date));
+            countExhibitions = factoryMySql.createExhibitionContract(connection)
+                    .getNumberOfContractsAfterSearch(searchLine, java.sql.Date.valueOf(date));
             countNumberOfPages();
             List<Contract> contractList = factoryMySql.createExhibitionContract(connection)
-                    .searchContactsWithExpoAndCenterLimit(searchLine, java.sql.Date.valueOf(date), start, recordsPerPage);
+                    .searchContactsWithExpoAndCenterLimit(searchLine, java.sql.Date.valueOf(date),
+                            start, recordsPerPage);
 
             req.setAttribute("listForCustomer", contractList);
 
@@ -112,10 +114,12 @@ public class Home implements Command {
     }
 
     private List<Contract> getAllContract() throws DBException {
-        countExhibitions = factoryMySql.createExhibitionContract(connection).getNumberOfContractsAfterDate(java.sql.Date.valueOf(date));
+        countExhibitions = factoryMySql.createExhibitionContract(connection)
+                .getNumberOfContractsAfterDate(java.sql.Date.valueOf(date));
         countNumberOfPages();
         start = currentPage * recordsPerPage - recordsPerPage;
-        return factoryMySql.createExhibitionContract(connection).getContractsAfterDateLimit(java.sql.Date.valueOf(date), start, recordsPerPage);
+        return factoryMySql.createExhibitionContract(connection)
+                .getContractsAfterDateLimit(java.sql.Date.valueOf(date), start, recordsPerPage);
     }
 
     private void getDate(HttpServletRequest req) {

@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ErrorHandler extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ErrorHandler.class);
-
+    // TODO: Refactor and remove this class
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

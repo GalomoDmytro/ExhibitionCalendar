@@ -55,9 +55,17 @@
                            <fmt:message key="home.Address"/>
                         </th>
                         <th>
+                           <fmt:message key="home.fromDate"/>
+                        </th>
+                        <th>
                            <fmt:message key="home.toDate"/>
                         </th>
-                        <th></th>
+                        <th>
+                           <fmt:message key="home.price"/>
+                        </th>
+                        <th>
+
+                        </th>
                      </tr>
                      <c:forEach var="list" items="${listForCustomer}">
                         <tr>
@@ -68,11 +76,16 @@
                               <c:out value="${list.exhibitionCenterTitle}" />
                            </td>
                            <td>
+
+                           </td>
+                           <td>
+                              <c:out value="${list.dateFrom}" />
                            </td>
                            <td>
                               <c:out value="${list.dateTo}" />
                            </td>
                            <td>
+                              <c:out value="${list.ticketPrice}" />
                            </td>
                            <td>
                               &nbsp;

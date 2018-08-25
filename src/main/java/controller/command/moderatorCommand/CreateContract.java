@@ -76,8 +76,6 @@ public class CreateContract implements Command {
         } finally {
             closeConnection();
         }
-
-
     }
 
     private boolean contractDataIsValid() {

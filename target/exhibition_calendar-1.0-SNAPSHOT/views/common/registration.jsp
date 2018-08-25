@@ -2,6 +2,8 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page errorPage="../utility/error.jsp" %>
+
 <c:choose>
    <c:when test="${langBundle == null}">
       <fmt:setBundle basename="strings_ru"/>
@@ -26,15 +28,15 @@
             <section class="main">
                <!-- Registration form-->
                <form action="${pageContext.request.contextPath}/controller?command=registration" method="post">
-                  <input type="text" name="name" placeholder="*Profile Name"/><br/>
+                  <input type="text" name="name" placeholder="*Profile Name" required="required"/><br/>
                   ${errorNameProfile}<br/>
-                  <input type="password" name="password" placeholder="*Password"/><br/>
-                  <input type="password" name="passwordRepeat" placeholder="*Repeat password"/><br/>
+                  <input type="password" name="password" placeholder="*Password" required="required"/><br/>
+                  <input type="password" name="passwordRepeat" placeholder="*Repeat password" required="required"/><br/>
                   ${errorPassword}<br/>
                   <input type="text" name="firstName" placeholder="First name"/><br/>
                   <input type="text" name="lastName" placeholder="Last name"/><br/><br/>
-                  <input type="email" name="eMail" placeholder="*eMail"/><br/>
-                  <input type="email" name="eMailRepeat" placeholder="*Repeat eMail"/><br/>
+                  <input type="email" name="eMail" placeholder="*eMail" required="required"/><br/>
+                  <input type="email" name="eMailRepeat" placeholder="*Repeat eMail" required="required"/><br/>
                   ${errorMail}<br/>
                   <input type="text" name="phone1" placeholder="Phone number 1"/><br/>
                   <input type="text" name="phone2" placeholder="Phone number 2"/><br/>
