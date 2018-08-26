@@ -3,8 +3,6 @@ package controller.command;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Contract;
-import entities.Exhibition;
-import entities.ExhibitionCenter;
 import entities.User;
 import org.apache.log4j.Logger;
 
@@ -14,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Purchase implements Command {
 
@@ -23,10 +25,13 @@ public class Purchase implements Command {
     private FactoryMySql factoryMySql;
     private Integer contractId;
     private Contract contract;
-    private ExhibitionCenter exhibitionCenter;
-    private Exhibition exhibition;
-    private String date;
+    private String dateExhibitionStart;
+    private String dateSearch;
+    private Date date;
     private Integer quantityTickets;
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//    private BigDecimal price;
+
 
     private static final Logger LOGGER = Logger.getLogger(Purchase.class);
 
@@ -37,6 +42,7 @@ public class Purchase implements Command {
         roleMail(req);
 
         getDataFromRequest(req);
+        figureDateTicket();
         getDataFromTable();
 
         if (req.getParameter("cancel") != null) {
@@ -62,6 +68,8 @@ public class Purchase implements Command {
         return true;
     }
 
+
+
     private void getDataFromRequest(HttpServletRequest req) {
         if (req.getParameter("idContract") != null) {
             try {
@@ -71,6 +79,7 @@ public class Purchase implements Command {
             }
         }
 
+        LOGGER.info(req.getParameter("quantity") + " tickets");
         if (req.getParameter("quantity") == null) {
             quantityTickets = 1;
         } else {
@@ -80,16 +89,19 @@ public class Purchase implements Command {
 
             }
         }
+
+        dateExhibitionStart = req.getParameter("dateFromExhibitionStart");
+        dateSearch = req.getParameter("searchDateLine");
     }
 
+
     private void setDataToReq(HttpServletRequest req) {
-//        req.setAttribute("dateBuy", date);
-//        req.setAttribute("nameExpo", exhibition.getTitle());
-//        req.setAttribute("nameExpoCen", exhibitionCenter.getTitle());
-//        req.setAttribute("addressExpoCen", exhibitionCenter.getAddress());
-        req.setAttribute("price", contract.getTicketPrice());
+
         req.setAttribute("idContract", contract.getId());
-//        req.setAttribute("ticketsAvailable", 0);
+        req.setAttribute("dateTicketToApply", format.format(date));
+        req.setAttribute("price", contract.getTicketPrice());
+        req.setAttribute("quantity", quantityTickets);
+
     }
 
     private void roleMail(HttpServletRequest req) {
@@ -108,6 +120,29 @@ public class Purchase implements Command {
             closeConnection();
         }
 
+    }
+
+    private void figureDateTicket() {
+        if(dateSearch == null || dateSearch.isEmpty()) {
+            dateSearch =  format.format(new Date());
+        }
+
+        Date date1 = null;
+        Date date2 = null;
+        try {
+            date1 = format.parse(dateSearch);
+            date2 = format.parse(dateExhibitionStart);
+            LOGGER.info(date1 + " " + date2);
+            if (date1.compareTo(date2) <= 0) {
+                date = date2;
+            } else {
+                date = date1;
+            }
+
+        } catch (ParseException e) {
+            date = new Date();
+            LOGGER.error(e);
+        }
     }
 
     private void getDataFromTable() {
