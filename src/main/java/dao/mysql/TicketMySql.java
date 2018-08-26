@@ -1,10 +1,12 @@
 package dao.mysql;
 
+import controller.command.CheckOut;
 import dao.interfaces.TicketDao;
 import entities.Contract;
 import entities.Ticket;
 import entities.User;
 import exceptions.DBException;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class TicketMySql implements TicketDao {
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
+    private static final Logger LOGGER = Logger.getLogger(TicketMySql.class);
+
 
     TicketMySql(Connection connection) {
         this.connection = connection;
@@ -150,6 +154,7 @@ public class TicketMySql implements TicketDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -158,7 +163,7 @@ public class TicketMySql implements TicketDao {
     public void updateTicket(Ticket ticket) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.updateUser"))) {
             prepareStatementToUpdate(statement, ticket);
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -202,6 +207,8 @@ public class TicketMySql implements TicketDao {
             statement.setInt(2, ticket.getContractId());
             statement.setDate(3, ticket.getDateTransaction());
             statement.setString(4, ticket.getUserMail());
+            statement.setInt(5, ticket.getQuantity());
+            statement.setInt(6, ticket.getUserId());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -213,7 +220,8 @@ public class TicketMySql implements TicketDao {
             statement.setInt(2, ticket.getContractId());
             statement.setDate(3, ticket.getDateTransaction());
             statement.setString(4, ticket.getUserMail());
-            statement.setInt(5, ticket.getId());
+            statement.setInt(5, ticket.getQuantity());
+            statement.setInt(6, ticket.getId());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

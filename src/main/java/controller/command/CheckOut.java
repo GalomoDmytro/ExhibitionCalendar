@@ -2,6 +2,7 @@ package controller.command;
 
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
+import entities.Contract;
 import entities.Ticket;
 import org.apache.log4j.Logger;
 import utility.PriceTicket;
@@ -20,7 +21,6 @@ public class CheckOut implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
     private String priceLine;
-    private String oneTicketPrice;
     private BigDecimal price;
     private int quantity;
     private String dateToApplyTicket;
@@ -33,31 +33,63 @@ public class CheckOut implements Command {
     private static final Logger LOGGER = Logger.getLogger(CheckOut.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.CHECKOUT_PAGE);
 
         getDataFromRequest(req);
 
         calculatePrice();
 
-        setDataToReq(req);
+        if (!hasTicketOnStock()) {
+            req.setAttribute("ticketsAvailable", "Ticket's sold out!");
+            dispatcher = req.getRequestDispatcher(Links.PURCHASE_PAGE);
+            dispatcher.forward(req, resp);
+            return;
+        }
 
+        setDataToReq(req);
+        LOGGER.info("bifore save");
         if (req.getParameter("checkoutPurchase") != null) {
+            LOGGER.info("-------------------checkout pressed");
             dispatcher = finishPurchase(req);
         }
 
         dispatcher.forward(req, resp);
     }
 
+    private boolean hasTicketOnStock() {
+        handleConnection();
+
+        try {
+            Contract contract = factoryMySql.createExhibitionContract(connection).getExhibitionContractById(idContract);
+            int soldTickets = factoryMySql.createTicket(connection)
+                    .getCountSoldTicketForDate(java.sql.Date.valueOf(dateToApplyTicket), idContract);
+            if (contract.getMaxTicketPerDay() >= soldTickets + quantity) {
+                return false;
+            }
+            if (soldTickets + quantity > contract.getMaxTicketPerDay()) {
+                return false;
+            }
+            return true;
+
+        } catch (Exception exception) {
+
+        } finally {
+            closeConnection();
+        }
+
+        return true;
+    }
+
     private void getDataFromRequest(HttpServletRequest req) {
         if (req.getParameter("priceTickets") != null) {
             priceLine = req.getParameter("priceTickets");
-            LOGGER.info("priceTickets " + priceLine);
+//            LOGGER.info("priceTickets " + priceLine);
             price = new PriceTicket().getBigDecimalPriceVal(priceLine);
         }
 
-//        dateToApplyTicket = req.getParameter("");
-        dateToApplyTicket = req.getParameter("date");
+        dateToApplyTicket = req.getParameter("dateTicketToApply");
         quantityTicketsLine = req.getParameter("quantity");
         if (quantityTicketsLine != null) {
             quantity = Integer.parseInt(quantityTicketsLine);
@@ -74,19 +106,23 @@ public class CheckOut implements Command {
     private void setDataToReq(HttpServletRequest req) {
         req.setAttribute("price", price);
         req.setAttribute("eMail", userMail);
+        req.setAttribute("dateTicketToApply", dateToApplyTicket);
     }
 
     private void calculatePrice() {
         price = new PriceTicket().calculateSumTicketsPrice(price, quantity);
-        LOGGER.info("price after calc " + price);
+//        LOGGER.info("price after calc " + price);
     }
 
     private RequestDispatcher finishPurchase(HttpServletRequest req) {
         handleConnection();
         try {
             ticket = formTicket();
+            LOGGER.info("try to insert " + ticket);
+            factoryMySql.createTicket(connection).insertTicket(ticket);
             return req.getRequestDispatcher(Links.PURCHASE_FINISH_PAGE);
         } catch (Exception exception) {
+            LOGGER.error(exception);
             return req.getRequestDispatcher(Links.ERROR_PAGE);
 
         } finally {
@@ -95,14 +131,21 @@ public class CheckOut implements Command {
     }
 
     private Ticket formTicket() {
+        LOGGER.info(
+                "userMail" + userMail +
+                "; dateToApplyTicket" + dateToApplyTicket +
+                "; quantity" + quantity +
+                "; transactionDate" + transactionDate() +
+                "; idContract" + idContract
+                );
         return new Ticket.Builder()
                 .setUserMail(userMail)
                 .setDateToApply(java.sql.Date.valueOf(dateToApplyTicket))
+                .setQuantity(quantity)
                 .setDateTransaction(transactionDate())
                 .setContractId(idContract)
                 .build();
     }
-
 
     private Date transactionDate() {
         return java.sql.Date.valueOf(java.time.LocalDate.now());

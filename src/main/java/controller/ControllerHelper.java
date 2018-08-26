@@ -52,6 +52,8 @@ public class ControllerHelper {
         commandMap.put("changeLang", new ChangeLanguage());
         commandMap.put("checkOut", new CheckOut());
         commandMap.put("purchaseProcessing", new PurchaseProcessing());
+        commandMap.put("waitApprovalTicket", new WaitApprowalTicket());
+        commandMap.put("approvedTicket", new ApprovedTickets());
     }
 
 }

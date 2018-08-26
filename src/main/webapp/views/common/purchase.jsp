@@ -56,7 +56,7 @@
                      </table>
 
                      <input name="priceTickets" type="hidden" value="${price}">
-                     <input name="date" type="hidden" value="${dateTicketToApply}">
+                     <input name="dateTicketToApply" type="hidden" value="${dateTicketToApply}">
                      <input name="idContract" type="hidden" value="${idContract}">
                      <input class="submitBtn"  type="submit" name="buy" value="buy" />
                      <input class="resetBtn" type="submit" name="cancel" value="cancel"/>

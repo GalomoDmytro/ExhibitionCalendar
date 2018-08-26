@@ -98,6 +98,7 @@ public class Purchase implements Command {
     private void setDataToReq(HttpServletRequest req) {
 
         req.setAttribute("idContract", contract.getId());
+
         req.setAttribute("dateTicketToApply", format.format(date));
         req.setAttribute("price", contract.getTicketPrice());
         req.setAttribute("quantity", quantityTickets);

@@ -38,12 +38,9 @@ public class AccessSecurityFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         } else if (path.endsWith("/errorHandler")) {
-            LOGGER.info("Acess secur --- Error handler");
             filterChain.doFilter(request, response);
             return;
         }
-
-
 
         getCommand(httpRequest);
 
@@ -87,6 +84,8 @@ public class AccessSecurityFilter implements Filter {
                 case "createContract":
                 case "contractManagement":
                 case "editContract":
+                case "waitApprovalTicket":
+                case "approvedTicket":
                     if (session.getAttribute("role") != null) {
                         if (session.getAttribute("role").equals(Role.MODERATOR)
                                 || session.getAttribute("role").equals(Role.ADMIN)) {
