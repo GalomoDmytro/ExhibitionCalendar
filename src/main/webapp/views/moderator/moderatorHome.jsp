@@ -29,15 +29,19 @@
                <br>
                <a href="${pageContext.request.contextPath}/controller?command=addExpoCenter">Create Expo center</a>
                <br>
+
                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
-                    <input type="submit" value="Go home"/>
+                    <input type="submit" value="Go home">
                </form>
+
                <form action="${pageContext.request.contextPath}/controller?command=waitApprovalTicket" method="post">
-                   <input type="submit" value="Wait Approval Ticket"/>
+                   <input type="submit" value="Wait Approval Ticket">
                </form>
+
                 <form action="${pageContext.request.contextPath}/controller?command=approvedTicket" method="post">
-                <input type="submit" value="Approved Ticket"/>
+                    <input type="submit" value="Approved Ticket">
                </form>
+
             </section>
          </div>
       </center>

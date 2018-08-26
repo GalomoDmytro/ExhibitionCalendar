@@ -30,11 +30,13 @@ controller\command\moderatorCommand\ContractManagement.class
 controller\command\RegistrationCommand.class
 controller\command\user\UserHome.class
 dao\interfaces\RoleDao.class
+controller\command\moderatorCommand\WaitApprovalTicket.class
 dao\mysql\ExhibitionContractMySql.class
 controller\filter\EncodingFilter.class
 controller\command\ErrorHandler.class
 dao\interfaces\UserDao.class
 dao\mysql\DescriptionMySql.class
+controller\command\moderatorCommand\ApprovedTickets.class
 dao\mysql\RoleMySql.class
 controller\command\ChangeLanguage.class
 controller\Controller.class

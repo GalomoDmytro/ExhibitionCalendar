@@ -1,6 +1,5 @@
 package dao.mysql;
 
-import controller.command.CheckOut;
 import dao.interfaces.TicketDao;
 import entities.Contract;
 import entities.Ticket;
@@ -9,10 +8,8 @@ import exceptions.DBException;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class TicketMySql implements TicketDao {
 
@@ -21,6 +18,10 @@ public class TicketMySql implements TicketDao {
     private final String FIELD_CONTRACT_ID = "contract_id";
     private final String FIELD_DATE_TRANSACTION = "date_transaction";
     private final String FIELD_USER_MAIL = "user_mail";
+    private final String FIELD_QUANTITY = "quantity";
+    private final String FIELD_USER_ID = "id_user";
+    private final String FIELD_CHECKED = "is_confirmed";
+    private final String FIELD_APPROVED_BY = "approved_by_moderatorr_id";
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
@@ -57,6 +58,46 @@ public class TicketMySql implements TicketDao {
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
+        }
+
+        if(tickets == null) {
+            return Collections.emptyList();
+        }
+
+        return tickets;
+    }
+
+    @Override
+    public List<Ticket> getAllApprovedTickets() throws DBException {
+        List<Ticket> tickets;
+        try (PreparedStatement statement
+                     = connection.prepareStatement(QUERIES.getString("ticket.getAllApproved"))) {
+            ResultSet resultSet = statement.executeQuery();
+            tickets = parseTicketSet(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if(tickets == null) {
+            return Collections.emptyList();
+        }
+
+        return tickets;
+    }
+
+    @Override
+    public List<Ticket> getAllWaitApproval() throws DBException {
+        List<Ticket> tickets;
+        try (PreparedStatement statement
+                     = connection.prepareStatement(QUERIES.getString("ticket.getAllWaitApproval"))) {
+            ResultSet resultSet = statement.executeQuery();
+            tickets = parseTicketSet(resultSet);
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+
+        if(tickets == null) {
+            return Collections.emptyList();
         }
 
         return tickets;
@@ -191,6 +232,10 @@ public class TicketMySql implements TicketDao {
                         .setContractId(resultSet.getInt(FIELD_CONTRACT_ID))
                         .setDateTransaction(resultSet.getDate(FIELD_DATE_TRANSACTION))
                         .setUserMail(resultSet.getString(FIELD_USER_MAIL))
+                        .setQuantity(resultSet.getInt(FIELD_QUANTITY))
+                        .setUserId(resultSet.getInt(FIELD_USER_ID))
+                        .setChecked(resultSet.getBoolean(FIELD_CHECKED))
+                        .setAppruvedBy(resultSet.getInt(FIELD_APPROVED_BY))
                         .build();
                 tickets.add(ticket);
             }
@@ -206,7 +251,7 @@ public class TicketMySql implements TicketDao {
             statement.setDate(1, ticket.getDateToApply());
             statement.setInt(2, ticket.getContractId());
             statement.setDate(3, ticket.getDateTransaction());
-            statement.setString(4, ticket.getUserMail());
+            statement.setString(4, ticket.getUserEMail());
             statement.setInt(5, ticket.getQuantity());
             statement.setInt(6, ticket.getUserId());
         } catch (SQLException exception) {
@@ -219,7 +264,7 @@ public class TicketMySql implements TicketDao {
             statement.setDate(1, ticket.getDateToApply());
             statement.setInt(2, ticket.getContractId());
             statement.setDate(3, ticket.getDateTransaction());
-            statement.setString(4, ticket.getUserMail());
+            statement.setString(4, ticket.getUserEMail());
             statement.setInt(5, ticket.getQuantity());
             statement.setInt(6, ticket.getId());
         } catch (SQLException exception) {

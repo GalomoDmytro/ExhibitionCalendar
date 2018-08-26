@@ -14,6 +14,10 @@ public interface TicketDao {
 
     List<Ticket> getAllTickets() throws DBException;
 
+    List<Ticket> getAllApprovedTickets() throws DBException;
+
+    List<Ticket> getAllWaitApproval() throws DBException;
+
     List<Ticket> getAllTicketsForDate(Date date) throws DBException;
 
     List<Ticket> getAllTicketsForContract(Contract contract) throws DBException;

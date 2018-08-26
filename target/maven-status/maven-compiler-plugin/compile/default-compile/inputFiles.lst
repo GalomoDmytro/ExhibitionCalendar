@@ -28,6 +28,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCo
 D:\epam_project\Exhibition Calendar\src\main\java\utility\PasswordHandler.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\Purchase.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\RoleDao.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\WaitApprovalTicket.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\ContractManagement.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionCenterMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\utility\JSPError.java
@@ -65,3 +66,4 @@ D:\epam_project\Exhibition Calendar\src\main\java\controller\command\LogoutComma
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\EditCenter.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\TicketMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\filter\EncodingFilter.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\ApprovedTickets.java

@@ -13,6 +13,7 @@ public class Ticket {
     private String userEMail;
     private boolean hasChecked;
     private Integer userId;
+    private Integer approvedById;
 
     public Integer getId() {
         return id;
@@ -46,7 +47,7 @@ public class Ticket {
         this.dateTransaction = dateTransaction;
     }
 
-    public String getUserMail() {
+    public String getUserEMail() {
         return userEMail;
     }
 
@@ -62,7 +63,15 @@ public class Ticket {
         this.quantity = quantity;
     }
 
-    public boolean isHasChecked() {
+    public Integer getApprovedById() {
+        return approvedById;
+    }
+
+    public void setApprovedById(Integer approvedById) {
+        this.approvedById = approvedById;
+    }
+
+    public boolean getHasChecked() {
         return hasChecked;
     }
 
@@ -154,6 +163,11 @@ public class Ticket {
 
         public Builder setUserId(Integer id) {
             ticket.setUserId(id);
+            return this;
+        }
+
+        public Builder setAppruvedBy(Integer id) {
+            ticket.setApprovedById(id);
             return this;
         }
 
