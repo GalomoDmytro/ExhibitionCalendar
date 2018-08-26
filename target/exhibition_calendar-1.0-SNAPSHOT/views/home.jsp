@@ -89,15 +89,19 @@
                            </td>
                            <td>
                               &nbsp;
-                              <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=expoInfo&idContract=<c:out value='${list.id}'/>">
-                                 <fmt:message key="btn.expoInfo"/>
-                              </a>
+                                <form action="${pageContext.request.contextPath}/controller?command=expoInfo" method="post">
+                                <input type="hidden" name="idContract" value="<c:out value='${list.id}'/>"/>
+                                <input class="blueButton" type="submit" value='<fmt:message key="btn.expoInfo"/>'/>
+                              </form>
                            </td>
                            <td>
                               &nbsp;
-                              <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=purchase&idContract=<c:out value='${list.id}'/>&dateTicket=<c:out value='${searchDate}'/>">
-                                 <fmt:message key="btn.buy"/>
-                              </a>
+                              <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post">
+                                <input type="hidden" name="idContract" value="<c:out value='${list.id}'/>"/>
+                                <input type="hidden" name="searchDateLine" value="<c:out value='${searchDate}'/>"/>
+                                <input type="hidden" name="dateFromExhibitionStart" value="<c:out value='${list.dateFrom}'/>"/>
+                                <input class="blueButton" type="submit" value='<fmt:message key="btn.buy"/>'/>
+                              </form>
                            </td>
                         </tr>
                      </c:forEach>

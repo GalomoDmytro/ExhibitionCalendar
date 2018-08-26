@@ -4,6 +4,7 @@ import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Ticket;
 import org.apache.log4j.Logger;
+import utility.PriceTicket;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,13 +19,16 @@ public class CheckOut implements Command {
 
     private Connection connection;
     private FactoryMySql factoryMySql;
-    private BigDecimal priceTicket;
+    private String priceLine;
+    private String oneTicketPrice;
+    private BigDecimal price;
     private int quantity;
     private String dateToApplyTicket;
     private String quantityTicketsLine;
     private String userMail;
     private int idContract;
     private Ticket ticket;
+//    private PriceTicket mt = new PriceTicket();
 
     private static final Logger LOGGER = Logger.getLogger(CheckOut.class);
 
@@ -34,9 +38,11 @@ public class CheckOut implements Command {
 
         getDataFromRequest(req);
 
+        calculatePrice();
+
         setDataToReq(req);
 
-        if(req.getParameter("checkoutPurchase") != null) {
+        if (req.getParameter("checkoutPurchase") != null) {
             dispatcher = finishPurchase(req);
         }
 
@@ -44,34 +50,35 @@ public class CheckOut implements Command {
     }
 
     private void getDataFromRequest(HttpServletRequest req) {
-        if(req.getParameter("priceOneTicket") != null) {
-            // TODO make some awesome method to transofm currency
-            priceTicket = new BigDecimal(req.getParameter("priceOneTicket"));
-            LOGGER.info("priceTicket " + priceTicket);
-
+        if (req.getParameter("priceTickets") != null) {
+            priceLine = req.getParameter("priceTickets");
+            LOGGER.info("priceTickets " + priceLine);
+            price = new PriceTicket().getBigDecimalPriceVal(priceLine);
         }
 
 //        dateToApplyTicket = req.getParameter("");
-        dateToApplyTicket = "2018-08-30";
+        dateToApplyTicket = req.getParameter("date");
         quantityTicketsLine = req.getParameter("quantity");
-        if(quantityTicketsLine != null) {
+        if (quantityTicketsLine != null) {
             quantity = Integer.parseInt(quantityTicketsLine);
+            LOGGER.info("quantity " + quantity);
+
         }
-        LOGGER.info("quantity " + quantityTicketsLine);
-        LOGGER.info("quantity int " + quantity);
         userMail = req.getParameter("eMail");
-        LOGGER.info("mail " + userMail);
 
-
-        if(req.getParameter("idContract") != null) {
+        if (req.getParameter("idContract") != null) {
             idContract = Integer.parseInt(req.getParameter("idContract"));
-            LOGGER.info("idContact " + idContract);
         }
     }
 
     private void setDataToReq(HttpServletRequest req) {
-        req.setAttribute("price", priceTicket);
+        req.setAttribute("price", price);
         req.setAttribute("eMail", userMail);
+    }
+
+    private void calculatePrice() {
+        price = new PriceTicket().calculateSumTicketsPrice(price, quantity);
+        LOGGER.info("price after calc " + price);
     }
 
     private RequestDispatcher finishPurchase(HttpServletRequest req) {
@@ -95,6 +102,7 @@ public class CheckOut implements Command {
                 .setContractId(idContract)
                 .build();
     }
+
 
     private Date transactionDate() {
         return java.sql.Date.valueOf(java.time.LocalDate.now());

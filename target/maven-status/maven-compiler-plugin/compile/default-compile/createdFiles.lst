@@ -13,6 +13,7 @@ entities\Exhibition$Builder.class
 entities\Exhibition.class
 dao\interfaces\QueryHelper.class
 entities\Ticket.class
+utility\PriceTicket.class
 utility\Patterns.class
 dao\interfaces\ExhibitionCenterDao.class
 entities\Contract$Builder.class

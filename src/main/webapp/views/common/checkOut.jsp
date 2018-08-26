@@ -37,7 +37,7 @@
             <input type="text" class="checkout-input checkout-cvc" style="font-size: 11px;" placeholder="CVC" maxlength="4" autocomplete="off" required>
          </p>
          <p>
-            <input type="submit" value="checkoutPurchase" class="checkout-btn" required>
+            <input type="submit" value="Checkout Purchase" class="checkout-btn" required>
          </p>
       </form>
       <br/>

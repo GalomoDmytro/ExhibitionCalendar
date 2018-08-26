@@ -34,7 +34,7 @@
                         <th></th>
                      </tr>
                      <tr>
-                        <td>${dateBuy}</td>
+                        <td>${dateTicketToApply}</td>
                         <td>${nameExpo}</td>
                         <td>${nameExpoCen}</td>
                         <td>${addressExpoCen}</td>
@@ -51,10 +51,12 @@
                         </tr>
                         <tr>
                            <td>Quantity</td>
-                           <td><input type="number" name="quantity" value="1" min="1" max="10"/><br><br></td>
+                           <td><input type="number" name="quantity"  value="1" min="1" max="10"/><br><br></td>
                         </tr>
                      </table>
-                     <input name="priceOneTicket" type="hidden" value="${price}">
+
+                     <input name="priceTickets" type="hidden" value="${price}">
+                     <input name="date" type="hidden" value="${dateTicketToApply}">
                      <input name="idContract" type="hidden" value="${idContract}">
                      <input class="submitBtn"  type="submit" name="buy" value="buy" />
                      <input class="resetBtn" type="submit" name="cancel" value="cancel"/>
