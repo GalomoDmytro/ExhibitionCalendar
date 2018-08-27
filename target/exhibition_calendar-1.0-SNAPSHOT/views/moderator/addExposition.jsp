@@ -21,7 +21,7 @@
                <h2>${role}</h2>
                <br><br>
                <form action="${pageContext.request.contextPath}/controller?command=addExposition" method="post">
-                  Expo Title:<input type="text" name="title" required/><br/>
+                  Expo Title:<input type="text" name="title" min="1" required/><br/>
                   Expo imgSrc:<input type="text" name="imgSrc"/><br/>
                   Expo Description:<input type="text" name="description" required/><br/>
                   Expo Description Lang:

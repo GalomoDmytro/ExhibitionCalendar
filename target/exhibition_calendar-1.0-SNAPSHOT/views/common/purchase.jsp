@@ -1,7 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page errorPage="../utility/error.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page errorPage="/utility/error.jsp" %>
+<c:choose>
+   <c:when test="${langBundle == null}">
+      <fmt:setBundle basename="strings_ru"/>
+   </c:when>
+   <c:otherwise>
+      <fmt:setBundle basename="${langBundle}"/>
+   </c:otherwise>
+</c:choose>
+<!DOCTYPE html>
 <html>
    <head>
       <title>Purchase</title>
@@ -54,7 +63,6 @@
                            <td><input type="number" name="quantity"  value="1" min="1" max="10"/><br><br></td>
                         </tr>
                      </table>
-
                      <input name="priceTickets" type="hidden" value="${price}">
                      <input name="dateTicketToApply" type="hidden" value="${dateTicketToApply}">
                      <input name="idContract" type="hidden" value="${idContract}">

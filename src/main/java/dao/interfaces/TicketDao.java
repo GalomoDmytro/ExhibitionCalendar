@@ -18,6 +18,8 @@ public interface TicketDao {
 
     List<Ticket> getAllWaitApproval() throws DBException;
 
+    void approveTicket(Integer idTicket) throws DBException;
+
     List<Ticket> getAllTicketsForDate(Date date) throws DBException;
 
     List<Ticket> getAllTicketsForContract(Contract contract) throws DBException;
@@ -30,7 +32,7 @@ public interface TicketDao {
 
     void updateTicket(Ticket ticket) throws DBException;
 
-    void deleteTicket(Ticket ticket) throws DBException;
+    void deleteTicket(Integer ticket) throws DBException;
 
     int getCountSoldTicketForDate(Date date, Integer id_contract) throws DBException;
 }

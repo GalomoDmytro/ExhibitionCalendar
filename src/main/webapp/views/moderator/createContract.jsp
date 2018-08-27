@@ -77,11 +77,12 @@
                <!-- Contract -->
                <h3>Contract :</h3>
                <form action="${pageContext.request.contextPath}/controller?command=createContract" method="post">
-                  Date from<input type="date" name="dateFrom" required="required"/><br/>
-                  Date to<input type="date" name="dateTo" required="required"/><br/>
-                  <input type="text" name="price" placeholder="Price" required="required"/><br/>
-                  <input type="text" name="workTime" placeholder="Work Time" /><br/>
-                  <input type="text" name="maxTicketDay" placeholder="Max Ticket per day" required="required"/><br/>
+               <jsp:useBean id="now" class="java.util.Date"/>
+                  Date from<input type="date" name="dateFrom" required min='<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />'/><br/>
+                  Date to<input type="date" name="dateTo" required min='<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />'/><br/>
+                  <input type="number" name="price" placeholder="Price" min="0" required/><br/>
+                  <input type="text" name="workTime" placeholder="Work Time" max="64"/><br/>
+                  <input type="number" name="maxTicketDay" placeholder="Max Ticket per day" min="0" required/><br/>
                   <button class="submitBtn" type="submit" name="addNewContract" value="Submit">Add</button>
                   <button class="resetBtn" type="reset" value="Reset">Reset</button>
                   <br> ${error}

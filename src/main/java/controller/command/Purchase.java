@@ -79,28 +79,36 @@ public class Purchase implements Command {
             }
         }
 
-        LOGGER.info(req.getParameter("quantity") + " tickets");
+//        LOGGER.info(req.getParameter("quantity") + " tickets");
         if (req.getParameter("quantity") == null) {
             quantityTickets = 1;
         } else {
             try {
+                LOGGER.info(req.getParameter("quantity") + " ----quantity");
+
                 quantityTickets = Integer.parseInt(req.getParameter("quantity"));
             } catch (NumberFormatException exception) {
-
+                LOGGER.error(exception);
             }
         }
+//        LOGGER.info("quantityTickets: " + quantityTickets);
 
         dateExhibitionStart = req.getParameter("dateFromExhibitionStart");
         dateSearch = req.getParameter("searchDateLine");
+//        LOGGER.info("Purchase ****** getDataFromRequest ***** finish");
+
     }
 
 
     private void setDataToReq(HttpServletRequest req) {
-
+        LOGGER.info("setDataToReq --------------");
+        LOGGER.info("contract *--*" + contract);
         req.setAttribute("idContract", contract.getId());
 
         req.setAttribute("dateTicketToApply", format.format(date));
+        LOGGER.info("before contract.getTicketPrice()");
         req.setAttribute("price", contract.getTicketPrice());
+        LOGGER.info("after contract.getTicketPrice()");
         req.setAttribute("quantity", quantityTickets);
 
     }
@@ -124,9 +132,12 @@ public class Purchase implements Command {
     }
 
     private void figureDateTicket() {
+        LOGGER.info("figureDateTicket start");
         if(dateSearch == null || dateSearch.isEmpty()) {
             dateSearch =  format.format(new Date());
         }
+
+        LOGGER.info("dateSearch " + dateSearch);
 
         Date date1 = null;
         Date date2 = null;
@@ -144,6 +155,8 @@ public class Purchase implements Command {
             date = new Date();
             LOGGER.error(e);
         }
+
+        LOGGER.info("figureDateTicket end");
     }
 
     private void getDataFromTable() {
@@ -154,10 +167,12 @@ public class Purchase implements Command {
                 contract = factoryMySql.createExhibitionContract(connection).getExhibitionContractById(contractId);
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
+
+        LOGGER.info("getDataFromTable end");
     }
 
     private boolean hasTicketsToSold() {

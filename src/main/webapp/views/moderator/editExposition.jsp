@@ -24,7 +24,7 @@
                   Id:
                   <c:out value="${idEdit}" />
                   <br/>
-                  Expo Title:<input type="text" name="title" value="<c:out value='${title}'/>"/><br/>
+                  Expo Title:<input type="text" name="title" value="<c:out value='${title}'/>" min="1" max="255" required/><br/>
                   Expo imgSrc:<input type="text" name="imageSrc" value="${imgSrc}"/><br/>
                   <table border="0" cellpadding="5">
                      <tr>

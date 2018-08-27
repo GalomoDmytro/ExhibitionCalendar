@@ -77,11 +77,11 @@
                <!-- Contract -->
                <h3>Contract :</h3>
                <form action="${pageContext.request.contextPath}/controller?command=editContract" method="post">
-                  Date from:<input type="date" name="dateFrom" value='${dateFrom}'/><br/>
-                  End date:<input type="date" name="dateTo" value='${dateTo}'/><br/>
-                  Price:<input type="text" name="price" value='${price}'/><br/>
-                  Work Time:<input type="text" name="workTime" value='${workTime}'/><br/>
-                  Max Ticket per day:<input type="text" name="maxTicketDay" value='${maxTicketDay}'/><br/>
+                  Date from:<input type="date" name="dateFrom" value='${dateFrom}' min="2000-01-01" required/><br/>
+                  End date:<input type="date" name="dateTo" value='${dateTo}' min="2000-01-01" required/><br/>
+                  Price:<input type="number" name="price" value='${price}' min="0" required/><br/>
+                  Work Time:<input type="text" name="workTime" value='${workTime}' max="64"/><br/>
+                  Max Ticket per day:<input type="number" name="maxTicketDay" value='${maxTicketDay}' min="0" required/><br/>
                   <input type="hidden"  name="exhibitionId" value='${exhibitionId}'>
                   <input type="hidden"  name="exhibitionCenterId" value='${exhibitionCenterId}'>
                   <button class="submitBtn" type="submit" name="saveChangesContract" value="Submit">Save</button>

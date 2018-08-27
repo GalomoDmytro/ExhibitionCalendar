@@ -211,10 +211,20 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public void deleteTicket(Ticket ticket) throws DBException {
+    public void approveTicket(Integer idTicket) throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.approveTicket"))) {
+            statement.setInt(1, idTicket);
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void deleteTicket(Integer ticketId) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.delete"))) {
-            statement.setInt(1, ticket.getId());
-            ResultSet resultSet = statement.executeQuery();
+            statement.setInt(1, ticketId);
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

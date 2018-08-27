@@ -17,7 +17,6 @@ public class ChangeLanguage implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String url = req.getHeader("referer");
 
         HttpSession session = req.getSession();

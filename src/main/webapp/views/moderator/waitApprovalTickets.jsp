@@ -30,10 +30,12 @@
                      <th>is confirmed</th>
                      <th>quantity</th>
                      <th>id user</th>
+                     <th>action</th>
                   </tr>
 
-                  <tr>
+
                      <c:forEach var="list" items="${listTickets}">
+                     <tr>
                         <td>
                            <c:out value="${list.id}" />
                         </td>
@@ -58,8 +60,17 @@
                         <td>
                            <c:out value="${list.userId}" />
                         </td>
+                        <td>
+                           <form action="${pageContext.request.contextPath}/controller?command=waitApprovalTicket" method="post">
+                                <input type="hidden" name="idContract" value="${list.id}">
+                                <input type="submit" name="action" value="Approve">
+                                <br/>
+                                <input type="submit" name="action" value="Delete">
+                           </form>
+                        </td>
+                     </tr>
                      </c:forEach>
-                  </tr>
+
                </table>
                <br/>
                <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>

@@ -20,7 +20,7 @@ public class Patterns {
 
     public static final int PHONE_LENGTH = 45;
 
-    public static final String TITLE_EXPO_CENTER = ".{1,254}";
+    public static final String TITLE_EXPO_CENTER = ".{1,64}";
 
     public static final String TITLE_EXPO = ".{1,254}";
 
