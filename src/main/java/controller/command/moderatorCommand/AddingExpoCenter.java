@@ -61,6 +61,7 @@ public class AddingExpoCenter implements Command {
         prepareExhibitionCenter();
 
         try {
+            connection.setAutoCommit(false);
             factoryMySql.createExhibitionCenter(connection).insertExhibitionCenter(exCenter);
 
             exCenter = factoryMySql.createExhibitionCenter(connection)
@@ -71,6 +72,7 @@ public class AddingExpoCenter implements Command {
             if (phone2 != null) {
                 factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exCenter.getId(), phone2);
             }
+            connection.commit();
         } catch (Exception exception) {
             log.error(exception);
         } finally {

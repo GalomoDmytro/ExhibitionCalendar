@@ -46,10 +46,14 @@ public class ExhibitionManagement implements Command {
     }
 
     private void deleteById(HttpServletRequest req) {
-        // todo make available only for admin
-        String id = req.getParameter("idDelete");
+        Integer idCenter = Integer.parseInt(req.getParameter("idDelete"));
         try {
-            factoryMySql.createExhibition(connection).deleteById(Integer.valueOf(id));
+            if (factoryMySql.createExhibitionContract(connection)
+                    .getAllContractsForExhibition(idCenter).isEmpty()) {
+                factoryMySql.createExhibition(connection).deleteById(Integer.valueOf(idCenter));
+            } else {
+                req.setAttribute("errorDeleting", "Have contract for this exhibition. No Delete! ");
+            }
         } catch (Exception exception) {
         } finally {
             closeConnection();

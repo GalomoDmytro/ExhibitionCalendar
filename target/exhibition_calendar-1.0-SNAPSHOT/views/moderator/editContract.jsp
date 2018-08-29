@@ -77,9 +77,9 @@
                <!-- Contract -->
                <h3>Contract :</h3>
                <form action="${pageContext.request.contextPath}/controller?command=editContract" method="post">
-                  Date from:<input type="date" name="dateFrom" value='${dateFrom}' min="2000-01-01" required/><br/>
-                  End date:<input type="date" name="dateTo" value='${dateTo}' min="2000-01-01" required/><br/>
-                  Price:<input type="number" name="price" value='${price}' min="0" required/><br/>
+                  Date from:<input type="date" name="dateFrom" value='${dateFrom}' min="2000-01-01" autocomplete="nope" required/><br/>
+                  End date:<input type="date" name="dateTo" value='${dateTo}' min="2000-01-01" autocomplete="nope" required/><br/>
+                  Price:<input type="number" name="price" value='${price}' min="0" autocomplete="nope" required/><br/>
                   Work Time:<input type="text" name="workTime" value='${workTime}' max="64"/><br/>
                   Max Ticket per day:<input type="number" name="maxTicketDay" value='${maxTicketDay}' min="0" required/><br/>
                   <input type="hidden"  name="exhibitionId" value='${exhibitionId}'>

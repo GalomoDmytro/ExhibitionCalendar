@@ -7,6 +7,7 @@ import dao.mysql.FactoryMySql;
 import entities.Contract;
 import entities.Exhibition;
 import entities.ExhibitionCenter;
+import entities.Ticket;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
 
@@ -62,10 +63,15 @@ public class ContractManagement implements Command {
     private void deleteById(HttpServletRequest req) {
         handleConnection();
         try {
-            // TODO: make available only for admin
-            String id = req.getParameter("idDelete");
-            if (id != null) {
-                factoryMySql.createExhibitionContract(connection).deleteContractById(Integer.valueOf(id));
+            String idContractDel = req.getParameter("idDelete");
+            if (idContractDel != null) {
+                int idC = Integer.parseInt(idContractDel);
+                List<Ticket> soldTickets = factoryMySql.createTicket(connection).getAllTicketsForContract(idC);
+                if(soldTickets.isEmpty()) {
+                    factoryMySql.createExhibitionContract(connection).deleteContractById(idC);
+                } else {
+                    req.setAttribute("errorDeleting", "Сan not be deleted. Already sold some tickets!");
+                }
             }
         } catch (Exception exception) {
         } finally {

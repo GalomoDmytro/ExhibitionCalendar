@@ -80,6 +80,8 @@
                      </tr>
                   </c:forEach>
                </table>
+               <br/>
+               ${errorDeleting}
                <!-- /table -->
                <br>
                <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>

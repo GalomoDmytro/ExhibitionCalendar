@@ -109,7 +109,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
     @Override
     public List<ExhibitionCenter> getAllExhibitionCenter() throws DBException {
-        List<ExhibitionCenter> exhibitionCenters = null;
+        List<ExhibitionCenter> exhibitionCenters;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
             exhibitionCenters = parseExhibitionCenterSet(resultSet);

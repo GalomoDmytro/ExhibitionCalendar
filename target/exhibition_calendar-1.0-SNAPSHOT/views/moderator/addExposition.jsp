@@ -2,7 +2,6 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page errorPage="../utility/error.jsp" %>
-
 <html>
    <head>
       <title>Add Exhibition</title>
@@ -21,14 +20,29 @@
                <h2>${role}</h2>
                <br><br>
                <form action="${pageContext.request.contextPath}/controller?command=addExposition" method="post">
-                  Expo Title:<input type="text" name="title" min="1" required/><br/>
-                  Expo imgSrc:<input type="text" name="imgSrc"/><br/>
-                  Expo Description:<input type="text" name="description" required/><br/>
-                  Expo Description Lang:
-                  <select name="lang" size="1">
-                     <option value="RU" selected="selected">Russian</option>
-                     <option  value="ENG">English</option>
-                  </select>
+                  <table cellpadding="2">
+                     <tr>
+                        <td>Expo Title:</td>
+                        <td><input type="text" name="title" min="1" required/><br/></td>
+                     </tr>
+                     <tr>
+                        <td>Expo imgSrc:</td>
+                        <td><input type="text" name="imgSrc"/><br/></td>
+                     </tr>
+                     <tr>
+                        <td>Expo Description:</td>
+                        <td><input type="text" name="description" required/><br/></td>
+                     </tr>
+                     <tr>
+                        <td>Expo Description Lang:</td>
+                        <td>
+                           <select name="lang" size="1">
+                              <option value="RU" selected="selected">Russian</option>
+                              <option  value="ENG">English</option>
+                           </select>
+                        </td>
+                     </tr>
+                  </table>
                   <br/>
                   <button class="submitBtn" type="submit" name="addNewExpo" value="Submit">Add</button>
                   <button class="resetBtn" type="reset" value="Reset">Reset</button>

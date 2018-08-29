@@ -1,3 +1,4 @@
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\admin\Admin.java
 D:\epam_project\Exhibition Calendar\src\main\java\utility\Patterns.java
 D:\epam_project\Exhibition Calendar\src\main\java\entities\User.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\LoginCommand.java
@@ -44,7 +45,6 @@ D:\epam_project\Exhibition Calendar\src\main\java\entities\Contract.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\PhoneExhibitionCenterDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\EditExposition.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\UserPhoneMySql.java
-D:\epam_project\Exhibition Calendar\src\main\java\controller\command\Admin.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\FactoryMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\Home.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\ControllerHelper.java

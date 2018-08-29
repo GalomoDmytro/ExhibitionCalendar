@@ -19,6 +19,8 @@ public interface UserDao {
 
     boolean isMailInTable(String eMail) throws DBException;
 
+    boolean isNameOrMailInTable(String nameOrMail) throws DBException;
+
     void updateUser(User user) throws DBException;
 
     void insertUser(User user) throws DBException;

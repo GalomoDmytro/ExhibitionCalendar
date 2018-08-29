@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -84,10 +85,10 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
-    public List<Contract> getAllContractsForCenter(ExhibitionCenter exhibitionCenter) throws DBException {
+    public List<Contract> getAllContractsForCenter(Integer idExhibitionCenter) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllForExhibitionCenter"))) {
-            statement.setInt(1, exhibitionCenter.getId());
+            statement.setInt(1, idExhibitionCenter);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
@@ -95,17 +96,18 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
 
         if (contracts == null) {
-            return null;
+            return Collections.emptyList();
         } else {
             return contracts;
         }
     }
 
     @Override
-    public List<Contract> getAllContractsForExhibition(Exhibition exhibition) throws DBException {
+    public List<Contract> getAllContractsForExhibition(Integer id) throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllForExhibition"))) {
-            statement.setInt(1, exhibition.getId());
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("contract.getAllForExhibition"))) {
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
@@ -113,7 +115,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
 
         if (contracts == null) {
-            return null;
+            return Collections.emptyList();
         } else {
             return contracts;
         }
@@ -391,7 +393,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
         try {
             while (resultSet.next()) {
-                Contract ticket = new Contract.Builder()
+                Contract contract = new Contract.Builder()
                         .setId(resultSet.getInt(FIELD_ID))
                         .setExhibitionId(resultSet.getInt(FIELD_EXHIBITION_ID))
                         .setExCenterId(resultSet.getInt(FIELD_CENTER_ID))
@@ -402,7 +404,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                         .setMaxTicketPerDay(resultSet.getInt(FIELD_MAX_TICKET_PER_DAY))
                         .build();
 
-                contracts.add(ticket);
+                contracts.add(contract);
+                LOGGER.info(contract);
             }
         } catch (SQLException exception) {
             throw new DBException(exception);

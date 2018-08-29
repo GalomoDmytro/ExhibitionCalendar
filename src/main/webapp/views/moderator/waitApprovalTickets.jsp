@@ -27,7 +27,6 @@
                      <th>contract id</th>
                      <th>date transaction</th>
                      <th>user mail</th>
-                     <th>is confirmed</th>
                      <th>quantity</th>
                      <th>id user</th>
                      <th>action</th>
@@ -52,9 +51,6 @@
                            <c:out value="${list.userEMail}" />
                         </td>
                         <td>
-                           <c:out value="${list.hasChecked}" />
-                        </td>
-                        <td>
                            <c:out value="${list.quantity}" />
                         </td>
                         <td>
@@ -62,7 +58,7 @@
                         </td>
                         <td>
                            <form action="${pageContext.request.contextPath}/controller?command=waitApprovalTicket" method="post">
-                                <input type="hidden" name="idContract" value="${list.id}">
+                                <input type="hidden" name="idTicket" value="${list.id}">
                                 <input type="submit" name="action" value="Approve">
                                 <br/>
                                 <input type="submit" name="action" value="Delete">

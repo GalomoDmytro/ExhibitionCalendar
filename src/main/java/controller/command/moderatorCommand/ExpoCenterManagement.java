@@ -30,8 +30,8 @@ public class ExpoCenterManagement implements Command {
         handleConnection();
 
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
+        if (req.getParameter("search") != null && (req.getParameter("searchField") == null)) {
 
-        if (req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
         } else if (req.getParameter("search") != null) {
             specificSearch(req);
@@ -41,12 +41,17 @@ public class ExpoCenterManagement implements Command {
             deleteById(req);
         }
 
+
         dispatcher.forward(req, resp);
     }
 
     private void showAll(HttpServletRequest req) {
+        handleConnection();
         try {
             List<ExhibitionCenter> exhibitionCenterList = getAllFromDb();
+
+            for(ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
+            }
 
             setPhones(exhibitionCenterList);
             if (exhibitionCenterList != null) {
@@ -66,11 +71,18 @@ public class ExpoCenterManagement implements Command {
     }
 
     private void deleteById(HttpServletRequest req) {
-        // todo: make available only for admin
-        // TODO: make multi access safe
-        String id = req.getParameter("idDelete");
+
+        int idExhibitionCenterDeletion = Integer.parseInt(req.getParameter("idDelete"));
+        handleConnection();
         try {
-            factoryMySql.createExhibitionCenter(connection).deleteExhibitionCenterById(Integer.parseInt(id));
+
+            if (factoryMySql.createExhibitionContract(connection)
+                    .getAllContractsForCenter(idExhibitionCenterDeletion).isEmpty()) {
+                factoryMySql.createExhibitionCenter(connection)
+                        .deleteExhibitionCenterById(idExhibitionCenterDeletion);
+            } else {
+                req.setAttribute("errorDeleting", "Have contract for this exhibition center. Can not Delete! ");
+            }
         } catch (Exception exception) {
         } finally {
             closeConnection();
@@ -81,25 +93,10 @@ public class ExpoCenterManagement implements Command {
 
         // TODO: refactor search
         String looking = request.getParameter("searchField");
-//        looking = looking.toLowerCase();
-
-//        List<ExhibitionCenter> exhibitionCenterListAll;
-
+        handleConnection();
         try {
-//            exhibitionCenterListAll = getAllFromDb();
             List<ExhibitionCenter> exhibitionCenterListResult = factoryMySql.createExhibitionCenter(connection).getExhibitionCentersBySearch(looking);
             setPhones(exhibitionCenterListResult);
-
-
-            //            for(ExhibitionCenter center : exhibitionCenterListAll) {
-//                if(center.getTitle().toLowerCase().contains(looking) ||
-//                    center.getAddress().toLowerCase().contains(looking) ||
-//                    center.getWebPage().toLowerCase().contains(looking) ||
-//                    String.valueOf(center.getId()).equals(looking)) {
-//                    exhibitionCenterListResult.add(center);
-//                }
-//            }
-
 
             if (exhibitionCenterListResult != null) {
                 request.setAttribute("listExpoCenter", exhibitionCenterListResult);
@@ -115,6 +112,7 @@ public class ExpoCenterManagement implements Command {
         try {
             return factoryMySql.createExhibitionCenter(connection).getAllExhibitionCenter();
         } catch (Exception exception) {
+            LOGGER.info(exception);
             throw new DBException(exception);
         }
     }

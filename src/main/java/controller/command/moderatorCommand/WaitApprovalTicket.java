@@ -12,43 +12,49 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 public class WaitApprovalTicket implements Command {
 
     private Connection connection;
     private FactoryMySql factoryMySql;
-    private List<Ticket> ticketList;
-    private int idContract;
+//    private List<Ticket> ticketList;
+    private int idTicket;
+    private int idModerator;
 
     private static final Logger LOGGER = Logger.getLogger(WaitApprovalTicket.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.WAIT_APPROVAL_TICKETS_PAGE);
-        LOGGER.info("WaitApprovalTicket");
+
+        getIdModerator(req);
 
         onBtnClick(req);
 
-        readData();
-
-        setDataToReq(req);
+        readData(req);
 
         dispatcher.forward(req, resp);
     }
 
+    private void getIdModerator(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        idModerator = (Integer) session.getAttribute("idUser");
+    }
+
     private void onBtnClick(HttpServletRequest req) {
-        if(req.getParameter("idContract") != null) {
-            idContract = Integer.parseInt(req.getParameter("idContract"));
+        if (req.getParameter("idTicket") != null) {
+            idTicket = Integer.parseInt(req.getParameter("idTicket"));
         } else {
             return;
         }
 
         String actionBtn = req.getParameter("action");
-        if(actionBtn != null) {
+        if (actionBtn != null) {
 
             if (actionBtn.equals("Approve")) {
                 approveTicket();
@@ -64,12 +70,24 @@ public class WaitApprovalTicket implements Command {
         handleConnection();
 
         try {
-            LOGGER.info("Approve ticket");
+            connection.setAutoCommit(false);
+            factoryMySql.createTicket(connection).setLockTicketTable();
+            factoryMySql.createTicket(connection).approveTicket(idTicket);
 
-            factoryMySql.createTicket(connection).approveTicket(idContract);
+            Ticket ticket = factoryMySql.createTicket(connection).getTicketById(idTicket);
+            ticket.setApprovedById(idModerator);
+            factoryMySql.createTicket(connection).deleteTicket(ticket.getId());
+            int quantity = ticket.getQuantity();
+
+            ticket.setQuantity(1);
+            for (int i = 0; i < quantity; i++) {
+                factoryMySql.createTicket(connection).insertTicket(ticket);
+            }
+            factoryMySql.createTicket(connection).unlockTable();
+
+            connection.commit();
             // TODO: send message to user
         } catch (Exception exception) {
-            LOGGER.info(exception);
         } finally {
             closeConnection();
         }
@@ -79,7 +97,7 @@ public class WaitApprovalTicket implements Command {
         handleConnection();
 
         try {
-            factoryMySql.createTicket(connection).deleteTicket(idContract);
+            factoryMySql.createTicket(connection).deleteTicket(idTicket);
             // TODO: send message to user
         } catch (Exception exception) {
 
@@ -88,19 +106,26 @@ public class WaitApprovalTicket implements Command {
         }
     }
 
-    private void readData() {
+    private void readData(HttpServletRequest req) {
         handleConnection();
+          List<Ticket> ticketList = null;
 
         try {
             ticketList = factoryMySql.createTicket(connection).getAllWaitApproval();
+
         } catch (Exception exception) {
 
         } finally {
             closeConnection();
         }
+
+        if(ticketList == null) {
+            ticketList = Collections.emptyList();
+        }
+        setDataToReq(req, ticketList);
     }
 
-    private void setDataToReq(HttpServletRequest req) {
+    private void setDataToReq(HttpServletRequest req, List<Ticket> ticketList) {
         req.setAttribute("listTickets", ticketList);
     }
 

@@ -17,6 +17,7 @@ public class ExhibitionCenter {
     private List<String> phone;
 
     public Integer getId() {
+        if(id == null) return 0;
         return id;
     }
 

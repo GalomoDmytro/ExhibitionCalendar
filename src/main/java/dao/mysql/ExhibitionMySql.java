@@ -18,7 +18,7 @@ public class ExhibitionMySql implements ExhibitionDao {
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
-    private static final Logger log = Logger.getLogger(ExhibitionMySql.class);
+    private static final Logger LOGGER = Logger.getLogger(ExhibitionMySql.class);
 
 
     ExhibitionMySql(Connection connection) {
@@ -98,7 +98,7 @@ public class ExhibitionMySql implements ExhibitionDao {
                 }
             }
         } catch (SQLException exception) {
-            log.error(exception);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

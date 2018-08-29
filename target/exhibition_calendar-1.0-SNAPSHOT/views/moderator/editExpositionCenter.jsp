@@ -26,10 +26,10 @@
                   <br/>
                   Expo Center Title:<input type="text" name="expoCTitle" value="<c:out value='${expoCTitle}'/>" min="1" max="45" required/><br/>
                   Expo Center Address:<input type="text" name="expoCAddress" value="${expoCAddress}" min="1" max="255" required/><br/>
-                  Expo Center eMail:<input type="text" name="expoCMail" value="${expoCMail}" max="255"/><br/>
-                  Expo Center webPage:<input type="text" name="expoCWebPage" value="${expoCWebPage}" max="255"/><br/>
-                  Expo Center Phone 1:<input type="text" name="phone1" value="${expoCPhone1}" max="255"/><br/>
-                  Expo Center Phone 2:<input type="text" name="phone2" value="${expoCPhone2}" max="255"/><br/>
+                  Expo Center eMail:<input type="email" name="expoCMail" value="${expoCMail}" max="255" autocomplete="nope"/><br/>
+                  Expo Center webPage:<input type="text" name="expoCWebPage" value="${expoCWebPage}" max="255" /><br/>
+                  Expo Center Phone 1:<input type="text" name="phone1" value="${expoCPhone1}" max="255" autocomplete="nope"/><br/>
+                  Expo Center Phone 2:<input type="text" name="phone2" value="${expoCPhone2}" max="255" autocomplete="nope"/><br/>
                   <button class="submitBtn" type="submit" name="editExpoCenter" value="Save">Save</button>
                   <button class="resetBtn" type="submit" name="denieEdit" value="Cancel">Cancel</button>
                   <br> ${error}

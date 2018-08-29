@@ -21,16 +21,17 @@
                <!-- Registration form-->
                <p>Set role to user</p>
                <form action="${pageContext.request.contextPath}/controller?command=admin" method="post">
-                  <input type="text" name="id" placeholder="id of user"/> <br/>
-                  or <input type="text" name="eMail" placeholder="eMail of user"/> <br/>
+                  <input type="number" name="id" min="2" placeholder="id of user"/> <br/>
+                  or <br/>
+                  <input type="email" name="eMail" placeholder="eMail of user"/> <br/>
                   <select name="role" size="1">
                      <option value="user" selected="selected">USER</option>
                      <option value="moderator">MODERATOR</option>
                      <option value="admin">ADMIN</option>
+                     <option value="guest">GUEST</option>
                   </select>
                   </br>
-                  <button class="submitBtn" type="submit" name="action" value="changeRole">Change Role</button>
-                  <button class="resetBtn" type="reset" value="Reset">Reset</button>
+                  <button class="resetBtn" type="submit" name="action" value="changeRole">Change Role</button>
                   <button class="submitBtn" type="submit" name="action" value="getRole">Get User Role</button>
                   <br><br> ${showRole} ${mess}
                </form>

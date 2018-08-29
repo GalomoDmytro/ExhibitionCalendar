@@ -49,9 +49,7 @@ public class CheckOut implements Command {
         }
 
         setDataToReq(req);
-        LOGGER.info("bifore save");
         if (req.getParameter("checkoutPurchase") != null) {
-            LOGGER.info("-------------------checkout pressed");
             dispatcher = finishPurchase(req);
         }
 
@@ -85,7 +83,6 @@ public class CheckOut implements Command {
     private void getDataFromRequest(HttpServletRequest req) {
         if (req.getParameter("priceTickets") != null) {
             priceLine = req.getParameter("priceTickets");
-//            LOGGER.info("priceTickets " + priceLine);
             price = new PriceTicket().getBigDecimalPriceVal(priceLine);
         }
 
@@ -110,8 +107,7 @@ public class CheckOut implements Command {
     }
 
     private void calculatePrice() {
-        price = new PriceTicket().calculateSumTicketsPrice(price, quantity);
-//        LOGGER.info("price after calc " + price);
+        price = price.multiply(BigDecimal.valueOf(quantity));
     }
 
     private RequestDispatcher finishPurchase(HttpServletRequest req) {

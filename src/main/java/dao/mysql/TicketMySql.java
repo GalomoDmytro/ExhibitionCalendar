@@ -17,11 +17,11 @@ public class TicketMySql implements TicketDao {
     private final String FIELD_DATE_TO_APPLY = "date_to_apply";
     private final String FIELD_CONTRACT_ID = "contract_id";
     private final String FIELD_DATE_TRANSACTION = "date_transaction";
-    private final String FIELD_USER_MAIL = "user_mail";
+    private final String FIELD_USER_MAIL = "email";
     private final String FIELD_QUANTITY = "quantity";
     private final String FIELD_USER_ID = "id_user";
     private final String FIELD_CHECKED = "is_confirmed";
-    private final String FIELD_APPROVED_BY = "approved_by_moderatorr_id";
+    private final String FIELD_APPROVED_BY = "approved_by_moderator_id";
 
     private Connection connection;
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
@@ -30,6 +30,26 @@ public class TicketMySql implements TicketDao {
 
     TicketMySql(Connection connection) {
         this.connection = connection;
+    }
+
+    @Override
+    public void setLockTicketTable() throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement("lock table ticket write")) {
+            statement.execute();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void unlockTable() throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement("unlock table")) {
+            statement.execute();
+
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
     }
 
     @Override
@@ -133,16 +153,18 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public List<Ticket> getAllTicketsForContract(Contract contract) throws DBException {
+    public List<Ticket> getAllTicketsForContract(Integer contractId) throws DBException {
         List<Ticket> tickets;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getAllForContract"))) {
-            statement.setInt(1, contract.getId());
+            statement.setInt(1, contractId);
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
-
+        if(tickets == null) {
+            return Collections.emptyList();
+        }
         return tickets;
     }
 
@@ -225,7 +247,9 @@ public class TicketMySql implements TicketDao {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.delete"))) {
             statement.setInt(1, ticketId);
             statement.executeUpdate();
+            LOGGER.info("delete ticket id " + ticketId);
         } catch (SQLException exception) {
+            LOGGER.info(exception);
             throw new DBException(exception);
         }
 
@@ -264,6 +288,8 @@ public class TicketMySql implements TicketDao {
             statement.setString(4, ticket.getUserEMail());
             statement.setInt(5, ticket.getQuantity());
             statement.setInt(6, ticket.getUserId());
+            statement.setBoolean(7, ticket.getHasChecked());
+            statement.setInt(8, ticket.getApprovedById());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -276,7 +302,8 @@ public class TicketMySql implements TicketDao {
             statement.setDate(3, ticket.getDateTransaction());
             statement.setString(4, ticket.getUserEMail());
             statement.setInt(5, ticket.getQuantity());
-            statement.setInt(6, ticket.getId());
+            statement.setBoolean(6, ticket.getHasChecked());
+            statement.setInt(7, ticket.getId());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

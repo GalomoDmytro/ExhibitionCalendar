@@ -21,12 +21,11 @@ public class LoginCommand implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
 
-    private String eMail;
+    private String nameOrMail;
     private String password;
     private User user;
     private PasswordHandler passwordHandler;
 
-    // TODO: make multi lang
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
 
     @Override
@@ -71,8 +70,20 @@ public class LoginCommand implements Command {
 
     private User getUserFromDB() {
         handleConnection();
+
+
         try {
-            user = factoryMySql.createUser(connection).getByMail(eMail);
+            if(!factoryMySql.createUser(connection).isNameOrMailInTable(nameOrMail)) {
+                return null;
+            }
+            LOGGER.info("name or mail in ");
+            if(nameOrMail.contains("@")) {
+                LOGGER.info(" mail in and pars");
+                user = factoryMySql.createUser(connection).getByMail(nameOrMail);
+            } else {
+                LOGGER.info(" name in and pars");
+                user = factoryMySql.createUser(connection).getByName(nameOrMail);
+            }
             user.setRole(factoryMySql.createRole(connection).getRoleById(user.getId()));
             return user;
         } catch (Exception exception) {
@@ -99,7 +110,7 @@ public class LoginCommand implements Command {
     }
 
     private void collectParamsFromRequest(HttpServletRequest request) {
-        eMail = request.getParameter("eMail");
+        nameOrMail = request.getParameter("nameOrMail");
         password = request.getParameter("password");
     }
 

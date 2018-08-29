@@ -35,26 +35,21 @@ public class RegistrationCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
 
-    // todo make multi lang
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         collectParamsFromRequest(req);
-        // TODO: remove handleConnection from here
-        handleConnection();
 
         RequestDispatcher dispatcher;
         if (isDataGood(req)) {
             addNewUserToDB();
-            user.setRole(Role.USER);
+//            user.setRole(Role.USER);
             declareRole(req, resp);
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         } else {
-
             dispatcher = req.getRequestDispatcher(Links.REGISTRATION_PAGE);
         }
-
 
         dispatcher.forward(req, resp);
     }
@@ -109,7 +104,7 @@ public class RegistrationCommand implements Command {
 
         if (name == null
                 || password == null
-                || eMail == null) {
+                || eMail == null || eMail.isEmpty()) {
             return true;
         }
 
@@ -129,6 +124,7 @@ public class RegistrationCommand implements Command {
 
         // check if name already in table
         boolean alredyEx = false;
+        handleConnection();
         try {
             if (factoryMySql.createUser(connection).isNameInTable(name)) {
                 alredyEx = true;
@@ -138,9 +134,10 @@ public class RegistrationCommand implements Command {
         } catch (Exception exception) {
             return false;
         } finally {
-            if(alredyEx) {
-                closeConnection();
-            }
+//            if(alredyEx) {
+//                closeConnection();
+//            }
+            closeConnection();
         }
 
         return true;
@@ -186,8 +183,10 @@ public class RegistrationCommand implements Command {
             lastName = req.getParameter("lastName");
         }
 
-        if(req.getParameter("eMail") != null) {
-            eMail = req.getParameter("eMail");
+        if(req.getParameter("eMailRegistration") != null) {
+            eMail = req.getParameter("eMailRegistration");
+        } else {
+            eMail = null;
         }
 
         if(req.getParameter("eMailRepeat") != null) {
@@ -205,7 +204,8 @@ public class RegistrationCommand implements Command {
     }
 
     private boolean eMailIsGood(HttpServletRequest request) {
-        if (eMail == null || eMailRepeat == null) {
+
+        if (eMail == null || eMailRepeat == null || eMail.trim().length() < 1) {
             request.setAttribute("errorMail", QUERIES.getString("ERROR_MISS_EMAIL"));
             return false;
         }
@@ -226,6 +226,7 @@ public class RegistrationCommand implements Command {
         }
 
         // check if eMail already in table
+        handleConnection();
         try {
             if (factoryMySql.createUser(connection).isMailInTable(eMail)) {
                 request.setAttribute("errorMail", QUERIES.getString("ERROR_EMAIL_ALREADY_EXIST"));
@@ -233,6 +234,8 @@ public class RegistrationCommand implements Command {
             }
         } catch (Exception exception) {
             return false;
+        } finally {
+            closeConnection();
         }
 
         return true;
@@ -256,6 +259,8 @@ public class RegistrationCommand implements Command {
     }
 
     private void addNewUserToDB() {
+        handleConnection();
+
         try {
             addUserToDbUser();
             setUserRoleInDB();

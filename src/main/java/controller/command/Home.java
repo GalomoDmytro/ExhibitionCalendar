@@ -5,6 +5,8 @@ import dao.mysql.FactoryMySql;
 import entities.Contract;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
+import utility.Patterns;
+import utility.PriceTicket;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,6 +29,7 @@ public class Home implements Command {
     private int numberOfPages;
     private int currentPage;
     private int start;
+    PriceTicket priceTicket = new PriceTicket();
 
     private static final int recordsPerPage = 2;
     private static final Logger LOGGER = Logger.getLogger(Home.class);
@@ -86,6 +89,7 @@ public class Home implements Command {
                     .searchContactsWithExpoAndCenterLimit(searchLine, java.sql.Date.valueOf(date),
                             start, recordsPerPage);
 
+            transformPrice(contractList);
             req.setAttribute("listForCustomer", contractList);
 
         } catch (Exception exception) {
@@ -102,16 +106,21 @@ public class Home implements Command {
     }
 
     private void showAll(HttpServletRequest req) {
-
         handleConnection();
 
         try {
             List<Contract> listContract = getAllContract();
-
+            transformPrice(listContract);
             req.setAttribute("listForCustomer", listContract);
         } catch (Exception exception) {
         } finally {
             closeConnection();
+        }
+    }
+
+    private void transformPrice(List<Contract> listContract) {
+        for(Contract contract : listContract) {
+            contract.setTicketPrice(priceTicket.calculateSumTicketsPrice(contract.getTicketPrice(), 1));
         }
     }
 

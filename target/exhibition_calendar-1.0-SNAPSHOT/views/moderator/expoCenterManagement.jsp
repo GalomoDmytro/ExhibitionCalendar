@@ -25,7 +25,7 @@
                </form>
                <!-- table -->
 
-               <table border="1" cellpadding="8" style="table-layout: fixed; width: 100%;">
+               <table border="1" cellpadding="7" style="table-layout: fixed; width: 100%;">
                   <caption>
                      <h2>List of Expo Centers</h2>
                   </caption>
@@ -35,8 +35,7 @@
                      <th>Address</th>
                      <th>eMail</ht>
                      <th>webPage</th>
-                     <th>phone 1</th>
-                     <th>phone 2</th>
+                     <th>phone</th>
                      <th>Action</th>
                   </tr>
                   <c:forEach var="expoCenter" items="${listExpoCenter}" >
@@ -64,23 +63,24 @@
                         <td>
                             <form action="${pageContext.request.contextPath}/controller?command=editExpositionCenter" method="post">
                                 <input type="hidden" name="idEdit" value="${expoCenter.id}">
-                                <%-- Comment
+
                                 <input type="hidden" name="expoCTitle" value="${expoCenter.title}">
                                 <input type="hidden" name="expoCAddress" value="${expoCenter.address}">
                                 <input type="hidden" name="expoCMail" value="${expoCenter.eMail}">
-                                <input type="hidden" name="expoCWebPage" value="${expoCenter.webPage}">--%>
+                                <input type="hidden" name="expoCWebPage" value="${expoCenter.webPage}">
                                 <input class="submitBtn" type="submit" name="Edit" value="Edit" />
                             </form>
-                            <a class="submitBtn" href="${pageContext.request.contextPath}/controller?command=editExpositionCenter&idEdit=<c:out value='${expoCenter.id}'/>&expoCTitle=<c:out value='${expoCenter.title}'/>&expoCAddress=<c:out value='${expoCenter.address}'/>&expoCWebPage=<c:out value='${expoCenter.webPage}'/>&expoCMail=<c:out value='${expoCenter.eMail}'/>">Edit</a>
-                           &nbsp;
+
                            <a class="resetBtn" href="${pageContext.request.contextPath}/controller?command=expoCenterManagement&idDelete=<c:out value='${expoCenter.id}'/>">Delete</a>
                            &nbsp;
+
                            <a class="submitBtn" href="${pageContext.request.contextPath}/controller?command=combineExpoWithCenter&expoCenterId=<c:out value='${expoCenter.id}' />">Form_contract</a>
                         </td>
                      </tr>
                   </c:forEach>
                </table>
-
+               <br>
+                ${errorDeleting}
                <!-- /table -->
                <br>
                <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>

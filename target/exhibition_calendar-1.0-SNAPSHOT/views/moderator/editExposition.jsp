@@ -33,8 +33,8 @@
                      </tr>
                      <c:forEach var="langDescript" items="${mapLang}" >
                         <tr>
-                           <td>Tag:<input type="text" name="<c:out value='${langDescript.key}'/>" value="<c:out value='${langDescript.key}'/>"/></td>
-                           <td>Text:<input type="text" name="<c:out value='${langDescript.value}'/>" value="${langDescript.value}"/></td>
+                           <td>Tag:<input type="text" name="<c:out value='${langDescript.key}'/>" value="<c:out value='${langDescript.key}'/>" autocomplete="nope"/></td>
+                           <td>Text:<input type="text" name="<c:out value='${langDescript.value}'/>" value="${langDescript.value}" autocomplete="nope"/></td>
                         </tr>
                      </c:forEach>
                   </table>

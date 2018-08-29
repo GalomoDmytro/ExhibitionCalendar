@@ -64,6 +64,9 @@ public class Ticket {
     }
 
     public Integer getApprovedById() {
+        if(approvedById == null) {
+            return  0;
+        }
         return approvedById;
     }
 

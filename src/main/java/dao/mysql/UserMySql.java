@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.locks.Lock;
 
 public class UserMySql implements UserDao {
 
@@ -186,6 +187,28 @@ public class UserMySql implements UserDao {
             }
 
         } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public boolean isNameOrMailInTable(String nameOrMail) throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.nameOrMailInTable"))) {
+            LOGGER.info("isNameOrMailInTable - seartch in db " + nameOrMail);
+            statement.setString(1, nameOrMail);
+            statement.setString(2, nameOrMail);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                LOGGER.info(nameOrMail + " in table");
+                return true;
+            } else {
+                LOGGER.info(nameOrMail + " not in table");
+                return false;
+            }
+
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

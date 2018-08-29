@@ -19,7 +19,7 @@
           <section class="login">
              <h1>Login</h1>
              <form action="${pageContext.request.contextPath}/controller?command=login" method="post">
-                <input type="email" name="eMail" placeholder="Email" required/><br/><br/>
+                <input type="text" min="2" max="255" name="nameOrMail" placeholder="Email or Name" required/><br/><br/>
                 <input type="password" name="password" placeholder="Password" min="6" max="64" required/><br/>
                 ${errorLogin}<br>
                 <input  class="submitBtn" class="submitBtn" type="submit" value="login" name="loginBtn"/>

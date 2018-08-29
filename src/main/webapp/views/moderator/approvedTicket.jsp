@@ -20,20 +20,17 @@
                <br>
                <h2>Edit contract:</h2>
                <table border="1" cellpadding="8">
-
                   <tr>
                      <th>ID</th>
                      <th>date to apply</th>
                      <th>contract id</th>
                      <th>date transaction</th>
                      <th>user mail</th>
-                     <th>is confirmed</th>
-                     <th>quantity</th>
                      <th>id user</th>
                      <th>approved by</th>
                   </tr>
-                  <tr>
-                     <c:forEach var="list" items="${listTickets}">
+                  <c:forEach var="list" items="${listTickets}">
+                     <tr>
                         <td>
                            <c:out value="${list.id}" />
                         </td>
@@ -50,18 +47,13 @@
                            <c:out value="${list.userEMail}" />
                         </td>
                         <td>
-                           <c:out value="${list.hasChecked}" />
-                        </td>
-                        <td>
-                           <c:out value="${list.quantity}" />
-                        </td>
-                        <td>
                            <c:out value="${list.userId}" />
                         </td>
                         <td>
                            <c:out value="${list.approvedById}" />
                         </td>
-                     </c:forEach>
+                     </tr>
+                  </c:forEach>
                   </tr>
                </table>
                <br/>

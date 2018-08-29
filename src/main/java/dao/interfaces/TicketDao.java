@@ -20,9 +20,13 @@ public interface TicketDao {
 
     void approveTicket(Integer idTicket) throws DBException;
 
+    void setLockTicketTable() throws DBException;
+
+    void unlockTable() throws DBException;
+
     List<Ticket> getAllTicketsForDate(Date date) throws DBException;
 
-    List<Ticket> getAllTicketsForContract(Contract contract) throws DBException;
+    List<Ticket> getAllTicketsForContract(Integer contractId) throws DBException;
 
     List<Ticket> getAllTicketsForUser(User user) throws DBException;
 

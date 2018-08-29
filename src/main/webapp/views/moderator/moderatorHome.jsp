@@ -2,7 +2,6 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page errorPage="../utility/error.jsp" %>
-
 <html>
    <head>
       <title>MHP</title>
@@ -19,29 +18,31 @@
             <section class="main">
                <h1>Moderator Home Page</h1>
                <br>
-               <a href="${pageContext.request.contextPath}/controller?command=expoCenterManagement">Expo Center management</a>
-               <br>
-               <a href="${pageContext.request.contextPath}/controller?command=expoManagement">Expo Management</a>
-               <br>
-               <a href="${pageContext.request.contextPath}/controller?command=contractManagement">Contract Management</a>
-               <br>
-               <a href="${pageContext.request.contextPath}/controller?command=addExposition">Create Expo</a>
-               <br>
-               <a href="${pageContext.request.contextPath}/controller?command=addExpoCenter">Create Expo center</a>
-               <br>
-
-               <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
-                    <input type="submit" value="Go home">
+               <form action="${pageContext.request.contextPath}/controller?command=expoCenterManagement" method="post">
+                  <input type="submit" value="Expo Center management">
                </form>
-
+               <form action="${pageContext.request.contextPath}/controller?command=expoManagement" method="post">
+                  <input type="submit" value="Expo Management">
+               </form>
+               <form action="${pageContext.request.contextPath}/controller?command=contractManagement" method="post">
+                  <input type="submit" value="Contract Management">
+               </form>
+               <form action="${pageContext.request.contextPath}/controller?command=addExposition" method="post">
+                  <input type="submit" value="Create Expo center">
+               </form>
+               <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
+                  <input type="submit" value="Create Expo">
+               </form>
                <form action="${pageContext.request.contextPath}/controller?command=waitApprovalTicket" method="post">
-                   <input type="submit" value="Wait Approval Ticket">
+                  <input type="submit" value="Wait Approval Ticket">
                </form>
-
-                <form action="${pageContext.request.contextPath}/controller?command=approvedTicket" method="post">
-                    <input type="submit" value="Approved Ticket">
+               <form action="${pageContext.request.contextPath}/controller?command=approvedTicket" method="post">
+                  <input type="submit" value="Approved Ticket">
                </form>
-
+               <br/>
+               <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
+                  <input type="submit" value="Go home">
+               </form>
             </section>
          </div>
       </center>
