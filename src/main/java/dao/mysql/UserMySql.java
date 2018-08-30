@@ -15,9 +15,8 @@ import java.util.concurrent.locks.Lock;
 
 public class UserMySql implements UserDao {
 
-    private Connection connection;
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
-
+    private final Connection connection;
+    private final ResourceBundle QUERIES;
     private static final String FIELD_ID = "id";
     private static final String FIELD_NAME = "name";
     private static final String FIELD_MAIL = "email";
@@ -27,10 +26,13 @@ public class UserMySql implements UserDao {
 
     private static final Logger LOGGER = Logger.getLogger(UserMySql.class);
 
-    public UserMySql() {
+    public UserMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
+        this.connection = connection;
     }
 
-    public UserMySql(Connection connection) {
+    public UserMySql(Connection connection, ResourceBundle resourceBundle) {
+        this.QUERIES = resourceBundle;
         this.connection = connection;
     }
 

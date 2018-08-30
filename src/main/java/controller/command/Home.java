@@ -45,6 +45,7 @@ public class Home implements Command {
         choseWhatToShow(req);
 
         saveAtrToReq(req);
+        LOGGER.info("currant page " + currentPage + " np " + numberOfPages) ;
 
         dispatcher.forward(req, resp);
 
@@ -64,6 +65,7 @@ public class Home implements Command {
         LOGGER.info("home page searchDateLine save to req " + req.getParameter("searchDate"));
         req.setAttribute("searchField", req.getParameter("searchField"));
         req.setAttribute("numberOfPages", numberOfPages);
+        req.setAttribute("currentPage", currentPage);
     }
 
     private void choseWhatToShow(HttpServletRequest req) {

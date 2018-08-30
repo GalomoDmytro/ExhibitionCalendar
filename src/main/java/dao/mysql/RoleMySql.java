@@ -15,15 +15,20 @@ import java.util.ResourceBundle;
 
 public class RoleMySql implements RoleDao {
 
+    private Role role;
+    private final Connection connection;
+    private final ResourceBundle QUERIES;
     private static final Logger log = Logger.getLogger(RegistrationCommand.class);
     private static final String FIELD_ID = "id";
     private static final String FIELD_ROLE = "role";
-    private Role role;
-
-    private Connection connection;
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
 
     public RoleMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
+        this.connection = connection;
+    }
+
+    public RoleMySql(Connection connection, ResourceBundle resourceBundle) {
+        this.QUERIES = resourceBundle;
         this.connection = connection;
     }
 

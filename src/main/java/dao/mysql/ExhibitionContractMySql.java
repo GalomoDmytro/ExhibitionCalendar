@@ -15,21 +15,25 @@ import java.util.ResourceBundle;
 
 public class ExhibitionContractMySql implements ExhibitionContractDao {
 
-    private final String FIELD_ID = "id";
-    private final String FIELD_EXHIBITION_ID = "exhibition_id";
-    private final String FIELD_CENTER_ID = "exhibition_center_id";
-    private final String FIELD_DATE_FROM = "date_from";
-    private final String FIELD_DATE_TO = "date_to";
-    private final String FIELD_TICKET_PRICE = "ticket_price";
-    private final String FIELD_WORK_TIME_EXHIBITION = "work_time_exhibition";
-    private final String FIELD_MAX_TICKET_PER_DAY = "max_ticket_per_day";
-
-    private Connection connection;
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
-
+    private final Connection connection;
+    private final ResourceBundle QUERIES;
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_EXHIBITION_ID = "exhibition_id";
+    private static final String FIELD_CENTER_ID = "exhibition_center_id";
+    private static final String FIELD_DATE_FROM = "date_from";
+    private static final String FIELD_DATE_TO = "date_to";
+    private static final String FIELD_TICKET_PRICE = "ticket_price";
+    private static final String FIELD_WORK_TIME_EXHIBITION = "work_time_exhibition";
+    private static final String FIELD_MAX_TICKET_PER_DAY = "max_ticket_per_day";
     private static final Logger LOGGER = Logger.getLogger(ExhibitionContractMySql.class);
 
     ExhibitionContractMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
+        this.connection = connection;
+    }
+
+    ExhibitionContractMySql(Connection connection, ResourceBundle resourceBundle) {
+        this.QUERIES = resourceBundle;
         this.connection = connection;
     }
 

@@ -13,19 +13,22 @@ import java.util.ResourceBundle;
 
 public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
-    private Connection connection;
-
-    private final String FIELD_ID = "id";
-    private final String FIELD_TITLE = "title";
-    private final String FIELD_ADDRES = "address";
-    private final String FIELD_MAIL = "email";
-    private final String FIELD_WEB_PAGE = "web_page";
-
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
+    private final Connection connection;
+    private final ResourceBundle QUERIES;
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_TITLE = "title";
+    private static final String FIELD_ADDRES = "address";
+    private static final String FIELD_MAIL = "email";
+    private static final String FIELD_WEB_PAGE = "web_page";
     private static final Logger LOGGER = Logger.getLogger(ExhibitionCenterMySql.class);
 
-
     ExhibitionCenterMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
+        this.connection = connection;
+    }
+
+    ExhibitionCenterMySql(Connection connection, ResourceBundle resourceBundle) {
+        this.QUERIES = resourceBundle;
         this.connection = connection;
     }
 
@@ -82,7 +85,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             throw new DBException(exception);
         }
 
-        if(exhibitionCenters == null) {
+        if (exhibitionCenters == null) {
             return Collections.emptyList();
         }
 

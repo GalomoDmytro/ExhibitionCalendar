@@ -12,16 +12,20 @@ import java.util.ResourceBundle;
 
 public class ExhibitionMySql implements ExhibitionDao {
 
-    private final String FIELD_ID = "id";
-    private final String FIELD_TITLE = "title";
-    private final String FIELD_IMAGE_SRC = "image_src";
-
-    private Connection connection;
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
+    private final Connection connection;
+    private final ResourceBundle QUERIES;
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_TITLE = "title";
+    private static final String FIELD_IMAGE_SRC = "image_src";
     private static final Logger LOGGER = Logger.getLogger(ExhibitionMySql.class);
 
+    ExhibitionMySql(Connection connection, ResourceBundle resourceBundle) {
+        this.QUERIES = resourceBundle;
+        this.connection = connection;
+    }
 
     ExhibitionMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
         this.connection = connection;
     }
 

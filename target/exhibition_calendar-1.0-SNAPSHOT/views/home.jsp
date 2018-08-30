@@ -112,17 +112,12 @@
                   <br/>
                   <div>
                       <ul class="pagination">
-                      <c:if test="${currentPage != 1}">
-                                  <li class="page-item"><a class="page-link"
-                                      href="${pageContext.request.contextPath}/controller?command=home&currentPage=${currentPage-1}&searchField=${searchField}&searchDate=${searchDate}">Previous</a>
-                                  </li>
-                              </c:if>
 
                          <c:forEach begin="1" end="${numberOfPages}" var="i">
                             <c:choose>
                                <c:when test="${currentPage eq i}">
                                   <li class="page-item active"><a class="page-link">
-                                      <span class="sr-only" >${i} aaa</span></a>
+                                      ${i}<span class="sr-only" ></span></a>
                                   </li>
                                </c:when>
                                <c:otherwise>

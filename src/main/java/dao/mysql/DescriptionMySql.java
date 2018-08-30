@@ -12,15 +12,20 @@ import java.util.ResourceBundle;
 
 public class DescriptionMySql implements DescriptionTableDao {
 
+    private final ResourceBundle QUERIES;
+    private final Connection connection;
     private static final String FIELD_ID = "id";
     private static final String FIELD_DESCRIPTION = "description";
     private static final String FIELD_EXHIBITION_ID = "exhibition_id";
     private static final String FIELD_LANGUAGE = "language";
 
-    private Connection connection;
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
-
     DescriptionMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
+        this.connection = connection;
+    }
+
+    DescriptionMySql(Connection connection, ResourceBundle queries) {
+        this.QUERIES = queries;
         this.connection = connection;
     }
 
@@ -70,6 +75,7 @@ public class DescriptionMySql implements DescriptionTableDao {
             resultSet.next();
             description = resultSet.getString(FIELD_DESCRIPTION);
         } catch (SQLException exception) {
+            System.out.println(exception);
             throw new DBException(exception);
         }
 
@@ -124,11 +130,10 @@ public class DescriptionMySql implements DescriptionTableDao {
 
     @Override
     public void deleteDescriptionForLang(Exhibition exhibition, String keyLanguage) throws DBException {
-        String description;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.deleteLang"))) {
             statement.setInt(1, exhibition.getId());
             statement.setString(2, keyLanguage);
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

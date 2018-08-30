@@ -16,15 +16,19 @@ import java.util.ResourceBundle;
 
 public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
 
+    private final Connection connection;
+    private final ResourceBundle QUERIES;
     private static final String FIELD_EXHIBITION_ID = "exhibition_id";
     private static final String FIELD_PHONE = "phone";
-
-    private Connection connection;
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
     private static final Logger LOGGER = Logger.getLogger(ExpoCenterManagement.class);
 
-
     PhoneExhibitionCenterMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
+        this.connection = connection;
+    }
+
+    PhoneExhibitionCenterMySql(Connection connection, ResourceBundle resourceBundle) {
+        this.QUERIES = resourceBundle;
         this.connection = connection;
     }
 

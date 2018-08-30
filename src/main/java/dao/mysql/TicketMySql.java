@@ -12,23 +12,27 @@ import java.util.*;
 import java.util.Date;
 
 public class TicketMySql implements TicketDao {
+    private final Connection connection;
+    private final ResourceBundle QUERIES;
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_DATE_TO_APPLY = "date_to_apply";
+    private static final String FIELD_CONTRACT_ID = "contract_id";
+    private static final String FIELD_DATE_TRANSACTION = "date_transaction";
+    private static final String FIELD_USER_MAIL = "email";
+    private static final String FIELD_QUANTITY = "quantity";
+    private static final String FIELD_USER_ID = "id_user";
+    private static final String FIELD_CHECKED = "is_confirmed";
+    private static final String FIELD_APPROVED_BY = "approved_by_moderator_id";
 
-    private final String FIELD_ID = "id";
-    private final String FIELD_DATE_TO_APPLY = "date_to_apply";
-    private final String FIELD_CONTRACT_ID = "contract_id";
-    private final String FIELD_DATE_TRANSACTION = "date_transaction";
-    private final String FIELD_USER_MAIL = "email";
-    private final String FIELD_QUANTITY = "quantity";
-    private final String FIELD_USER_ID = "id_user";
-    private final String FIELD_CHECKED = "is_confirmed";
-    private final String FIELD_APPROVED_BY = "approved_by_moderator_id";
-
-    private Connection connection;
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("QueriesMySql");
     private static final Logger LOGGER = Logger.getLogger(TicketMySql.class);
 
-
     TicketMySql(Connection connection) {
+        this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
+        this.connection = connection;
+    }
+
+    TicketMySql(Connection connection, ResourceBundle resourceBundle) {
+        this.QUERIES = resourceBundle;
         this.connection = connection;
     }
 
@@ -80,7 +84,7 @@ public class TicketMySql implements TicketDao {
             throw new DBException(exception);
         }
 
-        if(tickets == null) {
+        if (tickets == null) {
             return Collections.emptyList();
         }
 
@@ -98,7 +102,7 @@ public class TicketMySql implements TicketDao {
             throw new DBException(exception);
         }
 
-        if(tickets == null) {
+        if (tickets == null) {
             return Collections.emptyList();
         }
 
@@ -116,7 +120,7 @@ public class TicketMySql implements TicketDao {
             throw new DBException(exception);
         }
 
-        if(tickets == null) {
+        if (tickets == null) {
             return Collections.emptyList();
         }
 
@@ -162,7 +166,7 @@ public class TicketMySql implements TicketDao {
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
-        if(tickets == null) {
+        if (tickets == null) {
             return Collections.emptyList();
         }
         return tickets;
@@ -255,7 +259,7 @@ public class TicketMySql implements TicketDao {
 
     }
 
-    private List<Ticket> parseTicketSet(ResultSet resultSet) throws DBException{
+    private List<Ticket> parseTicketSet(ResultSet resultSet) throws DBException {
         List<Ticket> tickets = new ArrayList<>();
 
         try {
