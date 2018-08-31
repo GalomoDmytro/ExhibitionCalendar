@@ -1,1 +1,5 @@
-junit\dao\mysql\DescriptionMySqlTest.class
+dao\mysql\PhoneExhibitionCenterMySqlTest.class
+dao\mysql\DescriptionMySqlTest.class
+dao\mysql\ExhibitionContractMySqlTest.class
+dao\mysql\ExhibitionMySqlTest.class
+dao\mysql\ExhibitionCenterMySqlTest.class

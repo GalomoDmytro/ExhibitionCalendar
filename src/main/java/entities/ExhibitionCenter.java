@@ -68,6 +68,17 @@ public class ExhibitionCenter {
         this.phone = phone;
     }
 
+    public ExhibitionCenter emptyCenter() {
+        return new ExhibitionCenter.Builder()
+                .setId(0)
+                .setWebPage("null")
+                .seteMail("null")
+                .setAddress("null")
+                .setTitle("null")
+                .setPhone(Collections.emptyList())
+                .build();
+    }
+
     @Override
     public String toString() {
         return "ExhibitionCenter{" +
@@ -79,6 +90,7 @@ public class ExhibitionCenter {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,8 +100,7 @@ public class ExhibitionCenter {
                 Objects.equals(title, that.title) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(eMail, that.eMail) &&
-                Objects.equals(webPage, that.webPage) &&
-                Objects.equals(phone, that.phone);
+                Objects.equals(webPage, that.webPage);
     }
 
     @Override

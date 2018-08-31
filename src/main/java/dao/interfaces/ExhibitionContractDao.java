@@ -18,12 +18,12 @@ public interface ExhibitionContractDao {
 
     List<Contract> getAllContractsForExhibition(Integer integer) throws DBException;
 
-    List<Contract> galAllContactsWithExpoAndCenter(Date date) throws DBException;
+    List<Contract> getAllContractAfterDateWithExpoCenterAndExhibition(Date date) throws DBException;
 
     void prepareCEC(Contract contract, Exhibition exhibition,
                     ExhibitionCenter exhibitionCenter, Integer idContract) throws DBException;
 
-    List<Contract> searchContactsWithExpoAndCenter(String search, Date date) throws DBException;
+    List<Contract> searchAfterDateWithExpoCenterAndExhibition(String search, Date date) throws DBException;
 
     List<Contract> searchContactsWithExpoAndCenterLimit(String search, Date date, int startLimit, int endLimit) throws DBException;
 

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -40,10 +41,11 @@ public class ExhibitionMySql implements ExhibitionDao {
             throw new DBException(exception);
         }
 
-        if (exhibitions != null) {
+        if (exhibitions != null && !exhibitions.isEmpty()) {
             return exhibitions.get(0);
         }
-        return null;
+
+        return new Exhibition().emptyExhibition();
     }
 
     @Override
@@ -59,10 +61,10 @@ public class ExhibitionMySql implements ExhibitionDao {
             throw new DBException(exception);
         }
 
-        if (exhibitions != null) {
+        if (exhibitions != null && !exhibitions.isEmpty()) {
             return exhibitions;
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -76,10 +78,10 @@ public class ExhibitionMySql implements ExhibitionDao {
             throw new DBException(exception);
         }
 
-        if (exhibitions != null) {
+        if (exhibitions != null && !exhibitions.isEmpty()) {
             return exhibitions.get(0);
         }
-        return null;
+        return new Exhibition().emptyExhibition();
     }
 
     @Override
@@ -129,10 +131,10 @@ public class ExhibitionMySql implements ExhibitionDao {
             throw new DBException(exception);
         }
 
-        if (exhibitions != null) {
+        if (exhibitions != null && !exhibitions.isEmpty()) {
             return exhibitions;
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -163,7 +165,7 @@ public class ExhibitionMySql implements ExhibitionDao {
                 Exhibition exhibition = new Exhibition.Builder()
                         .setId(resultSet.getInt(FIELD_ID))
                         .setTitle(resultSet.getString(FIELD_TITLE))
-                        .setImgSrc(FIELD_IMAGE_SRC)
+                        .setImgSrc(resultSet.getString(FIELD_IMAGE_SRC))
                         .build();
                 exhibitions.add(exhibition);
             }
@@ -173,5 +175,7 @@ public class ExhibitionMySql implements ExhibitionDao {
 
         return exhibitions;
     }
+
+
 
 }

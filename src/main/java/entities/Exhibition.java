@@ -44,6 +44,13 @@ public class Exhibition {
         this.languageTags = languageTags;
     }
 
+    public Exhibition emptyExhibition() {
+        return new Exhibition.Builder()
+                .setImgSrc("null")
+                .setTitle("null")
+                .build();
+    }
+
     @Override
     public String toString() {
         return "ExhibitionMySql{" +

@@ -2,35 +2,165 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bebe6f2d-17ec-42d8-8dce-6844d266036d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/MySqlDB_TEST.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/junit/dao/mysql/DescriptionMySqlTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionCenterMySqlTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionContractMySqlTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionMySqlTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/PhoneExhibitionCenterMySqlTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/command/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/command/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/FactoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/FactoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionContractDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionContractDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionCenterMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionCenterMySql.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionContractMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionContractMySql.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/TicketMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/TicketMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Exhibition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Exhibition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/ExhibitionCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/ExhibitionCenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/DBConnection.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DBConnection.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MySqlDB_TEST.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MySqlDB_TEST.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/command/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/command/Home.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/FactoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/FactoryDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/DescriptionMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/DescriptionMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/junit/dao/mysql/DescriptionMySqlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/DescriptionMySqlTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBConnection.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBConnection.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MySqlDB_TEST.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MySqlDB_TEST.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/QueriesMySql.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/QueriesMySql.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/QueriesMySql_Test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/QueriesMySql_Test.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/ExhibitionContractDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/ExhibitionContractDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionCenterMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionCenterMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionContractMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionContractMySql.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/ExhibitionMySql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/FactoryMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/FactoryMySql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/Home.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/Contract$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Contract$Builder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Contract.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/Exhibition$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Exhibition$Builder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/Exhibition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Exhibition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/ExhibitionCenter$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/ExhibitionCenter$Builder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/ExhibitionCenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/ExhibitionCenter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/DBConnection.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/MySqlQueriesDB_TEST.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/QueriesMySql.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/ControllerHelper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/ChangeLanguage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/CheckOut.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/Command.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/EditUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/ErrorHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/ExpoInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/Home.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/Links.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/LoginCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/LogoutCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/Purchase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/PurchaseProcessing.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/RegistrationCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/admin/Admin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/AddExpo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/AddingExpoCenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ApprovedTickets.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ContractManagement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/CreateContract.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/EditCenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/EditContract.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/EditExposition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ExhibitionManagement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ExpoCenterManagement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/ModeratorHome.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/WaitApprovalTicket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/moderatorCommand/combineExhibitionWithExhibionCenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/command/user/UserHome.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/filter/AccessSecurityFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/filter/EncodingFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/filter/PageRedirectSecurityFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/filter/XSSFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/controller/filter/XSSRequestWrapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/Connection/ConnectionPoolMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/ConnectionPoolDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/DescriptionTableDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/ExhibitionCenterDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/ExhibitionContractDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/ExhibitionDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/FactoryDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/PhoneExhibitionCenterDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/QueryHelper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/RoleDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/TicketDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/UserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/interfaces/UserPhoneDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/DescriptionMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/ExhibitionCenterMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/ExhibitionContractMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/ExhibitionMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/FactoryMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/PhoneExhibitionCenterMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/RoleMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/TicketMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/UserMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/dao/mysql/UserPhoneMySql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/Contract$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/Contract.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/Exhibition$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/Exhibition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/ExhibitionCenter$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/ExhibitionCenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/Role.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/Ticket$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/Ticket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/User$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/entities/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/exceptions/DBException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/strings_eng.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/strings_error_eng.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/strings_ru.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/utility/JSPError.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/utility/PasswordHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/utility/Patterns.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/classes/utility/PriceTicket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/commons-codec-1.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/commons-dbcp-1.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/commons-lang3-3.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/commons-pool-1.5.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/jstl-1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/log4j-1.2.17.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/mysql-connector-java-8.0.11.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/lib/protobuf-java-2.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/resources/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/resources/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/resources/img/errorImg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/admin/changeRoleAdmin.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/common/centerInfo.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/common/checkOut.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/common/expoinfo.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/common/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/common/purchase.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/common/purchaseFinish.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/common/registration.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/home.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/addExpoCenter.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/addExposition.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/approvedTicket.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/combineExhibitionWithExhibionCenter.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/contractManagement.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/createContract.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/editContract.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/editExposition.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/editExpositionCenter.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/expoCenterManagement.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/expoManagement.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/moderatorHome.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/moderator/waitApprovalTickets.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/user/editUser.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/user/userHome.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/utility/error.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/utility/footer.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/exhibition_calendar-1.0-SNAPSHOT/views/utility/header.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-junit.dao.mysql.DescriptionMySqlTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/junit.dao.mysql.DescriptionMySqlTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/junit/dao/mysql/DescriptionMySqlTest.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,20 +194,20 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="705" />
-          <entry key="dummy" value="61" />
-          <entry key="java" value="60344" />
+          <entry key="dummy" value="102" />
+          <entry key="java" value="65190" />
           <entry key="jsp" value="11285" />
-          <entry key="properties" value="3946" />
+          <entry key="properties" value="4141" />
           <entry key="xml" value="328" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="705" />
-          <entry key="JAVA" value="60344" />
+          <entry key="JAVA" value="65190" />
           <entry key="JSP" value="11007" />
-          <entry key="PLAIN_TEXT" value="339" />
-          <entry key="Properties" value="3946" />
+          <entry key="PLAIN_TEXT" value="380" />
+          <entry key="Properties" value="4141" />
           <entry key="XML" value="328" />
         </counts>
       </usages-collector>
@@ -87,10 +217,10 @@
           <entry key="class" value="11" />
           <entry key="css" value="21" />
           <entry key="iml" value="1" />
-          <entry key="java" value="911" />
+          <entry key="java" value="934" />
           <entry key="jpg" value="2" />
           <entry key="jsp" value="374" />
-          <entry key="properties" value="107" />
+          <entry key="properties" value="109" />
           <entry key="xml" value="32" />
         </counts>
       </usages-collector>
@@ -100,10 +230,10 @@
           <entry key="CSS" value="21" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="911" />
+          <entry key="JAVA" value="934" />
           <entry key="JSP" value="358" />
           <entry key="PLAIN_TEXT" value="16" />
-          <entry key="Properties" value="108" />
+          <entry key="Properties" value="110" />
           <entry key="XML" value="32" />
         </counts>
       </usages-collector>
@@ -112,44 +242,44 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/entities/Contract.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/junit/dao/mysql/DescriptionMySqlTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="253">
+              <caret line="144" column="66" selection-start-line="144" selection-start-column="66" selection-end-line="144" selection-end-column="66" />
               <folding>
-                <element signature="method#crateTestTables#0;class#DescriptionMySqlTest#0" />
-                <element signature="method#getDescription#0;class#DescriptionMySqlTest#0" />
-                <element signature="method#prepareURL#0;class#DescriptionMySqlTest#0" />
-                <element signature="method#closeStatement#0;class#DescriptionMySqlTest#0" />
-                <element signature="method#closeConnection#0;class#DescriptionMySqlTest#0" />
+                <element signature="e#1670#1671#0" expanded="true" />
+                <element signature="e#1701#1702#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entities/Exhibition.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionCenterMySqlTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="-1430">
+              <caret line="47" selection-start-line="47" selection-end-line="48" />
+              <folding>
+                <element signature="method#setUp#0;class#ExhibitionCenterMySqlTest#0" />
+                <element signature="e#949#1301#0" />
+                <element signature="method#crateTestTables#0;class#ExhibitionCenterMySqlTest#0" />
+                <element signature="method#prepareURL#0;class#ExhibitionCenterMySqlTest#0" />
+                <element signature="method#closeConnection#0;class#ExhibitionCenterMySqlTest#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionContractMySql.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+            <state relative-caret-position="274">
+              <caret line="351" column="30" selection-start-line="351" selection-start-column="30" selection-end-line="351" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#searchAfterDateWithExpoCenterAndExhibition#0;class#ExhibitionContractMySql#0" />
+                <element signature="method#searchContactsWithExpoAndCenterLimit#0;class#ExhibitionContractMySql#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -157,8 +287,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+            <state relative-caret-position="304">
+              <caret line="111" column="22" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -166,17 +296,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="112" column="66" selection-start-line="112" selection-start-column="66" selection-end-line="112" selection-end-column="66" />
+            <state relative-caret-position="282">
+              <caret line="91" column="19" selection-start-line="91" selection-start-column="19" selection-end-line="92" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionContractMySqlTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+            <state relative-caret-position="-345">
+              <caret line="773" column="37" lean-forward="true" selection-start-line="773" selection-start-column="37" selection-end-line="773" selection-end-column="37" />
+              <folding>
+                <element signature="method#setUp#0;class#ExhibitionContractMySqlTest#0" />
+                <element signature="method#tearDown#0;class#ExhibitionContractMySqlTest#0" />
+                <element signature="method#deleteContractByIdTest#0;class#ExhibitionContractMySqlTest#0" />
+                <element signature="method#getNumberOfContractsAfterDateTest#0;class#ExhibitionContractMySqlTest#0" />
+                <element signature="method#getNumberOfContractsAfterSearchTest#0;class#ExhibitionContractMySqlTest#0" />
+                <element signature="method#crateTestTables#0;class#ExhibitionContractMySqlTest#0" />
+                <element signature="method#prepareURL#0;class#ExhibitionContractMySqlTest#0" />
+                <element signature="method#closeConnection#0;class#ExhibitionContractMySqlTest#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -188,32 +328,13 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="JUnit4 Test Class" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getAllContractsForExhibition</find>
-      <find>ticket</find>
-      <find>approveTicket</find>
-      <find>getAllExhibitionCenter</find>
-      <find>contra</find>
-      <find>wait</find>
-      <find>delete</find>
-      <find>inser</find>
-      <find>delet</find>
-      <find>ticke</find>
-      <find>COUNT</find>
-      <find>sess</find>
-      <find>currentPage</find>
-      <find>phone</find>
-      <find>exhibition_center_phon</find>
-      <find>_test</find>
-      <find>CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`exhibition_cente</find>
-      <find>CASCADEON UPDATE CASCADE)ENGINE = InnoDB</find>
-      <find>UPDATE CASCADE)ENGINE = InnoDB</find>
       <find>descr</find>
       <find>field</find>
       <find>exhibition</find>
@@ -223,8 +344,27 @@
       <find>WHERE exhibition_id = ?</find>
       <find>getDescription</find>
       <find>allDescriptionEx</find>
+      <find>image_src</find>
       <find>getAllDescription</find>
+      <find>getByEMail=SELECT * FROM exhibition_center WHERE email = ?;</find>
+      <find>getByI</find>
+      <find>empty</find>
+      <find>exhibitionCenter</find>
+      <find>sql</find>
+      <find>getByCenterAndExhibition</find>
+      <find>getAllAfterDateWithExpoCenterAndExhibition</find>
       <find>description.deleteLang</find>
+      <find>useLegacyDatetimeCode</find>
+      <find>useServerPrepStmts=true</find>
+      <find>insert</find>
+      <find>getAllContractAfterDateWithExpoCenterAndExhibition</find>
+      <find>setDate</find>
+      <find>getExhibitionCon</find>
+      <find>getExhibitionBySearch</find>
+      <find>contracts == null</find>
+      <find>getAllAfterDateWithExpoCenterAndExhibition=SELECT * FROM exhibition_contract</find>
+      <find>getNumberOfContractsAfterDate</find>
+      <find>setTi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -233,16 +373,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/editExpositionCenter.jsp" />
-        <option value="$PROJECT_DIR$/src/main/resources/strings_error_eng.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/LogoutCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/RegistrationCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Role.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/admin/Admin.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/contractManagement.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/views/admin/changeRoleAdmin.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ContractManagement.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/UserDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/utility/Patterns.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/common/registration.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/LoginCommand.java" />
@@ -250,7 +380,6 @@
         <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionContractDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/ExhibitionCenter.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/expoCenterManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/addExposition.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExpoCenterManagement.java" />
@@ -266,24 +395,35 @@
         <option value="$PROJECT_DIR$/src/main/java/controller/command/Home.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/home.jsp" />
         <option value="$PROJECT_DIR$/src/test/java/junit/mysql/DescriptionMySqlTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/DescriptionMySqlTest.java" />
         <option value="$PROJECT_DIR$/src/main/resources/MySqlQueriesDB_TEST.properties" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditExposition.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/FactoryDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionCenterMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionContractMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/TicketMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" />
         <option value="$PROJECT_DIR$/src/test/java/junit/dao/mysql/DescriptionMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/junit/dao/mysql/ExhibitionCenterMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/DescriptionMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/ExhibitionCenter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionCenterMySql.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java" />
+        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionCenterMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/PhoneExhibitionCenterMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Exhibition.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/Connection/ConnectionPoolMySql.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/MySqlDB_TEST.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/DBConnection.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Contract.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionContractMySql.java" />
+        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionContractMySqlTest.java" />
       </list>
     </option>
   </component>
@@ -310,7 +450,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -436,33 +576,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="moderator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -486,6 +599,11 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="mysql" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -494,8 +612,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="TODO&#9;ACTION&#9;ActivateTODOToolWindow&#10;todo&#9;null&#9;null" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535632683604" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/epam_project/Exhibition Calendar/src/main/java/entities/Exhibition.java&#10;TODO&#9;ACTION&#9;ActivateTODOToolWindow&#10;todo&#9;null&#9;null" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535719475662" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="extract.method.default.visibility" value="private" />
@@ -506,15 +624,8 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="dao.mysql" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\resources\img" />
-      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\resourses" />
-      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\views" />
-      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp" />
-      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\views\utility" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="dao.mysql" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\resources\css" />
@@ -522,6 +633,16 @@
       <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp" />
       <recent name="D:\epam_project\Exhibition Calendar\src\main\java" />
       <recent name="D:\epam_project\Exhibition Calendar\src\main\java\entities" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\resources\img" />
+      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\resourses" />
+      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\views" />
+      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp" />
+      <recent name="D:\epam_project\Exhibition Calendar\src\main\webapp\views\utility" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -536,99 +657,99 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DescriptionMySqlTest (1)">
-    <configuration name="DescriptionMySqlTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ExhibitionContractMySqlTest">
+    <configuration name="ExhibitionContractMySqlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="junit.dao.mysql.*" />
+          <option name="PATTERN" value="dao.mysql.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="junit.dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="junit.dao.mysql.DescriptionMySqlTest" />
+      <option name="PACKAGE_NAME" value="dao.mysql" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.ExhibitionContractMySqlTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DescriptionMySqlTest.deleteAllDescriptionForExposition" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ExhibitionContractMySqlTest.deleteContractById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="junit.dao.mysql.*" />
+          <option name="PATTERN" value="dao.mysql.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="junit.dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="junit.dao.mysql.DescriptionMySqlTest" />
-      <option name="METHOD_NAME" value="deleteAllDescriptionForExposition" />
+      <option name="PACKAGE_NAME" value="dao.mysql" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.ExhibitionContractMySqlTest" />
+      <option name="METHOD_NAME" value="deleteContractById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DescriptionMySqlTest.deleteDescriptionForLang" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ExhibitionContractMySqlTest.getContractsAfterDateLimit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="junit.dao.mysql.*" />
+          <option name="PATTERN" value="dao.mysql.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="junit.dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="junit.dao.mysql.DescriptionMySqlTest" />
-      <option name="METHOD_NAME" value="deleteDescriptionForLang" />
+      <option name="PACKAGE_NAME" value="dao.mysql" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.ExhibitionContractMySqlTest" />
+      <option name="METHOD_NAME" value="getContractsAfterDateLimit" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DescriptionMySqlTest.insertDescription" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="junit.dao.mysql.*" />
+          <option name="PATTERN" value="dao.mysql.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="junit.dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="junit.dao.mysql.DescriptionMySqlTest" />
-      <option name="METHOD_NAME" value="insertDescription" />
+      <option name="PACKAGE_NAME" value="dao.mysql" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.ExhibitionContractMySqlTest" />
+      <option name="METHOD_NAME" value="getNumberOfContractsAfterDate" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DescriptionMySqlTest.insertDescriptionById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="junit.dao.mysql.*" />
+          <option name="PATTERN" value="dao.mysql.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="junit.dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="junit.dao.mysql.DescriptionMySqlTest" />
-      <option name="METHOD_NAME" value="insertDescriptionById" />
+      <option name="PACKAGE_NAME" value="dao.mysql" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.ExhibitionContractMySqlTest" />
+      <option name="METHOD_NAME" value="getNumberOfContractsAfterSearch" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.DescriptionMySqlTest (1)" />
-      <item itemvalue="JUnit.DescriptionMySqlTest.insertDescription" />
-      <item itemvalue="JUnit.DescriptionMySqlTest.insertDescriptionById" />
-      <item itemvalue="JUnit.DescriptionMySqlTest.deleteAllDescriptionForExposition" />
-      <item itemvalue="JUnit.DescriptionMySqlTest.deleteDescriptionForLang" />
+      <item itemvalue="JUnit.ExhibitionContractMySqlTest.deleteContractById" />
+      <item itemvalue="JUnit.ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" />
+      <item itemvalue="JUnit.ExhibitionContractMySqlTest" />
+      <item itemvalue="JUnit.ExhibitionContractMySqlTest.getNumberOfContractsAfterSearch" />
+      <item itemvalue="JUnit.ExhibitionContractMySqlTest.getContractsAfterDateLimit" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DescriptionMySqlTest (1)" />
-        <item itemvalue="JUnit.DescriptionMySqlTest.deleteDescriptionForLang" />
-        <item itemvalue="JUnit.DescriptionMySqlTest.deleteAllDescriptionForExposition" />
-        <item itemvalue="JUnit.DescriptionMySqlTest.insertDescriptionById" />
-        <item itemvalue="JUnit.DescriptionMySqlTest.insertDescription" />
+        <item itemvalue="JUnit.ExhibitionContractMySqlTest" />
+        <item itemvalue="JUnit.ExhibitionContractMySqlTest.getContractsAfterDateLimit" />
+        <item itemvalue="JUnit.ExhibitionContractMySqlTest.getNumberOfContractsAfterSearch" />
+        <item itemvalue="JUnit.ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" />
+        <item itemvalue="JUnit.ExhibitionContractMySqlTest.deleteContractById" />
       </list>
     </recent_temporary>
   </component>
@@ -643,35 +764,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DescriptionMySqlTest_insertDescription - 2018.08.30 at 15h 13m 13s.xml">
-      <configuration name="DescriptionMySqlTest.insertDescription" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_deleteContractById - 2018.08.31 at 14h 36m 11s.xml">
+      <configuration name="ExhibitionContractMySqlTest.deleteContractById" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_insertDescriptionById - 2018.08.30 at 15h 22m 01s.xml">
-      <configuration name="DescriptionMySqlTest.insertDescriptionById" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getNumberOfContractsAfterDate - 2018.08.31 at 14h 51m 44s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteAllDescriptionForExposition - 2018.08.30 at 15h 25m 58s.xml">
-      <configuration name="DescriptionMySqlTest.deleteAllDescriptionForExposition" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getNumberOfContractsAfterDate - 2018.08.31 at 14h 53m 56s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteAllDescriptionForExposition - 2018.08.30 at 15h 26m 23s.xml">
-      <configuration name="DescriptionMySqlTest.deleteAllDescriptionForExposition" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getNumberOfContractsAfterDate - 2018.08.31 at 14h 55m 14s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteAllDescriptionForExposition - 2018.08.30 at 15h 28m 34s.xml">
-      <configuration name="DescriptionMySqlTest.deleteAllDescriptionForExposition" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getNumberOfContractsAfterDate - 2018.08.31 at 14h 58m 50s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteDescriptionForLang - 2018.08.30 at 15h 30m 51s.xml">
-      <configuration name="DescriptionMySqlTest.deleteDescriptionForLang" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest - 2018.08.31 at 14h 59m 10s.xml">
+      <configuration name="ExhibitionContractMySqlTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteDescriptionForLang - 2018.08.30 at 15h 31m 45s.xml">
-      <configuration name="DescriptionMySqlTest.deleteDescriptionForLang" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getNumberOfContractsAfterDate - 2018.08.31 at 15h 12m 56s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterDate" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteDescriptionForLang - 2018.08.30 at 15h 32m 28s.xml">
-      <configuration name="DescriptionMySqlTest.deleteDescriptionForLang" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getNumberOfContractsAfterSearch - 2018.08.31 at 15h 20m 59s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getNumberOfContractsAfterSearch" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteDescriptionForLang - 2018.08.30 at 15h 33m 59s.xml">
-      <configuration name="DescriptionMySqlTest.deleteDescriptionForLang" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getContractsAfterDateLimit - 2018.08.31 at 15h 35m 05s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getContractsAfterDateLimit" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionMySqlTest_deleteDescriptionForLang - 2018.08.30 at 15h 34m 49s.xml">
-      <configuration name="DescriptionMySqlTest.deleteDescriptionForLang" configurationId="JUnit" />
+    <history-entry file="ExhibitionContractMySqlTest_getContractsAfterDateLimit - 2018.08.31 at 15h 35m 23s.xml">
+      <configuration name="ExhibitionContractMySqlTest.getContractsAfterDateLimit" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -687,7 +808,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21215352" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -696,7 +817,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.21475054" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.30802602" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -751,55 +872,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/ExhibitionCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/addExpoCenter.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/expoCenterManagement.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/addExposition.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1298">
-          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/Purchase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="185" column="24" selection-start-line="185" selection-start-column="24" selection-end-line="185" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/editContract.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="79" column="118" selection-start-line="79" selection-start-column="118" selection-end-line="79" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/AddingExpoCenter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2805">
@@ -877,13 +949,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/CheckOut.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-407">
-          <caret line="109" column="58" selection-start-line="109" selection-start-column="58" selection-end-line="109" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/utility/PriceTicket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11">
@@ -907,13 +972,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/junit/dao/mysql.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/DescriptionMySqlTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/DBConnection.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -928,13 +986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/Connection/ConnectionPoolMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="830">
-          <caret line="74" column="5" selection-start-line="65" selection-start-column="4" selection-end-line="74" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -998,27 +1049,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionContractMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionCenterMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1052,27 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Exhibition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/MySqlDB_TEST.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1087,30 +1096,187 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties">
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/DescriptionMySqlTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+        <state relative-caret-position="308">
+          <caret line="68" selection-start-line="68" selection-end-line="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getDescriptionTest#0;class#DescriptionMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#DescriptionMySqlTest#0" />
+            <element signature="method#closeStatement#0;class#DescriptionMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#DescriptionMySqlTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionCenterMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="38" column="51" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/ExhibitionCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1034">
+          <caret line="102" column="53" selection-start-line="102" selection-start-column="53" selection-end-line="102" selection-end-column="53" />
+          <folding>
+            <element signature="method#emptyCenter#0;class#ExhibitionCenter#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="316" column="4" selection-start-line="316" selection-start-column="4" selection-end-line="316" selection-end-column="4" />
+          <folding>
+            <element signature="method#setUp#0;class#ExhibitionMySqlTest#0" />
+            <element signature="method#tearDown#0;class#ExhibitionMySqlTest#0" />
+            <element signature="method#getExhibitionBySearchTest#0;class#ExhibitionMySqlTest#0" />
+            <element signature="method#getExhibitionByTitleTest#0;class#ExhibitionMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#ExhibitionMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#ExhibitionMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#ExhibitionMySqlTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/PhoneExhibitionCenterMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="71" column="99" selection-start-line="71" selection-start-column="99" selection-end-line="71" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/PhoneExhibitionCenterMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="17" column="45" lean-forward="true" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+          <folding>
+            <element signature="method#setUp#0;class#PhoneExhibitionCenterMySqlTest#0" />
+            <element signature="method#tearDown#0;class#PhoneExhibitionCenterMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#PhoneExhibitionCenterMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#PhoneExhibitionCenterMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#PhoneExhibitionCenterMySqlTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-814">
+          <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Exhibition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/CheckOut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="138" column="72" selection-start-line="138" selection-start-column="32" selection-end-line="138" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_172/src.zip!/java/sql/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/Connection/ConnectionPoolMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/DBConnection.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="49" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/MySqlDB_TEST.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1100">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Contract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="144" column="66" selection-start-line="144" selection-start-column="66" selection-end-line="144" selection-end-column="66" />
+          <folding>
+            <element signature="e#1670#1671#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionCenterMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1430">
+          <caret line="47" selection-start-line="47" selection-end-line="48" />
+          <folding>
+            <element signature="method#setUp#0;class#ExhibitionCenterMySqlTest#0" />
+            <element signature="e#949#1301#0" />
+            <element signature="method#crateTestTables#0;class#ExhibitionCenterMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#ExhibitionCenterMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#ExhibitionCenterMySqlTest#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="112" column="66" selection-start-line="112" selection-start-column="66" selection-end-line="112" selection-end-column="66" />
+        <state relative-caret-position="282">
+          <caret line="91" column="19" selection-start-line="91" selection-start-column="19" selection-end-line="92" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/junit/dao/mysql/DescriptionMySqlTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="304">
+          <caret line="111" column="22" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/ExhibitionContractMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="351" column="30" selection-start-line="351" selection-start-column="30" selection-end-line="351" selection-end-column="30" />
           <folding>
-            <element signature="method#crateTestTables#0;class#DescriptionMySqlTest#0" />
-            <element signature="method#getDescription#0;class#DescriptionMySqlTest#0" />
-            <element signature="method#prepareURL#0;class#DescriptionMySqlTest#0" />
-            <element signature="method#closeStatement#0;class#DescriptionMySqlTest#0" />
-            <element signature="method#closeConnection#0;class#DescriptionMySqlTest#0" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#searchAfterDateWithExpoCenterAndExhibition#0;class#ExhibitionContractMySql#0" />
+            <element signature="method#searchContactsWithExpoAndCenterLimit#0;class#ExhibitionContractMySql#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionContractMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345">
+          <caret line="773" column="37" lean-forward="true" selection-start-line="773" selection-start-column="37" selection-end-line="773" selection-end-column="37" />
+          <folding>
+            <element signature="method#setUp#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#tearDown#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#deleteContractByIdTest#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#getNumberOfContractsAfterDateTest#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#getNumberOfContractsAfterSearchTest#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#ExhibitionContractMySqlTest#0" />
           </folding>
         </state>
       </provider>

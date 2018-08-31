@@ -35,16 +35,18 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     @Override
     public ExhibitionCenter getExhibitionCenterById(Integer id) throws DBException {
         List<ExhibitionCenter> exhibitionCenters = null;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getById"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("exhibitionCenter.getById"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
 
-        if (exhibitionCenters == null) {
-            return null;
+        if (exhibitionCenters == null || exhibitionCenters.isEmpty()) {
+            return new ExhibitionCenter().emptyCenter();
         } else {
             return exhibitionCenters.get(0);
         }
@@ -62,8 +64,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             throw new DBException(exception);
         }
 
-        if (exhibitionCenters == null) {
-            return null;
+        if (exhibitionCenters == null || exhibitionCenters.isEmpty()) {
+            return new ExhibitionCenter().emptyCenter();
         } else {
             return exhibitionCenters.get(0);
         }
@@ -243,4 +245,5 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             throw new DBException(exception);
         }
     }
+
 }

@@ -108,6 +108,19 @@ public class Contract {
         this.maxTicketPerDay = maxTicketPerDay;
     }
 
+    public Contract emptyContract() {
+        return new Contract.Builder()
+                .setId(0)
+                .setExCenterId(0)
+                .setExhibitionId(0)
+                .setDateFrom(null)
+                .setDateTo(null)
+                .setTicketPrice(new BigDecimal(0))
+                .setWorkTime("null")
+                .setMaxTicketPerDay(0)
+                .build();
+    }
+
     @Override
     public String toString() {
         return "Contract{" +
@@ -130,8 +143,6 @@ public class Contract {
         return Objects.equals(id, contract.id) &&
                 Objects.equals(exhibitionId, contract.exhibitionId) &&
                 Objects.equals(exCenterId, contract.exCenterId) &&
-                Objects.equals(dateFrom, contract.dateFrom) &&
-                Objects.equals(dateTo, contract.dateTo) &&
                 Objects.equals(ticketPrice, contract.ticketPrice) &&
                 Objects.equals(workTime, contract.workTime) &&
                 Objects.equals(maxTicketPerDay, contract.maxTicketPerDay);
@@ -190,7 +201,7 @@ public class Contract {
             return this;
         }
 
-        public Builder setTicketPrice(String description) {
+        public Builder setTicketDescription(String description) {
             contract.setExhibitionDescription(description);
             return this;
         }

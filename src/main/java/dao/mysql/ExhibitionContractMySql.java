@@ -40,7 +40,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     @Override
     public Contract getExhibitionContractById(Integer id) throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getById"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.getById"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
@@ -48,8 +49,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return new Contract().emptyContract();
         } else {
             return contracts.get(0);
         }
@@ -59,7 +60,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter,
                                                                   Exhibition exhibition) throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getByCenterAndExhibition"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.getByCenterAndExhibition"))) {
             statement.setInt(1, exhibitionCenter.getId());
             statement.setInt(2, exhibition.getId());
             ResultSet resultSet = statement.executeQuery();
@@ -68,8 +70,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
@@ -91,7 +93,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     @Override
     public List<Contract> getAllContractsForCenter(Integer idExhibitionCenter) throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllForExhibitionCenter"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.getAllForExhibitionCenter"))) {
             statement.setInt(1, idExhibitionCenter);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
@@ -99,7 +102,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
+        if (contracts == null || contracts.isEmpty()) {
             return Collections.emptyList();
         } else {
             return contracts;
@@ -118,7 +121,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
+        if (contracts == null || contracts.isEmpty()) {
             return Collections.emptyList();
         } else {
             return contracts;
@@ -128,68 +131,75 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     @Override
     public List<Contract> getAllContracts() throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAll"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("contract.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
     }
 
     @Override
-    public List<Contract> galAllContactsWithExpoAndCenter(Date date) throws DBException {
+    public List<Contract> getAllContractAfterDateWithExpoCenterAndExhibition(java.sql.Date date)
+            throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDateWithExpoCenterAndExhibition"))) {
-            statement.setDate(1, date);
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.getAllAfterDateWithExpoCenterAndExhibition"))) {
+            statement.setDate(1, date, java.util.Calendar.getInstance());
+            statement.setDate(2, date, java.util.Calendar.getInstance());
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
     }
 
     @Override
-    public List<Contract> searchContactsWithExpoAndCenter(String search, Date date) throws DBException {
+    public List<Contract> searchAfterDateWithExpoCenterAndExhibition(String search, Date date)
+            throws DBException {
         List<Contract> contracts;
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.searchAfterDateWithExpoCenterAndExhibition"))) {
-            statement.setDate(1, date);
-            statement.setString(2, search);
+            statement.setDate(1, date, java.util.Calendar.getInstance());
+            statement.setDate(2, date, java.util.Calendar.getInstance());
             statement.setString(3, search);
             statement.setString(4, search);
+            statement.setString(5, search);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
     }
 
     @Override
-    public List<Contract> searchContactsWithExpoAndCenterLimit(String search, Date date, int startLimit, int endLimit) throws DBException {
+    public List<Contract> searchContactsWithExpoAndCenterLimit(String search, Date date, int startLimit,
+                                                               int endLimit) throws DBException {
         List<Contract> contracts;
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.searchAfterDateWithExpoCenterAndExhibitionLimit"))) {
-            statement.setDate(1, date);
+            statement.setDate(1, date, java.util.Calendar.getInstance());
             statement.setString(2, search);
             statement.setString(3, search);
             statement.setString(4, search);
@@ -201,8 +211,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
@@ -211,16 +221,18 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     @Override
     public List<Contract> getAllAfterDate(Date date) throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDate"))) {
-            statement.setDate(1, date);
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.getAllAfterDate"))) {
+            statement.setDate(1, date, java.util.Calendar.getInstance());
+            statement.setDate(2, date, java.util.Calendar.getInstance());
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
@@ -230,7 +242,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     public List<Contract> getAllContractsBySearch(String search) throws DBException {
         search = "%" + search + "%";
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.search"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.search"))) {
             statement.setString(1, search);
             statement.setString(2, search);
             statement.setString(3, search);
@@ -246,8 +259,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
@@ -255,7 +268,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
     @Override
     public void updateContract(Contract contract) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.updateContract"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.updateContract"))) {
             prepareStatementToUpdate(statement, contract);
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -289,7 +303,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
     @Override
     public void deleteContract(Contract contract) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.deleteContract"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.deleteContract"))) {
             statement.setInt(1, contract.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -299,7 +314,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
     @Override
     public void deleteContractById(Integer id) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.deleteContract"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.deleteContract"))) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -310,8 +326,10 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     @Override
     public int getNumberOfContractsAfterDate(Date date) throws DBException {
         int count = 0;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDateWithExpoCenterAndExhibitionCount"))) {
-            statement.setDate(1, date);
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.getAllAfterDateWithExpoCenterAndExhibitionCount"))) {
+            statement.setDate(1, date, java.util.Calendar.getInstance());
+            statement.setDate(2, date, java.util.Calendar.getInstance());
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             count = resultSet.getInt(1);
@@ -323,20 +341,23 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
-    public List<Contract> getContractsAfterDateLimit(Date date, int startLimit, int endLimit) throws DBException {
+    public List<Contract> getContractsAfterDateLimit(Date date, int startLimit,
+                                                     int endLimit) throws DBException {
         List<Contract> contracts;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("contract.getAllAfterDateWithExpoCenterAndExhibitionLimit"))) {
-            statement.setDate(1, date);
-            statement.setInt(2, startLimit);
-            statement.setInt(3, endLimit);
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("contract.getAllAfterDateWithExpoCenterAndExhibitionLimit"))) {
+            statement.setDate(1, date, java.util.Calendar.getInstance());
+            statement.setDate(2, date, java.util.Calendar.getInstance());
+            statement.setInt(3, startLimit);
+            statement.setInt(4, endLimit);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
 
-        if (contracts == null) {
-            return null;
+        if (contracts == null || contracts.isEmpty()) {
+            return Collections.emptyList();
         } else {
             return contracts;
         }
@@ -348,10 +369,11 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.searchAfterDateWithExpoCenterAndExhibitionCount"))) {
-            statement.setDate(1, date);
-            statement.setString(2, search);
+            statement.setDate(1, date, java.util.Calendar.getInstance());
+            statement.setDate(2, date, java.util.Calendar.getInstance());
             statement.setString(3, search);
             statement.setString(4, search);
+            statement.setString(5, search);
 
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -444,12 +466,13 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         return contracts;
     }
 
-    private void prepareStatementToInsert(PreparedStatement statement, Contract contract) throws DBException {
+    private void prepareStatementToInsert(PreparedStatement statement, Contract contract)
+            throws DBException {
         try {
             statement.setInt(1, contract.getExhibitionId());
             statement.setInt(2, contract.getExCenterId());
-            statement.setDate(3, contract.getDateFrom());
-            statement.setDate(4, contract.getDateTo());
+            statement.setDate(3, contract.getDateFrom(), java.util.Calendar.getInstance());
+            statement.setDate(4, contract.getDateTo(), java.util.Calendar.getInstance());
             statement.setBigDecimal(5, contract.getTicketPrice());
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
@@ -458,12 +481,13 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
-    private void prepareStatementToUpdate(PreparedStatement statement, Contract contract) throws DBException {
+    private void prepareStatementToUpdate(PreparedStatement statement, Contract contract)
+            throws DBException {
         try {
             statement.setInt(1, contract.getExhibitionId());
             statement.setInt(2, contract.getExCenterId());
-            statement.setDate(3, contract.getDateFrom());
-            statement.setDate(4, contract.getDateTo());
+            statement.setDate(3, contract.getDateFrom(), java.util.Calendar.getInstance());
+            statement.setDate(4, contract.getDateTo(), java.util.Calendar.getInstance());
             statement.setBigDecimal(5, contract.getTicketPrice());
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
