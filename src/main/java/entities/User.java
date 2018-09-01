@@ -78,6 +78,17 @@ public class User {
         this.role = role;
     }
 
+    public User emptyUser() {
+        return new User.Builder()
+                .setId(0)
+                .setName("empty")
+                .setMail("empty")
+                .setFirstName("empty")
+                .setLastName("empty")
+                .setPassword("empty")
+                .build();
+    }
+
     @Override
     public String toString() {
         return "User{" +

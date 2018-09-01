@@ -59,7 +59,8 @@ public class TicketMySql implements TicketDao {
     @Override
     public Ticket getTicketById(Integer id) throws DBException {
         List<Ticket> tickets;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getById"))) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement(QUERIES.getString("ticket.getById"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
@@ -67,8 +68,8 @@ public class TicketMySql implements TicketDao {
             throw new DBException(exception);
         }
 
-        if (tickets == null) {
-            return null;
+        if (tickets == null || tickets.isEmpty()) {
+            return new Ticket().emptyTicket();
         } else {
             return tickets.get(0);
         }
@@ -77,14 +78,15 @@ public class TicketMySql implements TicketDao {
     @Override
     public List<Ticket> getAllTickets() throws DBException {
         List<Ticket> tickets;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getAll"))) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement(QUERIES.getString("ticket.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
 
-        if (tickets == null) {
+        if (tickets == null || tickets.isEmpty()) {
             return Collections.emptyList();
         }
 
@@ -102,7 +104,7 @@ public class TicketMySql implements TicketDao {
             throw new DBException(exception);
         }
 
-        if (tickets == null) {
+        if (tickets == null || tickets.isEmpty()) {
             return Collections.emptyList();
         }
 
@@ -120,7 +122,7 @@ public class TicketMySql implements TicketDao {
             throw new DBException(exception);
         }
 
-        if (tickets == null) {
+        if (tickets == null || tickets.isEmpty()) {
             return Collections.emptyList();
         }
 
@@ -131,42 +133,50 @@ public class TicketMySql implements TicketDao {
     public int getCountSoldTicketForDate(Date date, Integer id_contract) throws DBException {
         int countTickets = 0;
 
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.countSoldTicket"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.countSoldTicket"))) {
+            statement.setDate(1, java.sql.Date.valueOf(date.toString())
+                    , java.util.Calendar.getInstance());
+            statement.setInt(2, id_contract);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             countTickets = resultSet.getInt(1);
         } catch (SQLException exception) {
+            System.out.println(exception);
             throw new DBException(exception);
         }
 
         return countTickets;
     }
 
-    @Override
-    public List<Ticket> getAllTicketsForDate(Date date) throws DBException {
-        List<Ticket> tickets;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getAllForDate"))) {
-            statement.setString(1, date.toString());
-            ResultSet resultSet = statement.executeQuery();
-            tickets = parseTicketSet(resultSet);
-        } catch (SQLException exception) {
-            throw new DBException(exception);
-        }
 
-        return tickets;
-    }
+
+//    @Override
+//    public List<Ticket> getAllTicketsForDate(Date date) throws DBException {
+//        List<Ticket> tickets;
+//        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getAllForDate"))) {
+//            statement.setString(1, date.toString());
+//            ResultSet resultSet = statement.executeQuery();
+//            tickets = parseTicketSet(resultSet);
+//        } catch (SQLException exception) {
+//            throw new DBException(exception);
+//        }
+//
+//        return tickets;
+//    }
 
     @Override
     public List<Ticket> getAllTicketsForContract(Integer contractId) throws DBException {
         List<Ticket> tickets;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getAllForContract"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.getAllForContract"))) {
             statement.setInt(1, contractId);
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
-        if (tickets == null) {
+        if (tickets == null || tickets.isEmpty()) {
             return Collections.emptyList();
         }
         return tickets;
@@ -175,12 +185,16 @@ public class TicketMySql implements TicketDao {
     @Override
     public List<Ticket> getAllTicketsForUser(User user) throws DBException {
         List<Ticket> tickets;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getAllForUser"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.getAllForUser"))) {
             statement.setString(1, user.getMail());
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
+        }
+        if (tickets == null || tickets.isEmpty()) {
+            return Collections.emptyList();
         }
 
         return tickets;
@@ -189,13 +203,18 @@ public class TicketMySql implements TicketDao {
     @Override
     public List<Ticket> getTicketForUserOnContract(User user, Contract contract) throws DBException {
         List<Ticket> tickets;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getTicketForUserOnContract"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.getTicketForUserOnContract"))) {
             statement.setInt(1, user.getId());
-            statement.setInt(1, contract.getId());
+            statement.setInt(2, contract.getId());
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
             throw new DBException(exception);
+        }
+
+        if (tickets == null || tickets.isEmpty()) {
+            return Collections.emptyList();
         }
 
         return tickets;
@@ -228,7 +247,8 @@ public class TicketMySql implements TicketDao {
 
     @Override
     public void updateTicket(Ticket ticket) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.updateUser"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.updateUser"))) {
             prepareStatementToUpdate(statement, ticket);
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -238,7 +258,8 @@ public class TicketMySql implements TicketDao {
 
     @Override
     public void approveTicket(Integer idTicket) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.approveTicket"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.approveTicket"))) {
             statement.setInt(1, idTicket);
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -248,7 +269,8 @@ public class TicketMySql implements TicketDao {
 
     @Override
     public void deleteTicket(Integer ticketId) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.delete"))) {
             statement.setInt(1, ticketId);
             statement.executeUpdate();
             LOGGER.info("delete ticket id " + ticketId);
@@ -256,7 +278,6 @@ public class TicketMySql implements TicketDao {
             LOGGER.info(exception);
             throw new DBException(exception);
         }
-
     }
 
     private List<Ticket> parseTicketSet(ResultSet resultSet) throws DBException {
@@ -286,9 +307,9 @@ public class TicketMySql implements TicketDao {
 
     private void prepareStatementToInsert(PreparedStatement statement, Ticket ticket) throws DBException {
         try {
-            statement.setDate(1, ticket.getDateToApply());
+            statement.setDate(1, ticket.getDateToApply(), java.util.Calendar.getInstance());
             statement.setInt(2, ticket.getContractId());
-            statement.setDate(3, ticket.getDateTransaction());
+            statement.setDate(3, ticket.getDateTransaction(), java.util.Calendar.getInstance());
             statement.setString(4, ticket.getUserEMail());
             statement.setInt(5, ticket.getQuantity());
             statement.setInt(6, ticket.getUserId());
@@ -301,9 +322,9 @@ public class TicketMySql implements TicketDao {
 
     private void prepareStatementToUpdate(PreparedStatement statement, Ticket ticket) throws DBException {
         try {
-            statement.setDate(1, ticket.getDateToApply());
+            statement.setDate(1, ticket.getDateToApply(), java.util.Calendar.getInstance());
             statement.setInt(2, ticket.getContractId());
-            statement.setDate(3, ticket.getDateTransaction());
+            statement.setDate(3, ticket.getDateTransaction(), java.util.Calendar.getInstance());
             statement.setString(4, ticket.getUserEMail());
             statement.setInt(5, ticket.getQuantity());
             statement.setBoolean(6, ticket.getHasChecked());

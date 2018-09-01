@@ -24,7 +24,7 @@ public interface TicketDao {
 
     void unlockTable() throws DBException;
 
-    List<Ticket> getAllTicketsForDate(Date date) throws DBException;
+//    List<Ticket> getAllTicketsForDate(java.sql.Date date) throws DBException;
 
     List<Ticket> getAllTicketsForContract(Integer contractId) throws DBException;
 

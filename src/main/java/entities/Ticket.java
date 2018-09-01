@@ -51,7 +51,7 @@ public class Ticket {
         return userEMail;
     }
 
-    public void setUserName(String userName) {
+    public void setUserEMail(String userName) {
         this.userEMail = userName;
     }
 
@@ -91,6 +91,19 @@ public class Ticket {
         this.userId = userId;
     }
 
+    public Ticket emptyTicket() {
+        return new Ticket.Builder()
+                .setId(0)
+                .setDateToApply(java.sql.Date.valueOf("2000-01-01"))
+                .setDateTransaction(java.sql.Date.valueOf("2000-01-01"))
+                .setUserMail("null")
+                .setContractId(0)
+                .setQuantity(0)
+                .setUserId(1)
+                .setAppruvedBy(0)
+                .build();
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -112,9 +125,9 @@ public class Ticket {
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
         return Objects.equals(id, ticket.id) &&
-                Objects.equals(dateToApply, ticket.dateToApply) &&
+                Objects.equals(dateToApply.toString(), ticket.dateToApply.toString()) &&
                 Objects.equals(contractId, ticket.contractId) &&
-                Objects.equals(dateTransaction, ticket.dateTransaction) &&
+                Objects.equals(dateTransaction.toString(), ticket.dateTransaction.toString()) &&
                 Objects.equals(userEMail, ticket.userEMail);
     }
 
@@ -152,7 +165,7 @@ public class Ticket {
         }
 
         public Builder setUserMail(String email) {
-            ticket.setUserName(email);
+            ticket.setUserEMail(email);
             return this;
         }
 

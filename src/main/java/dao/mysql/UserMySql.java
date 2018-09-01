@@ -1,6 +1,5 @@
 package dao.mysql;
 
-import controller.command.RegistrationCommand;
 import dao.interfaces.UserDao;
 import entities.User;
 import exceptions.DBException;
@@ -8,10 +7,8 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.locks.Lock;
 
 public class UserMySql implements UserDao {
 
@@ -39,7 +36,8 @@ public class UserMySql implements UserDao {
     @Override
     public User getById(Integer id) throws DBException {
         List<User> user = null;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.getById"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("user.getById"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             user = parseUsersSet(resultSet);
@@ -48,7 +46,7 @@ public class UserMySql implements UserDao {
         }
 
         if (user == null) {
-            return null;
+            return new User().emptyUser();
         } else {
             return user.get(0);
         }

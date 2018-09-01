@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="18" failures="5" name="dao.mysql.ExhibitionContractMySqlTest" time="0.877" errors="0" skipped="0">
+<testsuite tests="18" failures="0" name="dao.mysql.ExhibitionContractMySqlTest" time="9.183" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2018.2.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -62,246 +62,22 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContracts" time="0.41"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsByExCenterWithExhibition" time="0.04">
-    <failure message="expected:&lt;2&gt; but was:&lt;0&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;0&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at dao.mysql.ExhibitionContractMySqlTest.getAllContractsByExCenterWithExhibition(ExhibitionContractMySqlTest.java:123)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</failure>
-    <system-out>mysql insert contract Contract{id=null, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=0}
-statement date fromnull
-mysql insert contract Contract{id=null, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=0}
-statement date fromnull
-</system-out>
-  </testcase>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="prepareCEC" time="0.027">
-    <failure message="expected:&lt;Contract{id=6, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=529622310}&gt; but was:&lt;Contract{id=1, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-873390649}&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;Contract{id=6, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=529622310}&gt; but was:&lt;Contract{id=1, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-873390649}&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at dao.mysql.ExhibitionContractMySqlTest.prepareCEC(ExhibitionContractMySqlTest.java:164)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</failure>
-    <system-out>mysql insert contract Contract{id=null, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=529622310}
-statement date fromnull
-</system-out>
-  </testcase>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="searchContactsWithExpoAndCenter" time="0.018"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getContractsAfterDateLimit" time="0.019"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllAfterDate" time="0.022"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getNumberOfContractsAfterSearch" time="0.018"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="updateContract" time="0.019"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsForCenter" time="0.049">
-    <failure message="expected:&lt;3&gt; but was:&lt;9&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;3&gt; but was:&lt;9&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at dao.mysql.ExhibitionContractMySqlTest.getAllContractsForCenter(ExhibitionContractMySqlTest.java:222)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</failure>
-    <system-out>mysql insert contract Contract{id=null, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=328763123}
-statement date fromnull
-mysql insert contract Contract{id=7, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=328763123}
-statement date fromnull
-mysql insert contract Contract{id=8, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=328763123}
-statement date fromnull
-mysql insert contract Contract{id=null, exhibitionId=1, exCenterId=2, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-1834782943}
-statement date fromnull
-</system-out>
-  </testcase>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractAfterDateWithExpoCenterAndExhibition" time="0.07"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="insertContract" time="0.019"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsForExhibition" time="0.044">
-    <failure message="expected:&lt;3&gt; but was:&lt;14&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;3&gt; but was:&lt;14&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at dao.mysql.ExhibitionContractMySqlTest.getAllContractsForExhibition(ExhibitionContractMySqlTest.java:290)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</failure>
-    <system-out>mysql insert contract Contract{id=null, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-1690784632}
-statement date fromnull
-mysql insert contract Contract{id=12, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-1690784632}
-statement date fromnull
-mysql insert contract Contract{id=13, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-1690784632}
-statement date fromnull
-mysql insert contract Contract{id=null, exhibitionId=2, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-136312402}
-statement date fromnull
-</system-out>
-  </testcase>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getNumberOfContractsAfterDate" time="0.019"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsBySearch" time="0.019"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getExhibitionContractById" time="0.028">
-    <failure message="expected:&lt;Contract{id=16, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=0}&gt; but was:&lt;Contract{id=1, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-873390649}&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;Contract{id=16, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=0}&gt; but was:&lt;Contract{id=1, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=-873390649}&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at dao.mysql.ExhibitionContractMySqlTest.getExhibitionContractById(ExhibitionContractMySqlTest.java:76)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</failure>
-    <system-out>mysql insert contract Contract{id=null, exhibitionId=1, exCenterId=1, dateFrom=null, dateTo=null, ticketPrice=0, workTime=&apos;test&apos;, maxTicketPerDay=0}
-statement date fromnull
-</system-out>
-  </testcase>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="deleteContractById" time="0.018"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="deleteContract" time="0.02"/>
-  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="searchContactsWithExpoAndCenterLimit" time="0.018"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsByExCenterWithExhibitionTest" time="0.55"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getNumberOfContractsAfterSearchTest" time="0.498"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getExhibitionContractByIdTest" time="0.489"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsForExhibitionTest" time="0.611"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getContractsAfterDateLimitTest" time="0.575"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="searchContactsWithExpoAndCenterLimitTest" time="0.506"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsForCenterTest" time="0.52"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="prepareCECTest" time="0.466"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getNumberOfContractsAfterDateTest" time="0.526"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractAfterDateWithExpoCenterAndExhibitionTest" time="0.474"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsBySearchTest" time="0.48"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="deleteContractByIdTest" time="0.525"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllAfterDateTest" time="0.483"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="deleteContractTest" time="0.499"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="getAllContractsTest" time="0.5"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="insertContractTest" time="0.513"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="updateContractTest" time="0.495"/>
+  <testcase classname="dao.mysql.ExhibitionContractMySqlTest" name="searchAfterDateWithExpoCenterAndExhibitionTest" time="0.473"/>
 </testsuite>

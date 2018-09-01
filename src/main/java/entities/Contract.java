@@ -21,6 +21,9 @@ public class Contract {
     public Contract(){}
 
     public Integer getId() {
+        if(id == null) {
+            return 0;
+        }
         return id;
     }
 
@@ -29,6 +32,9 @@ public class Contract {
     }
 
     public Integer getExhibitionId() {
+        if(exhibitionId == null) {
+            return 0;
+        }
         return exhibitionId;
     }
 
@@ -41,6 +47,9 @@ public class Contract {
     }
 
     public String getExhibitionDescription() {
+        if(exhibitionDescription == null) {
+            return "";
+        }
         return exhibitionDescription;
     }
 
@@ -53,6 +62,9 @@ public class Contract {
     }
 
     public String getExhibitionCenterTitle() {
+        if(exhibitionCenterTitle == null) {
+            return "";
+        }
         return exhibitionCenterTitle;
     }
 
@@ -61,6 +73,9 @@ public class Contract {
     }
 
     public Integer getExCenterId() {
+        if(exCenterId == null) {
+            return 0;
+        }
         return exCenterId;
     }
 
@@ -69,6 +84,7 @@ public class Contract {
     }
 
     public Date getDateFrom() {
+
         return dateFrom;
     }
 
