@@ -1,5 +1,6 @@
 package dao.mysql;
 
+import entities.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +8,7 @@ import org.junit.Test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static junit.framework.TestCase.fail;
@@ -41,43 +43,279 @@ public class UserMySqlTest {
     }
 
     @Test
-    public void getById() {
+    public void getByIdTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+
+        User user = new User().emptyUser();
+        user.setId(1);
+
+        try {
+            // insert user to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            // get user by id
+            User expectedUser = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .getById(1);
+
+            assertEquals(user, expectedUser);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void getByName() {
+    public void getByNameTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+
+        String userName = "name";
+        User user = new User().emptyUser();
+        user.setName(userName);
+
+        try {
+            // insert user to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            // get by name
+            User expectedUser = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .getByName(userName);
+
+            assertEquals(user, expectedUser);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void getByMail() {
+    public void getByMailTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+
+        String userMail = "mail@mail";
+        User user = new User().emptyUser();
+        user.setMail(userMail);
+
+        try {
+            // insert user to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            // get by mail
+            User expectedUser = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .getByMail(userMail);
+            assertEquals(user, expectedUser);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void getAllUsers() {
+    public void getAllUsersTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+
+        User user = new User().emptyUser();
+
+        try {
+            // insert users to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+            user.setMail("2");
+            user.setName("2");
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            // get all users
+            List<User> expectedUsers = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .getAllUsers();
+            assertEquals(2, expectedUsers.size());
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void updateUser() {
+    public void updateUserTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+
+        User user = new User().emptyUser();
+
+        try {
+            // insert users to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            // change user
+            user.setName("new name");
+            // update user
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .updateUser(user);
+
+            User expectedUser = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .getById(1);
+
+            assertEquals(user, expectedUser);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void insertUser() {
+    public void insertUserTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+
+        User user = new User().emptyUser();
+
+        try {
+            // insert user to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            User expectedUser = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .getById(1);
+            assertEquals(user, expectedUser);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void deleteUser() {
+    public void deleteUserTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+        String userMailDelete = "delte@mail";
+
+        User user = new User().emptyUser();
+
+        try {
+            // insert users to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+            user.setMail(userMailDelete);
+            user.setName("2");
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            // delete user
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .deleteUser(userMailDelete);
+
+            // get all users
+            List<User> expectedUsers = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .getAllUsers();
+            assertEquals(1, expectedUsers.size());
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void isNameInTable() {
+    public void isNameInTableTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+        String userNameSearch = "nameSearch";
+        String userNameNotInTable = "bad name";
+
+        User user = new User().emptyUser();
+
+        try {
+            // insert users to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+            user.setMail("2");
+            user.setName(userNameSearch);
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            boolean lookingRealName = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .isNameInTable(userNameSearch);
+            boolean lookingMissedName = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .isNameInTable(userNameNotInTable);
+
+            assertTrue(lookingRealName);
+            assertFalse(lookingMissedName);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void isMailInTable() {
+    public void isMailInTableTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+        String userMailSearch = "mail@Search";
+        String userMailNotInTable = "bad@mail";
+
+        User user = new User().emptyUser();
+
+        try {
+            // insert users to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+            user.setMail(userMailSearch);
+            user.setName("2");
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            boolean lookingRealMail = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .isMailInTable(userMailSearch);
+            boolean lookingMissedMail = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .isMailInTable(userMailNotInTable);
+
+            assertTrue(lookingRealMail);
+            assertFalse(lookingMissedMail);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     @Test
-    public void isNameOrMailInTable() {
+    public void isNameOrMailInTableTest() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+        String userMailSearch = "mail@Search";
+        String userNameSearch = "coolName";
+        String userMailNotInTable = "bad@mail";
+
+        User user = new User().emptyUser();
+
+        try {
+            // insert users to table
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+            user.setMail(userMailSearch);
+            user.setName(userNameSearch);
+            factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .insertUser(user);
+
+            boolean lookingRealMail = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .isNameOrMailInTable(userMailSearch);
+            boolean lookingRealName = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .isNameOrMailInTable(userMailSearch);
+            boolean lookingMissedMail = factoryMySql.createUser(connection, QUERIES_MY_SQL_TEST)
+                    .isNameOrMailInTable(userMailNotInTable);
+
+            assertTrue(lookingRealMail);
+            assertTrue(lookingRealName);
+            assertFalse(lookingMissedMail);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
     }
 
     private void crateTestTables() {

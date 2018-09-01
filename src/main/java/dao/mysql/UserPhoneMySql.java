@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,23 +35,30 @@ public class UserPhoneMySql implements UserPhoneDao {
 
     @Override
     public List<String> getPhones(String eMail) throws DBException {
-        List<String> phones = new ArrayList<>();
+        List<String> phones;
 
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("userPhone.getPhones"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("userPhone.getPhones"))) {
             statement.setString(1, eMail);
             ResultSet resultSet = statement.executeQuery();
+            phones = new ArrayList<>();
             while (resultSet.next()) {
                 phones.add(resultSet.getString(FIELD_PHONE));
             }
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
+        if(phones == null) {
+            return Collections.emptyList();
+        }
+
         return phones;
     }
 
     @Override
     public void insertPhone(String mail, String phone) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("userPhone.insertPhone"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("userPhone.insertPhone"))) {
             statement.setString(1, phone);
             statement.setString(2, mail);
             statement.executeUpdate();
@@ -61,9 +69,11 @@ public class UserPhoneMySql implements UserPhoneDao {
 
     @Override
     public void deletePhone(String mail, String phone) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("userPhone.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("userPhone.delete"))) {
             statement.setString(1, mail);
             statement.setString(2, phone);
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }

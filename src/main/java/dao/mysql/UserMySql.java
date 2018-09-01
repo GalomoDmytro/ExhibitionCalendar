@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -55,7 +56,8 @@ public class UserMySql implements UserDao {
     @Override
     public User getByName(String name) throws DBException {
         List<User> user = null;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.getByName"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.getByName"))) {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             user = parseUsersSet(resultSet);
@@ -64,7 +66,7 @@ public class UserMySql implements UserDao {
         }
 
         if (user == null) {
-            return null;
+            return new User().emptyUser();
         } else {
             return user.get(0);
         }
@@ -72,26 +74,21 @@ public class UserMySql implements UserDao {
 
     @Override
     public User getByMail(String eMail) throws DBException {
-        List<User> user = null;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.getByEMail"))) {
-            LOGGER.info("looking by email" + eMail);
+        List<User> user;
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.getByEMail"))) {
             statement.setString(1, eMail);
             ResultSet resultSet = statement.executeQuery();
-            LOGGER.info("size " + resultSet.getFetchSize());
             user = parseUsersSet(resultSet);
         } catch (SQLException exception) {
             LOGGER.error(exception);
             throw new DBException(exception);
         }
 
-        LOGGER.info("userlist size " + user + " " + user.size());
-
         if (user == null) {
-            LOGGER.info("return null");
-            return null;
+            return new User().emptyUser();
         } else if (user.size() < 1) {
-            LOGGER.info("return null");
-            return null;
+            return new User().emptyUser();
         } else {
             LOGGER.info("return  " + user.get(0));
             return user.get(0);
@@ -100,7 +97,7 @@ public class UserMySql implements UserDao {
 
     @Override
     public List<User> getAllUsers() throws DBException {
-        List<User> user = null;
+        List<User> user;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
             user = parseUsersSet(resultSet);
@@ -109,7 +106,7 @@ public class UserMySql implements UserDao {
         }
 
         if (user == null) {
-            return null;
+            return Collections.emptyList();
         } else {
             return user;
         }
@@ -117,9 +114,10 @@ public class UserMySql implements UserDao {
 
     @Override
     public void updateUser(User user) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.updateUser"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.updateUser"))) {
             prepareStatementToUpdate(statement, user);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -153,7 +151,7 @@ public class UserMySql implements UserDao {
     public void deleteUser(String mail) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.delete"))) {
             statement.setString(1, mail);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -262,11 +260,4 @@ public class UserMySql implements UserDao {
         }
     }
 
-    private void closeConnection() throws DBException {
-        try {
-            if (connection != null) connection.close();
-        } catch (SQLException exception) {
-            throw new DBException(exception);
-        }
-    }
 }

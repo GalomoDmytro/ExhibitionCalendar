@@ -18,7 +18,7 @@ public class RoleMySql implements RoleDao {
     private Role role;
     private final Connection connection;
     private final ResourceBundle QUERIES;
-    private static final Logger log = Logger.getLogger(RegistrationCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
     private static final String FIELD_ID = "id";
     private static final String FIELD_ROLE = "role";
 
@@ -35,14 +35,16 @@ public class RoleMySql implements RoleDao {
     @Override
     public Role getRoleById(Integer id) throws DBException {
 
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.getRole"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("role.getRole"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
-            resultSet.next();
-            String stringRole = resultSet.getString(FIELD_ROLE);
+            String stringRole = "";
+            if(resultSet.next()) {
+                stringRole = resultSet.getString(FIELD_ROLE);
+            }
             setRole(stringRole);
-            log.info("Role info form mysql " + role.toString());
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -57,7 +59,7 @@ public class RoleMySql implements RoleDao {
             statement.setString(2, role.toString());
             statement.executeUpdate();
         } catch (SQLException exception) {
-            log.error(exception);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -66,7 +68,7 @@ public class RoleMySql implements RoleDao {
     public void delete(User user) throws DBException{
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.delete"))) {
             statement.setInt(1, user.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new DBException(exception);
         }
@@ -79,7 +81,7 @@ public class RoleMySql implements RoleDao {
             statement.setInt(2, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
-            log.error(exception);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -107,6 +109,7 @@ public class RoleMySql implements RoleDao {
                 return;
 
             default:
+                role = Role.GUEST;
                 return;
         }
     }

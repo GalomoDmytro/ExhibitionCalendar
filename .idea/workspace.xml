@@ -2,39 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bebe6f2d-17ec-42d8-8dce-6844d266036d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/TicketMySqlTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/UserMySqlTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/RoleMySqlTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/UserPhoneMySqlTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/TicketDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/TicketDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/TicketMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/TicketMySql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/dao/mysql/TicketMySqlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/TicketMySqlTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/dao/mysql/UserMySqlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dao/mysql/UserMySqlTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/QueriesMySql.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/QueriesMySql.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/QueriesMySql_Test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/QueriesMySql_Test.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/TicketDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/TicketDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/TicketMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/TicketMySql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/Contract$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Contract$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Contract.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/Ticket$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Ticket$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Ticket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/User$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/User$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.DescriptionMySqlTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.DescriptionMySqlTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.ExhibitionCenterMySqlTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.ExhibitionCenterMySqlTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.ExhibitionContractMySqlTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.ExhibitionContractMySqlTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.ExhibitionMySqlTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.ExhibitionMySqlTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.PhoneExhibitionCenterMySqlTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dao.mysql.PhoneExhibitionCenterMySqlTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.DescriptionMySqlTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.DescriptionMySqlTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.ExhibitionCenterMySqlTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.ExhibitionCenterMySqlTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.ExhibitionContractMySqlTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.ExhibitionContractMySqlTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.ExhibitionMySqlTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.ExhibitionMySqlTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.PhoneExhibitionCenterMySqlTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dao.mysql.PhoneExhibitionCenterMySqlTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/RoleMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/RoleMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/mysql/UserMySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/mysql/UserMySql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/dao/mysql/TicketMySqlTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/dao/mysql/TicketMySqlTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,13 +33,13 @@
     <SUITE FILE_PATH="coverage/exhibition_calendar$ExhibitionContractMySqlTest.ic" NAME="ExhibitionContractMySqlTest Coverage Results" MODIFIED="1535721104368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>dao.mysql.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/exhibition_calendar$All_in_Exhibition_Calendar.ic" NAME="All in Exhibition Calendar Coverage Results" MODIFIED="1535784911242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/exhibition_calendar$All_in_Exhibition_Calendar.ic" NAME="All in Exhibition Calendar Coverage Results" MODIFIED="1535795081461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/exhibition_calendar$TicketMySqlTest.ic" NAME="TicketMySqlTest Coverage Results" MODIFIED="1535784623744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>dao.mysql.*</FILTER>
     </SUITE>
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="128" />
+    <option name="myElementSize" value="101" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1159804134">
@@ -84,19 +66,19 @@
         <counts>
           <entry key="css" value="705" />
           <entry key="dummy" value="102" />
-          <entry key="java" value="67929" />
+          <entry key="java" value="69435" />
           <entry key="jsp" value="11285" />
-          <entry key="properties" value="4152" />
+          <entry key="properties" value="4165" />
           <entry key="xml" value="328" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="705" />
-          <entry key="JAVA" value="67929" />
+          <entry key="JAVA" value="69435" />
           <entry key="JSP" value="11007" />
           <entry key="PLAIN_TEXT" value="380" />
-          <entry key="Properties" value="4152" />
+          <entry key="Properties" value="4165" />
           <entry key="XML" value="328" />
         </counts>
       </usages-collector>
@@ -106,7 +88,7 @@
           <entry key="class" value="11" />
           <entry key="css" value="21" />
           <entry key="iml" value="1" />
-          <entry key="java" value="953" />
+          <entry key="java" value="963" />
           <entry key="jpg" value="2" />
           <entry key="jsp" value="374" />
           <entry key="properties" value="112" />
@@ -119,7 +101,7 @@
           <entry key="CSS" value="21" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="953" />
+          <entry key="JAVA" value="963" />
           <entry key="JSP" value="358" />
           <entry key="PLAIN_TEXT" value="16" />
           <entry key="Properties" value="113" />
@@ -130,50 +112,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/TicketMySqlTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1166">
-              <caret line="428" selection-start-line="428" selection-end-line="467" />
-              <folding>
-                <element signature="method#setUp#0;class#TicketMySqlTest#0" />
-                <element signature="method#tearDown#0;class#TicketMySqlTest#0" />
-                <element signature="method#getTicketByIdTestTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#getAllTicketsTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#getAllApprovedTicketsTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#getAllWaitApprovalTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#getCountSoldTicketForDateTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#getAllTicketsForContractTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#getAllTicketsForUserTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#getTicketForUserOnContractTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#insertTicketTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#updateTicketTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#approveTicket#0;class#TicketMySqlTest#0" />
-                <element signature="method#deleteTicketTest#0;class#TicketMySqlTest#0" />
-                <element signature="method#crateTestTables#0;class#TicketMySqlTest#0" />
-                <element signature="method#prepareURL#0;class#TicketMySqlTest#0" />
-                <element signature="method#closeConnection#0;class#TicketMySqlTest#0" />
-                <element signature="method#insertDependedTables#0;class#TicketMySqlTest#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/UserMySqlTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1364">
-              <caret line="121" selection-start-line="121" selection-end-line="121" />
+            <state relative-caret-position="154">
+              <caret line="52" column="12" lean-forward="true" selection-start-line="52" selection-start-column="12" selection-end-line="54" selection-end-column="38" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#setUp#0;class#UserMySqlTest#0" />
                 <element signature="method#tearDown#0;class#UserMySqlTest#0" />
                 <element signature="method#crateTestTables#0;class#UserMySqlTest#0" />
@@ -184,14 +129,45 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/UserPhoneMySqlTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+            <state relative-caret-position="396">
+              <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#setUp#0;class#UserPhoneMySqlTest#0" />
+                <element signature="method#tearDown#0;class#UserPhoneMySqlTest#0" />
+                <element signature="method#crateTestTables#0;class#UserPhoneMySqlTest#0" />
+                <element signature="method#prepareURL#0;class#UserPhoneMySqlTest#0" />
+                <element signature="method#closeConnection#0;class#UserPhoneMySqlTest#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/entities/Role.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="44">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -199,8 +175,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1276">
-              <caret line="58" column="35" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
+            <state relative-caret-position="169">
+              <caret line="38" column="64" selection-start-line="38" selection-start-column="64" selection-end-line="38" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -208,8 +184,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="946">
-              <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+            <state relative-caret-position="210">
+              <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -266,8 +242,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/views/common/login.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/ExhibitionContractDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ExhibitionManagement.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/expoManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/expoCenterManagement.jsp" />
@@ -288,8 +262,6 @@
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditExposition.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/FactoryDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/DescriptionMySql.java" />
         <option value="$PROJECT_DIR$/src/test/java/junit/dao/mysql/DescriptionMySqlTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/junit/dao/mysql/ExhibitionCenterMySqlTest.java" />
@@ -312,11 +284,15 @@
         <option value="$PROJECT_DIR$/src/main/java/entities/Contract.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Ticket.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/mysql/TicketMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" />
         <option value="$PROJECT_DIR$/src/test/java/dao/mysql/TicketMySqlTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/dao/mysql/UserMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java" />
+        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/RoleMySqlTest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java" />
+        <option value="$PROJECT_DIR$/src/test/java/dao/mysql/UserPhoneMySqlTest.java" />
       </list>
     </option>
   </component>
@@ -506,7 +482,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/epam_project/Exhibition Calendar/src/main/java/entities/Exhibition.java&#10;TODO&#9;ACTION&#9;ActivateTODOToolWindow&#10;todo&#9;null&#9;null" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535784907708" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535796289519" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="extract.method.default.visibility" value="private" />
@@ -559,7 +535,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketMySqlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RoleMySqlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
@@ -568,12 +544,12 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="dao.mysql.TicketMySqlTest" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.RoleMySqlTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketMySqlTest.approveTicket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserPhoneMySqlTest.deletePhone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
@@ -582,14 +558,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="dao.mysql.TicketMySqlTest" />
-      <option name="METHOD_NAME" value="approveTicket" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.UserPhoneMySqlTest" />
+      <option name="METHOD_NAME" value="deletePhone" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketMySqlTest.updateTicket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserPhoneMySqlTest.getPhones" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
@@ -598,14 +574,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dao.mysql" />
-      <option name="MAIN_CLASS_NAME" value="dao.mysql.TicketMySqlTest" />
-      <option name="METHOD_NAME" value="updateTicket" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.UserPhoneMySqlTest" />
+      <option name="METHOD_NAME" value="getPhones" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="dao.mysql in Exhibition Calendar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserPhoneMySqlTest.insertPhone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <extension name="coverage">
         <pattern>
@@ -614,25 +590,27 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dao.mysql" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="dao.mysql.UserPhoneMySqlTest" />
+      <option name="METHOD_NAME" value="insertPhone" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.TicketMySqlTest.approveTicket" />
-      <item itemvalue="JUnit.TicketMySqlTest.updateTicket" />
-      <item itemvalue="JUnit.TicketMySqlTest" />
-      <item itemvalue="JUnit.dao.mysql in Exhibition Calendar" />
+      <item itemvalue="JUnit.RoleMySqlTest" />
+      <item itemvalue="JUnit.UserPhoneMySqlTest.getPhones" />
+      <item itemvalue="JUnit.UserPhoneMySqlTest.insertPhone" />
+      <item itemvalue="JUnit.UserPhoneMySqlTest.deletePhone" />
       <item itemvalue="JUnit.All in Exhibition Calendar" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in Exhibition Calendar" />
-        <item itemvalue="JUnit.dao.mysql in Exhibition Calendar" />
-        <item itemvalue="JUnit.TicketMySqlTest" />
-        <item itemvalue="JUnit.TicketMySqlTest.updateTicket" />
-        <item itemvalue="JUnit.TicketMySqlTest.approveTicket" />
+        <item itemvalue="JUnit.UserPhoneMySqlTest.deletePhone" />
+        <item itemvalue="JUnit.UserPhoneMySqlTest.insertPhone" />
+        <item itemvalue="JUnit.UserPhoneMySqlTest.getPhones" />
+        <item itemvalue="JUnit.RoleMySqlTest" />
       </list>
     </recent_temporary>
   </component>
@@ -647,34 +625,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TicketMySqlTest_approveTicket - 2018.09.01 at 08h 29m 22s.xml">
-      <configuration name="TicketMySqlTest.approveTicket" configurationId="JUnit" />
+    <history-entry file="RoleMySqlTest_updateRole - 2018.09.01 at 12h 18m 43s.xml">
+      <configuration name="RoleMySqlTest.updateRole" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TicketMySqlTest_approveTicket - 2018.09.01 at 08h 29m 36s.xml">
-      <configuration name="TicketMySqlTest.approveTicket" configurationId="JUnit" />
+    <history-entry file="RoleMySqlTest - 2018.09.01 at 12h 19m 11s.xml">
+      <configuration name="RoleMySqlTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TicketMySqlTest_updateTicket - 2018.09.01 at 08h 37m 46s.xml">
-      <configuration name="TicketMySqlTest.updateTicket" configurationId="JUnit" />
+    <history-entry file="UserPhoneMySqlTest_getPhones - 2018.09.01 at 12h 38m 49s.xml">
+      <configuration name="UserPhoneMySqlTest.getPhones" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TicketMySqlTest_updateTicket - 2018.09.01 at 08h 38m 03s.xml">
-      <configuration name="TicketMySqlTest.updateTicket" configurationId="JUnit" />
+    <history-entry file="UserPhoneMySqlTest_getPhones - 2018.09.01 at 12h 40m 05s.xml">
+      <configuration name="UserPhoneMySqlTest.getPhones" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TicketMySqlTest_updateTicket - 2018.09.01 at 08h 39m 16s.xml">
-      <configuration name="TicketMySqlTest.updateTicket" configurationId="JUnit" />
+    <history-entry file="UserPhoneMySqlTest_insertPhone - 2018.09.01 at 12h 40m 41s.xml">
+      <configuration name="UserPhoneMySqlTest.insertPhone" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TicketMySqlTest - 2018.09.01 at 08h 39m 49s.xml">
-      <configuration name="TicketMySqlTest" configurationId="JUnit" />
+    <history-entry file="UserPhoneMySqlTest_deletePhone - 2018.09.01 at 12h 41m 54s.xml">
+      <configuration name="UserPhoneMySqlTest.deletePhone" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TicketMySqlTest - 2018.09.01 at 09h 50m 38s.xml">
-      <configuration name="TicketMySqlTest" configurationId="JUnit" />
+    <history-entry file="UserPhoneMySqlTest_deletePhone - 2018.09.01 at 12h 42m 14s.xml">
+      <configuration name="UserPhoneMySqlTest.deletePhone" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="dao_mysql_in_Exhibition_Calendar - 2018.09.01 at 09h 53m 16s.xml">
-      <configuration name="dao.mysql in Exhibition Calendar" configurationId="JUnit" />
+    <history-entry file="UserPhoneMySqlTest_deletePhone - 2018.09.01 at 12h 43m 10s.xml">
+      <configuration name="UserPhoneMySqlTest.deletePhone" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="dao_mysql_in_Exhibition_Calendar - 2018.09.01 at 09h 54m 32s.xml">
-      <configuration name="dao.mysql in Exhibition Calendar" configurationId="JUnit" />
+    <history-entry file="UserPhoneMySqlTest_deletePhone - 2018.09.01 at 12h 43m 55s.xml">
+      <configuration name="UserPhoneMySqlTest.deletePhone" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Exhibition_Calendar - 2018.09.01 at 09h 56m 13s.xml">
+    <history-entry file="All_in_Exhibition_Calendar - 2018.09.01 at 12h 45m 26s.xml">
       <configuration name="All in Exhibition Calendar" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -689,9 +667,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20095949" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20095949" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -700,7 +677,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.28850326" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.28850326" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -715,10 +692,10 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Coverage" order="5" sideWeight="0.5043384" side_tool="true" visible="true" weight="0.18976545" />
+      <window_info anchor="right" id="Coverage" order="5" sideWeight="0.50457317" side_tool="true" visible="true" weight="0.18976545" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="8" sideWeight="0.49566162" visible="true" weight="0.18976545" />
+      <window_info anchor="right" id="Maven Projects" order="8" sideWeight="0.49542683" visible="true" weight="0.18976545" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21215352" />
@@ -755,27 +732,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/approvedTicket.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="27" column="39" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/waitApprovalTickets.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="60" column="67" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/home.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="119" column="65" selection-start-line="119" selection-start-column="65" selection-end-line="119" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/WaitApprovalTicket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -847,6 +803,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="292" column="81" selection-start-line="292" selection-start-column="65" selection-end-line="292" selection-end-column="81" />
+          <folding>
+            <element signature="e#15397#15398#0" expanded="true" />
+            <element signature="e#15443#15444#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -871,40 +831,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding>
-            <element signature="method#createExhibition#0;class#FactoryMySql#0" />
-            <element signature="method#createExhibitionCenter#0;class#FactoryMySql#0" />
-            <element signature="method#createExhibitionCenter#1;class#FactoryMySql#0" />
-            <element signature="method#createExhibitionCenterPhone#1;class#FactoryMySql#0" />
-            <element signature="e#965#966#0" expanded="true" />
-            <element signature="e#1015#1016#0" expanded="true" />
-            <element signature="method#createTicket#1;class#FactoryMySql#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/junit/framework/TestCase.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
           <caret line="110" selection-start-line="110" selection-end-line="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -992,13 +922,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/DescriptionMySqlTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4224">
-          <caret line="345" selection-start-line="345" selection-end-line="361" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/ExhibitionMySqlTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-620">
@@ -1010,6 +933,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="348" column="71" lean-forward="true" selection-start-line="348" selection-start-column="39" selection-end-line="348" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#searchAfterDateWithExpoCenterAndExhibition#0;class#ExhibitionContractMySql#0" />
+            <element signature="method#searchContactsWithExpoAndCenterLimit#0;class#ExhibitionContractMySql#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1017,6 +945,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="25" column="56" lean-forward="true" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
+          <folding>
+            <element signature="method#setUp#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#tearDown#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#deleteContractByIdTest#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#getNumberOfContractsAfterDateTest#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#getNumberOfContractsAfterSearchTest#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#ExhibitionContractMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#ExhibitionContractMySqlTest#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1069,41 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1276">
-          <caret line="58" column="35" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="946">
-          <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/UserMySqlTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1364">
-          <caret line="121" selection-start-line="121" selection-end-line="121" />
-          <folding>
-            <element signature="method#setUp#0;class#UserMySqlTest#0" />
-            <element signature="method#tearDown#0;class#UserMySqlTest#0" />
-            <element signature="method#crateTestTables#0;class#UserMySqlTest#0" />
-            <element signature="method#prepareURL#0;class#UserMySqlTest#0" />
-            <element signature="method#closeConnection#0;class#UserMySqlTest#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/TicketMySql.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="574">
@@ -1120,24 +1023,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/TicketMySqlTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1166">
-          <caret line="428" selection-start-line="428" selection-end-line="467" />
+        <state relative-caret-position="176">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="method#setUp#0;class#TicketMySqlTest#0" />
             <element signature="method#tearDown#0;class#TicketMySqlTest#0" />
-            <element signature="method#getTicketByIdTestTest#0;class#TicketMySqlTest#0" />
             <element signature="method#getAllTicketsTest#0;class#TicketMySqlTest#0" />
             <element signature="method#getAllApprovedTicketsTest#0;class#TicketMySqlTest#0" />
             <element signature="method#getAllWaitApprovalTest#0;class#TicketMySqlTest#0" />
@@ -1153,6 +1045,129 @@
             <element signature="method#prepareURL#0;class#TicketMySqlTest#0" />
             <element signature="method#closeConnection#0;class#TicketMySqlTest#0" />
             <element signature="method#insertDependedTables#0;class#TicketMySqlTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/FactoryMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding>
+            <element signature="method#createExhibitionCenter#0;class#FactoryMySql#0" />
+            <element signature="method#createExhibitionCenter#1;class#FactoryMySql#0" />
+            <element signature="method#createExhibitionCenterPhone#1;class#FactoryMySql#0" />
+            <element signature="method#createTicket#1;class#FactoryMySql#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/UserMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="261" selection-start-line="261" selection-end-line="261" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Role.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/RoleMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/RoleMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="method#setUp#0;class#RoleMySqlTest#0" />
+            <element signature="method#tearDown#0;class#RoleMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#RoleMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#RoleMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#RoleMySqlTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/DescriptionMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="345" selection-start-line="345" selection-end-line="361" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getDescriptionTest#0;class#DescriptionMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#DescriptionMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#DescriptionMySqlTest#0" />
+            <element signature="method#closeStatement#0;class#DescriptionMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#DescriptionMySqlTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/UserMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="52" column="12" lean-forward="true" selection-start-line="52" selection-start-column="12" selection-end-line="54" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUp#0;class#UserMySqlTest#0" />
+            <element signature="method#tearDown#0;class#UserMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#UserMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#UserMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#UserMySqlTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql_Test.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="38" column="64" selection-start-line="38" selection-start-column="64" selection-end-line="38" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/QueriesMySql.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/mysql/UserPhoneMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/dao/mysql/UserPhoneMySqlTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+          <folding>
+            <element signature="method#setUp#0;class#UserPhoneMySqlTest#0" />
+            <element signature="method#tearDown#0;class#UserPhoneMySqlTest#0" />
+            <element signature="method#crateTestTables#0;class#UserPhoneMySqlTest#0" />
+            <element signature="method#prepareURL#0;class#UserPhoneMySqlTest#0" />
+            <element signature="method#closeConnection#0;class#UserPhoneMySqlTest#0" />
           </folding>
         </state>
       </provider>

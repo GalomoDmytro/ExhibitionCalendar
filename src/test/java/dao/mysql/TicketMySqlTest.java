@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
