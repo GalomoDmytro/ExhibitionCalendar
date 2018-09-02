@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page errorPage="../utility/error.jsp" %>
 
+
 <c:choose>
    <c:when test="${langBundle == null}">
       <fmt:setBundle basename="strings_ru"/>
@@ -26,23 +27,24 @@
       <center>
          <div class="content">
             <section class="main">
+            <h1><fmt:message key="header.registration"/></h1>
                <!-- Registration form-->
                <form action="${pageContext.request.contextPath}/controller?command=registration" method="post"  autocomplete="nope">
-                  <input type="text" name="name" autocomplete="nope" placeholder="*Profile Name" max="24" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" title="Should start with letter, and contain 2-20 characters. Allowed only latin and numbers. No whitespace allowed."  required/><br/>
+                  <input type="text" name="name" autocomplete="nope" placeholder="*<fmt:message key='common.profileName'/>" max="24" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" title="Should start with letter, and contain 2-20 characters. Allowed only latin and numbers. No whitespace allowed."  required/><br/>
                   ${errorNameProfile}<br/>
 
-                  <input type="password" name="password" placeholder="*Password" min="6" max="64" pattern="^(?=.*[0-9])(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=\S+$).{6,}$" title="start-of-string;a digit must occur at least once; a lower case letter must occur at least once; an upper case letter must occur at least once ; no whitespace allowed in the entire string;anything, at least 6 places though" required/><br/>
-                  <input type="password" name="passwordRepeat" placeholder="*Repeat password" min="6" max="64" required/><br/>
+                  <input type="password" name="password" placeholder="*<fmt:message key='common.password'/>" min="6" max="64" pattern="^(?=.*[0-9])(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=\S+$).{6,}$" title="start-of-string;a digit must occur at least once; a lower case letter must occur at least once; an upper case letter must occur at least once ; no whitespace allowed in the entire string;anything, at least 6 places though" required/><br/>
+                  <input type="password" name="passwordRepeat" placeholder="*<fmt:message key='common.passwordRepeat'/>" min="6" max="64" required/><br/>
                   ${errorPassword}<br/>
 
-                  <input type="text" name="firstName" placeholder="First name" max="25" max="100" autocomplete="nope"/><br/>
-                  <input type="text" name="lastName" placeholder="Last name" max="100" autocomplete="nope"/><br/><br/>
-                  <input type="email" name="eMailRegistration" placeholder="*eMail" default="" max="255" required autocomplete="off"/><br/>
-                  <input type="email" name="eMailRepeat" placeholder="*Repeat eMail" max="255" required autocomplete="nope"><br/>
+                  <input type="text" name="firstName" placeholder="<fmt:message key='common.firstName'/>" max="25" max="100" autocomplete="nope"/><br/>
+                  <input type="text" name="lastName" placeholder="<fmt:message key='common.lastName'/>" max="100" autocomplete="nope"/><br/><br/>
+                  <input type="email" name="eMailRegistration" placeholder="*<fmt:message key='common.eMail'/>" default="" max="255" required autocomplete="off"/><br/>
+                  <input type="email" name="eMailRepeat" placeholder="*<fmt:message key='common.eMailRepeat'/>" max="255" required autocomplete="nope"><br/>
                   ${errorMail}<br/>
 
-                  <input type="text" name="phone1" placeholder="Phone number 1" max="45" autocomplete="nope"/><br/>
-                  <input type="text" name="phone2" placeholder="Phone number 2" max="45" autocomplete="nope"/><br/>
+                  <input type="text" name="phone1" placeholder="<fmt:message key='common.phoneNumber'/> 1" max="45" autocomplete="nope"/><br/>
+                  <input type="text" name="phone2" placeholder="<fmt:message key='common.phoneNumber'/> 2" max="45" autocomplete="nope"/><br/>
                   ${errorPhone}<br/>
 
                   <button class="submitBtn" type="submit" value="Submit"><fmt:message key="btn.submit"/></button>

@@ -7,6 +7,10 @@ import java.util.Map;
 
 public interface DescriptionTableDao {
 
+    void setLockDescriptionTable() throws DBException;
+
+    void unlockTable() throws DBException;
+
     Map<String, String> getAllDescription(Exhibition exhibition) throws DBException;
 
     Map<String, String> getAllDescriptionById(Integer id) throws DBException;

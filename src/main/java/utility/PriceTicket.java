@@ -11,8 +11,6 @@ public class PriceTicket {
 //        price = price.divide(BigDecimal.valueOf(100));
         setRound(price);
 
-        // TODO make currency change method
-
         return price;
     }
 

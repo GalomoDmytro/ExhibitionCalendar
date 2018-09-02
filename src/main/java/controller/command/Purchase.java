@@ -3,6 +3,8 @@ package controller.command;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Contract;
+import entities.Exhibition;
+import entities.ExhibitionCenter;
 import entities.User;
 import org.apache.log4j.Logger;
 import utility.PriceTicket;
@@ -26,6 +28,8 @@ public class Purchase implements Command {
     private FactoryMySql factoryMySql;
     private Integer contractId;
     private Contract contract;
+    private Exhibition exhibition;
+    private ExhibitionCenter exhibitionCenter;
     private String dateExhibitionStart;
     private String dateSearch;
     private Date date;
@@ -47,18 +51,17 @@ public class Purchase implements Command {
         figureDateTicket();
         getDataFromTable();
 
-        if (req.getParameter("cancel") != null) {
-            dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
-        }
-        if (req.getParameter("buy") != null) {
-            if (isDataForPurchaseGood()) {
-                // TODO: make purchase to form
 
-                dispatcher = req.getRequestDispatcher(Links.CHECKOUT_PAGE);
-            } else {
-                // TODO: set error mes
-            }
-        }
+//        if (req.getParameter("buy") != null) {
+//                LOGGER.info("--------------buy pressed -------------");
+//            if (isDataForPurchaseGood()) {
+//                LOGGER.info("--------------data good -------------");
+//
+//                dispatcher = req.getRequestDispatcher(Links.CHECKOUT_PAGE);
+//            } else {
+//                // TODO: set error mes
+//            }
+//        }
 
         setDataToReq(req);
         setDataToSession();
@@ -123,11 +126,15 @@ public class Purchase implements Command {
     private void setDataToReq(HttpServletRequest req) {
         req.setAttribute("dateFromExhibitionStart", dateExhibitionStart);
         req.setAttribute("searchDateLine", dateSearch);
-        req.setAttribute("idContract", contract.getId());
+//        req.setAttribute("idContract", contract.getId());
 
         req.setAttribute("dateTicketToApply", format.format(date));
-        req.setAttribute("price", contract.getTicketPrice());
+//        req.setAttribute("price", contract.getTicketPrice());
         req.setAttribute("quantity", quantityTickets);
+
+        req.setAttribute("contract", contract);
+        req.setAttribute("exhibitionCenter", exhibitionCenter);
+        req.setAttribute("exhibition", exhibition);
     }
 
     private void setDataToSession() {
@@ -139,14 +146,17 @@ public class Purchase implements Command {
     private void roleMail(HttpServletRequest req) {
         HttpSession session = req.getSession(true);
 
-        if (session.getAttribute("idUser") != null) {
-            userId = session.getAttribute("idUser").toString();
+        if (session.getAttribute("userId") != null) {
+            userId = session.getAttribute("userId").toString();
+        } else {
+            userId = "1";
         }
 
         handleConnection();
         try {
             User user = factoryMySql.createUser(connection).getById(Integer.parseInt(userId));
             req.setAttribute("eMailHold", user.getMail());
+//            LOGGER.info("user:  " + user);
         } catch (Exception exception) {
         } finally {
             closeConnection();
@@ -181,9 +191,14 @@ public class Purchase implements Command {
 
         try {
             if (contractId != null) {
-                contract = factoryMySql.createExhibitionContract(connection).getExhibitionContractById(contractId);
+                contract = factoryMySql.createExhibitionContract(connection)
+                        .getExhibitionContractById(contractId);
                 contract.setTicketPrice(new PriceTicket()
                         .calculateSumTicketsPrice(contract.getTicketPrice(), 1));
+                exhibition = factoryMySql.createExhibition(connection)
+                        .getExhibitionById(contract.getExhibitionId());
+                exhibitionCenter = factoryMySql.createExhibitionCenter(connection)
+                        .getExhibitionCenterById(contract.getExCenterId());
             }
         } catch (Exception exception) {
             LOGGER.error(exception);
@@ -191,31 +206,6 @@ public class Purchase implements Command {
             closeConnection();
         }
 
-        LOGGER.info("getDataFromTable end");
-    }
-
-    private boolean hasTicketsToSold() {
-//        handleConnection();
-//
-//        try {
-//            if (date != null && quantityTickets != null) {
-//                int soldTickets = factoryMySql.createTicket(connection)
-//                        .getCountSoldTicketForDate(java.sql.Date.valueOf(date), contract.getId());
-//                if (contract.getMaxTicketPerDay() >= soldTickets) {
-//                    return false;
-//                }
-//                if (soldTickets + quantityTickets > contract.getMaxTicketPerDay()) {
-//                    return false;
-//                }
-//                return true;
-//            }
-//        } catch (Exception exception) {
-//
-//        } finally {
-//            closeConnection();
-//        }
-
-        return false;
     }
 
     private void closeConnection() {

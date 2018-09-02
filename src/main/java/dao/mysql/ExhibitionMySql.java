@@ -31,9 +31,32 @@ public class ExhibitionMySql implements ExhibitionDao {
     }
 
     @Override
+    public void setLockExhibitionTable() throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement("LOCK TABLES exhibition WRITE, description WRITE ")) {
+            statement.execute();
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void unlockTable() throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement("UNLOCK TABLES")) {
+            statement.execute();
+
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
     public Exhibition getExhibitionById(Integer id) throws DBException {
         List<Exhibition> exhibitions;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.getById"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.getById"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             exhibitions = parseExhibitionSet(resultSet);

@@ -34,7 +34,7 @@ public class AccessSecurityFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         String path = httpRequest.getRequestURI();
-        if (path.endsWith(".css")) {
+        if (path.endsWith(".css") || path.endsWith(".jpg")) {
             filterChain.doFilter(request, response);
             return;
         } else if (path.endsWith("/errorHandler")) {

@@ -22,7 +22,7 @@ public class WaitApprovalTicket implements Command {
 
     private Connection connection;
     private FactoryMySql factoryMySql;
-//    private List<Ticket> ticketList;
+    //    private List<Ticket> ticketList;
     private int idTicket;
     private int idModerator;
 
@@ -70,8 +70,8 @@ public class WaitApprovalTicket implements Command {
         handleConnection();
 
         try {
-            connection.setAutoCommit(false);
             factoryMySql.createTicket(connection).setLockTicketTable();
+            connection.setAutoCommit(false);
             factoryMySql.createTicket(connection).approveTicket(idTicket);
 
             Ticket ticket = factoryMySql.createTicket(connection).getTicketById(idTicket);
@@ -83,12 +83,21 @@ public class WaitApprovalTicket implements Command {
             for (int i = 0; i < quantity; i++) {
                 factoryMySql.createTicket(connection).insertTicket(ticket);
             }
-            factoryMySql.createTicket(connection).unlockTable();
 
             connection.commit();
             // TODO: send message to user
         } catch (Exception exception) {
         } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (Exception e) {
+
+            }
+            try {
+                factoryMySql.createTicket(connection).unlockTable();
+            } catch (Exception e) {
+
+            }
             closeConnection();
         }
     }
@@ -108,7 +117,7 @@ public class WaitApprovalTicket implements Command {
 
     private void readData(HttpServletRequest req) {
         handleConnection();
-          List<Ticket> ticketList = null;
+        List<Ticket> ticketList = null;
 
         try {
             ticketList = factoryMySql.createTicket(connection).getAllWaitApproval();
@@ -119,7 +128,7 @@ public class WaitApprovalTicket implements Command {
             closeConnection();
         }
 
-        if(ticketList == null) {
+        if (ticketList == null) {
             ticketList = Collections.emptyList();
         }
         setDataToReq(req, ticketList);

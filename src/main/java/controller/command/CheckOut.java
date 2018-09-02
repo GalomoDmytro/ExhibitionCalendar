@@ -63,7 +63,10 @@ public class CheckOut implements Command {
             Contract contract = factoryMySql.createExhibitionContract(connection).getExhibitionContractById(idContract);
             int soldTickets = factoryMySql.createTicket(connection)
                     .getCountSoldTicketForDate(java.sql.Date.valueOf(dateToApplyTicket), idContract);
-            if (contract.getMaxTicketPerDay() >= soldTickets + quantity) {
+            if (contract.getMaxTicketPerDay() <= soldTickets + quantity) {
+//                LOGGER.info("Ticket quantity info;");
+//                LOGGER.info("sold ticket " + contract.getMaxTicketPerDay() + " >= "
+//                    + " soldTickets:" + soldTickets + " quantity: " + quantity );
                 return false;
             }
             if (soldTickets + quantity > contract.getMaxTicketPerDay()) {

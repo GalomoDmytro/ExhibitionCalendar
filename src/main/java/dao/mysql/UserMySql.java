@@ -90,7 +90,7 @@ public class UserMySql implements UserDao {
         } else if (user.size() < 1) {
             return new User().emptyUser();
         } else {
-            LOGGER.info("return  " + user.get(0));
+//            LOGGER.info("return  " + user.get(0));
             return user.get(0);
         }
     }
@@ -198,10 +198,10 @@ public class UserMySql implements UserDao {
             statement.setString(2, nameOrMail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                LOGGER.info(nameOrMail + " in table");
+//                LOGGER.info(nameOrMail + " in table");
                 return true;
             } else {
-                LOGGER.info(nameOrMail + " not in table");
+//                LOGGER.info(nameOrMail + " not in table");
                 return false;
             }
 
@@ -213,7 +213,7 @@ public class UserMySql implements UserDao {
 
     private List<User> parseUsersSet(ResultSet resultSet) throws DBException {
         List<User> users = new ArrayList<>();
-        LOGGER.info("parse user");
+//        LOGGER.info("parse user");
         try {
             while (resultSet.next()) {
                 User user = new User.Builder()
@@ -225,7 +225,7 @@ public class UserMySql implements UserDao {
                         .setPassword(resultSet.getString(FIELD_PASSWORD))
                         .build();
                 users.add(user);
-                LOGGER.info(user);
+//                LOGGER.info(user);
             }
         } catch (SQLException exception) {
             LOGGER.error(exception);

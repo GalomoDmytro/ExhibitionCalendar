@@ -1,6 +1,5 @@
 package utility;
 
-import controller.command.RegistrationCommand;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
@@ -11,6 +10,7 @@ public class PasswordHandler {
     public PasswordHandler(){}
 
     public String encrypt(String originalString) {
+
         return DigestUtils.sha256Hex(originalString + "salt java");
     }
 

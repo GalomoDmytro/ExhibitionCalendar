@@ -7,7 +7,7 @@ public class Exhibition {
     private Integer id;
     private String title;
     private String imgSrc;
-    private String languageTags;
+    private String languageTags = "";
 
     public Exhibition(){}
 

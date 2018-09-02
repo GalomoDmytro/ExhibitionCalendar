@@ -1,8 +1,10 @@
 package dao.mysql;
 
+import controller.command.moderatorCommand.EditExposition;
 import dao.interfaces.DescriptionTableDao;
 import entities.Exhibition;
 import exceptions.DBException;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.Collections;
@@ -19,6 +21,8 @@ public class DescriptionMySql implements DescriptionTableDao {
     private static final String FIELD_EXHIBITION_ID = "exhibition_id";
     private static final String FIELD_LANGUAGE = "language";
 
+    private static final Logger LOGGER = Logger.getLogger(DescriptionMySql.class);
+
     DescriptionMySql(Connection connection) {
         this.QUERIES = ResourceBundle.getBundle("QueriesMySql");
         this.connection = connection;
@@ -30,9 +34,32 @@ public class DescriptionMySql implements DescriptionTableDao {
     }
 
     @Override
+    public void setLockDescriptionTable() throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement("LOCK TABLE description WRITE")) {
+            statement.execute();
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void unlockTable() throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement("UNLOCK TABLE")) {
+            statement.execute();
+
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
     public Map<String, String> getAllDescription(Exhibition exhibition) throws DBException {
         Map<String, String> languageDescription;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.getAll"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("description.getAll"))) {
             statement.setInt(1, exhibition.getId());
             ResultSet resultSet = statement.executeQuery();
             languageDescription = parseResultSet(resultSet);
@@ -50,7 +77,8 @@ public class DescriptionMySql implements DescriptionTableDao {
     @Override
     public Map<String, String> getAllDescriptionById(Integer id) throws DBException {
         Map<String, String> languageDescription;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.getAll"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("description.getAll"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             languageDescription = parseResultSet(resultSet);
@@ -67,25 +95,33 @@ public class DescriptionMySql implements DescriptionTableDao {
 
     @Override
     public String getDescription(Exhibition exhibition, String keyLanguage) throws DBException {
-        String description;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.getDescription"))) {
+        String description = null;
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("description.getDescription"))) {
             statement.setInt(1, exhibition.getId());
             statement.setString(2, keyLanguage);
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            description = resultSet.getString(FIELD_DESCRIPTION);
+            if (resultSet.next()) {
+                description = resultSet.getString(FIELD_DESCRIPTION);
+            }
         } catch (SQLException exception) {
             System.out.println(exception);
             throw new DBException(exception);
+        }
+
+        if (description == null) {
+            return "oops, nothing to show";
         }
 
         return description;
     }
 
     @Override
-    public void insertDescription(String keyLanguage, String description, Exhibition exhibition) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.insert"),
-                Statement.RETURN_GENERATED_KEYS)) {
+    public void insertDescription(String keyLanguage, String description, Exhibition exhibition)
+            throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("description.insert"),
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, keyLanguage);
             statement.setString(2, description);
             statement.setInt(3, exhibition.getId());
@@ -96,16 +132,21 @@ public class DescriptionMySql implements DescriptionTableDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
 
     @Override
-    public void insertDescriptionById(String keyLanguage, String description, Integer exhibitionId) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.insert"),
-                Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, keyLanguage);
-            statement.setString(2, description);
+    public void insertDescriptionById(String keyLanguage, String description, Integer exhibitionId)
+            throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("description.insert"),
+                        Statement.RETURN_GENERATED_KEYS)) {
+            LOGGER.info("lang " + keyLanguage);
+            LOGGER.info("description " + description);
+            statement.setString(2, keyLanguage);
+            statement.setString(1, description);
             statement.setInt(3, exhibitionId);
 
             int affectedRows = statement.executeUpdate();
@@ -114,13 +155,16 @@ public class DescriptionMySql implements DescriptionTableDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
 
     @Override
-    public void deleteAllDescriptionForExposition(Exhibition exhibition) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.delete"))) {
+    public void deleteAllDescriptionForExposition(Exhibition exhibition)
+            throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("description.delete"))) {
             statement.setInt(1, exhibition.getId());
             statement.execute();
         } catch (SQLException exception) {
@@ -129,8 +173,10 @@ public class DescriptionMySql implements DescriptionTableDao {
     }
 
     @Override
-    public void deleteDescriptionForLang(Exhibition exhibition, String keyLanguage) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("description.deleteLang"))) {
+    public void deleteDescriptionForLang(Exhibition exhibition, String keyLanguage)
+            throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("description.deleteLang"))) {
             statement.setInt(1, exhibition.getId());
             statement.setString(2, keyLanguage);
             statement.executeUpdate();

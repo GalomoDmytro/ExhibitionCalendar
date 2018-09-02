@@ -48,7 +48,11 @@
                         <td>
                            <c:out value="${expo.languageTags}" />
                         </td>
-                        <td><a href="${pageContext.request.contextPath}/controller?command=editExposition&expoId=<c:out value='${expo.id}'/>&title=<c:out value='${expo.title}'/>&imgSrc=<c:out value='${expo.imgSrc}'/>">Edit</a>
+                        <td>
+                        <form action="${pageContext.request.contextPath}/controller?command=editExposition" method="post">
+                            <input type="hidden" name="expoId" value="<c:out value='${expo.id}'/>">
+                            <input type="submit" value="Edit"/>
+                        </form>
                            &nbsp;&nbsp;&nbsp;&nbsp;
                            <a href="${pageContext.request.contextPath}/controller?command=expoManagement&idDelete=<c:out value='${expo.id}'/>">Delete</a>
                            &nbsp;&nbsp;&nbsp;&nbsp;

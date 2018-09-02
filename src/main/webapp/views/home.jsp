@@ -52,9 +52,6 @@
                            <fmt:message key="home.ExpoCenter"/>
                         </th>
                         <th>
-                           <fmt:message key="home.Address"/>
-                        </th>
-                        <th>
                            <fmt:message key="home.fromDate"/>
                         </th>
                         <th>
@@ -75,9 +72,7 @@
                            <td>
                               <c:out value="${list.exhibitionCenterTitle}" />
                            </td>
-                           <td>
 
-                           </td>
                            <td>
                               <c:out value="${list.dateFrom}" />
                            </td>

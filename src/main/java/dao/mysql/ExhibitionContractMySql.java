@@ -431,7 +431,6 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                         .build();
 
                 contracts.add(contract);
-                LOGGER.info(contract);
             }
         } catch (SQLException exception) {
             throw new DBException(exception);

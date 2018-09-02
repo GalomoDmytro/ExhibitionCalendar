@@ -18,33 +18,51 @@
          <div class="content">
             <section class="main">
                <h1>Edit Exposition</h1>
-               <h2>${role}</h2>
                <br><br>
                <form action="${pageContext.request.contextPath}/controller?command=editExposition" method="post">
                   Id:
-                  <c:out value="${idEdit}" />
+                  <c:out value='${exhibition.id}'/>
                   <br/>
-                  Expo Title:<input type="text" name="title" value="<c:out value='${title}'/>" min="1" max="255" required/><br/>
-                  Expo imgSrc:<input type="text" name="imageSrc" value="${imgSrc}"/><br/>
-                  <table border="0" cellpadding="5">
-                     <tr>
-                        <th>Lang</th>
-                        <th>Text</th>
-                     </tr>
+                  Expo Title:<input type="text" name="title" value="<c:out value='${exhibition.title}'/>" min="1" max="255" required/><br/>
+                  <c:if test="${exhibition.imgSrc != null}">
+                    <img src="<c:out value='${exhibition.imgSrc}'/>" alt="Exhibition poster" style="max-height: 150px; max-width: 150px;">
+                  </c:if>
+                  <br/>
+                  Expo imgSrc:<input type="text" name="imgSrc" value="<c:out value='${exhibition.imgSrc}'/>"/><br/>
+
+                  <br/>
+                     <table>
                      <c:forEach var="langDescript" items="${mapLang}" >
                         <tr>
-                           <td>Tag:<input type="text" name="<c:out value='${langDescript.key}'/>" value="<c:out value='${langDescript.key}'/>" autocomplete="nope"/></td>
-                           <td>Text:<input type="text" name="<c:out value='${langDescript.value}'/>" value="${langDescript.value}" autocomplete="nope"/></td>
+                           <td>Tag:<input type="text" max="15" name="<c:out value='${langDescript.key}'/>" value="<c:out value='${langDescript.key}'/>" autocomplete="nope"/></td>
+                           <td><textarea name="val:<c:out value='${langDescript.key}'/>" rows="4" cols="50" autocomplete="nope">${langDescript.value}</textarea>   </td>
                         </tr>
                      </c:forEach>
+                     </table>
+                  <br/>
+
+                  <table>
+                        <tr>
+                           <td>New Lang Tag:</td>
+                           <td>New Text Description:</td>
+                        </tr>
+                        <tr>
+                           <td>Tag:<input type="text" max="15" name="newTextLabel" value="<c:out value='${langDescript.key}'/>" autocomplete="nope"/></td>
+                           <td><textarea name="newTextDescription" rows="4" cols="50" autocomplete="nope"></textarea></td>
+                        </tr>
                   </table>
-                  New Lang Tag:<input type="text" name="newTag" />New Text:<input type="text" name="newTextDescription" /><br/>
                   <button class="submitBtn" type="submit" name="editExpo" value="Save">Save</button>
-                  <button class="resetBtn" type="submit" name="denieEdit" value="Cancel">Cancel</button>
                   <br> ${error}
                </form>
                <br>
-               <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>
+
+               <form action="${pageContext.request.contextPath}/controller?command=expoManagement" method="post">
+                    <input class="resetBtn" type="submit"  value="Cancel">
+               </form>
+
+                <form action="${pageContext.request.contextPath}/controller?command=moderatorHome" method="post">
+                    <input class="blueButton" type="submit" value="moderator home">
+                </form>
             </section>
          </div>
       </center>

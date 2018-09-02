@@ -38,7 +38,8 @@ public class TicketMySql implements TicketDao {
 
     @Override
     public void setLockTicketTable() throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement("lock table ticket write")) {
+        try (PreparedStatement statement = connection
+                .prepareStatement("lock table ticket write")) {
             statement.execute();
         } catch (SQLException exception) {
             throw new DBException(exception);
@@ -47,7 +48,8 @@ public class TicketMySql implements TicketDao {
 
     @Override
     public void unlockTable() throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement("unlock table")) {
+        try (PreparedStatement statement = connection
+                .prepareStatement("unlock table")) {
             statement.execute();
 
         } catch (SQLException exception) {
@@ -57,7 +59,8 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public Ticket getTicketById(Integer id) throws DBException {
+    public Ticket getTicketById(Integer id)
+            throws DBException {
         List<Ticket> tickets;
         try (PreparedStatement statement =
                      connection.prepareStatement(QUERIES.getString("ticket.getById"))) {
@@ -76,7 +79,8 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public List<Ticket> getAllTickets() throws DBException {
+    public List<Ticket> getAllTickets()
+            throws DBException {
         List<Ticket> tickets;
         try (PreparedStatement statement =
                      connection.prepareStatement(QUERIES.getString("ticket.getAll"))) {
@@ -94,7 +98,8 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public List<Ticket> getAllApprovedTickets() throws DBException {
+    public List<Ticket> getAllApprovedTickets()
+            throws DBException {
         List<Ticket> tickets;
         try (PreparedStatement statement
                      = connection.prepareStatement(QUERIES.getString("ticket.getAllApproved"))) {
@@ -112,7 +117,8 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public List<Ticket> getAllWaitApproval() throws DBException {
+    public List<Ticket> getAllWaitApproval()
+            throws DBException {
         List<Ticket> tickets;
         try (PreparedStatement statement
                      = connection.prepareStatement(QUERIES.getString("ticket.getAllWaitApproval"))) {
@@ -130,7 +136,8 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public int getCountSoldTicketForDate(Date date, Integer id_contract) throws DBException {
+    public int getCountSoldTicketForDate(Date date, Integer id_contract)
+            throws DBException {
         int countTickets = 0;
 
         try (PreparedStatement statement = connection

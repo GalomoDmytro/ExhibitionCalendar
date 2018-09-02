@@ -78,7 +78,6 @@ public class LoginCommand implements Command {
             }
             LOGGER.info("name or mail in ");
             if(nameOrMail.contains("@")) {
-                LOGGER.info(" mail in and pars");
                 user = factoryMySql.createUser(connection).getByMail(nameOrMail);
             } else {
                 LOGGER.info(" name in and pars");
@@ -105,7 +104,7 @@ public class LoginCommand implements Command {
 
         if (user != null) {
             session.setAttribute("role", user.getRole());
-            session.setAttribute("idUser", user.getId());
+            session.setAttribute("userId", user.getId());
         }
     }
 

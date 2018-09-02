@@ -35,7 +35,8 @@ public class Home implements Command {
     private static final Logger LOGGER = Logger.getLogger(Home.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
 
         toFindCurrentPage(req);
@@ -45,10 +46,8 @@ public class Home implements Command {
         choseWhatToShow(req);
 
         saveAtrToReq(req);
-        LOGGER.info("currant page " + currentPage + " np " + numberOfPages) ;
 
         dispatcher.forward(req, resp);
-
     }
 
     private void toFindCurrentPage(HttpServletRequest req) {
@@ -62,14 +61,14 @@ public class Home implements Command {
     private void saveAtrToReq(HttpServletRequest req) {
         req.setAttribute("searchDate", req.getParameter("searchDate"));
         req.setAttribute("searchDateLine", req.getParameter("searchDate"));
-        LOGGER.info("home page searchDateLine save to req " + req.getParameter("searchDate"));
         req.setAttribute("searchField", req.getParameter("searchField"));
         req.setAttribute("numberOfPages", numberOfPages);
         req.setAttribute("currentPage", currentPage);
     }
 
     private void choseWhatToShow(HttpServletRequest req) {
-        if (req.getParameter("searchField") != null && req.getParameter("searchField").length() > 0) {
+        if (req.getParameter("searchField") != null
+                && req.getParameter("searchField").length() > 0) {
             specificSearch(req);
         } else {
             showAll(req);
@@ -122,7 +121,8 @@ public class Home implements Command {
 
     private void transformPrice(List<Contract> listContract) {
         for(Contract contract : listContract) {
-            contract.setTicketPrice(priceTicket.calculateSumTicketsPrice(contract.getTicketPrice(), 1));
+            contract.setTicketPrice(priceTicket
+                    .calculateSumTicketsPrice(contract.getTicketPrice(), 1));
         }
     }
 

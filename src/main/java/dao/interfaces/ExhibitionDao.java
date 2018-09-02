@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface ExhibitionDao {
 
+    void setLockExhibitionTable() throws DBException;
+
+    void unlockTable() throws DBException;
+
     Exhibition getExhibitionById(Integer id) throws DBException;
 
     Exhibition getExhibitionByTitle(String title) throws DBException;

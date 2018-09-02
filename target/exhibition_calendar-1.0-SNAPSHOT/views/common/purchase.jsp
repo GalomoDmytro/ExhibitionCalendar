@@ -25,30 +25,30 @@
       <center>
          <div class="content">
             <section class="main">
-               <h1>Purchase</h1>
+               <h1><fmt:message key="purchase.title"/></h1>
                <br/>
                <hr>
                <div align="center">
                   <table border="1" cellpadding="7">
                      <caption>
-                        <h2>Expo info</h2>
+                        <h2><fmt:message key="purchase.checkVal"/></h2>
                      </caption>
                      <tr>
-                        <th>Date</th>
-                        <th>Name Expo</th>
-                        <th>Expo Center</th>
-                        <th>Address</th>
-                        <th>Price</th>
-                        <th>ticket?</th>
+                        <th><fmt:message key="purchase.date"/></th>
+                        <th><fmt:message key="purchase.nameExpo"/></th>
+                        <th><fmt:message key="purchase.nameExpoCenter"/></th>
+                        <th><fmt:message key="purchase.address"/></th>
+                        <th><fmt:message key="purchase.price"/></th>
+                        <th><fmt:message key="purchase.ticketsAv"/></th>
                         <th></th>
                      </tr>
                      <tr>
                         <td>${dateTicketToApply}</td>
-                        <td>${nameExpo}</td>
-                        <td>${nameExpoCen}</td>
-                        <td>${addressExpoCen}</td>
-                        <td>${price}</td>
-                        <td>${ticketsAvailable}</td>
+                        <td>${exhibition.title}</td>
+                        <td>${exhibitionCenter.title}</td>
+                        <td>${exhibitionCenter.address}</td>
+                        <td>${contract.ticketPrice}</td>
+                        <td>${ticketsAv}</td>
                         <td></td>
                      </tr>
                   </table>
@@ -56,22 +56,21 @@
                      <table>
                         <tr>
                            <td></td>
-                           <td> <input type="email" name="eMail" value="${eMailHold}" placeholder="eMail" required/></td>
+                           <td> <input type="email" name="eMail" value="${eMailHold}" placeholder="eMail" autocomplete="off"required/></td>
                         </tr>
                         <tr>
                            <td>Quantity</td>
                            <td><input type="number" name="quantity"  value="1" min="1" max="10"/><br><br></td>
                         </tr>
                      </table>
-                     <input name="priceTickets" type="hidden" value="${price}">
+                     <input name="priceTickets" type="hidden" value="${contract.ticketPrice}">
                      <input name="dateTicketToApply" type="hidden" value="${dateTicketToApply}">
                      <input name="idContract" type="hidden" value="${idContract}">
-                     <input class="submitBtn"  type="submit" name="buy" value="buy" />
-                     <input class="resetBtn" type="submit" name="cancel" value="cancel"/>
+                     <input class="submitBtn"  type="submit" name="buy" value='<fmt:message key="btn.buy"/>' />
                   </form>
                   <br/><br/>
                   <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
-                     <input  class="blueButton" type="submit" value="go home"/>
+                     <input  class="blueButton" type="submit" value='<fmt:message key="btn.goHome"/>'/>
                   </form>
                </div>
             </section>
