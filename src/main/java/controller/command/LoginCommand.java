@@ -76,11 +76,9 @@ public class LoginCommand implements Command {
             if(!factoryMySql.createUser(connection).isNameOrMailInTable(nameOrMail)) {
                 return null;
             }
-            LOGGER.info("name or mail in ");
             if(nameOrMail.contains("@")) {
                 user = factoryMySql.createUser(connection).getByMail(nameOrMail);
             } else {
-                LOGGER.info(" name in and pars");
                 user = factoryMySql.createUser(connection).getByName(nameOrMail);
             }
             user.setRole(factoryMySql.createRole(connection).getRoleById(user.getId()));

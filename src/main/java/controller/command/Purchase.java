@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +33,7 @@ public class Purchase implements Command {
     private ExhibitionCenter exhibitionCenter;
     private String dateExhibitionStart;
     private String dateSearch;
+    private String dateToApply;
     private Date date;
     private Integer quantityTickets;
     private HttpSession session;
@@ -50,18 +52,6 @@ public class Purchase implements Command {
         getDataFromSession(req);
         figureDateTicket();
         getDataFromTable();
-
-
-//        if (req.getParameter("buy") != null) {
-//                LOGGER.info("--------------buy pressed -------------");
-//            if (isDataForPurchaseGood()) {
-//                LOGGER.info("--------------data good -------------");
-//
-//                dispatcher = req.getRequestDispatcher(Links.CHECKOUT_PAGE);
-//            } else {
-//                // TODO: set error mes
-//            }
-//        }
 
         setDataToReq(req);
         setDataToSession();
@@ -84,6 +74,7 @@ public class Purchase implements Command {
         if (request.getParameter("searchDateLine") == null
                 || request.getParameter("searchDateLine").isEmpty()) {
             dateSearch = (String) session.getAttribute("searchDateLine");
+            LOGGER.info("get from session dateSearch " + dateSearch);
         }
 
         try {
@@ -115,21 +106,18 @@ public class Purchase implements Command {
                 LOGGER.error(exception);
             }
         }
-//        LOGGER.info("quantityTickets: " + quantityTickets);
 
         dateExhibitionStart = req.getParameter("dateFromExhibitionStart");
         dateSearch = req.getParameter("searchDateLine");
-//        LOGGER.info("Purchase ****** getDataFromRequest ***** finish");
+        LOGGER.info("------------ " + dateSearch);
 
     }
 
     private void setDataToReq(HttpServletRequest req) {
         req.setAttribute("dateFromExhibitionStart", dateExhibitionStart);
         req.setAttribute("searchDateLine", dateSearch);
-//        req.setAttribute("idContract", contract.getId());
 
-        req.setAttribute("dateTicketToApply", format.format(date));
-//        req.setAttribute("price", contract.getTicketPrice());
+        req.setAttribute("dateTicketToApply", dateToApply);
         req.setAttribute("quantity", quantityTickets);
 
         req.setAttribute("contract", contract);
@@ -140,7 +128,7 @@ public class Purchase implements Command {
     private void setDataToSession() {
         session.setAttribute("idContract", contractId);
         session.setAttribute("dateFromExhibitionStart", dateExhibitionStart);
-        session.setAttribute("searchDateLine", dateSearch);
+        session.setAttribute("searchDateLine", dateToApply);
     }
 
     private void roleMail(HttpServletRequest req) {
@@ -169,21 +157,30 @@ public class Purchase implements Command {
             dateSearch = format.format(new Date());
         }
 
-        Date date1;
-        Date date2;
+        Date dateUserChose;
+        Date dateWhenExpoStart;
+        Date dateToday;
+        String todayDate = format.format(new Date());;
         try {
-            date1 = format.parse(dateSearch);
-            date2 = format.parse(dateExhibitionStart);
-            if (date1.compareTo(date2) <= 0) {
-                date = date2;
+            dateUserChose = format.parse(dateSearch);
+            dateWhenExpoStart = format.parse(dateExhibitionStart);
+            dateToday = format.parse(todayDate);
+            if (dateUserChose.compareTo(dateWhenExpoStart) <= 0) {
+                date = dateWhenExpoStart;
             } else {
-                date = date1;
+                date = dateUserChose;
+            }
+
+            if(date.compareTo(dateToday) <= 0) {
+                date = dateToday;
             }
 
         } catch (ParseException e) {
             date = new Date();
         }
 
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        dateToApply = df.format(date);
     }
 
     private void getDataFromTable() {

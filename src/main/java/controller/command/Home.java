@@ -5,7 +5,6 @@ import dao.mysql.FactoryMySql;
 import entities.Contract;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
-import utility.Patterns;
 import utility.PriceTicket;
 
 import javax.servlet.RequestDispatcher;
@@ -39,7 +38,7 @@ public class Home implements Command {
             throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
 
-        toFindCurrentPage(req);
+        findCurrentPage(req);
 
         getDate(req);
 
@@ -50,7 +49,7 @@ public class Home implements Command {
         dispatcher.forward(req, resp);
     }
 
-    private void toFindCurrentPage(HttpServletRequest req) {
+    private void findCurrentPage(HttpServletRequest req) {
         if (req.getParameter("currentPage") == null) {
             currentPage = 1;
         } else {
@@ -60,7 +59,8 @@ public class Home implements Command {
 
     private void saveAtrToReq(HttpServletRequest req) {
         req.setAttribute("searchDate", req.getParameter("searchDate"));
-        req.setAttribute("searchDateLine", req.getParameter("searchDate"));
+        LOGGER.info("***** save to request " + date);
+        req.setAttribute("searchDateLine", date);
         req.setAttribute("searchField", req.getParameter("searchField"));
         req.setAttribute("numberOfPages", numberOfPages);
         req.setAttribute("currentPage", currentPage);
@@ -137,9 +137,11 @@ public class Home implements Command {
 
     private void getDate(HttpServletRequest req) {
         date = req.getParameter("searchDate");
+        LOGGER.info("get date from req " + req);
         if(date == null || date.length() < 1) {
             date = getTodayDate();
         }
+
     }
 
     private String getTodayDate() {

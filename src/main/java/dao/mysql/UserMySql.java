@@ -193,7 +193,6 @@ public class UserMySql implements UserDao {
     public boolean isNameOrMailInTable(String nameOrMail) throws DBException {
         try (PreparedStatement statement = connection
                 .prepareStatement(QUERIES.getString("user.nameOrMailInTable"))) {
-            LOGGER.info("isNameOrMailInTable - seartch in db " + nameOrMail);
             statement.setString(1, nameOrMail);
             statement.setString(2, nameOrMail);
             ResultSet resultSet = statement.executeQuery();

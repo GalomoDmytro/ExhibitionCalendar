@@ -32,18 +32,22 @@ public class WaitApprovalTicket implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.WAIT_APPROVAL_TICKETS_PAGE);
 
+        LOGGER.info("getIdModerator");
         getIdModerator(req);
 
+        LOGGER.info("onBtnClick");
         onBtnClick(req);
 
+        LOGGER.info("readData");
         readData(req);
 
+        LOGGER.info("forward");
         dispatcher.forward(req, resp);
     }
 
     private void getIdModerator(HttpServletRequest req) {
         HttpSession session = req.getSession();
-        idModerator = (Integer) session.getAttribute("idUser");
+        idModerator = (Integer) session.getAttribute("userId");
     }
 
     private void onBtnClick(HttpServletRequest req) {
