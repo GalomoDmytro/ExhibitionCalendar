@@ -10,6 +10,10 @@ import java.util.List;
 
 public interface ExhibitionContractDao {
 
+    void setLockContractTable() throws DBException;
+
+    void unlockTable() throws DBException;
+
     Contract getExhibitionContractById(Integer id) throws DBException;
 
     List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter, Exhibition exhibition) throws DBException;

@@ -1,7 +1,7 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
-import controller.command.Links;
+import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Contract;
@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
 
 public class EditContract implements Command {
 
@@ -56,7 +55,7 @@ public class EditContract implements Command {
         if (req.getParameter("saveChangesContract") != null) {
             updateContractInfo(req);
             if (changeSuccessful) {
-                dispatcher = req.getRequestDispatcher(Links.MODERATOR_PAGE);
+                dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
             }
 
         }
@@ -67,18 +66,26 @@ public class EditContract implements Command {
     private void updateContractInfo(HttpServletRequest req) {
         prepareDataToUpdate(req);
         if (!checkData()) {
+            req.setAttribute("error", "Ops! Can't save. Check data please.");
             return;
         }
 
         handleConnection();
         try {
             Contract contract = prepareContractToUdpdate();
+            factoryMySql.createExhibitionContract(connection).setLockContractTable();
             factoryMySql.createExhibitionContract(connection).updateContract(contract);
             changeSuccessful = true;
         } catch (Exception exception) {
             LOGGER.error(exception);
             changeSuccessful = false;
         } finally {
+            try {
+                factoryMySql.createExhibitionCenter(connection).unlockTable();
+            } catch (DBException e) {
+                e.printStackTrace();
+            }
+
             closeConnection();
         }
     }
@@ -109,17 +116,14 @@ public class EditContract implements Command {
 
     private boolean checkData() {
         if (!dateValid()) {
-
             return false;
         }
 
         if (!priceValid()) {
-
             return false;
         }
 
         if (!maxTicketPerDayValid()) {
-
             return false;
         }
 
@@ -172,13 +176,32 @@ public class EditContract implements Command {
             return false;
         }
 
+        if (!isDateInOrder(dateFromLine, dateToLine)) {
+            return false;
+        }
+
         return true;
+    }
+
+    private boolean isDateInOrder(String from, String to) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dateFrom = df.parse(from);
+            Date dateTo = df.parse(to);
+            if (dateFrom.compareTo(dateTo) < 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            LOGGER.error(e);
+        }
+        return false;
     }
 
     private void setDataInForm(HttpServletRequest req) {
         handleConnection();
 
         try {
+
             if (idContract != null) {
                 Contract contract = factoryMySql.createExhibitionContract(connection)
                         .getExhibitionContractById(idContract);
@@ -201,23 +224,15 @@ public class EditContract implements Command {
 
     private void setDataToForm(Contract contract, Exhibition exhibition,
                                ExhibitionCenter exhibitionCenter, HttpServletRequest req) {
-        req.setAttribute("dateFrom", contract.getDateFrom());
-        req.setAttribute("dateTo", contract.getDateTo());
-        req.setAttribute("price", contract.getTicketPrice());
-        req.setAttribute("workTime", contract.getWorkTime());
-        req.setAttribute("maxTicketDay", contract.getMaxTicketPerDay());
 
-        req.setAttribute("exhibitionId", exhibition.getId());
-        req.setAttribute("exhibitionTitle", exhibition.getTitle());
-        req.setAttribute("exhibitionLangTags", exhibition.getLanguageTags());
+        req.setAttribute("contract", contract);
 
-        req.setAttribute("exhibitionCenterId", exhibitionCenter.getId());
-        req.setAttribute("exhibitionCenterTitle", exhibitionCenter.getTitle());
-        req.setAttribute("exhibitionAddress", exhibitionCenter.getAddress());
-        req.setAttribute("exhibitionMail", exhibitionCenter.geteMail());
-        req.setAttribute("exhibitionWebPage", exhibitionCenter.getWebPage());
+        req.setAttribute("exhibition", exhibition);
+
+        req.setAttribute("exhibitionCenter", exhibitionCenter);
+
         if (exhibitionCenter.getPhone() != null) {
-            req.setAttribute("exhibitionCenterPhones", exhibitionCenter.getPhone().toString());
+            req.setAttribute("exhibitionCenterPhones", exhibitionCenter.getPhone());
         }
 
     }

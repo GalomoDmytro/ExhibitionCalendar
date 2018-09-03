@@ -57,7 +57,7 @@
                         </td>
                         <td>
                            <c:forEach var="expoCenterPhone" items="${expoCenter.phone}" >
-                                <c:out value="${expoCenterPhone}" />
+                                <c:out value="${expoCenterPhone}" /><br/>
                            </c:forEach>
                         </td>
                         <td>

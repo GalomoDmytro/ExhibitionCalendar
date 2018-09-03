@@ -31,13 +31,13 @@
                   </tr>
                   <tr>
                      <th>
-                        <c:out value='${exhibitionId}'/>
+                        <c:out value='${exhibition.id}'/>
                      </th>
                      <th>
-                        <c:out value='${exhibitionTitle}'/>
+                        <c:out value='${exhibition.title}'/>
                      </th>
                      <th>
-                        <c:out value='${exhibitionLangTags}'/>
+                        <c:out value='${exhibition.languageTags}'/>
                      </th>
                   </tr>
                </table>
@@ -55,42 +55,60 @@
                   </tr>
                   <tr>
                      <th>
-                        <c:out value='${exhibitionCenterId}'/>
+                        <c:out value='${exhibitionCenter.id}'/>
                      </th>
                      <th>
-                        <c:out value='${exhibitionCenterTitle}'/>
+                        <c:out value='${exhibitionCenter.title}'/>
                      </th>
                      <th>
-                        <c:out value='${exhibitionAddress}'/>
+                        <c:out value='${exhibitionCenter.address}'/>
                      </th>
                      <th>
-                        <c:out value='${exhibitionMail}'/>
+                        <c:out value='${exhibitionCenter.eMail}'/>
                      </th>
                      <th>
-                        <c:out value='${exhibitionWebPage}'/>
+                        <c:out value='${exhibitionCenter.webPage}'/>
                      </th>
                      <th>
-                        <c:out value='${exhibitionCenterPhones}'/>
+                        <c:forEach var="phones" items="${exhibitionCenterPhones}" >
+
+                            <c:out value='${phones}'/><br/>
+                        </c:forEach>
+
                      </th>
                   </tr>
                </table>
                <!-- Contract -->
                <h3>Contract :</h3>
                <form action="${pageContext.request.contextPath}/controller?command=editContract" method="post">
-                  Date from:<input type="date" name="dateFrom" value='${dateFrom}' min="2000-01-01" autocomplete="nope" required/><br/>
-                  End date:<input type="date" name="dateTo" value='${dateTo}' min="2000-01-01" autocomplete="nope" required/><br/>
-                  Price:<input type="number" name="price" value='${price}' min="0" autocomplete="nope" required/><br/>
-                  Work Time:<input type="text" name="workTime" value='${workTime}' max="64"/><br/>
-                  Max Ticket per day:<input type="number" name="maxTicketDay" value='${maxTicketDay}' min="0" required/><br/>
-                  <input type="hidden"  name="exhibitionId" value='${exhibitionId}'>
-                  <input type="hidden"  name="exhibitionCenterId" value='${exhibitionCenterId}'>
+               <table>
+               <tr>
+                  <td>Date from:</td><td><input type="date" name="dateFrom" value='${contract.getDateFrom()}' min="2000-01-01" autocomplete="nope" required/></td>
+               </tr>
+               <tr>
+                  <td>End date:</td><td><input type="date" name="dateTo" value='${contract.getDateTo()}' min="2000-01-01" autocomplete="nope" required/></td>
+               </tr>
+               <tr>
+                  <td>Price (coins):</td><td><input type="number" name="price" value='${contract.getTicketPrice()}' min="0" autocomplete="nope" required/></td>
+               </tr>
+               <tr>
+                  <td>Work Time:</td><td><input type="text" name="workTime" value='${contract.getWorkTime()}' max="64"/></td>
+               </tr>
+               <tr>
+                  <td>Max Ticket per day:</td><td><input type="number" name="maxTicketDay" value='${contract.getMaxTicketPerDay()}' min="0" required/></td>
+               </tr>
+
+               </table>
+                  <input type="hidden"  name="exhibitionId" value='${exhibition.id}'>
+                  <input type="hidden"  name="exhibitionCenterId" value='${exhibitionCenter.id}'>
                   <button class="submitBtn" type="submit" name="saveChangesContract" value="Submit">Save</button>
                   <button class="resetBtn" type="reset" value="Reset">Cancel</button>
-                  <br> ${error}
                   <br>
                   <h4>${insertInfo}</h4>
                </form>
                <!-- /Contract -->
+               <br>
+               <h2>${error}</h2>
                <br>
                <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>
             </section>

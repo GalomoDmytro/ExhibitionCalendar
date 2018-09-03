@@ -157,21 +157,6 @@ public class TicketMySql implements TicketDao {
     }
 
 
-
-//    @Override
-//    public List<Ticket> getAllTicketsForDate(Date date) throws DBException {
-//        List<Ticket> tickets;
-//        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("ticket.getAllForDate"))) {
-//            statement.setString(1, date.toString());
-//            ResultSet resultSet = statement.executeQuery();
-//            tickets = parseTicketSet(resultSet);
-//        } catch (SQLException exception) {
-//            throw new DBException(exception);
-//        }
-//
-//        return tickets;
-//    }
-
     @Override
     public List<Ticket> getAllTicketsForContract(Integer contractId) throws DBException {
         List<Ticket> tickets;

@@ -1,7 +1,7 @@
 package controller.command.user;
 
 import controller.command.Command;
-import controller.command.Links;
+import controller.command.util.Links;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -1,10 +1,11 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
-import controller.command.Links;
+import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.ExhibitionCenter;
+import exceptions.DBException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
 public class EditCenter implements Command {
 
@@ -26,23 +28,25 @@ public class EditCenter implements Command {
     private String eMail;
     private String phone1;
     private String phone2;
+    private List<String> phoneList;
 
     private ExhibitionCenter exhibitionCenter;
 
     private static final Logger LOGGER = Logger.getLogger(EditCenter.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
-
         if (req.getParameter("editExpoCenter") != null) {
-            readDataToUpdate(req);
-            changeExpoCenterData(req);
+            editExhibitionCenter(req);
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
-        } else if (req.getParameter("denieEdit") != null) {
+        } else if (req.getParameter("deniedEdit") != null) {
+
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_PAGE);
         } else {
+
             readDataFromReqOnFirstStart(req);
             setExpoCenterDataToReq(req);
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CENTER_PAGE);
@@ -51,13 +55,22 @@ public class EditCenter implements Command {
         dispatcher.forward(req, resp);
     }
 
+    private void editExhibitionCenter(HttpServletRequest req) {
+        readDataToUpdate(req);
+        changeExpoCenterData();
+    }
+
     private void readDataFromDB() {
         handleConnection();
 
         try {
-
-            exhibitionCenter = factoryMySql.createExhibitionCenter(connection).getExhibitionCenterById(idCenter);
-
+            exhibitionCenter = factoryMySql.createExhibitionCenter(connection)
+                    .getExhibitionCenterById(idCenter);
+            phoneList = factoryMySql.createExhibitionCenterPhone(connection)
+                    .getPhones(exhibitionCenter.getId());
+            if(phoneList.size() < 2) {
+                phoneList.add("");
+            }
         } catch (Exception exception) {
 
         } finally {
@@ -65,7 +78,7 @@ public class EditCenter implements Command {
         }
     }
 
-    private void changeExpoCenterData(HttpServletRequest req) {
+    private void changeExpoCenterData() {
 
          exhibitionCenter = new ExhibitionCenter.Builder()
                 .setId(idCenter)
@@ -76,12 +89,31 @@ public class EditCenter implements Command {
                 .build();
         handleConnection();
         try {
-            factoryMySql.createExhibitionCenter(connection).updateExhibitionCenter(exhibitionCenter);
-            factoryMySql.createExhibitionCenterPhone(connection).deletePhone(exhibitionCenter.getId());
-            factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exhibitionCenter.getId(), phone1);
-            factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exhibitionCenter.getId(), phone2);
+            factoryMySql.createExhibitionCenter(connection).setLockExhibitionCenterTable();
+            connection.setAutoCommit(false);
+
+            factoryMySql.createExhibitionCenter(connection)
+                    .updateExhibitionCenter(exhibitionCenter);
+            factoryMySql.createExhibitionCenterPhone(connection)
+                    .deletePhone(exhibitionCenter.getId());
+            if(phone1 != null) {
+                factoryMySql.createExhibitionCenterPhone(connection)
+                        .insertPhone(exhibitionCenter.getId(), phone1);
+            }
+            if(phone2 != null) {
+                factoryMySql.createExhibitionCenterPhone(connection)
+                        .insertPhone(exhibitionCenter.getId(), phone2);
+            }
+            connection.commit();
+            connection.setAutoCommit(true);
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
+            try {
+                factoryMySql.createExhibitionCenter(connection).unlockTable();
+            } catch (DBException e) {
+                e.printStackTrace();
+            }
             closeConnection();
         }
     }
@@ -91,29 +123,25 @@ public class EditCenter implements Command {
             idCenter = Integer.parseInt(req.getParameter("idEdit"));
         }
 
-        if(req.getParameter("expoCTitle") == null || req.getParameter("expoCTitle").length() < 1) {
-            readDataFromDB();
-        }
-//        phone1 = req.getParameter("phone1");
-//        phone2 = req.getParameter("phone2");
+        readDataFromDB();
+
     }
 
     private void readDataToUpdate(HttpServletRequest req) {
 
         title = req.getParameter("expoCTitle");
         address = req.getParameter("expoCAddress");
-        webPage = req.getParameter("expoCMail");
-        eMail = req.getParameter("expoCWebPage");
+        webPage = req.getParameter("expoCWebPage");
+        eMail = req.getParameter("expoCMail");
+        phone1 = req.getParameter("phone0");
+        phone2 = req.getParameter("phone1");
     }
 
     private void setExpoCenterDataToReq(HttpServletRequest req) {
         req.setAttribute("idEdit", idCenter);
-        req.setAttribute("expoCTitle", exhibitionCenter.getTitle());
-        req.setAttribute("expoCAddress", exhibitionCenter.getAddress());
-        req.setAttribute("expoCWebPage", exhibitionCenter.getWebPage());
-        req.setAttribute("expoCMail", exhibitionCenter.geteMail());
-        req.setAttribute("expoCPhone1", phone1);
-        req.setAttribute("expoCPhone2", phone2);
+        req.setAttribute("exhibitionCenter", exhibitionCenter);
+
+        req.setAttribute("phones", phoneList);
     }
 
     private void closeConnection() {

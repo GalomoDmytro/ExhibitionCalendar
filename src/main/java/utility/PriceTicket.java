@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 
 public class PriceTicket {
 
-    public PriceTicket(){}
+    public PriceTicket() {
+    }
 
     public BigDecimal getBigDecimalPriceVal(String priseLine) {
         priseLine = checkIfNumber(priseLine);
@@ -18,17 +19,18 @@ public class PriceTicket {
     }
 
     private String checkIfNumber(String priseLine) {
-        if(priseLine == null) {
+        if (priseLine == null) {
             return "0";
         }
 
         String[] digit = priseLine.split("");
 
-        for(String d : digit) {
-            if(!StringUtils.isNumeric(d)
+        for (String d : digit) {
+            if (!StringUtils.isNumeric(d)
                     || !d.equals(".")
-                    || !d.equals(",") )
-                priseLine = "0";
+                    || !d.equals(",")
+            )
+                return "0";
         }
 
         return priseLine;

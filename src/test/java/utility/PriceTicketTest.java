@@ -44,9 +44,6 @@ public class PriceTicketTest {
         BigDecimal expectOne = priceTicket.getBigDecimalPriceVal("1,1");
         BigDecimal expectTwo = priceTicket.getBigDecimalPriceVal("6.6");
 
-        System.out.println(resultOne);
-        System.out.println(expectOne);
-        System.out.println(resultTwo);
 
         assertTrue(resultOne.getClass().equals(BigDecimal.class));
         assertTrue(resultTwo.getClass().equals(BigDecimal.class));

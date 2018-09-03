@@ -1,7 +1,7 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
-import controller.command.Links;
+import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Exhibition;

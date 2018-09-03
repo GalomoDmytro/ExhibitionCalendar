@@ -24,12 +24,39 @@
                   Id:
                   <c:out value="${idEdit}" />
                   <br/>
-                  Expo Center Title:<input type="text" name="expoCTitle" value="<c:out value='${expoCTitle}'/>" min="1" max="45" required/><br/>
-                  Expo Center Address:<input type="text" name="expoCAddress" value="${expoCAddress}" min="1" max="255" required/><br/>
-                  Expo Center eMail:<input type="email" name="expoCMail" value="${expoCMail}" max="255" autocomplete="nope"/><br/>
-                  Expo Center webPage:<input type="text" name="expoCWebPage" value="${expoCWebPage}" max="255" /><br/>
-                  Expo Center Phone 1:<input type="text" name="phone1" value="${expoCPhone1}" max="255" autocomplete="nope"/><br/>
-                  Expo Center Phone 2:<input type="text" name="phone2" value="${expoCPhone2}" max="255" autocomplete="nope"/><br/>
+                  <table>
+                    <tr>
+                        <td>Expo Center Title:</td>
+                        <td><input type="text" name="expoCTitle" value="${exhibitionCenter.title}" min="1" max="45" required/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Expo Center Address:</td>
+                        <td><input type="text" name="expoCAddress" value="${exhibitionCenter.address}" min="1" max="255" required/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Expo Center eMail:</td>
+                        <td><input type="email" name="expoCMail" value="${exhibitionCenter.eMail}" max="255" autocomplete="nope"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Expo Center webPage:</td>
+                        <td><input type="text" name="expoCWebPage" value="${exhibitionCenter.webPage}" max="255" /></td>
+                    </tr>
+
+
+                    <c:forEach var="expoCenterPhone" items="${phones}" varStatus="loop" >
+                    <tr>
+                        <td>phone ${loop.index + 1}</td>
+                        <td><input type="text" name='phone${loop.index}' value="${expoCenterPhone}" max="255" autocomplete="nope"/></td>
+                    </tr>
+                    </c:forEach>
+                  </table>
+
+
+
+
                   <button class="submitBtn" type="submit" name="editExpoCenter" value="Save">Save</button>
                   <button class="resetBtn" type="submit" name="denieEdit" value="Cancel">Cancel</button>
                   <br> ${error}

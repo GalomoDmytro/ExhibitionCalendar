@@ -56,6 +56,7 @@
                            &nbsp;&nbsp;&nbsp;&nbsp;
                            <a href="${pageContext.request.contextPath}/controller?command=expoManagement&idDelete=<c:out value='${expo.id}'/>">Delete</a>
                            &nbsp;&nbsp;&nbsp;&nbsp;
+
                            <a href="${pageContext.request.contextPath}/controller?command=combineExpoWithCenter&idExhibition=<c:out value='${expo.id}'/>">Form_contract</a>
                         </td>
                      </tr>

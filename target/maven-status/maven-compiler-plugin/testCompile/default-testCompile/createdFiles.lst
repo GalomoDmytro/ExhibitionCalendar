@@ -1,4 +1,5 @@
 dao\mysql\TicketMySqlTest.class
+utility\PriceTicketTest.class
 dao\mysql\DescriptionMySqlTest.class
 dao\mysql\ExhibitionContractMySqlTest.class
 dao\mysql\ExhibitionMySqlTest.class

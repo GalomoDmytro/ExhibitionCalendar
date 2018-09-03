@@ -1,11 +1,10 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
-import controller.command.Links;
+import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Exhibition;
-import exceptions.DBException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -34,7 +33,6 @@ public class EditExposition implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(EditExposition.class);
 
-
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -45,10 +43,8 @@ public class EditExposition implements Command {
 
         getDataFromDB();
 
-        LOGGER.info("ready to chose action");
         choseAction(req);
 
-        LOGGER.info("ready to set data to req");
         setDataToReq(req);
 
         if (goModeratorHome) {

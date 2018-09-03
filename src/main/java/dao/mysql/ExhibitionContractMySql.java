@@ -7,6 +7,7 @@ import entities.ExhibitionCenter;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +39,27 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
+    public void setLockContractTable() throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement("LOCK TABLE exhibition_contract WRITE")) {
+            statement.execute();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void unlockTable() throws DBException {
+        try (PreparedStatement statement = connection.prepareStatement("UNLOCK TABLES")) {
+            statement.execute();
+
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
     public Contract getExhibitionContractById(Integer id) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
@@ -58,7 +80,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
 
     @Override
     public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter,
-                                                                  Exhibition exhibition) throws DBException {
+                                                                  Exhibition exhibition)
+            throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.getByCenterAndExhibition"))) {

@@ -1,6 +1,6 @@
 package controller.filter;
 
-import controller.command.Links;
+import controller.command.util.Links;
 import entities.Role;
 import org.apache.log4j.Logger;
 

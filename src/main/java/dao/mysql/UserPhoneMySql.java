@@ -1,6 +1,6 @@
 package dao.mysql;
 
-import controller.command.RegistrationCommand;
+import controller.command.common.RegistrationCommand;
 import dao.interfaces.UserPhoneDao;
 import exceptions.DBException;
 import org.apache.log4j.Logger;

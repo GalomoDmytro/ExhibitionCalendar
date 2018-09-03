@@ -2,8 +2,11 @@ package controller;
 
 import controller.command.*;
 import controller.command.admin.Admin;
+import controller.command.common.*;
 import controller.command.moderatorCommand.*;
 import controller.command.user.UserHome;
+import controller.command.util.ChangeLanguage;
+import controller.command.util.LogoutCommand;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,7 +1,7 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
-import controller.command.Links;
+import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Ticket;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 public class ApprovedTickets implements Command {
 

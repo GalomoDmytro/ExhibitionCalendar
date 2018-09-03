@@ -1,6 +1,6 @@
 package dao.mysql;
 
-import controller.command.RegistrationCommand;
+import controller.command.common.RegistrationCommand;
 import dao.interfaces.RoleDao;
 import entities.Role;
 import entities.User;

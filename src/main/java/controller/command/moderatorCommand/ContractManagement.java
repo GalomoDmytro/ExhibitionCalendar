@@ -1,12 +1,10 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
-import controller.command.Links;
+import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Contract;
-import entities.Exhibition;
-import entities.ExhibitionCenter;
 import entities.Ticket;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContractManagement implements Command {

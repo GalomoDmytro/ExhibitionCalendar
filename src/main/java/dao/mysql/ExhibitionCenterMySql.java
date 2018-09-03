@@ -17,7 +17,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     private final ResourceBundle QUERIES;
     private static final String FIELD_ID = "id";
     private static final String FIELD_TITLE = "title";
-    private static final String FIELD_ADDRES = "address";
+    private static final String FIELD_ADDRESS = "address";
     private static final String FIELD_MAIL = "email";
     private static final String FIELD_WEB_PAGE = "web_page";
     private static final Logger LOGGER = Logger.getLogger(ExhibitionCenterMySql.class);
@@ -30,6 +30,28 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     ExhibitionCenterMySql(Connection connection, ResourceBundle resourceBundle) {
         this.QUERIES = resourceBundle;
         this.connection = connection;
+    }
+
+    @Override
+    public void setLockExhibitionCenterTable() throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement("LOCK TABLES exhibition_center WRITE, exhibition_center_phone WRITE")) {
+            statement.execute();
+        } catch (SQLException exception) {
+            throw new DBException(exception);
+        }
+    }
+
+    @Override
+    public void unlockTable() throws DBException {
+        try (PreparedStatement statement = connection
+                .prepareStatement("unlock table")) {
+            statement.execute();
+
+        } catch (SQLException exception) {
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
     }
 
     @Override
@@ -210,7 +232,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
                 ExhibitionCenter exCenter = new ExhibitionCenter.Builder()
                         .setId(resultSet.getInt(FIELD_ID))
                         .setTitle(resultSet.getString(FIELD_TITLE))
-                        .setAddress(resultSet.getString(FIELD_ADDRES))
+                        .setAddress(resultSet.getString(FIELD_ADDRESS))
                         .seteMail(resultSet.getString(FIELD_MAIL))
                         .setWebPage(resultSet.getString(FIELD_WEB_PAGE))
                         .build();
