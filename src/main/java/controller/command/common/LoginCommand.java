@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
 
 public class LoginCommand implements Command {
 
-    private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
     private Connection connection;
     private FactoryMySql factoryMySql;
 
@@ -27,8 +26,11 @@ public class LoginCommand implements Command {
     private String password;
     private User user;
     private PasswordHandler passwordHandler;
+    private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
 
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
+
+    public LoginCommand() {}
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -73,12 +75,11 @@ public class LoginCommand implements Command {
     private User getUserFromDB() {
         handleConnection();
 
-
         try {
-            if(!factoryMySql.createUser(connection).isNameOrMailInTable(nameOrMail)) {
+            if (!factoryMySql.createUser(connection).isNameOrMailInTable(nameOrMail)) {
                 return null;
             }
-            if(nameOrMail.contains("@")) {
+            if (nameOrMail.contains("@")) {
                 user = factoryMySql.createUser(connection).getByMail(nameOrMail);
             } else {
                 user = factoryMySql.createUser(connection).getByName(nameOrMail);

@@ -1,11 +1,13 @@
 dao\mysql\TicketMySqlTest.class
-utility\PriceTicketTest.class
 dao\mysql\DescriptionMySqlTest.class
+utility\PasswordHandlerTest.class
+controller\command\HomeTest.class
+dao\mysql\RoleMySqlTest.class
+dao\mysql\ExhibitionCenterMySqlTest.class
+utility\PriceTicketTest.class
+controller\command\common\LoginCommandTest.class
 dao\mysql\ExhibitionContractMySqlTest.class
 dao\mysql\ExhibitionMySqlTest.class
 dao\mysql\UserPhoneMySqlTest.class
-utility\PasswordHandlerTest.class
-dao\mysql\RoleMySqlTest.class
 dao\mysql\UserMySqlTest.class
 dao\mysql\PhoneExhibitionCenterMySqlTest.class
-dao\mysql\ExhibitionCenterMySqlTest.class

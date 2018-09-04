@@ -14,11 +14,9 @@ import java.io.IOException;
 public class ErrorHandler extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ErrorHandler.class);
-    // TODO: Refactor and remove this class
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOGGER.info("Error handler class ------");
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.ERROR_PAGE);
         dispatcher.forward(req, resp);
     }

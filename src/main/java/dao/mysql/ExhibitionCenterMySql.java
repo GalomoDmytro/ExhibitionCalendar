@@ -95,7 +95,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
     @Override
     public List<ExhibitionCenter> getExhibitionCentersBySearch(String search) throws DBException {
-        List<ExhibitionCenter> exhibitionCenters = null;
+        List<ExhibitionCenter> exhibitionCenters ;
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.search"))) {
             statement.setString(1, search);

@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,10 +8,10 @@ public class User {
 
     private Integer id;
     private String name;
-    private String eMail;
+    private String mail;
     private List<String> phone;
-    private String firstName;
-    private String lastName;
+    private String firstName = "";
+    private String lastName = "";
     private String password;
     private Role role;
 
@@ -31,14 +32,17 @@ public class User {
     }
 
     public String getMail() {
-        return eMail;
+        return mail;
     }
 
     public void setMail(String eMail) {
-        this.eMail = eMail;
+        this.mail = eMail;
     }
 
     public List<String> getPhone() {
+        if (phone == null) {
+            return Collections.emptyList();
+        }
         return phone;
     }
 
@@ -94,7 +98,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", eMail='" + eMail + '\'' +
+                ", mail='" + mail + '\'' +
 //                ", phone='" + phone.toString() + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -104,7 +108,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, eMail, phone, firstName, lastName, password, role);
+        return Objects.hash(id, name, mail, phone, firstName, lastName, password, role);
     }
 
     @Override
@@ -114,7 +118,7 @@ public class User {
         User user = (User) o;
         return Objects.equals(id, user.id) &&
                 Objects.equals(name, user.name) &&
-                Objects.equals(eMail, user.eMail) &&
+                Objects.equals(mail, user.mail) &&
                 Objects.equals(phone, user.phone) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&

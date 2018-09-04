@@ -12,12 +12,15 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.ResourceBundle;
 
+/**
+ * Singleton
+ * Serves to get the connection to the database
+ */
 public class ConnectionPoolMySql implements ConnectionPoolDao {
 
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("DBConnection");
     private volatile static ConnectionPoolMySql instance = null;
 
-    //    private static String URL = "jdbc:mysql://localhost:3306/bookstore?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     private GenericObjectPool connectionPool = null;
 
 

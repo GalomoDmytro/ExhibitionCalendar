@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Accepts input and converts it to commands for the model
+ */
 public class ControllerHelper {
 
     private Map<String, Command> commandMap = new HashMap<>();

@@ -114,11 +114,11 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
-    public List<Contract> getAllContractsForCenter(Integer idExhibitionCenter) throws DBException {
+    public List<Contract> getAllContractsForCenter(Integer idExCenter) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.getAllForExhibitionCenter"))) {
-            statement.setInt(1, idExhibitionCenter);
+            statement.setInt(1, idExCenter);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
@@ -133,11 +133,11 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     @Override
-    public List<Contract> getAllContractsForExhibition(Integer id) throws DBException {
+    public List<Contract> getAllContractsForExhibition(Integer idExhibition) throws DBException {
         List<Contract> contracts;
         try (PreparedStatement statement = connection
                 .prepareStatement(QUERIES.getString("contract.getAllForExhibition"))) {
-            statement.setInt(1, id);
+            statement.setInt(1, idExhibition);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {

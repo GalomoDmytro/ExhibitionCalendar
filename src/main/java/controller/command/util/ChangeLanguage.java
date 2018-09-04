@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Responsible for installing and changing
+ * the language bundle in the session
+ */
 public class ChangeLanguage implements Command {
 
     private static final String ruBundle = "strings_ru";

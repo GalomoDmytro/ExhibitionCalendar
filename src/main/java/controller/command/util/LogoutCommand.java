@@ -14,7 +14,8 @@ import java.io.IOException;
 public class LogoutCommand implements Command {
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         HttpSession session = req.getSession(true);
         session.setAttribute("role", Role.GUEST);
         session.setAttribute("userId", 1);

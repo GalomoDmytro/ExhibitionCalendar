@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Prohibits access through the address bar
+ */
+
 @WebFilter(
 //        urlPatterns = {"/views/*"},
         filterName = "PageRedirectSecurityFilter",
@@ -17,7 +21,7 @@ import java.io.IOException;
         })
 public class PageRedirectSecurityFilter implements Filter {
     private String indexPath;
-    private static final Logger LOGGER = Logger.getLogger(EncodingFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(PageRedirectSecurityFilter.class);
 
     public void init(FilterConfig fConfig) throws ServletException {
         indexPath = fConfig.getInitParameter("INDEX_PATH");

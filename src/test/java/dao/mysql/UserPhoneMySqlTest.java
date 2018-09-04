@@ -1,6 +1,5 @@
 package dao.mysql;
 
-import dao.interfaces.QueryHelper;
 import entities.User;
 import org.junit.After;
 import org.junit.Before;

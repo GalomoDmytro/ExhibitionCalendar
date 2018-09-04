@@ -136,7 +136,7 @@ public class TicketMySql implements TicketDao {
     }
 
     @Override
-    public int getCountSoldTicketForDate(Date date, Integer id_contract)
+    public int getCountSoldTicketForDate(Date date, Integer idContract)
             throws DBException {
         int countTickets = 0;
 
@@ -144,7 +144,7 @@ public class TicketMySql implements TicketDao {
                 .prepareStatement(QUERIES.getString("ticket.countSoldTicket"))) {
             statement.setDate(1, java.sql.Date.valueOf(date.toString())
                     , java.util.Calendar.getInstance());
-            statement.setInt(2, id_contract);
+            statement.setInt(2, idContract);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             countTickets = resultSet.getInt(1);

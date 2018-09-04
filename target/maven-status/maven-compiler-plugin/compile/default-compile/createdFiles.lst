@@ -11,7 +11,6 @@ controller\command\util\Links.class
 entities\Contract.class
 entities\Exhibition$Builder.class
 entities\Exhibition.class
-dao\interfaces\QueryHelper.class
 entities\Ticket.class
 utility\PriceTicket.class
 utility\Patterns.class

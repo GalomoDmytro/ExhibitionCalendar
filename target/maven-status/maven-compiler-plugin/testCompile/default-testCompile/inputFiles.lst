@@ -2,10 +2,12 @@ D:\epam_project\Exhibition Calendar\src\test\java\utility\PasswordHandlerTest.ja
 D:\epam_project\Exhibition Calendar\src\test\java\utility\PriceTicketTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\DescriptionMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\ExhibitionMySqlTest.java
+D:\epam_project\Exhibition Calendar\src\test\java\controller\command\HomeTest.java
+D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\UserMySqlTest.java
+D:\epam_project\Exhibition Calendar\src\test\java\controller\command\common\LoginCommandTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\RoleMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\ExhibitionCenterMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\PhoneExhibitionCenterMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\UserPhoneMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\TicketMySqlTest.java
-D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\UserMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\ExhibitionContractMySqlTest.java

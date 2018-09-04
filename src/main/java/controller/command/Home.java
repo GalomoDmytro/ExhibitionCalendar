@@ -60,7 +60,6 @@ public class Home implements Command {
 
     private void saveAtrToReq(HttpServletRequest req) {
         req.setAttribute("searchDate", req.getParameter("searchDate"));
-        LOGGER.info("***** save to request " + date);
         req.setAttribute("searchDateLine", date);
         req.setAttribute("searchField", req.getParameter("searchField"));
         req.setAttribute("numberOfPages", numberOfPages);

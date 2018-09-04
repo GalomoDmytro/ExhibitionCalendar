@@ -1,63 +1,81 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page errorPage="../utility/error.jsp" %>
-
+<c:choose>
+   <c:when test="${langBundle == null}">
+      <fmt:setBundle basename="strings_ru"/>
+   </c:when>
+   <c:otherwise>
+      <fmt:setBundle basename="${langBundle}"/>
+   </c:otherwise>
+</c:choose>
 <html>
    <head>
-      <title>Exhibition Calendar</title>
+      <title>User Info</title>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
    </head>
-
    <body>
+      <header>
+         <div>
+            <jsp:include page="../utility/header.jsp" />
+         </div>
+      </header>
       <center>
-        <h1>USER INFO</h1>
-        <h2>${role}</h2>
-         <br/>
-             <a  href="${pageContext.request.contextPath}/controller?command=logout">logout</a>
-            <br/>
-
-         <br/>
-
-		<hr>
-		nickname<br/>
-		eMail<br/>
-		First name<br/>
-		Last name<br/>
-		Phone 1<br/>
-		Phone 2<br/>
-
-		<hr>
-
-
-		<div align="center">
-
-        <table border="1" cellpadding="7">
-            <caption><h2>Expo info</h2></caption>
-            <tr>
-
-                <th>Name Expo</th>
-                <th>Expo Center</th>
-                <th>Address</th>
-                <th>img</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <c:forEach var="list" items="${listTickets}">
-                <tr>
-                    <td><c:out value="${list.exhibitionTitle}" /></td>
-                    <td><c:out value="${list.exhibitionCenterTitle}" /></td>
-                    <td></td>
-                    <td></td>
-
-                    <td><a href="${pageContext.request.contextPath}/controller?command=expoInfo&idContract=<c:out value='${list.id}'/>">Expo info</a></td>
-
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
-
-
+         <div class="content">
+            <section class="main">
+               <h1>
+                  <fmt:message key='userInfo.title'/>
+               </h1>
+               <br/>
+               <br/>
+               <table>
+                  <tr>
+                     <td>
+                        <fmt:message key='common.profileName'/>
+                     </td>
+                     <td>${user.name}</td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <fmt:message key='common.eMail'/>
+                     </td>
+                     <td>${user.mail}</td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <fmt:message key='common.firstName'/>
+                     </td>
+                     <td>${user.firstName}</td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <fmt:message key='common.lastName'/>
+                     </td>
+                     <td>${user.lastName}</td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <fmt:message key='common.phoneNumber'/>
+                     </td>
+                     <td>
+                        <c:forEach var="phone" items="${phonesList}">
+                           <c:out value = "${phone}"/>
+                           <br/>
+                        </c:forEach>
+                     </td>
+                  </tr>
+               </table>
+               <br/>
+               <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
+                  <input  class="blueButton" type="submit" value='<fmt:message key="btn.goHome"/>'/>
+               </form>
+            </section>
+         </div>
       </center>
+      <footer>
+         <jsp:include page="../utility/footer.jsp" />
+      </footer>
    </body>
 </html>

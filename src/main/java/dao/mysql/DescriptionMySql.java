@@ -34,28 +34,6 @@ public class DescriptionMySql implements DescriptionTableDao {
     }
 
     @Override
-    public void setLockDescriptionTable() throws DBException {
-        try (PreparedStatement statement = connection
-                .prepareStatement("LOCK TABLE description WRITE")) {
-            statement.execute();
-        } catch (SQLException exception) {
-            LOGGER.error(exception);
-            throw new DBException(exception);
-        }
-    }
-
-    @Override
-    public void unlockTable() throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement("UNLOCK TABLE")) {
-            statement.execute();
-
-        } catch (SQLException exception) {
-            LOGGER.error(exception);
-            throw new DBException(exception);
-        }
-    }
-
-    @Override
     public Map<String, String> getAllDescription(Exhibition exhibition) throws DBException {
         Map<String, String> languageDescription;
         try (PreparedStatement statement = connection
@@ -110,7 +88,7 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
 
         if (description == null) {
-            return "oops, nothing to show";
+            return "";
         }
 
         return description;

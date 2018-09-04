@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Сhecks or the user has access to the requested page.
+ */
 @WebFilter(
         filterName = "AccessSecurityFilter",
         initParams = {
@@ -34,6 +37,7 @@ public class AccessSecurityFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         String path = httpRequest.getRequestURI();
+        // allow access to .css and  .jpg
         if (path.endsWith(".css") || path.endsWith(".jpg")) {
             filterChain.doFilter(request, response);
             return;

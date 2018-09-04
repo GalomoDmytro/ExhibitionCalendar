@@ -1,5 +1,8 @@
 package controller.command.util;
 
+/**
+ * contains all pages involved in project
+ */
 public class Links {
 
     public static final String INDEX_PAGE = "/index.jsp";
@@ -25,7 +28,7 @@ public class Links {
     public static final String MODERATOR_CONTRACT_PAGE = "/views/moderator/contractManagement.jsp";
     public static final String APPROVED_TICKETS_PAGE = "/views/moderator/approvedTicket.jsp";
     public static final String WAIT_APPROVAL_TICKETS_PAGE = "/views/moderator/waitApprovalTickets.jsp";
-    public static final String USER_HOME_PAGE = "/views/user/userHome.jsp";
+    public static final String USER_INFO_PAGE = "/views/user/userHome.jsp";
     public static final String USER_EDIT_PAGE = "/views/user/editUser.jsp";
 
 }

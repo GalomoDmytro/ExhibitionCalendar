@@ -74,7 +74,8 @@ public class ExhibitionMySql implements ExhibitionDao {
     @Override
     public List<Exhibition> getExhibitionBySearch(String line) throws DBException {
         List<Exhibition> exhibitions;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.search"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.search"))) {
             line = "%" + line + "%";
             statement.setString(1, line);
             statement.setString(2, line);
@@ -93,7 +94,8 @@ public class ExhibitionMySql implements ExhibitionDao {
     @Override
     public Exhibition getExhibitionByTitle(String title) throws DBException {
         List<Exhibition> exhibitions;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.getByTitle"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.getByTitle"))) {
             statement.setString(1, title);
             ResultSet resultSet = statement.executeQuery();
             exhibitions = parseExhibitionSet(resultSet);
@@ -109,7 +111,9 @@ public class ExhibitionMySql implements ExhibitionDao {
 
     @Override
     public void insertExhibition(Exhibition exhibition) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.insert"), Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.insert"),
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, exhibition.getTitle());
             statement.setString(2, exhibition.getImgSrc());
             int affectedRows = statement.executeUpdate();
@@ -134,7 +138,8 @@ public class ExhibitionMySql implements ExhibitionDao {
 
     @Override
     public void updateExhibition(Exhibition exhibition) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.update"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.update"))) {
             statement.setString(1, exhibition.getTitle());
             statement.setString(2, exhibition.getImgSrc());
             statement.setInt(3, exhibition.getId());
@@ -147,7 +152,8 @@ public class ExhibitionMySql implements ExhibitionDao {
     @Override
     public List<Exhibition> getAllExhibition() throws DBException {
         List<Exhibition> exhibitions;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.getAll"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
             exhibitions = parseExhibitionSet(resultSet);
         } catch (SQLException exception) {
@@ -162,7 +168,8 @@ public class ExhibitionMySql implements ExhibitionDao {
 
     @Override
     public void deleteExhibition(Exhibition exhibition) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.delete"))) {
             statement.setInt(1, exhibition.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -172,7 +179,8 @@ public class ExhibitionMySql implements ExhibitionDao {
 
     @Override
     public void deleteById(Integer id) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibition.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibition.delete"))) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException exception) {

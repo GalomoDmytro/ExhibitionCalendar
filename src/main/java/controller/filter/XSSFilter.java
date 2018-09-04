@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * Prevent Cross-Site Scripting
+ */
+
 @WebFilter(
 //        urlPatterns = {"/*"},
         filterName = "XSSFilter"
