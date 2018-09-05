@@ -27,10 +27,10 @@
                <form action="${pageContext.request.contextPath}/controller?command=contractManagement" method="post">
                   <input type="submit" value="Contract Management">
                </form>
-               <form action="${pageContext.request.contextPath}/controller?command=addExposition" method="post">
+               <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
                   <input type="submit" value="Create Expo center">
                </form>
-               <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
+               <form action="${pageContext.request.contextPath}/controller?command=addExposition" method="post">
                   <input type="submit" value="Create Expo">
                </form>
                <form action="${pageContext.request.contextPath}/controller?command=waitApprovalTicket" method="post">

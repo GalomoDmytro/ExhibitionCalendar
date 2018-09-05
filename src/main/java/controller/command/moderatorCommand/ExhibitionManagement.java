@@ -25,13 +25,16 @@ public class ExhibitionManagement implements Command {
     private static final Logger LOGGER = Logger.getLogger(ExhibitionManagement.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher;
         handleConnection();
 
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_EXPO_PAGE);
 
-        if (req.getParameter("search") != null && (req.getParameter("searchField") == null || req.getParameter("searchField").trim().length() == 0)) {
+        if (req.getParameter("search") != null
+                && (req.getParameter("searchField") == null
+                || req.getParameter("searchField").trim().length() == 0)) {
             showAll(req);
         } else if (req.getParameter("search") != null) {
             specificSearch(req);
@@ -49,9 +52,11 @@ public class ExhibitionManagement implements Command {
         try {
             if (factoryMySql.createExhibitionContract(connection)
                     .getAllContractsForExhibition(idCenter).isEmpty()) {
-                factoryMySql.createExhibition(connection).deleteById(Integer.valueOf(idCenter));
+                factoryMySql.createExhibition(connection)
+                        .deleteById(Integer.valueOf(idCenter));
             } else {
-                req.setAttribute("errorDeleting", "Have contract for this exhibition. No Delete! ");
+                req.setAttribute("errorDeleting"
+                        , "Have contract for this exhibition. No Delete! ");
             }
         } catch (Exception exception) {
             LOGGER.error(exception);
@@ -69,15 +74,18 @@ public class ExhibitionManagement implements Command {
                 req.setAttribute("listExpo", exhibitionCenterList);
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
     }
 
-    private void setLangTagsToExhibition(List<Exhibition> exhibitionCenterList) throws DBException {
+    private void setLangTagsToExhibition(List<Exhibition> exhibitionCenterList)
+            throws DBException {
         for (Exhibition exhibition : exhibitionCenterList) {
-            Map<String, String> expoLang = factoryMySql.createDescriptionTable(connection).getAllDescription(exhibition);
+            Map<String, String> expoLang = factoryMySql
+                    .createDescriptionTable(connection)
+                    .getAllDescription(exhibition);
             String langTags = "";
             for (Map.Entry<String, String> entry : expoLang.entrySet()) {
                 langTags += entry.getKey() + " ";
@@ -90,32 +98,26 @@ public class ExhibitionManagement implements Command {
         String looking = request.getParameter("searchField");
 
         try {
-            LOGGER.info("try search");
-            List<Exhibition> exhibitionList = factoryMySql.createExhibition(connection).getExhibitionBySearch(looking);
+            List<Exhibition> exhibitionList
+                    = factoryMySql.createExhibition(connection)
+                    .getExhibitionBySearch(looking);
             setLangTagsToExhibition(exhibitionList);
             if (exhibitionList != null) {
                 request.setAttribute("listExpo", exhibitionList);
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
 
     }
 
-    private void findMatchedWithLookingField(String looking, List<Exhibition> exhibitionList, List<Exhibition> allExhibitionFromDb) {
-        for (Exhibition exhibition : allExhibitionFromDb) {
-            if (exhibition.getTitle().toLowerCase().contains(looking) ||
-                    String.valueOf(exhibition.getId()).equals(looking)) {
-                exhibitionList.add(exhibition);
-            }
-        }
-    }
-
     private List<Exhibition> getAllFromDb() throws DBException {
         try {
             return factoryMySql.createExhibition(connection).getAllExhibition();
         } catch (Exception exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -126,7 +128,7 @@ public class ExhibitionManagement implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -135,7 +137,7 @@ public class ExhibitionManagement implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

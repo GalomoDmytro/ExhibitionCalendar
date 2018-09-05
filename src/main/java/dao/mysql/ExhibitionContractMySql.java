@@ -7,7 +7,6 @@ import entities.ExhibitionCenter;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +43,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                 .prepareStatement("LOCK TABLE exhibition_contract WRITE")) {
             statement.execute();
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -68,6 +68,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionContractById(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -90,6 +92,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllContractsByExCenterWithExhibition(" +
+                    exhibitionCenter + ", " + exhibition + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -109,6 +114,10 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             fillCEC(resultSet, contract, exhibition, exhibitionCenter);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When prepareCEC(" +
+                    contract + ", " + exhibition + ", " + exhibitionCenter +
+                    ", " + idContract + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -122,6 +131,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllContractsForCenter(" +
+                    idExCenter + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -141,6 +153,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllContractsForExhibition(" +
+                    idExhibition + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -159,6 +174,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllContracts();");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -180,6 +197,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllContractAfterDateWithExpoCenterAndExhibition(" +
+                    date + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -205,6 +225,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When searchAfterDateWithExpoCenterAndExhibition(" +
+                    search + ", " + date + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -222,15 +245,13 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.searchAfterDateWithExpoCenterAndExhibitionLimit"))) {
-            statement.setDate(1, date, java.util.Calendar.getInstance());
-            statement.setString(2, search);
-            statement.setString(3, search);
-            statement.setString(4, search);
-            statement.setInt(5, startLimit);
-            statement.setInt(6, endLimit);
+            prepareStatementForSearchWithExpoCenterAndExhibition(search, date, startLimit, endLimit, statement);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When searchContactsWithExpoAndCenterLimit(" +
+                    search + ", " + date + ", " + startLimit + ", " + endLimit + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -239,6 +260,17 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         } else {
             return contracts;
         }
+    }
+
+    public void prepareStatementForSearchWithExpoCenterAndExhibition
+            (String search, Date date, int startLimit, int endLimit, PreparedStatement statement)
+            throws SQLException {
+        statement.setDate(1, date, java.util.Calendar.getInstance());
+        statement.setString(2, search);
+        statement.setString(3, search);
+        statement.setString(4, search);
+        statement.setInt(5, startLimit);
+        statement.setInt(6, endLimit);
     }
 
     @Override
@@ -251,6 +283,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllAfterDate(" +
+                    date + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -267,18 +302,13 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         List<Contract> contracts;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.search"))) {
-            statement.setString(1, search);
-            statement.setString(2, search);
-            statement.setString(3, search);
-            statement.setString(4, search);
-            statement.setString(5, search);
-            statement.setString(6, search);
-            statement.setString(7, search);
-            statement.setString(8, search);
+            prepareStatementForSearchAll(search, statement);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
-
+            LOGGER.info("Catch exception. When getAllContractsBySearch(" +
+                    search + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -289,6 +319,18 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    public void prepareStatementForSearchAll(String search, PreparedStatement statement)
+            throws SQLException {
+        statement.setString(1, search);
+        statement.setString(2, search);
+        statement.setString(3, search);
+        statement.setString(4, search);
+        statement.setString(5, search);
+        statement.setString(6, search);
+        statement.setString(7, search);
+        statement.setString(8, search);
+    }
+
     @Override
     public void updateContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
@@ -296,6 +338,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             prepareStatementToUpdate(statement, contract);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When updateContract(" +
+                    contract + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -320,6 +365,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertContract(" +
+                    contract + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -331,6 +379,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setInt(1, contract.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteContract(" +
+                    contract + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -342,6 +393,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteContractById(" +
+                    id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -357,6 +411,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             resultSet.next();
             count = resultSet.getInt(1);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getNumberOfContractsAfterDate(" +
+                    date + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -376,6 +433,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getContractsAfterDateLimit(" +
+                    date + ", " + startLimit + ", " + endLimit + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -402,7 +462,9 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             resultSet.next();
             count = resultSet.getInt(1);
         } catch (SQLException exception) {
-            LOGGER.info(exception);
+            LOGGER.info("Catch exception. When getNumberOfContractsAfterSearch(" +
+                    search + ", " + date + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -433,6 +495,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                 exhibitionCenter.setWebPage(resultSet.getString(16));
             }
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -456,6 +519,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                 contracts.add(contract);
             }
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -482,6 +546,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
                 contracts.add(contract);
             }
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -499,6 +564,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setString(6, contract.getWorkTime());
             statement.setInt(7, contract.getMaxTicketPerDay());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -515,6 +581,7 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             statement.setInt(7, contract.getMaxTicketPerDay());
             statement.setInt(8, contract.getId());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

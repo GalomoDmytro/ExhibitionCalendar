@@ -64,7 +64,7 @@ public class UserHome implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -73,6 +73,7 @@ public class UserHome implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
+            LOGGER.error(exception);
         }
     }
 }

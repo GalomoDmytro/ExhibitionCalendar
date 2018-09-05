@@ -17,8 +17,9 @@
          <div class="content">
             <section class="main">
                <h1>Add Exhibition</h1>
-               <h2>${role}</h2>
-               <br><br>
+               <br>
+               ${confirmAdd}
+               <br>
                <form action="${pageContext.request.contextPath}/controller?command=addExposition" method="post">
                   <table cellpadding="2">
                      <tr>

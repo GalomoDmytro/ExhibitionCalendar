@@ -12,6 +12,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
@@ -29,6 +30,7 @@ public class EditCenter implements Command {
     private String phone1;
     private String phone2;
     private List<String> phoneList;
+    private Integer idModerator;
 
     private ExhibitionCenter exhibitionCenter;
 
@@ -38,6 +40,8 @@ public class EditCenter implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         RequestDispatcher dispatcher;
+
+        getIdModerator(req);
 
         if (req.getParameter("editExpoCenter") != null) {
             editExhibitionCenter(req);
@@ -53,6 +57,11 @@ public class EditCenter implements Command {
         }
 
         dispatcher.forward(req, resp);
+    }
+
+    private void getIdModerator(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        idModerator = (Integer) session.getAttribute("userId");
     }
 
     private void editExhibitionCenter(HttpServletRequest req) {
@@ -72,7 +81,7 @@ public class EditCenter implements Command {
                 phoneList.add("");
             }
         } catch (Exception exception) {
-
+            LOGGER.info(exception);
         } finally {
             closeConnection();
         }
@@ -106,13 +115,16 @@ public class EditCenter implements Command {
             }
             connection.commit();
             connection.setAutoCommit(true);
+            LOGGER.info("Moderator id: " + idModerator
+                    + " has update Ex.Center with id: " + exhibitionCenter.getId()
+                    + " with new data: " + exhibitionCenter);
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
             try {
                 factoryMySql.createExhibitionCenter(connection).unlockTable();
             } catch (DBException e) {
-                e.printStackTrace();
+                LOGGER.info(e);
             }
             closeConnection();
         }
@@ -150,7 +162,7 @@ public class EditCenter implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.info(exception);
         }
     }
 
@@ -159,7 +171,7 @@ public class EditCenter implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.info(exception);
         }
     }
 }

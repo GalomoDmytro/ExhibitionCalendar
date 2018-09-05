@@ -12,6 +12,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 
@@ -22,29 +23,34 @@ public class AddExpo implements Command {
     private String expoTitle;
     private String expoImg;
     private String expoDescription;
-    private String descriptionLang;
+    private String descriptionKeyLang;
     private Exhibition exhibition;
+    private Integer idModerator;
 
     private static final Logger LOGGER = Logger.getLogger(AddExpo.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        getDataFromSession(req);
 
-        RequestDispatcher dispatcher;
-        handleConnection();
-
-        dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_PAGE);
+        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_PAGE);
 
         collectParamsFromRequest(req);
 
         if (req.getParameter("addNewExpo") != null) {
-            addNewExpo();
+            addNewExpo(req);
         }
 
         dispatcher.forward(req, resp);
     }
 
-    private void addNewExpo() {
+    private void getDataFromSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        idModerator = (Integer) session.getAttribute("userId");
+    }
+
+    private void addNewExpo(HttpServletRequest request) {
         if (!inputDataIsValid()) {
             LOGGER.error("input val is not valid");
             return;
@@ -52,21 +58,31 @@ public class AddExpo implements Command {
 
         prepareExpo();
 
-        insertInDB();
+        insertInDB(request);
     }
 
-    private void insertInDB() {
+    private void insertInDB(HttpServletRequest request) {
+        handleConnection();
         try {
             factoryMySql.createExhibition(connection).insertExhibition(exhibition);
-            if (descriptionLang.length() > 15) {
-                descriptionLang = descriptionLang.substring(0, 15);
-            }
+            checkDescriptionLangKey();
             factoryMySql.createDescriptionTable(connection)
-                    .insertDescription(expoDescription, descriptionLang, exhibition);
+                    .insertDescription(descriptionKeyLang, expoDescription, exhibition);
+            LOGGER.info("Moderator id: " + idModerator
+                    + " insert new exhibition: " + exhibition
+                    + " with description: " + expoDescription
+                    + " for language: " + descriptionKeyLang);
+            request.setAttribute("confirmAdd", "Exhibition center added ");
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
             closeConnection();
+        }
+    }
+
+    private void checkDescriptionLangKey() {
+        if (descriptionKeyLang.length() > 15) {
+            descriptionKeyLang = descriptionKeyLang.substring(0, 15);
         }
     }
 
@@ -78,7 +94,6 @@ public class AddExpo implements Command {
 
     private boolean inputDataIsValid() {
         if (!titleValid()) {
-            LOGGER.error("title not valid");
             return false;
         }
 
@@ -113,7 +128,7 @@ public class AddExpo implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -123,7 +138,7 @@ public class AddExpo implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -131,7 +146,7 @@ public class AddExpo implements Command {
         expoTitle = req.getParameter("title");
         expoImg = req.getParameter("imgSrc");
         expoDescription = req.getParameter("description");
-        descriptionLang = req.getParameter("lang");
+        descriptionKeyLang = req.getParameter("lang");
     }
 
 }

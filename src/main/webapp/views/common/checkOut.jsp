@@ -30,8 +30,8 @@
             <input type="hidden" name="eMail" value="${eMail}">
             <input type="hidden" name="dateTicketToApply" value="${dateTicketToApply}">
             <input type="text" class="checkout-input checkout-name" placeholder="Your name" autocomplete="off" autofocus required>
-            <input type="text" class="checkout-input checkout-exp" placeholder="MM" maxlength="2" autocomplete="off" required>
-            <input type="text" class="checkout-input checkout-exp" placeholder="YY" maxlength="2" autocomplete="off" required>
+            <input type="text" pattern="[0-9]{2}" class="checkout-input checkout-exp" placeholder="MM" maxlength="2" autocomplete="off" required>
+            <input type="text" pattern="[0-9]{2}" class="checkout-input checkout-exp" placeholder="YY" maxlength="2" autocomplete="off" required>
          </p>
          <p>
             <input type="text" class="checkout-input checkout-card" placeholder="1111 1111 1111 1111" autocomplete="off" required>

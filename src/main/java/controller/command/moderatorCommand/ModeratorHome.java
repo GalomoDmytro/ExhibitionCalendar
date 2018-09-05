@@ -12,7 +12,8 @@ import java.io.IOException;
 public class ModeratorHome implements Command {
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher;
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_PAGE);
         dispatcher.forward(req, resp);

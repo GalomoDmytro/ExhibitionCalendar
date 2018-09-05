@@ -39,7 +39,7 @@ public class Home implements Command {
             throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
 
-        findCurrentPage(req);
+        findCurrentPagePagination(req);
 
         getDate(req);
 
@@ -50,7 +50,7 @@ public class Home implements Command {
         dispatcher.forward(req, resp);
     }
 
-    private void findCurrentPage(HttpServletRequest req) {
+    private void findCurrentPagePagination(HttpServletRequest req) {
         if (req.getParameter("currentPage") == null) {
             currentPage = 1;
         } else {
@@ -94,6 +94,7 @@ public class Home implements Command {
             req.setAttribute("listForCustomer", contractList);
 
         } catch (Exception exception) {
+            LOGGER.info("get date from req " + req);
         } finally {
             closeConnection();
         }
@@ -114,13 +115,14 @@ public class Home implements Command {
             transformPrice(listContract);
             req.setAttribute("listForCustomer", listContract);
         } catch (Exception exception) {
+            LOGGER.info("get date from req " + req);
         } finally {
             closeConnection();
         }
     }
 
     private void transformPrice(List<Contract> listContract) {
-        for(Contract contract : listContract) {
+        for (Contract contract : listContract) {
             contract.setTicketPrice(priceTicket
                     .calculateSumTicketsPrice(contract.getTicketPrice(), 1));
         }
@@ -137,8 +139,7 @@ public class Home implements Command {
 
     private void getDate(HttpServletRequest req) {
         date = req.getParameter("searchDate");
-        LOGGER.info("get date from req " + req);
-        if(date == null || date.length() < 1) {
+        if (date == null || date.length() < 1) {
             date = getTodayDate();
         }
 
@@ -156,7 +157,7 @@ public class Home implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -165,7 +166,7 @@ public class Home implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

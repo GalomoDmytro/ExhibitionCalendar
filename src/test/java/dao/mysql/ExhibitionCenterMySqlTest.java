@@ -25,7 +25,8 @@ public class ExhibitionCenterMySqlTest {
     @Before
     public void setUp() throws Exception {
         Class.forName(DB_TEST.getString("mysql_test.driver")).newInstance();
-        connection = DriverManager.getConnection(prepareURL(), DB_TEST.getString("mysql_test.username"),
+        connection = DriverManager.getConnection(prepareURL(),
+                DB_TEST.getString("mysql_test.username"),
                 DB_TEST.getString("mysql_test.password"));
         crateTestTables();
     }
@@ -47,22 +48,17 @@ public class ExhibitionCenterMySqlTest {
     public void getExhibitionCenterByIdTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
-                .setWebPage("test")
-                .seteMail("test")
-                .setAddress("test")
-                .setTitle("test")
-                .setPhone(Collections.emptyList())
-                .build();
+        ExhibitionCenter exhibitionCenter = new ExhibitionCenter().emptyCenter();
 
         try {
+            // insert exhibition center
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
 
+            // get ex. center by id
             ExhibitionCenter returnExhibitionCenter = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getExhibitionCenterById(1);
-
             ExhibitionCenter notExistedExhibitionCenter = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getExhibitionCenterById(2);
@@ -80,21 +76,17 @@ public class ExhibitionCenterMySqlTest {
     public void getExhibitionCenterByTitleTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
-                .setWebPage("test")
-                .seteMail("test")
-                .setAddress("test")
-                .setTitle("test")
-                .build();
+        ExhibitionCenter exhibitionCenter = new ExhibitionCenter().emptyCenter();
 
         try {
+            // insert exhibition center in table
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
 
+            // get exhibition center by title
             ExhibitionCenter returnExhibitionCenter = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getExhibitionCenterByTitle(exhibitionCenter.getTitle());
-
             ExhibitionCenter notExistedExhibitionCenter = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getExhibitionCenterByTitle("not existed title");
@@ -128,6 +120,7 @@ public class ExhibitionCenterMySqlTest {
                 .build();
 
         try {
+            // insert exhibition centers
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
@@ -138,6 +131,7 @@ public class ExhibitionCenterMySqlTest {
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenterNotFound);
 
+            // get ex.centers with search
             List<ExhibitionCenter> exhibitionCenters = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getExhibitionCentersBySearch("test");
@@ -173,6 +167,7 @@ public class ExhibitionCenterMySqlTest {
                 .build();
 
         try {
+            // insert ex. centers in table
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
@@ -195,12 +190,7 @@ public class ExhibitionCenterMySqlTest {
     public void getAllExhibitionCenterTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
-                .setWebPage("test")
-                .seteMail("test")
-                .setAddress("test")
-                .setTitle("test")
-                .build();
+        ExhibitionCenter exhibitionCenter = new ExhibitionCenter().emptyCenter();
 
         ExhibitionCenter exhibitionCenterAnother = new ExhibitionCenter.Builder()
                 .setWebPage("NotFound")
@@ -210,6 +200,7 @@ public class ExhibitionCenterMySqlTest {
                 .build();
 
         try {
+            // insert exhibition centers
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
@@ -218,6 +209,7 @@ public class ExhibitionCenterMySqlTest {
                     .insertExhibitionCenter(exhibitionCenterAnother);
 
 
+            // get all exhibition centers
             List<ExhibitionCenter> exhibitionCenterList = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getAllExhibitionCenter();
@@ -235,14 +227,10 @@ public class ExhibitionCenterMySqlTest {
     public void deleteExhibitionCenterTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
-                .setWebPage("test")
-                .seteMail("test")
-                .setAddress("test")
-                .setTitle("test")
-                .build();
+        ExhibitionCenter exhibitionCenter = new ExhibitionCenter().emptyCenter();
 
         try {
+            // insert exhibition centers
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
@@ -258,6 +246,7 @@ public class ExhibitionCenterMySqlTest {
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .deleteExhibitionCenter(exhibitionCenter);
 
+            // get all ex. centers
             List<ExhibitionCenter> exhibitionCenterListAfterDelete = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getAllExhibitionCenter();
@@ -275,12 +264,7 @@ public class ExhibitionCenterMySqlTest {
     public void insertExhibitionCenterTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
-                .setWebPage("test")
-                .seteMail("test")
-                .setAddress("test")
-                .setTitle("test")
-                .build();
+        ExhibitionCenter exhibitionCenter = new ExhibitionCenter().emptyCenter();
 
         ExhibitionCenter exhibitionCenterSecond = new ExhibitionCenter.Builder()
                 .setWebPage("second")
@@ -290,13 +274,16 @@ public class ExhibitionCenterMySqlTest {
                 .build();
 
         try {
+            // insert ex. centers
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenterSecond);
 
+            // get all ex. centers
             List<ExhibitionCenter> exhibitionCenterList = factoryMySql
-                    .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST).getAllExhibitionCenter();
+                    .createExhibitionCenter
+                            (connection, QUERIES_MY_SQL_TEST).getAllExhibitionCenter();
 
             assertTrue(exhibitionCenterList.contains(exhibitionCenter));
             assertTrue(exhibitionCenterList.contains(exhibitionCenterSecond));
@@ -312,25 +299,24 @@ public class ExhibitionCenterMySqlTest {
     public void updateExhibitionCenterTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
-                .setWebPage("test")
-                .seteMail("test")
-                .setAddress("test")
-                .setTitle("test")
-                .build();
+        ExhibitionCenter exhibitionCenter = new ExhibitionCenter().emptyCenter();
 
         try {
+            // insert ex. center
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
 
+            // make some change to ex. center
             exhibitionCenter.setTitle("new title");
             exhibitionCenter.seteMail("new email");
             exhibitionCenter.setAddress("new address");
             exhibitionCenter.setWebPage("new web");
 
+            // update ex. center
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .updateExhibitionCenter(exhibitionCenter);
 
+            // get updated ex. center from table
             ExhibitionCenter exhibitionCenterUpdated = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getExhibitionCenterById(1);
@@ -357,14 +343,18 @@ public class ExhibitionCenterMySqlTest {
                 .build();
 
         try {
+            // insert exhibition center
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
 
-            boolean titleInTable = factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
+            // looking not existed title
+            boolean titleInTable = factoryMySql
+                    .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .isTitleInTable(titleNotInTable);
 
             assertFalse(titleInTable);
 
+            // looking already existed title
             titleInTable = factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .isTitleInTable(title);
 
@@ -380,27 +370,18 @@ public class ExhibitionCenterMySqlTest {
     public void deleteExhibitionCenterByIdTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        ExhibitionCenter exhibitionCenter = new ExhibitionCenter.Builder()
-                .setWebPage("test")
-                .seteMail("test")
-                .setAddress("test")
-                .setTitle("test")
-                .build();
+        ExhibitionCenter exhibitionCenter = new ExhibitionCenter().emptyCenter();
 
         try {
+            // insert exhibition in table
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .insertExhibitionCenter(exhibitionCenter);
 
-            ExhibitionCenter exhibitionCenterFromDB = factoryMySql
-                    .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
-                    .getExhibitionCenterById(1);
-
-            assertEquals(exhibitionCenter, exhibitionCenterFromDB);
-
+            // delete exhibition
             factoryMySql.createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .deleteExhibitionCenterById(1);
 
-            exhibitionCenterFromDB = factoryMySql
+            ExhibitionCenter exhibitionCenterFromDB = factoryMySql
                     .createExhibitionCenter(connection, QUERIES_MY_SQL_TEST)
                     .getExhibitionCenterById(1);
 

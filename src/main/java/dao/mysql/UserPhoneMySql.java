@@ -46,6 +46,8 @@ public class UserPhoneMySql implements UserPhoneDao {
                 phones.add(resultSet.getString(FIELD_PHONE));
             }
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getPhones(" + eMail + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
         if(phones == null) {
@@ -63,6 +65,9 @@ public class UserPhoneMySql implements UserPhoneDao {
             statement.setString(2, mail);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertPhone(" + mail + ","
+                    + phone + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -75,6 +80,9 @@ public class UserPhoneMySql implements UserPhoneDao {
             statement.setString(2, phone);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deletePhone(" + mail + ","
+                    + phone + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

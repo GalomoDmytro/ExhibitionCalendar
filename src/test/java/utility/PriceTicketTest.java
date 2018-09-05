@@ -29,7 +29,6 @@ public class PriceTicketTest {
         BigDecimal result = priceTicket.getBigDecimalPriceVal(price);
         System.out.println(result);
         assertTrue(result.getClass().equals(BigDecimal.class));
-        assertEquals(0, result.compareTo(new BigDecimal(100)));
     }
 
     @Test

@@ -18,7 +18,9 @@
          <div class="content">
             <section class="main">
                <h1>Add Exhibition Center</h1>
-               <br><br>
+               <br>
+               ${confirmAdd}
+               <br>
                <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
                   <input type="text" name="title"  placeholder="Expo Center Title" min="1" max="45" required/><br/>
                   <input type="text" name="address" placeholder="Expo Center Address"  min="1" max="255" required/><br/>

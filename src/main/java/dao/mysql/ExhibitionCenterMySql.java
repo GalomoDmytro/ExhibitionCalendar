@@ -35,9 +35,11 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     @Override
     public void setLockExhibitionCenterTable() throws DBException {
         try (PreparedStatement statement = connection
-                .prepareStatement("LOCK TABLES exhibition_center WRITE, exhibition_center_phone WRITE")) {
+                .prepareStatement("LOCK TABLES exhibition_center WRITE, " +
+                        "exhibition_center_phone WRITE")) {
             statement.execute();
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -56,7 +58,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
     @Override
     public ExhibitionCenter getExhibitionCenterById(Integer id) throws DBException {
-        List<ExhibitionCenter> exhibitionCenters = null;
+        List<ExhibitionCenter> exhibitionCenters;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("exhibitionCenter.getById"))) {
             statement.setInt(1, id);
@@ -64,6 +66,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionCenterById with idExhibitionCenter:" + id);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -77,11 +81,13 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     @Override
     public ExhibitionCenter getExhibitionCenterByTitle(String title) throws DBException {
         List<ExhibitionCenter> exhibitionCenters;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getByTitle"))) {
+        try (PreparedStatement statement = connection.prepareStatement(QUERIES
+                .getString("exhibitionCenter.getByTitle"))) {
             statement.setString(1, title);
             ResultSet resultSet = statement.executeQuery();
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionCenterByTitle with ExCenter title:" + title);
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -98,14 +104,12 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         List<ExhibitionCenter> exhibitionCenters ;
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.search"))) {
-            statement.setString(1, search);
-            statement.setString(2, search);
-            statement.setString(3, search);
-            statement.setString(4, search);
-            statement.setString(5, search);
+            prepareStatementToSearch(search, statement);
             ResultSet resultSet = statement.executeQuery();
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionCentersBySearch with search:" + search);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -116,19 +120,31 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         return exhibitionCenters;
     }
 
+    private void prepareStatementToSearch(String search, PreparedStatement statement)
+            throws SQLException {
+        statement.setString(1, search);
+        statement.setString(2, search);
+        statement.setString(3, search);
+        statement.setString(4, search);
+        statement.setString(5, search);
+    }
+
     @Override
     public ExhibitionCenter getExhibitionCenterByMail(String eMail) throws DBException {
-        List<ExhibitionCenter> exhibitionCenters = null;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getByEMail"))) {
+        List<ExhibitionCenter> exhibitionCenters;
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibitionCenter.getByEMail"))) {
             statement.setString(1, eMail);
             ResultSet resultSet = statement.executeQuery();
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionCenterByMail(" + eMail + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
         if (exhibitionCenters == null) {
-            return null;
+            return new ExhibitionCenter().emptyCenter();
         } else {
             return exhibitionCenters.get(0);
         }
@@ -137,10 +153,13 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     @Override
     public List<ExhibitionCenter> getAllExhibitionCenter() throws DBException {
         List<ExhibitionCenter> exhibitionCenters;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getAll"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibitionCenter.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
             exhibitionCenters = parseExhibitionCenterSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllExhibitionCenter();");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -157,6 +176,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             statement.setInt(1, exhibitionCenter.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteExhibitionCenter(" + exhibitionCenter + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -164,14 +185,15 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
     @Override
     public void insertExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement
-                (QUERIES.getString("exhibitionCenter.insert"), Statement.RETURN_GENERATED_KEYS)) {
+                (QUERIES.getString("exhibitionCenter.insert"),
+                        Statement.RETURN_GENERATED_KEYS)) {
             prepareStatementToInsert(statement, exhibitionCenter);
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Creating user failed, no rows affected.");
             }
 
-            // get the insert userId
+            // get userId after insert
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     exhibitionCenter.setId(generatedKeys.getInt(1));
@@ -181,6 +203,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertExhibitionCenter(" + exhibitionCenter + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -188,10 +211,12 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
 
     @Override
     public void updateExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.update"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibitionCenter.update"))) {
             prepareStatementToUpdate(statement, exhibitionCenter);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When updateExhibitionCenter(" + exhibitionCenter + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -209,6 +234,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When isTitleInTable(" + title + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -219,6 +246,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteExhibitionCenterById(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -239,6 +268,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
                 exhibitionCenters.add(exCenter);
             }
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When parseExhibitionCenterSet(" + resultSet + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -252,6 +283,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             statement.setString(3, exhibitionCenter.geteMail());
             statement.setString(4, exhibitionCenter.getWebPage());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -264,6 +296,7 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
             statement.setString(4, exhibitionCenter.getWebPage());
             statement.setInt(5, exhibitionCenter.getId());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

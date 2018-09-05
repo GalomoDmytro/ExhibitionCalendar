@@ -1,10 +1,13 @@
 package controller.command.common;
 
 import controller.command.Command;
+import controller.command.moderatorCommand.ExhibitionManagement;
 import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Ticket;
+import org.apache.log4j.Logger;
+import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +21,8 @@ public class PurchaseProcessing implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
     private Ticket ticket;
+    private static final Logger LOGGER = Logger.getLogger(PurchaseProcessing.class);
+
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,8 +42,6 @@ public class PurchaseProcessing implements Command {
     }
 
     private void sendBankCardProcessing() {
-        // some payment logic's
-        // ...
         bankResponse();
     }
 
@@ -48,7 +51,7 @@ public class PurchaseProcessing implements Command {
         try {
             factoryMySql.createTicket(connection).insertTicket(ticket);
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -59,6 +62,7 @@ public class PurchaseProcessing implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
+            LOGGER.error(exception);
         }
     }
 
@@ -68,7 +72,7 @@ public class PurchaseProcessing implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 

@@ -49,52 +49,42 @@ public class DescriptionMySqlTest {
 
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        Exhibition exhibition1 = new Exhibition.Builder()
-                .setTitle("test ex 1")
-                .setImgSrc("img src 1")
-                .build();
-        Exhibition exhibition2 = new Exhibition.Builder()
-                .setTitle("test ex 2")
-                .setImgSrc("img src 2")
-                .build();
+        Exhibition exhibition1 = new Exhibition().emptyExhibition();
+        Exhibition exhibition2 = new Exhibition().emptyExhibition();
 
-        String expected_first = "text ru";
-        String expected_second = "text eng";
-        String description_first_insert_queried = "INSERT INTO description_test " +
-                "(description, language, exhibition_id) " +
-                "values ('" + expected_first + "', 'ru', '1');";
-        String description_second_insert_queried = "INSERT INTO description_test " +
-                "(description, language, exhibition_id) " +
-                "values ('" + expected_second + "', 'eng', '2');";
-        Statement statement = null;
+        String keyRu = "ru";
+        String keyEng = "eng";
+        String expected_ru = "text ru";
+        String expected_eng = "text eng";
 
         try {
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition1);
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition2);
+            // insert exhibitions in table
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition1);
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition2);
 
-            statement = connection.createStatement();
-            statement.execute(description_first_insert_queried);
-            statement.execute(description_second_insert_queried);
+            // insert descriptions
+            factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .insertDescriptionById(keyEng, expected_eng, 1);
+            factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .insertDescriptionById(keyRu, expected_ru, 2);
 
-            Map<String, String> allDescriptionEx = factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition1);
-            assertEquals(expected_first, allDescriptionEx.get("ru"));
+            // get all descriptions
+            Map<String, String> allDescriptionEx
+                    = factoryMySql.createDescriptionTable
+                    (connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition1);
+            assertEquals(expected_eng, allDescriptionEx.get(keyEng));
             assertEquals(1, allDescriptionEx.size());
 
-            allDescriptionEx = factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition2);
-            assertEquals(expected_second, allDescriptionEx.get("eng"));
+            allDescriptionEx = factoryMySql.createDescriptionTable
+                    (connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition2);
+            assertEquals(expected_ru, allDescriptionEx.get(keyRu));
             assertEquals(1, allDescriptionEx.size());
 
         } catch (Exception e) {
             System.out.println(e);
             fail();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -102,39 +92,35 @@ public class DescriptionMySqlTest {
     public void getAllDescriptionByIdTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        Exhibition exhibition = new Exhibition.Builder()
-                .setTitle("test ex 1")
-                .setImgSrc("img src 1")
-                .build();
+        Exhibition exhibition = new Exhibition().emptyExhibition();
 
-        String expected_first = "text ru";
-        String expected_second = "text eng";
-        String description_first_insert_queried = "INSERT INTO description_test " +
-                "(description, language, exhibition_id) " +
-                "values ('" + expected_first + "', 'ru', '1');";
-        String description_second_insert_queried = "INSERT INTO description_test " +
-                "(description, language, exhibition_id) " +
-                "values ('" + expected_second + "', 'eng', '1');";
-        Statement statement = null;
+        String langKeyEng = "eng";
+        String langKeyRu = "ru";
+        String expected_ru = "text ru";
+        String expected_eng = "text eng";
 
         try {
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition);
+            // insert exhibition in table
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition);
 
-            statement = connection.createStatement();
-            statement.execute(description_first_insert_queried);
-            statement.execute(description_second_insert_queried);
+            factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .insertDescriptionById(langKeyEng, expected_eng, 1);
+            factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .insertDescriptionById(langKeyRu, expected_ru, 1);
 
+            // get all descriptions
             Map<String, String> allDescriptionEx = factoryMySql
-                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition);
-            assertEquals(expected_first, allDescriptionEx.get("ru"));
-            assertEquals(expected_second, allDescriptionEx.get("eng"));
+                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .getAllDescriptionById(exhibition.getId());
+
+            assertEquals(expected_ru, allDescriptionEx.get("ru"));
+            assertEquals(expected_eng, allDescriptionEx.get("eng"));
             assertEquals(2, allDescriptionEx.size());
 
         } catch (Exception e) {
             System.out.println(e);
             fail();
-        } finally {
-            closeStatement(statement);
         }
     }
 
@@ -142,41 +128,39 @@ public class DescriptionMySqlTest {
     public void getDescriptionTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        Exhibition exhibition = new Exhibition.Builder()
-                .setTitle("test ex 1")
-                .setImgSrc("img src 1")
-                .build();
+        Exhibition exhibition = new Exhibition().emptyExhibition();
 
-        String expected_first = "text ru";
-        String expected_second = "text eng";
+        String expected_ru = "текст ru";
+        String expected_eng = "text eng";
         String langKeyRu = "ru";
         String langKeyEng = "eng";
-        String description_first_insert_queried = "INSERT INTO description_test " +
-                "(description, language, exhibition_id) " +
-                "values ('" + expected_first + "', '" + langKeyRu + "', '1');";
-        String description_second_insert_queried = "INSERT INTO description_test " +
-                "(description, language, exhibition_id) " +
-                "values ('" + expected_second + "', '" + langKeyEng + "', '1');";
-        Statement statement = null;
 
         try {
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition);
-            statement = connection.createStatement();
-            statement.execute(description_first_insert_queried);
-            statement.execute(description_second_insert_queried);
+            // insert exhibition
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition);
 
+            // insert descriptions
+            factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .insertDescriptionById(langKeyEng, expected_eng, 1);
+            factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .insertDescriptionById(langKeyRu, expected_ru, 1);
+
+            // get description from table for langKeyRu
             String description = factoryMySql
-                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getDescription(exhibition, langKeyRu);
-            assertEquals(expected_first, description);
+                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .getDescription(exhibition, langKeyRu);
+            assertEquals(expected_ru, description);
+
+            // get description from table for langKeyEng
             description = factoryMySql
-                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getDescription(exhibition, langKeyEng);
-            assertEquals(expected_second, description);
+                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .getDescription(exhibition, langKeyEng);
+            assertEquals(expected_eng, description);
 
         } catch (Exception e) {
             System.out.println(e);
             fail();
-        } finally {
-            closeStatement(statement);
         }
     }
 
@@ -184,29 +168,28 @@ public class DescriptionMySqlTest {
     public void insertDescriptionTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        Exhibition exhibition = new Exhibition.Builder()
-                .setTitle("test ex 1")
-                .setImgSrc("img src 1")
-                .build();
+        Exhibition exhibition = new Exhibition().emptyExhibition();
 
         String expected_ru = "рус текст";
         String expected_eng = "text eng";
         String langKeyRu = "ru";
         String langKeyEng = "eng";
 
-        Statement statement = null;
-
         try {
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition);
-            statement = connection.createStatement();
+            // insert exhibition in table
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition);
 
+            // insert descriptions in table
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
                     .insertDescription(expected_ru, langKeyRu, exhibition);
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
                     .insertDescription(expected_eng, langKeyEng, exhibition);
 
+            // get all descriptions
             Map<String, String> allDescriptionEx = factoryMySql
-                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition);
+                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .getAllDescription(exhibition);
 
             assertEquals(2, allDescriptionEx.size());
             assertEquals(expected_eng, allDescriptionEx.get(langKeyEng));
@@ -215,8 +198,6 @@ public class DescriptionMySqlTest {
         } catch (Exception e) {
             System.err.println(e);
             fail();
-        } finally {
-            closeStatement(statement);
         }
     }
 
@@ -224,28 +205,28 @@ public class DescriptionMySqlTest {
     public void insertDescriptionByIdTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        Exhibition exhibition = new Exhibition.Builder()
-                .setTitle("test ex 1")
-                .setImgSrc("img src 1")
-                .build();
+        Exhibition exhibition = new Exhibition().emptyExhibition();
 
         String expected_ru = "рус текст";
         String expected_eng = "text eng";
         String langKeyRu = "ru";
         String langKeyEng = "eng";
-        Statement statement = null;
 
         try {
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition);
-            statement = connection.createStatement();
+            // insert exhibition in to db
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition);
 
+            // insert Descriptions for table
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
-                    .insertDescriptionById(expected_ru, langKeyRu, 1);
+                    .insertDescriptionById(langKeyRu, expected_ru, 1);
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
-                    .insertDescriptionById(expected_eng, langKeyEng, 1);
+                    .insertDescriptionById(langKeyEng, expected_eng, 1);
 
+            // get all description for exhibition
             Map<String, String> allDescriptionEx = factoryMySql
-                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition);
+                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .getAllDescription(exhibition);
 
             assertEquals(2, allDescriptionEx.size());
             assertEquals(expected_eng, allDescriptionEx.get(langKeyEng));
@@ -254,8 +235,6 @@ public class DescriptionMySqlTest {
         } catch (Exception e) {
             System.err.println(e);
             fail();
-        } finally {
-            closeStatement(statement);
         }
     }
 
@@ -263,41 +242,40 @@ public class DescriptionMySqlTest {
     public void deleteAllDescriptionForExpositionTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        Exhibition exhibition = new Exhibition.Builder()
-                .setTitle("test ex 1")
-                .setImgSrc("img src 1")
-                .build();
+        Exhibition exhibition = new Exhibition().emptyExhibition();
 
         String expected_ru = "рус текст";
         String expected_eng = "text eng";
         String langKeyRu = "ru";
         String langKeyEng = "eng";
-        Statement statement = null;
 
         try {
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition);
-            statement = connection.createStatement();
+            // insert exhibition in table
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition);
 
+            // insert descriptions
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
                     .insertDescriptionById(expected_ru, langKeyRu, 1);
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
                     .insertDescriptionById(expected_eng, langKeyEng, 1);
 
+            // delete all descriptions
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
                     .deleteAllDescriptionForExposition(exhibition);
 
+            // get all descriptions
             Map<String, String> allDescriptionEx = factoryMySql
-                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition);
+                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .getAllDescription(exhibition);
 
             assertEquals(0, allDescriptionEx.size());
             assertEquals(Collections.<String, String>emptyMap(), allDescriptionEx);
-            assertNull( allDescriptionEx.get(langKeyEng));
+            assertNull(allDescriptionEx.get(langKeyEng));
 
         } catch (Exception e) {
             System.err.println(e);
             fail();
-        } finally {
-            closeStatement(statement);
         }
     }
 
@@ -305,41 +283,39 @@ public class DescriptionMySqlTest {
     public void deleteDescriptionForLangTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
-        Exhibition exhibition = new Exhibition.Builder()
-                .setTitle("test ex 1")
-                .setImgSrc("img src 1")
-                .build();
+        Exhibition exhibition = new Exhibition().emptyExhibition();
 
         String expected_ru = "рус текст";
         String expected_eng = "text eng";
         String langKeyRu = "ru";
         String langKeyEng = "eng";
-        Statement statement = null;
 
         try {
-            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST).insertExhibition(exhibition);
-            statement = connection.createStatement();
+            // insert exhibition
+            factoryMySql.createExhibition(connection, QUERIES_MY_SQL_TEST)
+                    .insertExhibition(exhibition);
 
+            // insert descriptions
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
-                    .insertDescriptionById(expected_ru, langKeyRu, 1);
+                    .insertDescriptionById(langKeyRu, expected_ru, 1);
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
-                    .insertDescriptionById(expected_eng, langKeyEng, 1);
+                    .insertDescriptionById(langKeyEng, expected_eng, 1);
 
+            // delete description
             factoryMySql.createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
                     .deleteDescriptionForLang(exhibition, langKeyEng);
 
             Map<String, String> allDescriptionEx = factoryMySql
-                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST).getAllDescription(exhibition);
+                    .createDescriptionTable(connection, QUERIES_MY_SQL_TEST)
+                    .getAllDescription(exhibition);
 
             assertEquals(1, allDescriptionEx.size());
             assertEquals(expected_ru, allDescriptionEx.get(langKeyRu));
-            assertNull( allDescriptionEx.get(langKeyEng));
+            assertNull(allDescriptionEx.get(langKeyEng));
 
         } catch (Exception e) {
             System.err.println(e);
             fail();
-        } finally {
-            closeStatement(statement);
         }
     }
 
@@ -369,16 +345,6 @@ public class DescriptionMySqlTest {
         buildUrl.append(DB_TEST.getString("mysql_test.autoReconnect")).append("&");
         buildUrl.append(DB_TEST.getString("mysql_test.useSSL"));
         return buildUrl.toString();
-    }
-
-    private void closeStatement(Statement statement) {
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
     }
 
     private void closeConnection() {

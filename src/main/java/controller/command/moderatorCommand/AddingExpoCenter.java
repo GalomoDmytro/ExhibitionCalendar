@@ -13,6 +13,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -24,57 +25,61 @@ public class AddingExpoCenter implements Command {
     private FactoryMySql factoryMySql;
     private String title;
     private String address;
-    private String eMail; // todo add check email
+    private String eMail;
     private String eMail_repeat;
     private String webPage;
     private String phone1;
     private String phone2;
-    private HttpServletRequest req;
     private ExhibitionCenter exCenter;
+    private Integer idModerator;
 
-    private static final Logger log = Logger.getLogger(AddingExpoCenter.class);
+    private static final Logger LOGGER = Logger.getLogger(AddingExpoCenter.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.req = req;
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        getDataFromSession(req);
         RequestDispatcher dispatcher;
-        handleConnection();
-
 
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_CENTER_PAGE);
-
 
         collectParamsFromRequest(req);
 
         if (req.getParameter("addNewExpoCenter") != null) {
-            addNewExpoCenter();
+            addNewExpoCenter(req);
         }
 
         dispatcher.forward(req, resp);
     }
 
-    private void addNewExpoCenter() {
-        if (!inputDataIsValid()) {
+    private void addNewExpoCenter(HttpServletRequest request) {
+        if (!inputDataIsValid(request)) {
             return;
         }
-
         prepareExhibitionCenter();
 
+        handleConnection();
         try {
             connection.setAutoCommit(false);
-            factoryMySql.createExhibitionCenter(connection).insertExhibitionCenter(exCenter);
+            factoryMySql.createExhibitionCenter(connection)
+                    .insertExhibitionCenter(exCenter);
 
             exCenter = factoryMySql.createExhibitionCenter(connection)
                     .getExhibitionCenterByTitle(exCenter.getTitle());
             if (phone1 != null) {
-                factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exCenter.getId(), phone1);
+                factoryMySql.createExhibitionCenterPhone(connection)
+                        .insertPhone(exCenter.getId(), phone1);
             }
             if (phone2 != null) {
-                factoryMySql.createExhibitionCenterPhone(connection).insertPhone(exCenter.getId(), phone2);
+                factoryMySql.createExhibitionCenterPhone(connection)
+                        .insertPhone(exCenter.getId(), phone2);
             }
             connection.commit();
+            LOGGER.info("Moderator with id: " + idModerator +
+                    " insert new Ex.Center " + exCenter);
+            request.setAttribute("confirmAdd", "Exhibition center added ");
         } catch (Exception exception) {
-            log.error(exception);
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -106,21 +111,26 @@ public class AddingExpoCenter implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
-    private boolean inputDataIsValid() {
-        if (!titleIsValid()) {
+    private void getDataFromSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        idModerator = (Integer) session.getAttribute("userId");
+    }
+
+    private boolean inputDataIsValid(HttpServletRequest req) {
+        if (!titleIsValid(req)) {
             return false;
         }
 
-        if (!addressIsValid()) {
+        if (!addressIsValid(req)) {
             req.setAttribute("error", "Oops, some trouble with address");
             return false;
         }
 
-        if (!mailIsValid()) {
+        if (!mailIsValid(req)) {
             return false;
         }
 
@@ -135,7 +145,7 @@ public class AddingExpoCenter implements Command {
         return true;
     }
 
-    private boolean mailIsValid() {
+    private boolean mailIsValid(HttpServletRequest req) {
         if (eMail == null || eMail_repeat == null) {
             req.setAttribute("error", JSPError.ERROR_MAIL_MISSING);
             return false;
@@ -154,7 +164,7 @@ public class AddingExpoCenter implements Command {
         return true;
     }
 
-    private boolean addressIsValid() {
+    private boolean addressIsValid(HttpServletRequest req) {
         if (address == null) {
             req.setAttribute("error", JSPError.ERROR_ADDRESS);
             return false;
@@ -168,9 +178,9 @@ public class AddingExpoCenter implements Command {
         return true;
     }
 
-    private boolean titleIsValid() {
+    private boolean titleIsValid(HttpServletRequest req) {
         if (title == null) {
-            log.info("title null");
+            LOGGER.info("title null");
             return false;
         }
 
@@ -188,18 +198,15 @@ public class AddingExpoCenter implements Command {
     }
 
     private boolean titleAlreadyExist() {
-        boolean isMatch = false;
+        handleConnection();
         try {
             if (factoryMySql.createExhibitionCenter(connection).isTitleInTable(title)) {
-                isMatch = true;
                 return true;
             }
         } catch (Exception exception) {
-            log.error(exception);
+            LOGGER.error(exception);
         } finally {
-            if (isMatch) {
-                closeConnection();
-            }
+            closeConnection();
         }
         return false;
     }
@@ -210,7 +217,7 @@ public class AddingExpoCenter implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 

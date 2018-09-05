@@ -39,7 +39,6 @@ public class Purchase implements Command {
     private Integer quantityTickets;
     private HttpSession session;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//    private BigDecimal price;
 
     private static final Logger LOGGER = Logger.getLogger(Purchase.class);
 
@@ -75,7 +74,6 @@ public class Purchase implements Command {
         if (request.getParameter("searchDateLine") == null
                 || request.getParameter("searchDateLine").isEmpty()) {
             dateSearch = (String) session.getAttribute("searchDateLine");
-            LOGGER.info("get from session dateSearch " + dateSearch);
         }
 
         try {
@@ -93,11 +91,10 @@ public class Purchase implements Command {
             try {
                 contractId = Integer.parseInt(req.getParameter("idContract"));
             } catch (NumberFormatException exception) {
-
+                LOGGER.error(exception);
             }
         }
 
-//        LOGGER.info(req.getParameter("quantity") + " tickets");
         if (req.getParameter("quantity") == null) {
             quantityTickets = 1;
         } else {
@@ -110,7 +107,6 @@ public class Purchase implements Command {
 
         dateExhibitionStart = req.getParameter("dateFromExhibitionStart");
         dateSearch = req.getParameter("searchDateLine");
-        LOGGER.info("------------ " + dateSearch);
 
     }
 
@@ -143,10 +139,11 @@ public class Purchase implements Command {
 
         handleConnection();
         try {
-            User user = factoryMySql.createUser(connection).getById(Integer.parseInt(userId));
+            User user = factoryMySql.createUser(connection)
+                    .getById(Integer.parseInt(userId));
             req.setAttribute("eMailHold", user.getMail());
-//            LOGGER.info("user:  " + user);
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -177,6 +174,7 @@ public class Purchase implements Command {
             }
 
         } catch (ParseException e) {
+            LOGGER.error(e);
             date = new Date();
         }
 
@@ -212,7 +210,7 @@ public class Purchase implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -221,7 +219,7 @@ public class Purchase implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

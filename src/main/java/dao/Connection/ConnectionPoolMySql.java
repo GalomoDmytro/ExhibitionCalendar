@@ -7,6 +7,8 @@ import org.apache.commons.dbcp.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp.PoolableConnectionFactory;
 import org.apache.commons.dbcp.PoolingDataSource;
 import org.apache.commons.pool.impl.GenericObjectPool;
+import org.apache.log4j.Logger;
+import utility.PasswordHandler;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -18,10 +20,10 @@ import java.util.ResourceBundle;
  */
 public class ConnectionPoolMySql implements ConnectionPoolDao {
 
+    private GenericObjectPool connectionPool = null;
+    private static final Logger LOGGER = Logger.getLogger(PasswordHandler.class);
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("DBConnection");
     private volatile static ConnectionPoolMySql instance = null;
-
-    private GenericObjectPool connectionPool = null;
 
 
     private ConnectionPoolMySql() {
@@ -30,7 +32,7 @@ public class ConnectionPoolMySql implements ConnectionPoolDao {
     public static ConnectionPoolMySql getInstance() {
         if (instance == null) {
             synchronized (ConnectionPoolMySql.class) {
-                if(instance == null) {
+                if (instance == null) {
                     instance = new ConnectionPoolMySql();
                 }
             }
@@ -43,6 +45,7 @@ public class ConnectionPoolMySql implements ConnectionPoolDao {
             DataSource dataSource = setUp();
             return dataSource.getConnection();
         } catch (Exception exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

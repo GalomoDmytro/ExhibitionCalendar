@@ -43,6 +43,8 @@ public class UserMySql implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             user = parseUsersSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getById(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -62,6 +64,8 @@ public class UserMySql implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             user = parseUsersSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getByName(" + name + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -81,6 +85,7 @@ public class UserMySql implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             user = parseUsersSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getByMail(" + eMail + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -90,7 +95,6 @@ public class UserMySql implements UserDao {
         } else if (user.size() < 1) {
             return new User().emptyUser();
         } else {
-//            LOGGER.info("return  " + user.get(0));
             return user.get(0);
         }
     }
@@ -98,10 +102,12 @@ public class UserMySql implements UserDao {
     @Override
     public List<User> getAllUsers() throws DBException {
         List<User> user;
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.getAll"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.getAll"))) {
             ResultSet resultSet = statement.executeQuery();
             user = parseUsersSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -119,6 +125,8 @@ public class UserMySql implements UserDao {
             prepareStatementToUpdate(statement, user);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When updateUser(" + user + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -143,23 +151,29 @@ public class UserMySql implements UserDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertUser(" + user + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
 
     @Override
     public void deleteUser(String mail) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.delete"))) {
             statement.setString(1, mail);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteUser(" + mail + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
 
     @Override
     public boolean isNameInTable(String name) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.nameInTable"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.nameInTable"))) {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -169,13 +183,16 @@ public class UserMySql implements UserDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When isNameInTable(" + name + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
 
     @Override
     public boolean isMailInTable(String eMail) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("user.mailInTable"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("user.mailInTable"))) {
             statement.setString(1, eMail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -185,6 +202,8 @@ public class UserMySql implements UserDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When isMailInTable(" + eMail + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -197,14 +216,13 @@ public class UserMySql implements UserDao {
             statement.setString(2, nameOrMail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-//                LOGGER.info(nameOrMail + " in table");
                 return true;
             } else {
-//                LOGGER.info(nameOrMail + " not in table");
                 return false;
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When isNameOrMailInTable(" + nameOrMail + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -212,7 +230,6 @@ public class UserMySql implements UserDao {
 
     private List<User> parseUsersSet(ResultSet resultSet) throws DBException {
         List<User> users = new ArrayList<>();
-//        LOGGER.info("parse user");
         try {
             while (resultSet.next()) {
                 User user = new User.Builder()
@@ -224,7 +241,6 @@ public class UserMySql implements UserDao {
                         .setPassword(resultSet.getString(FIELD_PASSWORD))
                         .build();
                 users.add(user);
-//                LOGGER.info(user);
             }
         } catch (SQLException exception) {
             LOGGER.error(exception);
@@ -242,6 +258,7 @@ public class UserMySql implements UserDao {
             statement.setString(4, user.getLastName());
             statement.setString(5, user.getPassword());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -255,6 +272,7 @@ public class UserMySql implements UserDao {
             statement.setString(5, user.getPassword());
             statement.setInt(6, user.getId());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

@@ -10,7 +10,6 @@ public class PasswordHandler {
     public PasswordHandler(){}
 
     public String encrypt(String originalString) {
-
         return DigestUtils.sha256Hex(originalString + "salt java");
     }
 

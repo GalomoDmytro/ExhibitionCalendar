@@ -46,6 +46,8 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
                 }
             }
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getPhones(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -63,6 +65,8 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
             statement.setInt(2, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertPhone(" + id + ", " + phone + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -73,6 +77,8 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deletePhone(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

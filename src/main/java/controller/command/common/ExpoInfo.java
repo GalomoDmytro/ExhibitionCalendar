@@ -32,11 +32,13 @@ public class ExpoInfo implements Command {
 
     private String lang;
 
-    private static final Logger LOGGER = Logger.getLogger(ExhibitionContractMySql.class);
+    private static final Logger LOGGER = Logger.getLogger(ExpoInfo.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.EXHIBITION_INFO_PAGE);
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.EXHIBITION_INFO_PAGE);
 
         showExhibition(req);
 
@@ -109,7 +111,7 @@ public class ExpoInfo implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -118,7 +120,7 @@ public class ExpoInfo implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

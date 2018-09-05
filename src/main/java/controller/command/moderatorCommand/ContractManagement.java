@@ -52,6 +52,7 @@ public class ContractManagement implements Command {
                 req.setAttribute("listContract", contracts);
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -71,6 +72,7 @@ public class ContractManagement implements Command {
                 }
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -88,6 +90,7 @@ public class ContractManagement implements Command {
                 req.setAttribute("listContract", contractList);
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -103,7 +106,7 @@ public class ContractManagement implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -112,7 +115,7 @@ public class ContractManagement implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

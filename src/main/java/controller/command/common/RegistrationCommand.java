@@ -46,7 +46,6 @@ public class RegistrationCommand implements Command {
         RequestDispatcher dispatcher;
         if (isDataGood(req)) {
             addNewUserToDB();
-//            user.setRole(Role.USER);
             declareRole(req, resp);
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         } else {
@@ -73,7 +72,7 @@ public class RegistrationCommand implements Command {
             return false;
         }
 
-        if(!phoneIsGood()) {
+        if (!phoneIsGood()) {
             req.setAttribute("errorPhone", "bad phone number");
             return false;
         }
@@ -82,22 +81,18 @@ public class RegistrationCommand implements Command {
 
     private boolean phoneIsGood() {
 
-        if(phone1 != null) {
-            if(phone1.length() > Patterns.PHONE_LENGTH) {
+        if (phone1 != null) {
+            if (phone1.length() > Patterns.PHONE_LENGTH) {
                 return false;
             }
-//            if(!phone1.matches(Patterns.PHONE_LENGTH)) {
-//                LOGGER.info("check 1");
-//                return false;
-//            }
+
         }
 
-        if(phone2 != null) {
-            if(phone2.length() > Patterns.PHONE_LENGTH) {
+        if (phone2 != null) {
+            if (phone2.length() > Patterns.PHONE_LENGTH) {
                 return false;
             }
         }
-
 
         return true;
     }
@@ -125,20 +120,17 @@ public class RegistrationCommand implements Command {
         }
 
         // check if name already in table
-        boolean alredyEx = false;
         handleConnection();
         try {
             if (factoryMySql.createUser(connection).isNameInTable(name)) {
-                alredyEx = true;
                 req.setAttribute("errorNameProfile", QUERIES.getString("ERROR_NAME_ALREADY_EXIST"));
                 return false;
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
             return false;
         } finally {
-//            if(alredyEx) {
-//                closeConnection();
-//            }
+
             closeConnection();
         }
 
@@ -165,41 +157,41 @@ public class RegistrationCommand implements Command {
     }
 
     private void collectParamsFromRequest(HttpServletRequest req) {
-        if(req.getParameter("name") != null) {
+        if (req.getParameter("name") != null) {
             name = req.getParameter("name");
         }
 
-        if(req.getParameter("password") != null) {
+        if (req.getParameter("password") != null) {
             password = req.getParameter("password");
         }
 
-        if(req.getParameter("passwordRepeat") != null) {
+        if (req.getParameter("passwordRepeat") != null) {
             passwordRepeat = req.getParameter("passwordRepeat");
         }
 
-        if(req.getParameter("firstName") != null) {
+        if (req.getParameter("firstName") != null) {
             firstName = req.getParameter("firstName");
         }
 
-        if(req.getParameter("lastName") != null) {
+        if (req.getParameter("lastName") != null) {
             lastName = req.getParameter("lastName");
         }
 
-        if(req.getParameter("eMailRegistration") != null) {
+        if (req.getParameter("eMailRegistration") != null) {
             eMail = req.getParameter("eMailRegistration");
         } else {
             eMail = null;
         }
 
-        if(req.getParameter("eMailRepeat") != null) {
+        if (req.getParameter("eMailRepeat") != null) {
             eMailRepeat = req.getParameter("eMailRepeat");
         }
 
-        if(req.getParameter("phone1") != null) {
+        if (req.getParameter("phone1") != null) {
             phone1 = req.getParameter("phone1");
         }
 
-        if(req.getParameter("phone2") != null) {
+        if (req.getParameter("phone2") != null) {
             phone2 = req.getParameter("phone2");
         }
 
@@ -208,22 +200,26 @@ public class RegistrationCommand implements Command {
     private boolean eMailIsGood(HttpServletRequest request) {
 
         if (eMail == null || eMailRepeat == null || eMail.trim().length() < 1) {
-            request.setAttribute("errorMail", QUERIES.getString("ERROR_MISS_EMAIL"));
+            request.setAttribute("errorMail", QUERIES
+                    .getString("ERROR_MISS_EMAIL"));
             return false;
         }
 
         if (!eMail.equals(eMailRepeat)) {
-            request.setAttribute("errorMail", QUERIES.getString("ERROR_MATCHES_EMAIL"));
+            request.setAttribute("errorMail", QUERIES
+                    .getString("ERROR_MATCHES_EMAIL"));
             return false;
         }
 
         if (!eMail.matches(Patterns.EMAIL)) {
-            request.setAttribute("errorMail", QUERIES.getString("ERROR_EMAIL_PATTERN"));
+            request.setAttribute("errorMail", QUERIES
+                    .getString("ERROR_EMAIL_PATTERN"));
             return false;
         }
 
         if (!eMail.matches(Patterns.EMAIL_LENGTH)) {
-            request.setAttribute("errorMail", QUERIES.getString("ERROR_EMAIL_PATTERN"));
+            request.setAttribute("errorMail", QUERIES
+                    .getString("ERROR_EMAIL_PATTERN"));
             return false;
         }
 
@@ -231,7 +227,8 @@ public class RegistrationCommand implements Command {
         handleConnection();
         try {
             if (factoryMySql.createUser(connection).isMailInTable(eMail)) {
-                request.setAttribute("errorMail", QUERIES.getString("ERROR_EMAIL_ALREADY_EXIST"));
+                request.setAttribute("errorMail", QUERIES
+                        .getString("ERROR_EMAIL_ALREADY_EXIST"));
                 return false;
             }
         } catch (Exception exception) {
@@ -248,6 +245,7 @@ public class RegistrationCommand implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
+            LOGGER.error(exception);
         }
     }
 
@@ -267,7 +265,9 @@ public class RegistrationCommand implements Command {
             addUserToDbUser();
             setUserRoleInDB();
             insertUserPhones();
+            LOGGER.info("New user registered: " + user);
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -291,21 +291,21 @@ public class RegistrationCommand implements Command {
     }
 
     private void insertUserPhones() throws Exception {
-        if(phone1 != null) {
+        if (phone1 != null) {
             factoryMySql.createUserPhones(connection).insertPhone(user.getMail(), phone1);
         }
-        if(phone2 != null) {
+        if (phone2 != null) {
             factoryMySql.createUserPhones(connection).insertPhone(user.getMail(), phone2);
         }
     }
 
     private void closeConnection() {
         try {
-            if(connection != null) {
+            if (connection != null) {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 

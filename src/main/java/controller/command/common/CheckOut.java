@@ -30,7 +30,6 @@ public class CheckOut implements Command {
     private String userMail;
     private int idContract;
     private Ticket ticket;
-//    private PriceTicket mt = new PriceTicket();
 
     private static final Logger LOGGER = Logger.getLogger(CheckOut.class);
 
@@ -44,6 +43,8 @@ public class CheckOut implements Command {
         calculatePrice();
 
         if (!hasTicketOnStock()) {
+            LOGGER.info("Not enough tickets for contract: " + idContract
+                    + " for date: " + dateToApplyTicket);
             req.setAttribute("ticketsAvailable", "Ticket's sold out!");
             dispatcher = req.getRequestDispatcher(Links.PURCHASE_PAGE);
             dispatcher.forward(req, resp);
@@ -62,13 +63,12 @@ public class CheckOut implements Command {
         handleConnection();
 
         try {
-            Contract contract = factoryMySql.createExhibitionContract(connection).getExhibitionContractById(idContract);
+            Contract contract = factoryMySql
+                    .createExhibitionContract(connection)
+                    .getExhibitionContractById(idContract);
             int soldTickets = factoryMySql.createTicket(connection)
                     .getCountSoldTicketForDate(java.sql.Date.valueOf(dateToApplyTicket), idContract);
             if (contract.getMaxTicketPerDay() <= soldTickets + quantity) {
-//                LOGGER.info("Ticket quantity info;");
-//                LOGGER.info("sold ticket " + contract.getMaxTicketPerDay() + " >= "
-//                    + " soldTickets:" + soldTickets + " quantity: " + quantity );
                 return false;
             }
             if (soldTickets + quantity > contract.getMaxTicketPerDay()) {
@@ -77,7 +77,7 @@ public class CheckOut implements Command {
             return true;
 
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -119,33 +119,26 @@ public class CheckOut implements Command {
         handleConnection();
         try {
             ticket = formTicket();
-            LOGGER.info("try to insert " + ticket);
             factoryMySql.createTicket(connection).insertTicket(ticket);
+            LOGGER.info("CHECK OUT " + ticket);
             return req.getRequestDispatcher(Links.PURCHASE_FINISH_PAGE);
         } catch (Exception exception) {
             LOGGER.error(exception);
             return req.getRequestDispatcher(Links.ERROR_PAGE);
-
         } finally {
             closeConnection();
         }
     }
 
     private Ticket formTicket() {
-        LOGGER.info(
-                "userMail" + userMail +
-                "; dateToApplyTicket" + dateToApplyTicket +
-                "; quantity" + quantity +
-                "; transactionDate" + transactionDate() +
-                "; idContract" + idContract
-                );
-        return new Ticket.Builder()
+        Ticket ticket = new Ticket.Builder()
                 .setUserMail(userMail)
                 .setDateToApply(java.sql.Date.valueOf(dateToApplyTicket))
                 .setQuantity(quantity)
                 .setDateTransaction(transactionDate())
                 .setContractId(idContract)
                 .build();
+        return ticket;
     }
 
     private Date transactionDate() {
@@ -158,7 +151,7 @@ public class CheckOut implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -167,7 +160,7 @@ public class CheckOut implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

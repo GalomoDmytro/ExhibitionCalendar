@@ -42,6 +42,7 @@ public class TicketMySql implements TicketDao {
                 .prepareStatement("lock table ticket write")) {
             statement.execute();
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -68,6 +69,8 @@ public class TicketMySql implements TicketDao {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getTicketById(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -87,6 +90,7 @@ public class TicketMySql implements TicketDao {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -106,6 +110,7 @@ public class TicketMySql implements TicketDao {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -125,6 +130,7 @@ public class TicketMySql implements TicketDao {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -149,7 +155,9 @@ public class TicketMySql implements TicketDao {
             resultSet.next();
             countTickets = resultSet.getInt(1);
         } catch (SQLException exception) {
-            System.out.println(exception);
+            LOGGER.info("Catch exception. When getCountSoldTicketForDate(" + date +
+                    "," + idContract + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -166,6 +174,8 @@ public class TicketMySql implements TicketDao {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllTicketsForContract(" + contractId + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
         if (tickets == null || tickets.isEmpty()) {
@@ -183,6 +193,8 @@ public class TicketMySql implements TicketDao {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllTicketsForUser(" + user + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
         if (tickets == null || tickets.isEmpty()) {
@@ -202,6 +214,9 @@ public class TicketMySql implements TicketDao {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getTicketForUserOnContract(" + user
+                    +", " + contract + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -232,6 +247,7 @@ public class TicketMySql implements TicketDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertTicket(" + ticket + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -244,6 +260,8 @@ public class TicketMySql implements TicketDao {
             prepareStatementToUpdate(statement, ticket);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When updateTicket(" + ticket + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -255,6 +273,8 @@ public class TicketMySql implements TicketDao {
             statement.setInt(1, idTicket);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When approveTicket(" + idTicket + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -267,7 +287,8 @@ public class TicketMySql implements TicketDao {
             statement.executeUpdate();
             LOGGER.info("delete ticket id " + ticketId);
         } catch (SQLException exception) {
-            LOGGER.info(exception);
+            LOGGER.info("Catch exception. When deleteTicket(" + ticketId + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -291,6 +312,7 @@ public class TicketMySql implements TicketDao {
                 tickets.add(ticket);
             }
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -308,6 +330,7 @@ public class TicketMySql implements TicketDao {
             statement.setBoolean(7, ticket.getHasChecked());
             statement.setInt(8, ticket.getApprovedById());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -322,6 +345,7 @@ public class TicketMySql implements TicketDao {
             statement.setBoolean(6, ticket.getHasChecked());
             statement.setInt(7, ticket.getId());
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }

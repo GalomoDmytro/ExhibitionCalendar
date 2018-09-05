@@ -27,10 +27,15 @@ public class PriceTicket {
 
         for (String d : digit) {
             if (!StringUtils.isNumeric(d)
-                    || !d.equals(".")
-                    || !d.equals(",")
-            )
+                    && !d.equals(".")
+                    && !d.equals(",")
+            ) {
                 return "0";
+            }
+        }
+
+        if(priseLine.contains(",")) {
+            priseLine = priseLine.replaceAll(",", ".");
         }
 
         return priseLine;
@@ -44,6 +49,7 @@ public class PriceTicket {
     }
 
     private void setRound(BigDecimal bigDecimal) {
+
         bigDecimal.setScale(2, BigDecimal.ROUND_HALF_EVEN);
     }
 }

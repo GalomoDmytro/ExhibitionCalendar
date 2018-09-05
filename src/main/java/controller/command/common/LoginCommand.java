@@ -33,13 +33,15 @@ public class LoginCommand implements Command {
     public LoginCommand() {}
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         collectParamsFromRequest(req);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.LOGIN_PAGE);
 
         if (req.getParameter("loginBtn") != null) {
             if (identificationUser(req)) {
+                LOGGER.info("LOG IN: " + user);
                 dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
             } else {
                 req.setAttribute("errorLogin", QUERIES.getString("ERROR_LOGIN"));
@@ -69,6 +71,7 @@ public class LoginCommand implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
+            LOGGER.error(exception);
         }
     }
 
@@ -120,7 +123,7 @@ public class LoginCommand implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

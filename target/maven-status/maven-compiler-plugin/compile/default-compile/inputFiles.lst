@@ -14,6 +14,7 @@ D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\FactoryDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\PhoneExhibitionCenterMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\RoleMySql.java
+D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\combineExhibitionWithExhibitionCenter.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\util\ErrorHandler.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\ExhibitionContractDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\Connection\ConnectionPoolMySql.java
@@ -57,7 +58,6 @@ D:\epam_project\Exhibition Calendar\src\main\java\entities\Ticket.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\TicketDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\mysql\ExhibitionContractMySql.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\UserPhoneDao.java
-D:\epam_project\Exhibition Calendar\src\main\java\controller\command\moderatorCommand\combineExhibitionWithExhibionCenter.java
 D:\epam_project\Exhibition Calendar\src\main\java\dao\interfaces\DescriptionTableDao.java
 D:\epam_project\Exhibition Calendar\src\main\java\controller\command\common\LoginCommand.java
 D:\epam_project\Exhibition Calendar\src\main\java\exceptions\DBException.java

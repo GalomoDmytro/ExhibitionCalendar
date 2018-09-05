@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -69,8 +68,6 @@ public class PhoneExhibitionCenterMySqlTest {
                     .createExhibitionCenterPhone(connection, QUERIES_MY_SQL_TEST)
                     .getPhones(1);
 
-            System.out.println(phones);
-
             assertEquals(2, phones.size());
             assertTrue(phones.contains(phone1));
             assertTrue(phones.contains(phone2));
@@ -102,8 +99,6 @@ public class PhoneExhibitionCenterMySqlTest {
             List<String> phones = factoryMySql
                     .createExhibitionCenterPhone(connection, QUERIES_MY_SQL_TEST)
                     .getPhones(1);
-
-            System.out.println(phones);
 
             assertEquals(3, phones.size());
             assertTrue(phones.contains(phone2));

@@ -46,6 +46,8 @@ public class RoleMySql implements RoleDao {
             }
             setRole(stringRole);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getRoleById(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -59,6 +61,8 @@ public class RoleMySql implements RoleDao {
             statement.setString(2, role.toString());
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getRoleById(" + user +
+                    "," + role + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -70,6 +74,8 @@ public class RoleMySql implements RoleDao {
             statement.setInt(1, user.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getRoleById(" + user + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -81,6 +87,8 @@ public class RoleMySql implements RoleDao {
             statement.setInt(2, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getRoleById(" + id +
+                    "," + role + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }

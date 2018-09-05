@@ -16,6 +16,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -39,15 +40,17 @@ public class EditContract implements Command {
     private String maxTicketPerDayLine;
     private Integer exhibitionId;
     private Integer exCenterId;
-    private boolean changeSuccessful = false;
+    private boolean changeSuccessful;
+    private Integer idModerator;
 
     private static final Logger LOGGER = Logger.getLogger(EditContract.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher;
-
-        dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        getIdModerator(req);
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
 
         collectDataFromReq(req);
         setDataInForm(req);
@@ -55,12 +58,18 @@ public class EditContract implements Command {
         if (req.getParameter("saveChangesContract") != null) {
             updateContractInfo(req);
             if (changeSuccessful) {
-                dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
+                dispatcher = req
+                        .getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
             }
 
         }
 
         dispatcher.forward(req, resp);
+    }
+
+    private void getIdModerator(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        idModerator = (Integer) session.getAttribute("userId");
     }
 
     private void updateContractInfo(HttpServletRequest req) {
@@ -72,10 +81,13 @@ public class EditContract implements Command {
 
         handleConnection();
         try {
-            Contract contract = prepareContractToUdpdate();
+            Contract contract = prepareContractToUpdate();
             factoryMySql.createExhibitionContract(connection).setLockContractTable();
             factoryMySql.createExhibitionContract(connection).updateContract(contract);
             changeSuccessful = true;
+            LOGGER.info("Moderator id: " + idModerator
+                    + " update contract id: " + contract.getId()
+                    + " and set new data: " + contract);
         } catch (Exception exception) {
             LOGGER.error(exception);
             changeSuccessful = false;
@@ -83,14 +95,14 @@ public class EditContract implements Command {
             try {
                 factoryMySql.createExhibitionCenter(connection).unlockTable();
             } catch (DBException e) {
-                e.printStackTrace();
+                LOGGER.error(e);
             }
 
             closeConnection();
         }
     }
 
-    private Contract prepareContractToUdpdate() throws ParseException {
+    private Contract prepareContractToUpdate() throws ParseException {
         DateFormat format = new SimpleDateFormat(Patterns.DATE_SQL_PATTERN, Locale.ENGLISH);
         Date dateFrom = format.parse(dateFromLine);
         Date dateTo = format.parse(dateToLine);
@@ -172,7 +184,8 @@ public class EditContract implements Command {
             return false;
         }
 
-        if (!dateToLine.matches(Patterns.DATE_PATTERN) || !dateFromLine.matches(Patterns.DATE_PATTERN)) {
+        if (!dateToLine.matches(Patterns.DATE_PATTERN)
+                || !dateFromLine.matches(Patterns.DATE_PATTERN)) {
             return false;
         }
 
@@ -205,10 +218,12 @@ public class EditContract implements Command {
             if (idContract != null) {
                 Contract contract = factoryMySql.createExhibitionContract(connection)
                         .getExhibitionContractById(idContract);
-                Exhibition exhibition = factoryMySql.createExhibition(connection).getExhibitionById(contract
-                        .getExhibitionId());
+                Exhibition exhibition = factoryMySql.createExhibition(connection)
+                        .getExhibitionById(contract
+                                .getExhibitionId());
                 getLangTagsFroExhibition(exhibition);
-                ExhibitionCenter exhibitionCenter = factoryMySql.createExhibitionCenter(connection)
+                ExhibitionCenter exhibitionCenter = factoryMySql
+                        .createExhibitionCenter(connection)
                         .getExhibitionCenterById(contract.getExCenterId());
                 getPhonesExhibitionCenter(exhibitionCenter);
 
@@ -216,14 +231,15 @@ public class EditContract implements Command {
 
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
     }
 
     private void setDataToForm(Contract contract, Exhibition exhibition,
-                               ExhibitionCenter exhibitionCenter, HttpServletRequest req) {
+                               ExhibitionCenter exhibitionCenter,
+                               HttpServletRequest req) {
 
         req.setAttribute("contract", contract);
 
@@ -237,8 +253,10 @@ public class EditContract implements Command {
 
     }
 
-    private void getPhonesExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
-        List<String> phonesExhibitionCenter = factoryMySql.createExhibitionCenterPhone(connection)
+    private void getPhonesExhibitionCenter(ExhibitionCenter exhibitionCenter)
+            throws DBException {
+        List<String> phonesExhibitionCenter = factoryMySql
+                .createExhibitionCenterPhone(connection)
                 .getPhones(exhibitionCenter.getId());
         exhibitionCenter.setPhone(phonesExhibitionCenter);
     }
@@ -256,7 +274,9 @@ public class EditContract implements Command {
     }
 
     private void getLangTagsFroExhibition(Exhibition exhibition) throws DBException {
-        Map<String, String> expoLang = factoryMySql.createDescriptionTable(connection).getAllDescription(exhibition);
+        Map<String, String> expoLang = factoryMySql
+                .createDescriptionTable(connection)
+                .getAllDescription(exhibition);
         String langTags = "";
         for (Map.Entry<String, String> entry : expoLang.entrySet()) {
             langTags += entry.getKey() + " ";
@@ -270,7 +290,7 @@ public class EditContract implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -279,7 +299,7 @@ public class EditContract implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

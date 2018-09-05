@@ -6,6 +6,7 @@ dao\interfaces\ConnectionPoolDao.class
 utility\PasswordHandler.class
 dao\interfaces\PhoneExhibitionCenterDao.class
 controller\command\Home.class
+controller\command\moderatorCommand\combineExhibitionWithExhibitionCenter.class
 controller\command\moderatorCommand\AddExpo.class
 controller\command\util\Links.class
 entities\Contract.class
@@ -60,7 +61,6 @@ controller\command\common\LoginCommand.class
 dao\interfaces\FactoryDao.class
 entities\Role.class
 entities\User$Builder.class
-controller\command\moderatorCommand\combineExhibitionWithExhibionCenter.class
 controller\command\util\LogoutCommand.class
 dao\Connection\ConnectionPoolMySql.class
 entities\Ticket$Builder.class

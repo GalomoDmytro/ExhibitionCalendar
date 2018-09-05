@@ -111,7 +111,7 @@ public class Ticket {
                 ", dateToApply=" + dateToApply +
                 ", contractId=" + contractId +
                 ", dateTransaction=" + dateTransaction +
-                ", userName='" + userEMail + '\'' +
+                ", userEMail='" + userEMail + '\'' +
                 ", quantity='" + quantity + '\'' +
                 ", hasChecked='" + hasChecked + '\'' +
                 '}';

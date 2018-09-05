@@ -22,26 +22,23 @@ public class WaitApprovalTicket implements Command {
 
     private Connection connection;
     private FactoryMySql factoryMySql;
-    //    private List<Ticket> ticketList;
     private int idTicket;
     private int idModerator;
 
     private static final Logger LOGGER = Logger.getLogger(WaitApprovalTicket.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.WAIT_APPROVAL_TICKETS_PAGE);
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.WAIT_APPROVAL_TICKETS_PAGE);
 
-        LOGGER.info("getIdModerator");
         getIdModerator(req);
 
-        LOGGER.info("onBtnClick");
         onBtnClick(req);
 
-        LOGGER.info("readData");
         readData(req);
 
-        LOGGER.info("forward");
         dispatcher.forward(req, resp);
     }
 
@@ -49,6 +46,7 @@ public class WaitApprovalTicket implements Command {
         HttpSession session = req.getSession();
         idModerator = (Integer) session.getAttribute("userId");
     }
+
 
     private void onBtnClick(HttpServletRequest req) {
         if (req.getParameter("idTicket") != null) {
@@ -67,7 +65,6 @@ public class WaitApprovalTicket implements Command {
             }
         }
 
-
     }
 
     private void approveTicket() {
@@ -78,8 +75,10 @@ public class WaitApprovalTicket implements Command {
             connection.setAutoCommit(false);
             factoryMySql.createTicket(connection).approveTicket(idTicket);
 
-            Ticket ticket = factoryMySql.createTicket(connection).getTicketById(idTicket);
+            Ticket ticket = factoryMySql.createTicket(connection)
+                    .getTicketById(idTicket);
             ticket.setApprovedById(idModerator);
+            LOGGER.info("New approved ticket(s): " + ticket);
             factoryMySql.createTicket(connection).deleteTicket(ticket.getId());
             int quantity = ticket.getQuantity();
 
@@ -95,12 +94,12 @@ public class WaitApprovalTicket implements Command {
             try {
                 connection.setAutoCommit(true);
             } catch (Exception e) {
-
+                LOGGER.error(e);
             }
             try {
                 factoryMySql.createTicket(connection).unlockTable();
             } catch (Exception e) {
-
+                LOGGER.error(e);
             }
             closeConnection();
         }
@@ -111,9 +110,11 @@ public class WaitApprovalTicket implements Command {
 
         try {
             factoryMySql.createTicket(connection).deleteTicket(idTicket);
+            LOGGER.info("Moderator id: " + idModerator
+                    + " has deleted ticket id: " + idTicket);
             // TODO: send message to user
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -124,10 +125,11 @@ public class WaitApprovalTicket implements Command {
         List<Ticket> ticketList = null;
 
         try {
-            ticketList = factoryMySql.createTicket(connection).getAllWaitApproval();
+            ticketList = factoryMySql.createTicket(connection)
+                    .getAllWaitApproval();
 
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -148,16 +150,17 @@ public class WaitApprovalTicket implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
     private void handleConnection() {
         try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
+            connection = ConnectionPoolMySql.getInstance()
+                    .getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import controller.command.Command;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,26 +19,28 @@ public class Controller extends HttpServlet {
 
     private ControllerHelper controllerHelper = new ControllerHelper();
     private Command command;
+    private static final Logger LOGGER = Logger.getLogger(Controller.class);
+
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         manageRequest(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         manageRequest(req, resp);
     }
 
-    private void manageRequest(HttpServletRequest req, HttpServletResponse resp)  {
+    private void manageRequest(HttpServletRequest req, HttpServletResponse resp) {
         command = controllerHelper.getCommand(req, resp);
 
         try {
             command.execute(req, resp);
-        } catch (ServletException servletException){
-
+        } catch (ServletException servletException) {
+            LOGGER.error(servletException);
         } catch (IOException ioException) {
-
+            LOGGER.error(ioException);
         }
     }
 }

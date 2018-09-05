@@ -136,7 +136,6 @@ public class UserPhoneMySqlTest {
 
             List<String> phoneList = factoryMySql.createUserPhones(connection, QUERIES_MY_SQL_TEST)
                     .getPhones(userMail);
-            System.out.println(phoneList);
 
             assertEquals(1, phoneList.size());
             assertFalse(phoneList.contains(phone1));

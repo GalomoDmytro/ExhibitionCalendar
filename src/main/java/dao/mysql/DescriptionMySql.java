@@ -42,6 +42,8 @@ public class DescriptionMySql implements DescriptionTableDao {
             ResultSet resultSet = statement.executeQuery();
             languageDescription = parseResultSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllDescription with param:" + exhibition);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -61,6 +63,8 @@ public class DescriptionMySql implements DescriptionTableDao {
             ResultSet resultSet = statement.executeQuery();
             languageDescription = parseResultSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllDescriptionById with idExhibition:" + id);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -83,7 +87,9 @@ public class DescriptionMySql implements DescriptionTableDao {
                 description = resultSet.getString(FIELD_DESCRIPTION);
             }
         } catch (SQLException exception) {
-            System.out.println(exception);
+            LOGGER.info("Catch exception. When getDescription with exhibition:" + exhibition
+                + " and keyLang:" + keyLanguage);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -110,6 +116,8 @@ public class DescriptionMySql implements DescriptionTableDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertDescription with exhibition:" + exhibition
+                    + " and keyLang:" + keyLanguage + " and description:" + description);
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -133,6 +141,8 @@ public class DescriptionMySql implements DescriptionTableDao {
             }
 
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertDescriptionById with exhibitionId:" + exhibitionId
+                    + " and keyLang:" + keyLanguage + " and description:" + description);
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -146,6 +156,9 @@ public class DescriptionMySql implements DescriptionTableDao {
             statement.setInt(1, exhibition.getId());
             statement.execute();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteAllDescriptionForExposition with exhibition: "
+                    + exhibition);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -159,6 +172,9 @@ public class DescriptionMySql implements DescriptionTableDao {
             statement.setString(2, keyLanguage);
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteDescriptionForLang with exhibition: "
+                    + exhibition + " and keyLang: " + keyLanguage);
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -173,6 +189,7 @@ public class DescriptionMySql implements DescriptionTableDao {
                 langDescription.put(key, description);
             }
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 

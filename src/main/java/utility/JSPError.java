@@ -10,4 +10,6 @@ public class JSPError {
     public static final String ERROR_MAIL_MATCHES = "Oops, eMail not match";
     public static final String ERROR_MAIL_MISSING = "Oops, eMail missing";
     public static final String ERROR_PHONE = "Oops, some trouble with phone";
+    public static final String MESSAGE_ROLE_CHANGE_TROUBLE = "Role hasn't changed";
+
 }

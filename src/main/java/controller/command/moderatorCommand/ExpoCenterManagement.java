@@ -24,7 +24,8 @@ public class ExpoCenterManagement implements Command {
     private static final Logger LOGGER = Logger.getLogger(ExpoCenterManagement.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
         RequestDispatcher dispatcher;
         handleConnection();
@@ -59,6 +60,7 @@ public class ExpoCenterManagement implements Command {
             }
 
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -66,13 +68,16 @@ public class ExpoCenterManagement implements Command {
 
     private void setPhones(List<ExhibitionCenter> exhibitionCenterList) throws DBException {
         for (ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
-            exhibitionCenter.setPhone(factoryMySql.createExhibitionCenterPhone(connection).getPhones(exhibitionCenter.getId()));
+            exhibitionCenter.setPhone(factoryMySql
+                    .createExhibitionCenterPhone(connection)
+                    .getPhones(exhibitionCenter.getId()));
         }
     }
 
     private void deleteById(HttpServletRequest req) {
 
-        int idExhibitionCenterDeletion = Integer.parseInt(req.getParameter("idDelete"));
+        int idExhibitionCenterDeletion = Integer
+                .parseInt(req.getParameter("idDelete"));
         handleConnection();
         try {
 
@@ -81,9 +86,11 @@ public class ExpoCenterManagement implements Command {
                 factoryMySql.createExhibitionCenter(connection)
                         .deleteExhibitionCenterById(idExhibitionCenterDeletion);
             } else {
-                req.setAttribute("errorDeleting", "Have contract for this exhibition center. Can not Delete! ");
+                req.setAttribute("errorDeleting"
+                        , "Have contract for this exhibition center. Can't Delete! ");
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -95,13 +102,16 @@ public class ExpoCenterManagement implements Command {
         String looking = request.getParameter("searchField");
         handleConnection();
         try {
-            List<ExhibitionCenter> exhibitionCenterListResult = factoryMySql.createExhibitionCenter(connection).getExhibitionCentersBySearch(looking);
+            List<ExhibitionCenter> exhibitionCenterListResult
+                    = factoryMySql.createExhibitionCenter(connection)
+                    .getExhibitionCentersBySearch(looking);
             setPhones(exhibitionCenterListResult);
 
             if (exhibitionCenterListResult != null) {
                 request.setAttribute("listExpoCenter", exhibitionCenterListResult);
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -123,7 +133,7 @@ public class ExpoCenterManagement implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -132,7 +142,7 @@ public class ExpoCenterManagement implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

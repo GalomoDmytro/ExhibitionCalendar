@@ -61,6 +61,8 @@ public class ExhibitionMySql implements ExhibitionDao {
             ResultSet resultSet = statement.executeQuery();
             exhibitions = parseExhibitionSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionById(" + id + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -82,6 +84,8 @@ public class ExhibitionMySql implements ExhibitionDao {
             ResultSet resultSet = statement.executeQuery();
             exhibitions = parseExhibitionSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionBySearch(" + line + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -100,6 +104,8 @@ public class ExhibitionMySql implements ExhibitionDao {
             ResultSet resultSet = statement.executeQuery();
             exhibitions = parseExhibitionSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getExhibitionByTitle(" + title + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -131,6 +137,7 @@ public class ExhibitionMySql implements ExhibitionDao {
                 }
             }
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When insertExhibition(" + exhibition + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }
@@ -145,6 +152,8 @@ public class ExhibitionMySql implements ExhibitionDao {
             statement.setInt(3, exhibition.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When updateExhibition(" + exhibition + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -157,6 +166,7 @@ public class ExhibitionMySql implements ExhibitionDao {
             ResultSet resultSet = statement.executeQuery();
             exhibitions = parseExhibitionSet(resultSet);
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 
@@ -173,6 +183,8 @@ public class ExhibitionMySql implements ExhibitionDao {
             statement.setInt(1, exhibition.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When deleteExhibition(" + exhibition + ");");
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
@@ -201,6 +213,7 @@ public class ExhibitionMySql implements ExhibitionDao {
                 exhibitions.add(exhibition);
             }
         } catch (SQLException exception) {
+            LOGGER.error(exception);
             throw new DBException(exception);
         }
 

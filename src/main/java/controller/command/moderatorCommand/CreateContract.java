@@ -14,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -37,13 +38,15 @@ public class CreateContract implements Command {
     private String priceLine;
     private String workTimeLine;
     private String maxTicketDayLine;
+    private int idModerator;
 
-    private static final String INSRT_SUCCESSFUL = "Insert successful";
     private static final Logger LOGGER = Logger.getLogger(CreateContract.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher;
+        getIdModerator(req);
 
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_CREATE_CONTRACT_PAGE);
 
@@ -59,6 +62,11 @@ public class CreateContract implements Command {
         dispatcher.forward(req, resp);
     }
 
+    private void getIdModerator(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        idModerator = (Integer) session.getAttribute("userId");
+    }
+
     private void saveContract(HttpServletRequest req) {
         if (!contractDataIsValid()) {
             return;
@@ -66,11 +74,11 @@ public class CreateContract implements Command {
         handleConnection();
 
         try {
-            LOGGER.info("contract insert");
             Contract contract = prepareContract();
-            LOGGER.info("contract " + contract.toString());
             factoryMySql.createExhibitionContract(connection).insertContract(contract);
             req.setAttribute("insertInfo", "insert successful");
+            LOGGER.info("Id moderator: " + idModerator
+                    + " insert new contract: " + contract);
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
@@ -105,7 +113,8 @@ public class CreateContract implements Command {
         handleConnection();
         Exhibition exhibition;
         try {
-            exhibition = factoryMySql.createExhibition(connection).getExhibitionById(idExhibition);
+            exhibition = factoryMySql.createExhibition(connection)
+                    .getExhibitionById(idExhibition);
             if (exhibition != null) {
                 getLangTagsFroExhibition(exhibition);
 
@@ -114,7 +123,7 @@ public class CreateContract implements Command {
                 req.setAttribute("exhibitionLangTags", exhibition.getLanguageTags());
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -124,7 +133,8 @@ public class CreateContract implements Command {
         handleConnection();
         ExhibitionCenter exhibitionCenter;
         try {
-            exhibitionCenter = factoryMySql.createExhibitionCenter(connection).getExhibitionCenterById(idExhibitionCenter);
+            exhibitionCenter = factoryMySql.createExhibitionCenter(connection)
+                    .getExhibitionCenterById(idExhibitionCenter);
             if (exhibitionCenter != null) {
                 String phones = "";
                 phones = getPhonesExhibitionCenter(exhibitionCenter, phones);
@@ -137,13 +147,17 @@ public class CreateContract implements Command {
                 req.setAttribute("exhibitionCenterPhones", phones);
             }
         } catch (Exception exception) {
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
     }
 
-    private String getPhonesExhibitionCenter(ExhibitionCenter exhibitionCenter, String phones) throws DBException {
-        List<String> phonesExhibitionCenter = factoryMySql.createExhibitionCenterPhone(connection).getPhones(exhibitionCenter.getId());
+    private String getPhonesExhibitionCenter(ExhibitionCenter exhibitionCenter, String phones)
+            throws DBException {
+        List<String> phonesExhibitionCenter = factoryMySql
+                .createExhibitionCenterPhone(connection)
+                .getPhones(exhibitionCenter.getId());
         if (phonesExhibitionCenter != null) {
             for (String expoPhone : phonesExhibitionCenter) {
                 phones += expoPhone + "; \n";
@@ -153,7 +167,9 @@ public class CreateContract implements Command {
     }
 
     private void getLangTagsFroExhibition(Exhibition exhibition) throws DBException {
-        Map<String, String> expoLang = factoryMySql.createDescriptionTable(connection).getAllDescription(exhibition);
+        Map<String, String> expoLang = factoryMySql
+                .createDescriptionTable(connection)
+                .getAllDescription(exhibition);
         String langTags = "";
         for (Map.Entry<String, String> entry : expoLang.entrySet()) {
             langTags += entry.getKey() + " ";
@@ -193,7 +209,7 @@ public class CreateContract implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -202,7 +218,7 @@ public class CreateContract implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }

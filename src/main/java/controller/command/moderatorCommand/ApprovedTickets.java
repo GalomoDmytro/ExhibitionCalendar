@@ -11,6 +11,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
@@ -24,8 +25,10 @@ public class ApprovedTickets implements Command {
     private static final Logger LOGGER = Logger.getLogger(ApprovedTickets.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher(Links.APPROVED_TICKETS_PAGE);
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.APPROVED_TICKETS_PAGE);
 
         readData();
         setDataToReq(req);
@@ -33,7 +36,10 @@ public class ApprovedTickets implements Command {
         dispatcher.forward(req, resp);
     }
 
+
+
     private void setDataToReq(HttpServletRequest req) {
+
         req.setAttribute("listTickets", ticketList);
     }
 
@@ -41,10 +47,10 @@ public class ApprovedTickets implements Command {
         handleConnection();
 
         try {
-            ticketList = factoryMySql.createTicket(connection).getAllApprovedTickets();
-
+            ticketList = factoryMySql.createTicket(connection)
+                    .getAllApprovedTickets();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         } finally {
             closeConnection();
         }
@@ -56,7 +62,7 @@ public class ApprovedTickets implements Command {
                 connection.close();
             }
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 
@@ -65,7 +71,7 @@ public class ApprovedTickets implements Command {
             connection = ConnectionPoolMySql.getInstance().getConnection();
             factoryMySql = new FactoryMySql();
         } catch (Exception exception) {
-
+            LOGGER.error(exception);
         }
     }
 }
