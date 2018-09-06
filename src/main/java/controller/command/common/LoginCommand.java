@@ -21,15 +21,14 @@ public class LoginCommand implements Command {
 
     private Connection connection;
     private FactoryMySql factoryMySql;
-
     private String nameOrMail;
     private String password;
     private User user;
     private PasswordHandler passwordHandler;
     private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
 
-    private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
-
+    private static final ResourceBundle QUERIES = ResourceBundle
+            .getBundle("strings_error_eng");
     public LoginCommand() {}
 
     @Override
@@ -44,7 +43,8 @@ public class LoginCommand implements Command {
                 LOGGER.info("LOG IN: " + user);
                 dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
             } else {
-                req.setAttribute("errorLogin", QUERIES.getString("ERROR_LOGIN"));
+                req.setAttribute("errorLogin", QUERIES
+                        .getString("ERROR_LOGIN"));
             }
         }
 

@@ -32,6 +32,13 @@ public class RoleMySql implements RoleDao {
         this.connection = connection;
     }
 
+    /**
+     * Get role for specific user from role table
+     *
+     * @param id User
+     * @return Enum Role
+     * @throws DBException
+     */
     @Override
     public Role getRoleById(Integer id) throws DBException {
 
@@ -54,6 +61,13 @@ public class RoleMySql implements RoleDao {
         return role;
     }
 
+    /**
+     * Insert tole for user in to role table
+     *
+     * @param user entity
+     * @param role Enum
+     * @throws DBException
+     */
     @Override
     public void insertRole(User user, Role role) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.insert"))) {
@@ -68,6 +82,12 @@ public class RoleMySql implements RoleDao {
         }
     }
 
+    /**
+     * Delete role for user from role table
+     *
+     * @param user entity
+     * @throws DBException
+     */
     @Override
     public void delete(User user) throws DBException{
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.delete"))) {
@@ -80,6 +100,13 @@ public class RoleMySql implements RoleDao {
         }
     }
 
+    /**
+     * Change role for user in role table
+     *
+     * @param id   if User
+     * @param role Enum
+     * @throws DBException
+     */
     @Override
     public void updateRole(Integer id, Role role) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("role.updateById"))) {

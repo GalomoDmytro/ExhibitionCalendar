@@ -33,6 +33,13 @@ public class UserPhoneMySql implements UserPhoneDao {
         this.connection = connection;
     }
 
+    /**
+     * Get List of all Phones for chosen user from user_phone table
+     *
+     * @param eMail of User
+     * @return List of Strings phones or empty List
+     * @throws DBException
+     */
     @Override
     public List<String> getPhones(String eMail) throws DBException {
         List<String> phones;
@@ -57,6 +64,13 @@ public class UserPhoneMySql implements UserPhoneDao {
         return phones;
     }
 
+    /**
+     * Insert new phone to User in user_phone table
+     *
+     * @param mail  of User for identification User
+     * @param phone to insert
+     * @throws DBException
+     */
     @Override
     public void insertPhone(String mail, String phone) throws DBException {
         try (PreparedStatement statement = connection
@@ -72,6 +86,13 @@ public class UserPhoneMySql implements UserPhoneDao {
         }
     }
 
+    /**
+     * Delete User phone from user_phone table
+     *
+     * @param mail  of User
+     * @param phone to delete
+     * @throws DBException
+     */
     @Override
     public void deletePhone(String mail, String phone) throws DBException {
         try (PreparedStatement statement = connection

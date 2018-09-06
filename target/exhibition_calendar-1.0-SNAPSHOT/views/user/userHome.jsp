@@ -66,6 +66,17 @@
                         </c:forEach>
                      </td>
                   </tr>
+                  <tr>
+                     <td>
+                        <fmt:message key='common.purchasedTickets'/>
+                     </td>
+                     <td>
+                        <c:forEach var="ticket" items="${ticketList}">
+                           <c:out value = "${ticket}"/>
+                           <br/>
+                        </c:forEach>
+                     </td>
+                  </tr>
                </table>
                <br/>
                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">

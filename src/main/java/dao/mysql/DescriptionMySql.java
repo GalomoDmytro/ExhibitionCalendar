@@ -33,6 +33,13 @@ public class DescriptionMySql implements DescriptionTableDao {
         this.connection = connection;
     }
 
+    /**
+     * Get all descriptions from Description table
+     *
+     * @param exhibition will be used to find the description
+     * @return if there is no description return Collections.emptyMap();
+     * else key="Language" value="Description"
+     */
     @Override
     public Map<String, String> getAllDescription(Exhibition exhibition) throws DBException {
         Map<String, String> languageDescription;
@@ -54,6 +61,13 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
     }
 
+    /**
+     * Get all descriptions from Description table
+     *
+     * @param id exhibition
+     * @return if there is no description return Collections.emptyMap();
+     * else key="Language" value="Description"
+     */
     @Override
     public Map<String, String> getAllDescriptionById(Integer id) throws DBException {
         Map<String, String> languageDescription;
@@ -75,6 +89,13 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
     }
 
+    /**
+     * Get specific descriptions from Description table
+     *
+     * @param exhibition  entity
+     * @param keyLanguage key abbreviation for the language on which the description
+     * @return "" String or description for the key language
+     */
     @Override
     public String getDescription(Exhibition exhibition, String keyLanguage) throws DBException {
         String description = null;
@@ -100,6 +121,14 @@ public class DescriptionMySql implements DescriptionTableDao {
         return description;
     }
 
+    /**
+     * Insert in to Description table new Description for specific Language
+     *
+     * @param exhibition  entity
+     * @param keyLanguage key abbreviation for the language on which the description
+     * @param description of the exhibition
+     * @param keyLanguage key abbreviation for the language on which the description
+     */
     @Override
     public void insertDescription(String keyLanguage, String description, Exhibition exhibition)
             throws DBException {
@@ -123,8 +152,16 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
     }
 
+    /**
+     * Insert in to Description table new Description for specific Language
+     *
+     * @param id          exhibition
+     * @param keyLanguage key abbreviation for the language on which the description
+     * @param description of the exhibition
+     * @param keyLanguage key abbreviation for the language on which the description
+     */
     @Override
-    public void insertDescriptionById(String keyLanguage, String description, Integer exhibitionId)
+    public void insertDescriptionById(String keyLanguage, String description, Integer id)
             throws DBException {
         try (PreparedStatement statement = connection
                 .prepareStatement(QUERIES.getString("description.insert"),
@@ -133,7 +170,7 @@ public class DescriptionMySql implements DescriptionTableDao {
             LOGGER.info("description " + description);
             statement.setString(2, keyLanguage);
             statement.setString(1, description);
-            statement.setInt(3, exhibitionId);
+            statement.setInt(3, id);
 
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
@@ -141,13 +178,18 @@ public class DescriptionMySql implements DescriptionTableDao {
             }
 
         } catch (SQLException exception) {
-            LOGGER.info("Catch exception. When insertDescriptionById with exhibitionId:" + exhibitionId
+            LOGGER.info("Catch exception. When insertDescriptionById with exhibitionId:" + id
                     + " and keyLang:" + keyLanguage + " and description:" + description);
             LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
 
+    /**
+     * Delete all descriptions for specific Exhibition from Description table
+     *
+     * @param exhibition entity
+     */
     @Override
     public void deleteAllDescriptionForExposition(Exhibition exhibition)
             throws DBException {
@@ -163,6 +205,13 @@ public class DescriptionMySql implements DescriptionTableDao {
         }
     }
 
+    /**
+     * Delete specific descriptions for specific Exhibition from Description table
+     *
+     * @param exhibition  entity
+     * @param keyLanguage key abbreviation for the language on which the description
+     *                    will be deleted
+     */
     @Override
     public void deleteDescriptionForLang(Exhibition exhibition, String keyLanguage)
             throws DBException {
@@ -178,6 +227,7 @@ public class DescriptionMySql implements DescriptionTableDao {
             throw new DBException(exception);
         }
     }
+
 
     private Map<String, String> parseResultSet(ResultSet resultSet) throws DBException {
         Map<String, String> langDescription = new HashMap<>();

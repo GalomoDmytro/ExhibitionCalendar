@@ -119,10 +119,10 @@ public interface TicketDao {
     /**
      * Delete Ticket from ticket table
      *
-     * @param ticket
+     * @param ticketId
      * @throws DBException
      */
-    void deleteTicket(Integer ticket) throws DBException;
+    void deleteTicket(Integer ticketId) throws DBException;
 
     /**
      * Get quantity of sold tickets for specific date and for

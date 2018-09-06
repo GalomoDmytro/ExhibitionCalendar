@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * Accepts input and converts it to commands for the model
  */
@@ -28,7 +29,7 @@ public class ControllerHelper {
     Command getCommand(HttpServletRequest req, HttpServletResponse resp) {
         String commandName = req.getParameter("command");
 
-        if (commandName != null) {
+        if (commandMap.get(commandName) != null) {
             return commandMap.get(commandName);
         }
 
@@ -48,7 +49,7 @@ public class ControllerHelper {
         commandMap.put("addExposition", new AddExpo());
         commandMap.put("expoManagement", new ExhibitionManagement());
         commandMap.put("editExposition", new EditExposition());
-        commandMap.put("combineExpoWithCenter", new combineExhibitionWithExhibitionCenter());
+        commandMap.put("combineExpoWithCenter", new CombineExWithExCenter());
         commandMap.put("createContract", new CreateContract());
         commandMap.put("contractManagement", new ContractManagement());
         commandMap.put("editContract", new EditContract());

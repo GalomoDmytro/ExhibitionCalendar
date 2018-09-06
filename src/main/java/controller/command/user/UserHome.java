@@ -4,7 +4,7 @@ import controller.command.Command;
 import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
-import entities.User;
+import entities.*;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserHome implements Command {
@@ -22,23 +23,62 @@ public class UserHome implements Command {
     private Integer idUser;
     private User user;
     private List<String> phonesList;
+    private List<String> ticketList = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(UserHome.class);
 
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.USER_INFO_PAGE);
 
         getDataFromSession(req);
         getUserFromDB();
+        getTicketDataForUser();
         setDataToReq(req);
 
         dispatcher.forward(req, resp);
     }
 
+    private void getTicketDataForUser() {
+        handleConnection();
+        try {
+            List<Ticket> tickets = factoryMySql.createTicket(connection)
+                    .getAllTicketsForUser(user);
+            for (Ticket ticket : tickets) {
+                Contract contract = new Contract();
+                Exhibition exhibition = new Exhibition();
+                ExhibitionCenter exhibitionCenter = new ExhibitionCenter();
+                factoryMySql.createExhibitionContract(connection)
+                        .prepareCEC(contract, exhibition, exhibitionCenter,
+                                ticket.getContractId());
+
+                ticketList.add(createTicketToShowUser(ticket, exhibition, exhibitionCenter));
+            }
+        } catch (Exception exception) {
+            LOGGER.error(exception);
+        } finally {
+            closeConnection();
+        }
+    }
+
+    private String createTicketToShowUser(Ticket ticket, Exhibition exhibition,
+                                          ExhibitionCenter exhibitionCenter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Title: ").append(exhibition.getTitle()).append("; ");
+        stringBuilder.append("ExpoCenter: ")
+                .append(exhibitionCenter.getTitle()).append("; ");
+        stringBuilder.append("Addr: ")
+                .append(exhibitionCenter.getAddress()).append("; ");
+        stringBuilder.append("Date to apply: ")
+                .append(ticket.getDateToApply()).append("; ");
+        return stringBuilder.toString();
+    }
+
     private void setDataToReq(HttpServletRequest request) {
         request.setAttribute("user", user);
         request.setAttribute("phonesList", phonesList);
+        request.setAttribute("ticketList", ticketList);
     }
 
     private void getDataFromSession(HttpServletRequest request) {
@@ -50,7 +90,8 @@ public class UserHome implements Command {
         handleConnection();
         try {
             user = factoryMySql.createUser(connection).getById(idUser);
-            phonesList = factoryMySql.createUserPhones(connection).getPhones(user.getMail());
+            phonesList = factoryMySql.createUserPhones(connection)
+                    .getPhones(user.getMail());
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {

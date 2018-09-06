@@ -34,6 +34,13 @@ public class UserMySql implements UserDao {
         this.connection = connection;
     }
 
+    /**
+     * Get User from user table
+     *
+     * @param id of looking User, search parameter
+     * @return User or User().empty();
+     * @throws DBException
+     */
     @Override
     public User getById(Integer id) throws DBException {
         List<User> user = null;
@@ -55,6 +62,13 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Get User from user table
+     *
+     * @param name of looking User, search parameter
+     * @return User or User().empty()
+     * @throws DBException
+     */
     @Override
     public User getByName(String name) throws DBException {
         List<User> user = null;
@@ -76,6 +90,13 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Get User from user table
+     *
+     * @param eMail of looking User, search parameter
+     * @return User or User().empty()
+     * @throws DBException
+     */
     @Override
     public User getByMail(String eMail) throws DBException {
         List<User> user;
@@ -99,6 +120,12 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Get all Users from user table
+     *
+     * @return List of Usert or empty List
+     * @throws DBException
+     */
     @Override
     public List<User> getAllUsers() throws DBException {
         List<User> user;
@@ -118,6 +145,12 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Update user table
+     *
+     * @param user
+     * @throws DBException
+     */
     @Override
     public void updateUser(User user) throws DBException {
         try (PreparedStatement statement = connection
@@ -131,6 +164,12 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Insert User in user table
+     *
+     * @param user
+     * @throws DBException
+     */
     @Override
     public void insertUser(User user) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement
@@ -157,6 +196,12 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Delete User from user table
+     *
+     * @param mail of User
+     * @throws DBException
+     */
     @Override
     public void deleteUser(String mail) throws DBException {
         try (PreparedStatement statement = connection
@@ -170,6 +215,13 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Check if chosen name already in user table
+     *
+     * @param name to search in table
+     * @return true if name exist in table, else return false
+     * @throws DBException
+     */
     @Override
     public boolean isNameInTable(String name) throws DBException {
         try (PreparedStatement statement = connection
@@ -189,6 +241,13 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Check if chosen mail already exist in user table
+     *
+     * @param eMail to search in user table
+     * @return true if mail exist in table, else return false
+     * @throws DBException
+     */
     @Override
     public boolean isMailInTable(String eMail) throws DBException {
         try (PreparedStatement statement = connection
@@ -208,6 +267,14 @@ public class UserMySql implements UserDao {
         }
     }
 
+    /**
+     * Check if name or mail already exist in user table
+     *
+     * @param nameOrMail contain string with mail or name for looking
+     *                   matches on user table
+     * @return true if name or mail already in user table
+     * @throws DBException
+     */
     @Override
     public boolean isNameOrMailInTable(String nameOrMail) throws DBException {
         try (PreparedStatement statement = connection

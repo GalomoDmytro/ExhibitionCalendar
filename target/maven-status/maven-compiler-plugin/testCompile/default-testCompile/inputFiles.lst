@@ -5,6 +5,7 @@ D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\ExhibitionMySqlTest.
 D:\epam_project\Exhibition Calendar\src\test\java\controller\command\HomeTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\UserMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\controller\command\common\LoginCommandTest.java
+D:\epam_project\Exhibition Calendar\src\test\java\controller\ControllerHelperTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\RoleMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\ExhibitionCenterMySqlTest.java
 D:\epam_project\Exhibition Calendar\src\test\java\dao\mysql\PhoneExhibitionCenterMySqlTest.java

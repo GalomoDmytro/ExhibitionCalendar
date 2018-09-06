@@ -30,6 +30,15 @@ public class ExhibitionMySql implements ExhibitionDao {
         this.connection = connection;
     }
 
+    /**
+     * Enables client sessions to acquire exhibition_center table locks
+     * explicitly for the purpose of cooperating with other sessions
+     * for access to tables, or to prevent other
+     * sessions from modifying exhibition_center tables during periods when
+     * a session requires exclusive access to them
+     *
+     * @throws DBException
+     */
     @Override
     public void setLockExhibitionTable() throws DBException {
         try (PreparedStatement statement = connection
@@ -41,6 +50,11 @@ public class ExhibitionMySql implements ExhibitionDao {
         }
     }
 
+    /**
+     * Releases any table locks held by the current session
+     *
+     * @throws DBException
+     */
     @Override
     public void unlockTable() throws DBException {
         try (PreparedStatement statement = connection.prepareStatement("UNLOCK TABLES")) {
@@ -52,6 +66,14 @@ public class ExhibitionMySql implements ExhibitionDao {
         }
     }
 
+    /**
+     * Get Exhibition entity from exhibition table
+     *
+     * @param id of Exhibition
+     * @return Exhibition entity or
+     * will return Exhibition().emptyExhibition() if have not matches
+     * @throws DBException
+     */
     @Override
     public Exhibition getExhibitionById(Integer id) throws DBException {
         List<Exhibition> exhibitions;
@@ -73,6 +95,15 @@ public class ExhibitionMySql implements ExhibitionDao {
         return new Exhibition().emptyExhibition();
     }
 
+    /**
+     * Get List of Exhibition entities from exhibition table after search
+     * for matches title or id
+     *
+     * @param line will look for matches title or id column from exhibition table
+     * @return List of Exhibition entities or
+     * empty List
+     * @throws DBException
+     */
     @Override
     public List<Exhibition> getExhibitionBySearch(String line) throws DBException {
         List<Exhibition> exhibitions;
@@ -95,6 +126,14 @@ public class ExhibitionMySql implements ExhibitionDao {
         return Collections.emptyList();
     }
 
+    /**
+     * Get Exhibition entity from exhibition table
+     *
+     * @param title of Exhibition
+     * @return Exhibition entity or
+     * will return Exhibition().emptyExhibition() if have not matches
+     * @throws DBException
+     */
     @Override
     public Exhibition getExhibitionByTitle(String title) throws DBException {
         List<Exhibition> exhibitions;
@@ -115,6 +154,12 @@ public class ExhibitionMySql implements ExhibitionDao {
         return new Exhibition().emptyExhibition();
     }
 
+    /**
+     * Insert Exhibition entity to exhibition table
+     *
+     * @param exhibition entity
+     * @throws DBException
+     */
     @Override
     public void insertExhibition(Exhibition exhibition) throws DBException {
         try (PreparedStatement statement = connection
@@ -143,6 +188,12 @@ public class ExhibitionMySql implements ExhibitionDao {
         }
     }
 
+    /**
+     * Update exhibition table with new data
+     *
+     * @param exhibition entity
+     * @throws DBException
+     */
     @Override
     public void updateExhibition(Exhibition exhibition) throws DBException {
         try (PreparedStatement statement = connection
@@ -158,6 +209,12 @@ public class ExhibitionMySql implements ExhibitionDao {
         }
     }
 
+    /**
+     * Get List of all Exhibitions entities from exhibition table
+     *
+     * @return List of Exhibition or empty List
+     * @throws DBException
+     */
     @Override
     public List<Exhibition> getAllExhibition() throws DBException {
         List<Exhibition> exhibitions;
@@ -176,6 +233,12 @@ public class ExhibitionMySql implements ExhibitionDao {
         return Collections.emptyList();
     }
 
+    /**
+     * Delete exhibition from exhibition table
+     *
+     * @param exhibition entity
+     * @throws DBException
+     */
     @Override
     public void deleteExhibition(Exhibition exhibition) throws DBException {
         try (PreparedStatement statement = connection
@@ -189,6 +252,12 @@ public class ExhibitionMySql implements ExhibitionDao {
         }
     }
 
+    /**
+     * Delete exhibition from exhibition table
+     *
+     * @param id of exhibition
+     * @throws DBException
+     */
     @Override
     public void deleteById(Integer id) throws DBException {
         try (PreparedStatement statement = connection

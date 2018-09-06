@@ -5,6 +5,7 @@ import dao.Connection.ConnectionPoolMySql;
 import dao.mysql.FactoryMySql;
 import entities.Contract;
 import exceptions.DBException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import utility.PriceTicket;
 
@@ -45,20 +46,25 @@ public class Home implements Command {
 
         choseWhatToShow(req);
 
-        saveAtrToReq(req);
+        saveDataToReq(req);
 
         dispatcher.forward(req, resp);
     }
 
     private void findCurrentPagePagination(HttpServletRequest req) {
-        if (req.getParameter("currentPage") == null) {
+        if (req.getParameter("currentPage") == null ) {
             currentPage = 1;
         } else {
-            currentPage = Integer.valueOf(req.getParameter("currentPage"));
+            String curPageLine = req.getParameter("currentPage");
+            if(StringUtils.isNumeric(curPageLine)) {
+                currentPage = Integer.valueOf(req.getParameter("currentPage"));
+            } else {
+                currentPage = 1;
+            }
         }
     }
 
-    private void saveAtrToReq(HttpServletRequest req) {
+    private void saveDataToReq(HttpServletRequest req) {
         req.setAttribute("searchDate", req.getParameter("searchDate"));
         req.setAttribute("searchDateLine", date);
         req.setAttribute("searchField", req.getParameter("searchField"));
@@ -74,7 +80,6 @@ public class Home implements Command {
             showAll(req);
         }
     }
-
 
     private void specificSearch(HttpServletRequest req) {
 

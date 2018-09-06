@@ -17,7 +17,6 @@
          <div class="content">
             <section class="main">
                <h1>Add Exhibition</h1>
-               <h2>${role}</h2>
                <br>
                ${confirmAdd}
                <br>

@@ -37,6 +37,15 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         this.connection = connection;
     }
 
+    /**
+     * Enables client sessions to acquire exhibition_contract table locks
+     * explicitly for the purpose of cooperating with other sessions
+     * for access to tables, or to prevent other
+     * sessions from modifying exhibition_contract tables during periods when
+     * a session requires exclusive access to them
+     *
+     * @throws DBException
+     */
     @Override
     public void setLockContractTable() throws DBException {
         try (PreparedStatement statement = connection
@@ -48,6 +57,11 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Releases any table locks held by the current session
+     *
+     * @throws DBException
+     */
     @Override
     public void unlockTable() throws DBException {
         try (PreparedStatement statement = connection.prepareStatement("UNLOCK TABLES")) {
@@ -59,6 +73,15 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get ExhibitionContract entity from exhibition_contract table
+     *
+     * @param id of ExhibitionContract
+     * @return ExhibitionContract entity
+     * or will return ExhibitionContract().emptyContract) if have not matches
+     * with looking exhibition_contract id
+     * @throws DBException
+     */
     @Override
     public Contract getExhibitionContractById(Integer id) throws DBException {
         List<Contract> contracts;
@@ -80,6 +103,16 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get List of all Contracts entities from exhibition_contract table, witch
+     * depend to specific exhibition and exhibition center
+     *
+     * @param exhibitionCenter entity
+     * @param exhibition       entity
+     * @return List of Contract entities witch bind to exhibitionCenter and exhibition
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
     public List<Contract> getAllContractsByExCenterWithExhibition(ExhibitionCenter exhibitionCenter,
                                                                   Exhibition exhibition)
@@ -105,8 +138,19 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Set value to Contract, Exhibition, ExhibitionCenter params witch
+     * related to specific Contact
+     *
+     * @param contract         entity
+     * @param exhibition       entity
+     * @param exhibitionCenter entity
+     * @param idContract       id looking Exhibition Contract
+     * @throws DBException
+     */
     @Override
-    public void prepareCEC(Contract contract, Exhibition exhibition, ExhibitionCenter exhibitionCenter,
+    public void prepareCEC(Contract contract, Exhibition exhibition,
+                           ExhibitionCenter exhibitionCenter,
                            Integer idContract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(
                 QUERIES.getString("contract.getContractCenterExhibition"))) {
@@ -122,6 +166,15 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get List of all Contracts entities from exhibition_contract
+     * witch bind to specific Exhibition Center
+     *
+     * @param idExCenter id Exhibition Center
+     * @return List of Contract entities witch bind to Exhibition Center
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
     public List<Contract> getAllContractsForCenter(Integer idExCenter) throws DBException {
         List<Contract> contracts;
@@ -144,6 +197,15 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get List of all Contracts entities from exhibition_contract
+     * witch bind to specific Exhibition
+     *
+     * @param idExhibition id Exhibition
+     * @return List of Contract entities witch bind to Exhibition
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
     public List<Contract> getAllContractsForExhibition(Integer idExhibition) throws DBException {
         List<Contract> contracts;
@@ -166,6 +228,13 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get all contacts from exhibition_contract table, witch data similar to search request
+     *
+     * @return List of Contract entities
+     * or return Collections.emptyList() if table is empty
+     * @throws DBException
+     */
     @Override
     public List<Contract> getAllContracts() throws DBException {
         List<Contract> contracts;
@@ -186,6 +255,15 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get List of all Contracts from exhibition_contract
+     * witch 'date start' or 'date end' in looking range
+     *
+     * @param date sql.Date - will search for a contract includes this date
+     * @return List of Contract entities with Exhibition and ExhibitionContract title
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
     public List<Contract> getAllContractAfterDateWithExpoCenterAndExhibition(java.sql.Date date)
             throws DBException {
@@ -197,7 +275,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
-            LOGGER.info("Catch exception. When getAllContractAfterDateWithExpoCenterAndExhibition(" +
+            LOGGER.info("Catch exception." +
+                    " When getAllContractAfterDateWithExpoCenterAndExhibition(" +
                     date + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
@@ -210,6 +289,19 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get List of all Contracts from exhibition_contract
+     * witch 'date start' or 'date end' in looking range
+     * and 'line search' matches to date or address in related
+     * exhibition_center or exhibition tables
+     *
+     * @param date   sql.Date - will search for a contract includes this date
+     * @param search line - will search for a exhibition title or exhibition center title
+     *               or address matches to this 'search' line
+     * @return List of Contract entities with Exhibition and ExhibitionContract title
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
     public List<Contract> searchAfterDateWithExpoCenterAndExhibition(String search, Date date)
             throws DBException {
@@ -238,14 +330,32 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get List of all Contracts from exhibition_contract
+     * witch 'date start' or 'date end' in looking range
+     * and 'line search' matches to date or address in related
+     * exhibition_center or exhibition tables
+     * with using limit table on result
+     *
+     * @param date       sql.Date - will search for a contract includes this date
+     * @param search     line - will search for a exhibition title or exhibition center title
+     *                   or address matches to this 'search' line
+     * @param startLimit specifies the offset of the first row to return
+     * @param endLimit   specifies the maximum number of rows to return
+     * @return List of Contract entities with Exhibition and ExhibitionContract title
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
-    public List<Contract> searchContactsWithExpoAndCenterLimit(String search, Date date, int startLimit,
+    public List<Contract> searchContactsWithExpoAndCenterLimit(String search,
+                                                               Date date, int startLimit,
                                                                int endLimit) throws DBException {
         List<Contract> contracts;
         search = "%" + search + "%";
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.searchAfterDateWithExpoCenterAndExhibitionLimit"))) {
-            prepareStatementForSearchWithExpoCenterAndExhibition(search, date, startLimit, endLimit, statement);
+            prepareStatementForSearchWithExpoCenterAndExhibition(search, date, startLimit,
+                    endLimit, statement);
             ResultSet resultSet = statement.executeQuery();
             contracts = parseContractSetWithExpo(resultSet);
         } catch (SQLException exception) {
@@ -263,7 +373,8 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
     }
 
     public void prepareStatementForSearchWithExpoCenterAndExhibition
-            (String search, Date date, int startLimit, int endLimit, PreparedStatement statement)
+            (String search, Date date, int startLimit, int endLimit,
+             PreparedStatement statement)
             throws SQLException {
         statement.setDate(1, date, java.util.Calendar.getInstance());
         statement.setString(2, search);
@@ -273,6 +384,15 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         statement.setInt(6, endLimit);
     }
 
+    /**
+     * Get List of all Contracts from exhibition_contract table,
+     * witch 'date start' or 'date end' in looking range
+     *
+     * @param date sql.Date - will search for all contracts includes this date
+     * @return List of Contract entities
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
     public List<Contract> getAllAfterDate(Date date) throws DBException {
         List<Contract> contracts;
@@ -296,6 +416,15 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get all contacts from exhibition_contract table,
+     * witch data similar to search request
+     *
+     * @param search - will look data similar to this line
+     * @return List of Contract entities
+     * or return Collections.emptyList() if found nothing
+     * @throws DBException
+     */
     @Override
     public List<Contract> getAllContractsBySearch(String search) throws DBException {
         search = "%" + search + "%";
@@ -331,6 +460,12 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         statement.setString(8, search);
     }
 
+    /**
+     * Update exhibition_contract table
+     *
+     * @param contract entity to update
+     * @throws DBException
+     */
     @Override
     public void updateContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
@@ -345,6 +480,12 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Insert in exhibition_contract table new contract entity
+     *
+     * @param contract entity to insert
+     * @throws DBException
+     */
     @Override
     public void insertContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement
@@ -372,6 +513,12 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Delete contract from exhibition_contract table
+     *
+     * @param contract entity to delete from table
+     * @throws DBException
+     */
     @Override
     public void deleteContract(Contract contract) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
@@ -386,6 +533,12 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Delete contract from exhibition_contract table
+     *
+     * @param id contract to delete
+     * @throws DBException
+     */
     @Override
     public void deleteContractById(Integer id) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
@@ -400,9 +553,17 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get quantity of contracts witch include specific date
+     * from exhibition_contract table
+     *
+     * @param date sql.Date - will search contracts witch includes this date
+     * @return int quantity of contracts for this date
+     * @throws DBException
+     */
     @Override
     public int getNumberOfContractsAfterDate(Date date) throws DBException {
-        int count = 0;
+        int count;
         try (PreparedStatement statement = connection.prepareStatement(QUERIES
                 .getString("contract.getAllAfterDateWithExpoCenterAndExhibitionCount"))) {
             statement.setDate(1, date, java.util.Calendar.getInstance());
@@ -420,6 +581,17 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         return count;
     }
 
+    /**
+     * Get List of Contract entities witch include specific date
+     * with limited result
+     * from exhibition_contract table
+     *
+     * @param date       sql.Date - will search contracts witch includes this date
+     * @param startLimit specifies the offset of the first row to return
+     * @param endLimit   specifies the maximum number of rows to return
+     * @return List of Contract entities or emptyList
+     * @throws DBException
+     */
     @Override
     public List<Contract> getContractsAfterDateLimit(Date date, int startLimit,
                                                      int endLimit) throws DBException {
@@ -446,6 +618,16 @@ public class ExhibitionContractMySql implements ExhibitionContractDao {
         }
     }
 
+    /**
+     * Get quantity of contracts witch include specific date
+     * and include field matches to looking string
+     * from exhibition_contract table
+     *
+     * @param date   sql.Date - will search contracts witch includes this date
+     * @param search search contracts witch includes field whit matches this line
+     * @return quantity of contracts for this date
+     * @throws DBException
+     */
     @Override
     public int getNumberOfContractsAfterSearch(String search, Date date) throws DBException {
         int count = 0;

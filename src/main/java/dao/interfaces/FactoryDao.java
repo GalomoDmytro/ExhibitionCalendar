@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 public interface FactoryDao {
 
     UserDao createUser(Connection connection);
+    UserDao createUser(Connection connection, ResourceBundle queries);
 
     ExhibitionDao createExhibition(Connection connection, ResourceBundle queries);
 

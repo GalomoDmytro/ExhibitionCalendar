@@ -56,6 +56,15 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Get ExhibitionCenter entity from exhibition_center table
+     *
+     * @param id of ExhibitionCenter
+     * @return ExhibitionCenter entity
+     * will return ExhibitionCenter().emptyCenter() if have not matches
+     * with looking exhibition_center id
+     * @throws DBException
+     */
     @Override
     public ExhibitionCenter getExhibitionCenterById(Integer id) throws DBException {
         List<ExhibitionCenter> exhibitionCenters;
@@ -78,6 +87,15 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Get ExhibitionCenter entity from exhibition_center table
+     *
+     * @param title of ExhibitionCenter
+     * @return ExhibitionCenter entity
+     * will return ExhibitionCenter().emptyCenter() if have not matches
+     * with looking exhibition_center title
+     * @throws DBException
+     */
     @Override
     public ExhibitionCenter getExhibitionCenterByTitle(String title) throws DBException {
         List<ExhibitionCenter> exhibitionCenters;
@@ -99,6 +117,14 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Get List of all ExhibitionCenter entities from exhibition_center
+     * with using 'select from table
+     *
+     * @param search line will be looking matches with title, address, email, web page or id
+     * @return List of ExhibitionCenter entities or Collections.emptyList()
+     * @throws DBException
+     */
     @Override
     public List<ExhibitionCenter> getExhibitionCentersBySearch(String search) throws DBException {
         List<ExhibitionCenter> exhibitionCenters ;
@@ -129,6 +155,15 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         statement.setString(5, search);
     }
 
+    /**
+     * Get ExhibitionCenter entity from exhibition_center table
+     *
+     * @param eMail of ExhibitionCenter
+     * @return ExhibitionCenter entity
+     * will return ExhibitionCenter().emptyCenter() if have not matches
+     * with looking exhibition_center eMail
+     * @throws DBException
+     */
     @Override
     public ExhibitionCenter getExhibitionCenterByMail(String eMail) throws DBException {
         List<ExhibitionCenter> exhibitionCenters;
@@ -150,6 +185,12 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Get List of all ExhibitionCenter entities from exhibition_center
+     *
+     * @return List of ExhibitionCenter entities or Collections.emptyList()
+     * @throws DBException
+     */
     @Override
     public List<ExhibitionCenter> getAllExhibitionCenter() throws DBException {
         List<ExhibitionCenter> exhibitionCenters;
@@ -170,9 +211,17 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Delete chosen exhibition center from exhibition_center table
+     * with dependent phone from exhibition_center_phone
+     *
+     * @param exhibitionCenter entity
+     * @throws DBException
+     */
     @Override
     public void deleteExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibitionCenter.delete"))) {
             statement.setInt(1, exhibitionCenter.getId());
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -182,6 +231,12 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Insert in to exhibition_center table new exhibitionCenter entity
+     *
+     * @param exhibitionCenter entity
+     * @throws DBException
+     */
     @Override
     public void insertExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement
@@ -209,6 +264,12 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Update data in exhibition_center table
+     *
+     * @param exhibitionCenter entity
+     * @throws DBException
+     */
     @Override
     public void updateExhibitionCenter(ExhibitionCenter exhibitionCenter) throws DBException {
         try (PreparedStatement statement = connection
@@ -222,6 +283,13 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Check if title in exhibition_center table
+     *
+     * @param title line will comparing for matches with title from exhibition_center table
+     * @return true if title already exist in table
+     * @throws DBException
+     */
     @Override
     public boolean isTitleInTable(String title) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.getByTitle"))) {
@@ -240,9 +308,17 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
+    /**
+     * Delete chosen exhibition center from exhibition_center table
+     * with dependent phone from exhibition_center_phone
+     *
+     * @param id exhibitionCenter
+     * @throws DBException
+     */
     @Override
     public void deleteExhibitionCenterById(Integer id) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("exhibitionCenter.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("exhibitionCenter.delete"))) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -252,7 +328,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
-    private List<ExhibitionCenter> parseExhibitionCenterSet(ResultSet resultSet) throws DBException {
+    private List<ExhibitionCenter> parseExhibitionCenterSet(ResultSet resultSet)
+            throws DBException {
         List<ExhibitionCenter> exhibitionCenters = new ArrayList<>();
 
         try {
@@ -276,7 +353,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         return exhibitionCenters;
     }
 
-    private void prepareStatementToInsert(PreparedStatement statement, ExhibitionCenter exhibitionCenter) throws DBException {
+    private void prepareStatementToInsert(PreparedStatement statement,
+                                          ExhibitionCenter exhibitionCenter) throws DBException {
         try {
             statement.setString(1, exhibitionCenter.getTitle());
             statement.setString(2, exhibitionCenter.getAddress());
@@ -288,7 +366,8 @@ public class ExhibitionCenterMySql implements ExhibitionCenterDao {
         }
     }
 
-    private void prepareStatementToUpdate(PreparedStatement statement, ExhibitionCenter exhibitionCenter) throws DBException {
+    private void prepareStatementToUpdate(PreparedStatement statement,
+                                          ExhibitionCenter exhibitionCenter) throws DBException {
         try {
             statement.setString(1, exhibitionCenter.getTitle());
             statement.setString(2, exhibitionCenter.getAddress());

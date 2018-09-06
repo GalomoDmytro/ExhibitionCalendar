@@ -36,6 +36,15 @@ public class TicketMySql implements TicketDao {
         this.connection = connection;
     }
 
+    /**
+     * Enables client sessions to acquire exhibition_center table locks
+     * explicitly for the purpose of cooperating with other sessions
+     * for access to tables, or to prevent other
+     * sessions from modifying exhibition_center tables during periods when
+     * a session requires exclusive access to them
+     *
+     * @throws DBException
+     */
     @Override
     public void setLockTicketTable() throws DBException {
         try (PreparedStatement statement = connection
@@ -47,6 +56,11 @@ public class TicketMySql implements TicketDao {
         }
     }
 
+    /**
+     * Releases any table locks held by the current session
+     *
+     * @throws DBException
+     */
     @Override
     public void unlockTable() throws DBException {
         try (PreparedStatement statement = connection
@@ -59,6 +73,13 @@ public class TicketMySql implements TicketDao {
         }
     }
 
+    /**
+     * Get Ticket from ticket table
+     *
+     * @param id looking ticket
+     * @return Ticket entity
+     * @throws DBException
+     */
     @Override
     public Ticket getTicketById(Integer id)
             throws DBException {
@@ -81,6 +102,12 @@ public class TicketMySql implements TicketDao {
         }
     }
 
+    /**
+     * Get all tickets from ticket table
+     *
+     * @return List of Tickets or empty List
+     * @throws DBException
+     */
     @Override
     public List<Ticket> getAllTickets()
             throws DBException {
@@ -101,12 +128,18 @@ public class TicketMySql implements TicketDao {
         return tickets;
     }
 
+    /**
+     * Get all checked(approved) tickets from ticket table
+     *
+     * @return List of checked Tickets or empty List
+     * @throws DBException
+     */
     @Override
     public List<Ticket> getAllApprovedTickets()
             throws DBException {
         List<Ticket> tickets;
-        try (PreparedStatement statement
-                     = connection.prepareStatement(QUERIES.getString("ticket.getAllApproved"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.getAllApproved"))) {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
@@ -121,12 +154,18 @@ public class TicketMySql implements TicketDao {
         return tickets;
     }
 
+    /**
+     * Get all not checked(not approved) tickets from ticket table
+     *
+     * @return List of not checked Tickets or empty List
+     * @throws DBException
+     */
     @Override
     public List<Ticket> getAllWaitApproval()
             throws DBException {
         List<Ticket> tickets;
-        try (PreparedStatement statement
-                     = connection.prepareStatement(QUERIES.getString("ticket.getAllWaitApproval"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("ticket.getAllWaitApproval"))) {
             ResultSet resultSet = statement.executeQuery();
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
@@ -141,6 +180,15 @@ public class TicketMySql implements TicketDao {
         return tickets;
     }
 
+    /**
+     * Get quantity of sold tickets for specific date and for
+     * specific Contract from ticket table
+     *
+     * @param date
+     * @param idContract
+     * @return
+     * @throws DBException
+     */
     @Override
     public int getCountSoldTicketForDate(Date date, Integer idContract)
             throws DBException {
@@ -164,7 +212,13 @@ public class TicketMySql implements TicketDao {
         return countTickets;
     }
 
-
+    /**
+     * Get List of Tickets for specific Contract from ticket table
+     *
+     * @param contractId
+     * @return List Contracts or empty List
+     * @throws DBException
+     */
     @Override
     public List<Ticket> getAllTicketsForContract(Integer contractId) throws DBException {
         List<Ticket> tickets;
@@ -184,6 +238,13 @@ public class TicketMySql implements TicketDao {
         return tickets;
     }
 
+    /**
+     * Get List of Tickets for specific User from ticket table
+     *
+     * @param user
+     * @return List Contracts or empty List
+     * @throws DBException
+     */
     @Override
     public List<Ticket> getAllTicketsForUser(User user) throws DBException {
         List<Ticket> tickets;
@@ -204,8 +265,17 @@ public class TicketMySql implements TicketDao {
         return tickets;
     }
 
+    /**
+     * Get List of Tickets for specific User to Specific Exhibition from ticket table
+     *
+     * @param user     entity
+     * @param contract
+     * @return List Contracts or empty List
+     * @throws DBException
+     */
     @Override
-    public List<Ticket> getTicketForUserOnContract(User user, Contract contract) throws DBException {
+    public List<Ticket> getTicketForUserOnContract(User user, Contract contract)
+            throws DBException {
         List<Ticket> tickets;
         try (PreparedStatement statement = connection
                 .prepareStatement(QUERIES.getString("ticket.getTicketForUserOnContract"))) {
@@ -227,6 +297,12 @@ public class TicketMySql implements TicketDao {
         return tickets;
     }
 
+    /**
+     * Insert Ticket in to ticket table
+     *
+     * @param ticket
+     * @throws DBException
+     */
     @Override
     public void insertTicket(Ticket ticket) throws DBException {
         try (PreparedStatement statement = connection.prepareStatement
@@ -253,6 +329,12 @@ public class TicketMySql implements TicketDao {
         }
     }
 
+    /**
+     * Update data in ticket table
+     *
+     * @param ticket
+     * @throws DBException
+     */
     @Override
     public void updateTicket(Ticket ticket) throws DBException {
         try (PreparedStatement statement = connection
@@ -266,6 +348,12 @@ public class TicketMySql implements TicketDao {
         }
     }
 
+    /**
+     * Set true for is_confirmed column (set approved)
+     *
+     * @param idTicket
+     * @throws DBException
+     */
     @Override
     public void approveTicket(Integer idTicket) throws DBException {
         try (PreparedStatement statement = connection
@@ -279,6 +367,12 @@ public class TicketMySql implements TicketDao {
         }
     }
 
+    /**
+     * Delete Ticket from ticket table
+     *
+     * @param ticketId
+     * @throws DBException
+     */
     @Override
     public void deleteTicket(Integer ticketId) throws DBException {
         try (PreparedStatement statement = connection

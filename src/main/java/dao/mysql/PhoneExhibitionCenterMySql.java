@@ -32,11 +32,19 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
         this.connection = connection;
     }
 
+    /**
+     * Get List of phones from exhibition_center_phone table
+     *
+     * @param id of Exhibition Center
+     * @return List of Strings or empty List
+     * @throws DBException
+     */
     @Override
     public List<String> getPhones(Integer id) throws DBException {
         List<String> phones;
 
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("centerPhone.getPhones"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("centerPhone.getPhones"))) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             phones = new ArrayList<>();
@@ -58,9 +66,18 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
         return phones;
     }
 
+    /**
+     * Insert new phone for specific exhibition_center in
+     * exhibition_center_phone table
+     *
+     * @param id    of  Exhibition Center
+     * @param phone
+     * @throws DBException
+     */
     @Override
     public void insertPhone(Integer id, String phone) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("centerPhone.insertPhone"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("centerPhone.insertPhone"))) {
             statement.setString(1, phone);
             statement.setInt(2, id);
             statement.executeUpdate();
@@ -71,9 +88,17 @@ public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
         }
     }
 
+    /**
+     * Delete all phones for specific Exhibition Center
+     * from exhibition_center_phone table
+     *
+     * @param id of Exhibition Center
+     * @throws DBException
+     */
     @Override
     public void deletePhone(Integer id) throws DBException {
-        try (PreparedStatement statement = connection.prepareStatement(QUERIES.getString("centerPhone.delete"))) {
+        try (PreparedStatement statement = connection
+                .prepareStatement(QUERIES.getString("centerPhone.delete"))) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException exception) {
