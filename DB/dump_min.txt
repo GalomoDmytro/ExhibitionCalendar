@@ -1,0 +1,7 @@
+INSERT INTO `exposition_calendar_db`.`user` (`name`, `email`, `first_name`, `last_name`, `password` ) 
+values ('GUEST', '', 'GUEST', 'GUEST', ' ');
+INSERT INTO `exposition_calendar_db`.`role` (`id`, `role`) values ('1', 'GUEST');
+
+INSERT INTO `exposition_calendar_db`.`user` (`name`, `email`, `first_name`, `last_name`, `password` ) 
+values ('Admin', 'Admin@gmail.com', 'Dmytro', 'Galomko', '5c4db86dae0aa4fd72e58653fd92e65e46ba9d3dfd529b1ce2b67743672c7ab4');
+INSERT INTO `exposition_calendar_db`.`role` (`id`, `role`) values ('2', 'ADMIN');

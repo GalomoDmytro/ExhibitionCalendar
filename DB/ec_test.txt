@@ -1,0 +1,130 @@
+DROP DATABASE `exposition_calendar_db_test`;
+CREATE DATABASE IF NOT EXISTS  `exposition_calendar_db_test` DEFAULT CHARACTER SET utf8;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`exhibition_center_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NULL,
+  `address` VARCHAR(255) NULL,
+  `email` VARCHAR(255) NULL,
+  `web_page` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`exhibition_center_phone_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `phone` VARCHAR(45) NULL,
+  `exhibition_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `id_c_idx` (`exhibition_id` ASC),
+  CONSTRAINT `id_c`
+    FOREIGN KEY (`exhibition_id`)
+    REFERENCES `exposition_calendar_db_test`.`exhibition_center_test` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`exhibition_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NULL,
+  `image_src` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`description_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `description` TEXT NULL,
+  `language` VARCHAR(15) NULL,
+  `exhibition_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `ex_id_idx` (`exhibition_id` ASC),
+  CONSTRAINT `ex_id`
+    FOREIGN KEY (`exhibition_id`)
+    REFERENCES `exposition_calendar_db_test`.`exhibition_test` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`exhibition_contract_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `exhibition_id` INT NOT NULL,
+  `exhibition_center_id` INT NOT NULL,
+  `date_from` DATE NULL,
+  `date_to` DATE NULL,
+  `ticket_price` DECIMAL NULL,
+  `work_time_exhibition` VARCHAR(45) NULL,
+  `max_ticket_per_day` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `ex_id_idx` (`exhibition_id` ASC),
+  INDEX `ex_center_id_idx` (`exhibition_center_id` ASC),
+  CONSTRAINT `exhibition_id`
+    FOREIGN KEY (`exhibition_id`)
+    REFERENCES `exposition_calendar_db_test`.`exhibition_test` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `ex_center_id`
+    FOREIGN KEY (`exhibition_center_id`)
+    REFERENCES `exposition_calendar_db_test`.`exhibition_center_test` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`user_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(25) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `first_name` VARCHAR(100) NULL,
+  `last_name` VARCHAR(100) NULL,
+  `password` CHAR(64) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`user_phone_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `phone` VARCHAR(45) NULL,
+  `email` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `email_idx` (`email` ASC),
+  CONSTRAINT `email`
+    FOREIGN KEY (`email`)
+    REFERENCES `exposition_calendar_db_test`.`user_test` (`email`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`role_test` (
+  `id` INT NOT NULL,
+  `role` ENUM('GUEST', 'USER', 'AUTHOR', 'MODERATOR', 'ADMIN') NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `id`
+    FOREIGN KEY (`id`)
+    REFERENCES `exposition_calendar_db_test`.`user_test` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `exposition_calendar_db_test`.`ticket_test` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `date_to_apply` DATE NULL,
+  `contract_id` INT NULL,
+  `date_transaction` DATE NULL,
+  `email` VARCHAR(255) NULL,
+  `is_confirmed` TINYINT NULL DEFAULT 0,
+  `quantity` INT NULL,
+  `id_user` INT NOT NULL,
+   `approved_by_moderator_id` INT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  INDEX `contract_id_idx` (`contract_id` ASC),
+  INDEX `id_u_idx` (`id_user` ASC),
+  CONSTRAINT `contract_id`
+    FOREIGN KEY (`contract_id`)
+    REFERENCES `exposition_calendar_db_test`.`exhibition_contract_test` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `id_u`
+    FOREIGN KEY (`id_user`)
+    REFERENCES `exposition_calendar_db_test`.`user_test` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;

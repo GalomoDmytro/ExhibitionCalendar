@@ -1,0 +1,82 @@
+﻿INSERT INTO `exposition_calendar_db`.`user` (`name`, `email`, `first_name`, `last_name`, `password` ) 
+values ('GUEST', '', 'GUEST', 'GUEST', ' ');
+INSERT INTO `exposition_calendar_db`.`role` (`id`, `role`) values ('1', 'GUEST');
+
+INSERT INTO `exposition_calendar_db`.`user` (`name`, `email`, `first_name`, `last_name`, `password` ) 
+values ('Admin', 'Admin@gmail.com', 'Dmytro', 'Galomko', '5c4db86dae0aa4fd72e58653fd92e65e46ba9d3dfd529b1ce2b67743672c7ab4');
+INSERT INTO `exposition_calendar_db`.`role` (`id`, `role`) values ('2', 'ADMIN');
+
+
+
+INSERT INTO `exposition_calendar_db`.`exhibition_center` (`title`, `address`, `email`, `web_page`) 
+values ('Международный выставочный центр',  'Украина, 02660, Киев,Броварской пр-т, 15', 'lyudmila@iec-expo.com.ua', 'http://mvc-expo.com.ua/ru/');
+INSERT INTO `exposition_calendar_db`.`exhibition_center_phone`(`phone`,  `exhibition_id`)
+values ('+38(044) 201-1156', 1);
+INSERT INTO `exposition_calendar_db`.`exhibition_center_phone`(`phone`,  `exhibition_id`)
+values ('201-1161', 1);
+
+INSERT INTO `exposition_calendar_db`.`exhibition_center` (`title`, `address`, `email`, `web_page`) 
+values ('КиевЕкспоПлаза',  'ул. Салютная, 2-Б., Киев, 04111, Украина ', 'expo@expoplaza.kiev.ua', 'http://www.expoplaza.kiev.ua');
+INSERT INTO `exposition_calendar_db`.`exhibition_center_phone`(`phone`,  `exhibition_id`)
+values ('+38 (044) 461-99-21', 2);
+
+INSERT INTO `exposition_calendar_db`.`exhibition_center` (`title`, `address`, `email`, `web_page`) 
+values ('Shrinea uditorium',  'SHRINE AUDITORIUM & EXPO HALL 649 W. Jefferson Blvd Los Angeles, CA 90007', 'sales@shrineauditorium.com', 'http://www.shrineauditorium.com/');
+INSERT INTO `exposition_calendar_db`.`exhibition_center_phone`(`phone`,  `exhibition_id`)
+values ('(213) 748-5116', 3);
+
+INSERT INTO `exposition_calendar_db`.`exhibition_center` (`title`, `address`, `email`, `web_page`) 
+values ('New Your expo center',  '1108 Oak Point Ave, Point Morris, NY 10474, USA', '', 'www.newyorkexpocenter.com');
+
+
+
+
+
+INSERT INTO `exposition_calendar_db`.`exhibition` (`title`, `image_src`) 
+values('E3' , 'http://www.imgworlds.com/wp-content/themes/IMG/img/phase3/welcome/trex.png');
+INSERT INTO `exposition_calendar_db`.`description` (`description`, `language`, `exhibition_id`) 
+values('Выставка электронных развлечений.  — ежегодная выставка индустрии компьютерных игр, проводимая 
+Entertainment Software Association (ESA). На выставке разработчики, издатели, производители программного и 
+аппаратного обеспечения представляют компьютерные и видеоигры, игровые приставки, компьютерную электронику
+ и аксессуары.' , 'RU', '1');
+INSERT INTO `exposition_calendar_db`.`description` (`description`, `language`, `exhibition_id`) 
+values('Electronic Entertainment Expo. Presented and organized by the Entertainment Software Association (ESA), it is used by many developers,
+ publishers, and hardware and accessory manufacturers to introduce and advertise upcoming games and 
+ game-related merchandise to retailers and members of the press.' , 'ENG', '1');
+ 
+INSERT INTO `exposition_calendar_db`.`exhibition` (`title`, `image_src`)
+values('Extreme Sports Expo', 'http://www.imgworlds.com/wp-content/themes/IMG/img/phase3/welcome/trex.png');
+INSERT INTO `exposition_calendar_db`.`description` (`description`, `language`, `exhibition_id`) 
+values('The Extreme Sports Expo is the umbrella event that is home to col-located events including 
+ International Bicycle Exhibition, Motorbike Festival, Middle East Dive & Fish Expo and Photography Expo.' , 'ENG', '2');
+
+INSERT INTO `exposition_calendar_db`.`exhibition` (`title`, `image_src`) 
+values('Vincent van Gogh' , 'http://www.imgworlds.com/wp-content/themes/IMG/img/phase3/welcome/trex.png');
+INSERT INTO `exposition_calendar_db`.`description` (`description`, `language`, `exhibition_id`) 
+values('Discover the world’s most visited multimedia exhibition experience.
+Venture into an exciting new world; forego all preconceived ideas of traditional museum visits,
+ dispel all notions of tiptoeing through silent art galleries to view masterpieces from afar, change how 
+ you engage with art. Vitalize your senses and challenge your beliefs in a completely unique, stimulating 
+ Vincent van Gogh exhibition experience.
+Be prepared for a vibrant symphony of light, color and sound, combined and amplified to 
+create what visitors are calling “an unforgettable multi-sensory experience”.' , 'ENG', '3');
+INSERT INTO `exposition_calendar_db`.`description` (`description`, `language`, `exhibition_id`) 
+values('Винсент Ван Гог – один из самых популярных мировых художников пост-импрессионистов. За свою сложную и недолгую
+ жизнь он создал более 2000 произведений искусства: более 900 картин, 1100 рисунков и эскизов к ним.
+ Картины Ван Гога являются одними из самых ценных и дорогих картин в мире. Они находятся в музеях и частных коллекциях разных стран. 
+ Собрать все самые знаменитые картины в одну выставку не представляется возможным. 
+У вас есть уникальная возможность познакомиться с творчеством Ван Гога в виде репродукций картин на холсте.' , 'RU', '3');
+
+INSERT INTO `exposition_calendar_db`.`exhibition_contract` (`exhibition_id`, `exhibition_center_id`, `date_from`, 
+`date_to`, `ticket_price`, `work_time_exhibition`, `max_ticket_per_day`) 
+values('1' , '1', '2018-07-01', '2018-10-01', '150', '9 - 16', '1000');
+INSERT INTO `exposition_calendar_db`.`exhibition_contract` (`exhibition_id`, `exhibition_center_id`, `date_from`, 
+`date_to`, `ticket_price`, `work_time_exhibition`, `max_ticket_per_day`) 
+values('2' , '2', '2018-08-11', '2018-12-07', '1000', '10 - 17', '100');
+INSERT INTO `exposition_calendar_db`.`exhibition_contract` (`exhibition_id`, `exhibition_center_id`, `date_from`, 
+`date_to`, `ticket_price`, `work_time_exhibition`, `max_ticket_per_day`) 
+values('3' , '3', '2018-09-2', '2019-12-07', '1000', '7-18 except monday', '550');
+INSERT INTO `exposition_calendar_db`.`exhibition_contract` (`exhibition_id`, `exhibition_center_id`, `date_from`, 
+`date_to`, `ticket_price`, `work_time_exhibition`, `max_ticket_per_day`) 
+values('1' , '3', '2018-10-02', '2018-11-05', '150', '9 - 16', '1100');
+

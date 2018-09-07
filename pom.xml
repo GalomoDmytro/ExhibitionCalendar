@@ -10,7 +10,7 @@
     <packaging>war</packaging>
 
     <build>
-        <finalName>EC</finalName>
+        <finalName>ec</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
