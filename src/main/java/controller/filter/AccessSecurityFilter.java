@@ -61,6 +61,12 @@ public class AccessSecurityFilter implements Filter {
 
     }
 
+    /**
+     * Check, does the user have access to the requested page?
+     *
+     * @param req
+     * @return true if user has right to aces
+     */
     private boolean allowAccess(HttpServletRequest req) {
         HttpSession session = req.getSession();
 

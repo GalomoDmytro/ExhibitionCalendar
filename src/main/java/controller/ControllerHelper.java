@@ -26,6 +26,13 @@ public class ControllerHelper {
         initCommandMap();
     }
 
+    /**
+     * Searches the servlet responsible for the command received from the req
+     *
+     * @param req
+     * @param resp
+     * @return Command
+     */
     Command getCommand(HttpServletRequest req, HttpServletResponse resp) {
         String commandName = req.getParameter("command");
 

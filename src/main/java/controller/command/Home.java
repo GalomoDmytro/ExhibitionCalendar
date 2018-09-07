@@ -51,12 +51,17 @@ public class Home implements Command {
         dispatcher.forward(req, resp);
     }
 
+    /**
+     * Find the position of the current pagination page
+     *
+     * @param req
+     */
     private void findCurrentPagePagination(HttpServletRequest req) {
-        if (req.getParameter("currentPage") == null ) {
+        if (req.getParameter("currentPage") == null) {
             currentPage = 1;
         } else {
             String curPageLine = req.getParameter("currentPage");
-            if(StringUtils.isNumeric(curPageLine)) {
+            if (StringUtils.isNumeric(curPageLine)) {
                 currentPage = Integer.valueOf(req.getParameter("currentPage"));
             } else {
                 currentPage = 1;
@@ -72,6 +77,12 @@ public class Home implements Command {
         req.setAttribute("currentPage", currentPage);
     }
 
+    /**
+     * Show all available exhibitions from DB if search field is empty or
+     * search for what the searchField contain
+     *
+     * @param req
+     */
     private void choseWhatToShow(HttpServletRequest req) {
         if (req.getParameter("searchField") != null
                 && req.getParameter("searchField").length() > 0) {

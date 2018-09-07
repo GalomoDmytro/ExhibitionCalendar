@@ -46,7 +46,7 @@ public class Purchase implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.PURCHASE_PAGE);
 
-        roleMail(req);
+        userMail(req);
 
         getDataFromRequest(req);
         getDataFromSession(req);
@@ -128,7 +128,12 @@ public class Purchase implements Command {
         session.setAttribute("searchDateLine", dateToApply);
     }
 
-    private void roleMail(HttpServletRequest req) {
+    /**
+     * If user is signIn than get Mail form DB
+     *
+     * @param req
+     */
+    private void userMail(HttpServletRequest req) {
         HttpSession session = req.getSession(true);
 
         if (session.getAttribute("userId") != null) {
@@ -150,6 +155,9 @@ public class Purchase implements Command {
 
     }
 
+    /**
+     * Find on what date will be a ticket available
+     */
     private void figureDateTicket() {
         if (dateSearch == null || dateSearch.isEmpty()) {
             dateSearch = format.format(new Date());
@@ -158,7 +166,8 @@ public class Purchase implements Command {
         Date dateUserChose;
         Date dateWhenExpoStart;
         Date dateToday;
-        String todayDate = format.format(new Date());;
+        String todayDate = format.format(new Date());
+        ;
         try {
             dateUserChose = format.parse(dateSearch);
             dateWhenExpoStart = format.parse(dateExhibitionStart);
@@ -169,7 +178,7 @@ public class Purchase implements Command {
                 date = dateUserChose;
             }
 
-            if(date.compareTo(dateToday) <= 0) {
+            if (date.compareTo(dateToday) <= 0) {
                 date = dateToday;
             }
 
@@ -182,6 +191,9 @@ public class Purchase implements Command {
         dateToApply = df.format(date);
     }
 
+    /**
+     * Get and prepare Exhibition, ExhibitionCenter, Contract from DB
+     */
     private void getDataFromTable() {
         handleConnection();
 

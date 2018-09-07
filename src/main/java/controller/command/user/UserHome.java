@@ -17,6 +17,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Servlet responsible for User home page
+ */
 public class UserHome implements Command {
     private Connection connection;
     private FactoryMySql factoryMySql;
@@ -40,6 +43,10 @@ public class UserHome implements Command {
         dispatcher.forward(req, resp);
     }
 
+    /**
+     * Obtain data about Exhibition, ExhibitionCenter,
+     * Contract depend on Tickets. And save some of them for User
+     */
     private void getTicketDataForUser() {
         handleConnection();
         try {
@@ -62,6 +69,14 @@ public class UserHome implements Command {
         }
     }
 
+    /**
+     * Chose what data to show user about ticket
+     *
+     * @param ticket
+     * @param exhibition
+     * @param exhibitionCenter
+     * @return ticket info for User
+     */
     private String createTicketToShowUser(Ticket ticket, Exhibition exhibition,
                                           ExhibitionCenter exhibitionCenter) {
         StringBuilder stringBuilder = new StringBuilder();

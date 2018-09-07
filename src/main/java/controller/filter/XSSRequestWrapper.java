@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+/**
+ * Help prevent Cross-Site Scripting
+ */
 public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
     private static final Logger LOGGER = Logger.getLogger(XSSRequestWrapper.class);
@@ -94,7 +97,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             scriptPattern = Pattern.compile("vbscript:", Pattern.CASE_INSENSITIVE);
             value = scriptPattern.matcher(value).replaceAll("");
 
-            // Avoid onload= expressions
+            // Avoid onLoad= expressions
             scriptPattern = Pattern.compile("onload(.*?)=",
                     Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");

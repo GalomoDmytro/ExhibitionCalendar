@@ -32,6 +32,12 @@ public class Controller extends HttpServlet {
         manageRequest(req, resp);
     }
 
+    /**
+     * Transmits data to the controllerHelper, and execute the result
+     *
+     * @param req
+     * @param resp
+     */
     private void manageRequest(HttpServletRequest req, HttpServletResponse resp) {
         command = controllerHelper.getCommand(req, resp);
 

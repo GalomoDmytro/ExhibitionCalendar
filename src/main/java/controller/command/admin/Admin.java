@@ -50,7 +50,7 @@ public class Admin implements Command {
         dispatcher.forward(req, resp);
     }
 
-    private void getIdAdmin (HttpServletRequest request) {
+    private void getIdAdmin(HttpServletRequest request) {
         HttpSession session = request.getSession();
         idAdmin = (Integer) session.getAttribute("userId");
     }
@@ -85,6 +85,12 @@ public class Admin implements Command {
         }
     }
 
+    /**
+     * Use userId or userMail to find User and
+     * change Role
+     *
+     * @return
+     */
     private boolean changeRole() {
         handleConnection();
         try {
@@ -111,6 +117,12 @@ public class Admin implements Command {
         return true;
     }
 
+    /**
+     * Get Role of looking user from DB and
+     * save it to HttpServletRequest
+     *
+     * @param req
+     */
     private void showRole(HttpServletRequest req) {
         handleConnection();
         try {
@@ -118,7 +130,7 @@ public class Admin implements Command {
             if (id != null && id.trim().length() > 0) {
                 user = factoryMySql.createUser(connection)
                         .getById(Integer.valueOf(id));
-                if(user.getId() == 1) {
+                if (user.getId() == 1) {
                     return; // unsigned user
                 }
             } else if (eMail != null) {

@@ -29,7 +29,9 @@ public class LoginCommand implements Command {
 
     private static final ResourceBundle QUERIES = ResourceBundle
             .getBundle("strings_error_eng");
-    public LoginCommand() {}
+
+    public LoginCommand() {
+    }
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
@@ -51,6 +53,12 @@ public class LoginCommand implements Command {
         dispatcher.forward(req, resp);
     }
 
+    /**
+     * Check if User with data from request exists?
+     *
+     * @param req
+     * @return true if exist
+     */
     private boolean identificationUser(HttpServletRequest req) {
         user = getUserFromDB();
         if (user == null) {
@@ -75,6 +83,11 @@ public class LoginCommand implements Command {
         }
     }
 
+    /**
+     * Find and get User form DB
+     *
+     * @return
+     */
     private User getUserFromDB() {
         handleConnection();
 

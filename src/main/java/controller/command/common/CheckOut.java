@@ -18,6 +18,9 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 
+/**
+ * Servlet processes payment
+ */
 public class CheckOut implements Command {
 
     private Connection connection;
@@ -59,6 +62,11 @@ public class CheckOut implements Command {
         dispatcher.forward(req, resp);
     }
 
+    /**
+     * Check or have available tickets for sale?
+     *
+     * @return true if have ticket for sale
+     */
     private boolean hasTicketOnStock() {
         handleConnection();
 
@@ -115,6 +123,12 @@ public class CheckOut implements Command {
         price = price.multiply(BigDecimal.valueOf(quantity));
     }
 
+    /**
+     * Insert ticket to DB
+     *
+     * @param req
+     * @return requestDispatcher to PURCHASE_FINISH_PAGE or ERROR_PAGE
+     */
     private RequestDispatcher finishPurchase(HttpServletRequest req) {
         handleConnection();
         try {

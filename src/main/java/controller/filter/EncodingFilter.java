@@ -27,7 +27,9 @@ public class EncodingFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse,
+                         FilterChain filterChain)
             throws IOException, ServletException {
         String codeRequest = servletRequest.getCharacterEncoding();
 

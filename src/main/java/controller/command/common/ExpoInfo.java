@@ -3,7 +3,6 @@ package controller.command.common;
 import controller.command.Command;
 import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.ExhibitionContractMySql;
 import dao.mysql.FactoryMySql;
 import entities.Contract;
 import entities.Exhibition;
@@ -27,7 +26,6 @@ public class ExpoInfo implements Command {
     private Exhibition exhibition;
     private ExhibitionCenter exhibitionCenter;
     private Contract contract;
-    private String description;
     private List<String> listDescriptions;
 
     private String lang;
@@ -40,20 +38,21 @@ public class ExpoInfo implements Command {
         RequestDispatcher dispatcher = req
                 .getRequestDispatcher(Links.EXHIBITION_INFO_PAGE);
 
-        showExhibition(req);
+        getData(req);
 
         setDataToReq(req);
 
         dispatcher.forward(req, resp);
     }
 
-    private void showExhibition(HttpServletRequest request) {
-        getExhibitionId(request);
+    private void getData(HttpServletRequest request) {
+        getDataFromReq(request);
 
         getEntities();
     }
 
-    private void getExhibitionId(HttpServletRequest request) {
+
+    private void getDataFromReq(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (request.getParameter("idContract") != null) {
             idContact = Integer.parseInt(request.getParameter("idContract"));
@@ -76,6 +75,9 @@ public class ExpoInfo implements Command {
         request.setAttribute("description", listDescriptions);
     }
 
+    /**
+     * Get Contract, Exhibition, ExhibitionCenter from DB
+     */
     private void getEntities() {
         handleConnection();
         contract = new Contract();
