@@ -98,7 +98,7 @@ public class LoginCommandTest {
 
         loginCommand.execute(request, response);
 
-        verify(request, atLeast(1));
+        verify(request, atLeast(1)).getParameter("loginBtn");
     }
 
 
