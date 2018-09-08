@@ -1,9 +1,8 @@
 package controller.command.user;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.*;
 import org.apache.log4j.Logger;
 
@@ -13,22 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Servlet responsible for User home page
  */
-public class UserHome implements Command {
-    private Connection connection;
-    private FactoryMySql factoryMySql;
+public class UserHome extends ServletHelper implements Command {
+
     private Integer idUser;
     private User user;
     private List<String> phonesList;
     private List<String> ticketList = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(UserHome.class);
-
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
@@ -48,15 +44,15 @@ public class UserHome implements Command {
      * Contract depend on Tickets. And save some of them for User
      */
     private void getTicketDataForUser() {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            List<Ticket> tickets = factoryMySql.createTicket(connection)
+            List<Ticket> tickets = factoryDB.createTicket(connection)
                     .getAllTicketsForUser(user);
             for (Ticket ticket : tickets) {
                 Contract contract = new Contract();
                 Exhibition exhibition = new Exhibition();
                 ExhibitionCenter exhibitionCenter = new ExhibitionCenter();
-                factoryMySql.createExhibitionContract(connection)
+                factoryDB.createExhibitionContract(connection)
                         .prepareCEC(contract, exhibition, exhibitionCenter,
                                 ticket.getContractId());
 
@@ -65,7 +61,7 @@ public class UserHome implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -102,34 +98,16 @@ public class UserHome implements Command {
     }
 
     private void getUserFromDB() {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            user = factoryMySql.createUser(connection).getById(idUser);
-            phonesList = factoryMySql.createUserPhones(connection)
+            user = factoryDB.createUser(connection).getById(idUser);
+            phonesList = factoryDB.createUserPhones(connection)
                     .getPhones(user.getMail());
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

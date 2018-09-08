@@ -1,9 +1,8 @@
 package controller.command.common;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Contract;
 import entities.Ticket;
 import org.apache.log4j.Logger;
@@ -15,16 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.sql.Date;
 
 /**
  * Servlet processes payment
  */
-public class CheckOut implements Command {
+public class CheckOut extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private String priceLine;
     private BigDecimal price;
     private int quantity;
@@ -68,13 +64,13 @@ public class CheckOut implements Command {
      * @return true if have ticket for sale
      */
     private boolean hasTicketOnStock() {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
-            Contract contract = factoryMySql
+            Contract contract = factoryDB
                     .createExhibitionContract(connection)
                     .getExhibitionContractById(idContract);
-            int soldTickets = factoryMySql.createTicket(connection)
+            int soldTickets = factoryDB.createTicket(connection)
                     .getCountSoldTicketForDate(java.sql.Date.valueOf(dateToApplyTicket), idContract);
             if (contract.getMaxTicketPerDay() <= soldTickets + quantity) {
                 return false;
@@ -87,7 +83,7 @@ public class CheckOut implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
         return true;
@@ -130,17 +126,17 @@ public class CheckOut implements Command {
      * @return requestDispatcher to PURCHASE_FINISH_PAGE or ERROR_PAGE
      */
     private RequestDispatcher finishPurchase(HttpServletRequest req) {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             ticket = formTicket();
-            factoryMySql.createTicket(connection).insertTicket(ticket);
+            factoryDB.createTicket(connection).insertTicket(ticket);
             LOGGER.info("CHECK OUT " + ticket);
             return req.getRequestDispatcher(Links.PURCHASE_FINISH_PAGE);
         } catch (Exception exception) {
             LOGGER.error(exception);
             return req.getRequestDispatcher(Links.ERROR_PAGE);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -159,22 +155,5 @@ public class CheckOut implements Command {
         return java.sql.Date.valueOf(java.time.LocalDate.now());
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

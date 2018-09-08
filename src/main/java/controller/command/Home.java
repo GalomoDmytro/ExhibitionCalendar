@@ -1,8 +1,6 @@
 package controller.command;
 
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Contract;
 import exceptions.DBException;
 import org.apache.commons.lang3.StringUtils;
@@ -14,16 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class Home implements Command {
-    private Connection connection;
-    private FactoryMySql factoryMySql;
+public class Home extends ServletHelper implements Command {
     private String date;
     private String searchLine;
     private int countExhibitions;
@@ -94,15 +89,15 @@ public class Home implements Command {
 
     private void specificSearch(HttpServletRequest req) {
 
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
 
             searchLine = req.getParameter("searchField");
-            countExhibitions = factoryMySql.createExhibitionContract(connection)
+            countExhibitions = factoryDB.createExhibitionContract(connection)
                     .getNumberOfContractsAfterSearch(searchLine, java.sql.Date.valueOf(date));
             countNumberOfPages();
-            List<Contract> contractList = factoryMySql.createExhibitionContract(connection)
+            List<Contract> contractList = factoryDB.createExhibitionContract(connection)
                     .searchContactsWithExpoAndCenterLimit(searchLine, java.sql.Date.valueOf(date),
                             start, recordsPerPage);
 
@@ -112,7 +107,7 @@ public class Home implements Command {
         } catch (Exception exception) {
             LOGGER.info("get date from req " + req);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -124,7 +119,7 @@ public class Home implements Command {
     }
 
     private void showAll(HttpServletRequest req) {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
             List<Contract> listContract = getAllContract();
@@ -133,7 +128,7 @@ public class Home implements Command {
         } catch (Exception exception) {
             LOGGER.info("get date from req " + req);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -145,11 +140,11 @@ public class Home implements Command {
     }
 
     private List<Contract> getAllContract() throws DBException {
-        countExhibitions = factoryMySql.createExhibitionContract(connection)
+        countExhibitions = factoryDB.createExhibitionContract(connection)
                 .getNumberOfContractsAfterDate(java.sql.Date.valueOf(date));
         countNumberOfPages();
         start = currentPage * recordsPerPage - recordsPerPage;
-        return factoryMySql.createExhibitionContract(connection)
+        return factoryDB.createExhibitionContract(connection)
                 .getContractsAfterDateLimit(java.sql.Date.valueOf(date), start, recordsPerPage);
     }
 
@@ -167,24 +162,6 @@ public class Home implements Command {
         return format.format(now);
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }
 
 

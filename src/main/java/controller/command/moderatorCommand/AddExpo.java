@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Exhibition;
 import org.apache.log4j.Logger;
 import utility.Patterns;
@@ -14,12 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 
-public class AddExpo implements Command {
+public class AddExpo extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private String expoTitle;
     private String expoImg;
     private String expoDescription;
@@ -72,11 +68,11 @@ public class AddExpo implements Command {
      * @param request
      */
     private void insertInDB(HttpServletRequest request) {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            factoryMySql.createExhibition(connection).insertExhibition(exhibition);
+            factoryDB.createExhibition(connection).insertExhibition(exhibition);
             checkDescriptionLangKey();
-            factoryMySql.createDescriptionTable(connection)
+            factoryDB.createDescriptionTable(connection)
                     .insertDescription(descriptionKeyLang, expoDescription, exhibition);
             LOGGER.info("Moderator id: " + idModerator
                     + " insert new exhibition: " + exhibition
@@ -86,7 +82,7 @@ public class AddExpo implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -105,6 +101,7 @@ public class AddExpo implements Command {
 
     /**
      * Check data from request
+     *
      * @return true if data valid
      */
     private boolean inputDataIsValid() {
@@ -136,25 +133,6 @@ public class AddExpo implements Command {
             return false;
         }
         return true;
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
     }
 
     private void collectParamsFromRequest(HttpServletRequest req) {

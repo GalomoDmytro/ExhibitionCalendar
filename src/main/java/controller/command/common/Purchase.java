@@ -1,9 +1,8 @@
 package controller.command.common;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Contract;
 import entities.Exhibition;
 import entities.ExhibitionCenter;
@@ -17,17 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Purchase implements Command {
+public class Purchase extends ServletHelper implements Command {
 
-    private Connection connection;
     private String userId;
-    private FactoryMySql factoryMySql;
     private Integer contractId;
     private Contract contract;
     private Exhibition exhibition;
@@ -38,7 +34,7 @@ public class Purchase implements Command {
     private Date date;
     private Integer quantityTickets;
     private HttpSession session;
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     private static final Logger LOGGER = Logger.getLogger(Purchase.class);
 
@@ -142,15 +138,15 @@ public class Purchase implements Command {
             userId = "1";
         }
 
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            User user = factoryMySql.createUser(connection)
+            User user = factoryDB.createUser(connection)
                     .getById(Integer.parseInt(userId));
             req.setAttribute("eMailHold", user.getMail());
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
     }
@@ -160,18 +156,18 @@ public class Purchase implements Command {
      */
     private void figureDateTicket() {
         if (dateSearch == null || dateSearch.isEmpty()) {
-            dateSearch = format.format(new Date());
+            dateSearch = FORMAT.format(new Date());
         }
 
         Date dateUserChose;
         Date dateWhenExpoStart;
         Date dateToday;
-        String todayDate = format.format(new Date());
+        String todayDate = FORMAT.format(new Date());
         ;
         try {
-            dateUserChose = format.parse(dateSearch);
-            dateWhenExpoStart = format.parse(dateExhibitionStart);
-            dateToday = format.parse(todayDate);
+            dateUserChose = FORMAT.parse(dateSearch);
+            dateWhenExpoStart = FORMAT.parse(dateExhibitionStart);
+            dateToday = FORMAT.parse(todayDate);
             if (dateUserChose.compareTo(dateWhenExpoStart) <= 0) {
                 date = dateWhenExpoStart;
             } else {
@@ -195,43 +191,25 @@ public class Purchase implements Command {
      * Get and prepare Exhibition, ExhibitionCenter, Contract from DB
      */
     private void getDataFromTable() {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
             if (contractId != null) {
-                contract = factoryMySql.createExhibitionContract(connection)
+                contract = factoryDB.createExhibitionContract(connection)
                         .getExhibitionContractById(contractId);
                 contract.setTicketPrice(new PriceTicket()
                         .calculateSumTicketsPrice(contract.getTicketPrice(), 1));
-                exhibition = factoryMySql.createExhibition(connection)
+                exhibition = factoryDB.createExhibition(connection)
                         .getExhibitionById(contract.getExhibitionId());
-                exhibitionCenter = factoryMySql.createExhibitionCenter(connection)
+                exhibitionCenter = factoryDB.createExhibitionCenter(connection)
                         .getExhibitionCenterById(contract.getExCenterId());
             }
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

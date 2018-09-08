@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.ExhibitionCenter;
 import org.apache.log4j.Logger;
 import utility.JSPError;
@@ -15,17 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Servlet response  for manage creating and put new ExhibitionCenter in DB
  */
-public class AddingExpoCenter implements Command {
+public class AddingExpoCenter extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private String title;
     private String address;
     private String eMail;
@@ -66,20 +62,20 @@ public class AddingExpoCenter implements Command {
         }
         prepareExhibitionCenter();
 
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             connection.setAutoCommit(false);
-            factoryMySql.createExhibitionCenter(connection)
+            factoryDB.createExhibitionCenter(connection)
                     .insertExhibitionCenter(exCenter);
 
-            exCenter = factoryMySql.createExhibitionCenter(connection)
+            exCenter = factoryDB.createExhibitionCenter(connection)
                     .getExhibitionCenterByTitle(exCenter.getTitle());
             if (phone1 != null) {
-                factoryMySql.createExhibitionCenterPhone(connection)
+                factoryDB.createExhibitionCenterPhone(connection)
                         .insertPhone(exCenter.getId(), phone1);
             }
             if (phone2 != null) {
-                factoryMySql.createExhibitionCenterPhone(connection)
+                factoryDB.createExhibitionCenterPhone(connection)
                         .insertPhone(exCenter.getId(), phone2);
             }
             connection.commit();
@@ -89,7 +85,7 @@ public class AddingExpoCenter implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -117,15 +113,6 @@ public class AddingExpoCenter implements Command {
         }
     }
 
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
     private void getDataFromSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
         idModerator = (Integer) session.getAttribute("userId");
@@ -133,6 +120,7 @@ public class AddingExpoCenter implements Command {
 
     /**
      * Checking data from HttpServletRequest
+     *
      * @param req
      * @return false if data not valid
      */
@@ -214,27 +202,17 @@ public class AddingExpoCenter implements Command {
     }
 
     private boolean titleAlreadyExist() {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            if (factoryMySql.createExhibitionCenter(connection).isTitleInTable(title)) {
+            if (factoryDB.createExhibitionCenter(connection).isTitleInTable(title)) {
                 return true;
             }
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
         return false;
-    }
-
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
     }
 
     private void collectParamsFromRequest(HttpServletRequest req) {

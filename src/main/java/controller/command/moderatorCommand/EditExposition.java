@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Exhibition;
 import org.apache.log4j.Logger;
 
@@ -13,15 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditExposition implements Command {
+public class EditExposition extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private Integer exhibitionId;
     private Exhibition exhibition;
     private Map<String, String> descriptionMap;
@@ -80,19 +76,19 @@ public class EditExposition implements Command {
      * @return true if don't catch any exception
      */
     private boolean saveData(HttpServletRequest request) {
-        handleConnection();
+        handleConnection(LOGGER);
         Exhibition exhibition = prepareExhibition();
 
         try {
-            factoryMySql.createExhibition(connection).setLockExhibitionTable();
+            factoryDB.createExhibition(connection).setLockExhibitionTable();
             connection.setAutoCommit(false);
 
-            factoryMySql.createExhibition(connection).updateExhibition(exhibition);
+            factoryDB.createExhibition(connection).updateExhibition(exhibition);
 
-            factoryMySql.createDescriptionTable(connection)
+            factoryDB.createDescriptionTable(connection)
                     .deleteAllDescriptionForExposition(exhibition);
             for (Map.Entry<String, String> entry : descriptionToSave.entrySet()) {
-                factoryMySql.createDescriptionTable(connection)
+                factoryDB.createDescriptionTable(connection)
                         .insertDescriptionById(entry.getKey(), entry.getValue(), exhibitionId);
             }
             connection.commit();
@@ -106,12 +102,12 @@ public class EditExposition implements Command {
             return false;
         } finally {
             try {
-                factoryMySql.createTicket(connection).unlockTable();
+                factoryDB.createTicket(connection).unlockTable();
             } catch (Exception e) {
                 LOGGER.error(e);
             }
 
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
         return true;
@@ -155,18 +151,18 @@ public class EditExposition implements Command {
     }
 
     private void getDataFromDB() {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
-            exhibition = factoryMySql.createExhibition(connection)
+            exhibition = factoryDB.createExhibition(connection)
                     .getExhibitionById(exhibitionId);
-            descriptionMap = factoryMySql.createDescriptionTable(connection)
+            descriptionMap = factoryDB.createDescriptionTable(connection)
                     .getAllDescription(exhibition);
 
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -192,22 +188,4 @@ public class EditExposition implements Command {
         }
     }
 
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

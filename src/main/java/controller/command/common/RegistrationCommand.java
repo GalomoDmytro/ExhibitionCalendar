@@ -1,9 +1,8 @@
 package controller.command.common;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Role;
 import entities.User;
 import org.apache.log4j.Logger;
@@ -16,10 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ResourceBundle;
 
-public class RegistrationCommand implements Command {
+public class RegistrationCommand extends ServletHelper implements Command {
 
     private String name;
     private String password;
@@ -30,9 +28,6 @@ public class RegistrationCommand implements Command {
     private String eMailRepeat;
     private String phone1;
     private String phone2;
-
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private User user;
 
     private static final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
@@ -120,9 +115,9 @@ public class RegistrationCommand implements Command {
         }
 
         // check if name already in table
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            if (factoryMySql.createUser(connection).isNameInTable(name)) {
+            if (factoryDB.createUser(connection).isNameInTable(name)) {
                 req.setAttribute("errorNameProfile", QUERIES.getString("ERROR_NAME_ALREADY_EXIST"));
                 return false;
             }
@@ -131,7 +126,7 @@ public class RegistrationCommand implements Command {
             return false;
         } finally {
 
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
         return true;
@@ -224,9 +219,9 @@ public class RegistrationCommand implements Command {
         }
 
         // check if eMail already in table
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            if (factoryMySql.createUser(connection).isMailInTable(eMail)) {
+            if (factoryDB.createUser(connection).isMailInTable(eMail)) {
                 request.setAttribute("errorMail", QUERIES
                         .getString("ERROR_EMAIL_ALREADY_EXIST"));
                 return false;
@@ -234,19 +229,10 @@ public class RegistrationCommand implements Command {
         } catch (Exception exception) {
             return false;
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
         return true;
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
     }
 
     private void declareRole(HttpServletRequest req, HttpServletResponse resp) {
@@ -259,7 +245,7 @@ public class RegistrationCommand implements Command {
     }
 
     private void addNewUserToDB() {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
             addUserToDbUser();
@@ -269,7 +255,7 @@ public class RegistrationCommand implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -282,30 +268,20 @@ public class RegistrationCommand implements Command {
                 .setMail(eMail)
                 .setRole(Role.USER)
                 .build();
-        factoryMySql.createUser(connection).insertUser(user);
+        factoryDB.createUser(connection).insertUser(user);
     }
 
     private void setUserRoleInDB() throws Exception {
-        user = factoryMySql.createUser(connection).getByMail(user.getMail());
-        factoryMySql.createRole(connection).insertRole(user, Role.USER);
+        user = factoryDB.createUser(connection).getByMail(user.getMail());
+        factoryDB.createRole(connection).insertRole(user, Role.USER);
     }
 
     private void insertUserPhones() throws Exception {
         if (phone1 != null) {
-            factoryMySql.createUserPhones(connection).insertPhone(user.getMail(), phone1);
+            factoryDB.createUserPhones(connection).insertPhone(user.getMail(), phone1);
         }
         if (phone2 != null) {
-            factoryMySql.createUserPhones(connection).insertPhone(user.getMail(), phone2);
-        }
-    }
-
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
+            factoryDB.createUserPhones(connection).insertPhone(user.getMail(), phone2);
         }
     }
 

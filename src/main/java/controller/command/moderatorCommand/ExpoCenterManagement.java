@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.ExhibitionCenter;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
@@ -13,13 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
-public class ExpoCenterManagement implements Command {
-
-    private Connection connection;
-    private FactoryMySql factoryMySql;
+public class ExpoCenterManagement extends ServletHelper implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(ExpoCenterManagement.class);
 
@@ -49,7 +44,7 @@ public class ExpoCenterManagement implements Command {
     }
 
     private void showAll(HttpServletRequest req) {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             List<ExhibitionCenter> exhibitionCenterList = getAllFromDb();
 
@@ -64,13 +59,13 @@ public class ExpoCenterManagement implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
     private void setPhones(List<ExhibitionCenter> exhibitionCenterList) throws DBException {
         for (ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
-            exhibitionCenter.setPhone(factoryMySql
+            exhibitionCenter.setPhone(factoryDB
                     .createExhibitionCenterPhone(connection)
                     .getPhones(exhibitionCenter.getId()));
         }
@@ -80,12 +75,12 @@ public class ExpoCenterManagement implements Command {
 
         int idExhibitionCenterDeletion = Integer
                 .parseInt(req.getParameter("idDelete"));
-        handleConnection();
+        handleConnection(LOGGER);
         try {
 
-            if (factoryMySql.createExhibitionContract(connection)
+            if (factoryDB.createExhibitionContract(connection)
                     .getAllContractsForCenter(idExhibitionCenterDeletion).isEmpty()) {
-                factoryMySql.createExhibitionCenter(connection)
+                factoryDB.createExhibitionCenter(connection)
                         .deleteExhibitionCenterById(idExhibitionCenterDeletion);
             } else {
                 req.setAttribute("errorDeleting"
@@ -94,17 +89,17 @@ public class ExpoCenterManagement implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
     private void specificSearch(HttpServletRequest request) {
 
         String looking = request.getParameter("searchField");
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             List<ExhibitionCenter> exhibitionCenterListResult
-                    = factoryMySql.createExhibitionCenter(connection)
+                    = factoryDB.createExhibitionCenter(connection)
                     .getExhibitionCentersBySearch(looking);
             setPhones(exhibitionCenterListResult);
 
@@ -114,14 +109,14 @@ public class ExpoCenterManagement implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
     }
 
     private List<ExhibitionCenter> getAllFromDb() throws DBException {
         try {
-            return factoryMySql.createExhibitionCenter(connection)
+            return factoryDB.createExhibitionCenter(connection)
                     .getAllExhibitionCenter();
         } catch (Exception exception) {
             LOGGER.info(exception);
@@ -129,22 +124,4 @@ public class ExpoCenterManagement implements Command {
         }
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

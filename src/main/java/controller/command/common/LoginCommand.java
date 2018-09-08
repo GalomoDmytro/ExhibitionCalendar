@@ -1,9 +1,8 @@
 package controller.command.common;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.User;
 import org.apache.log4j.Logger;
 import utility.PasswordHandler;
@@ -14,13 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ResourceBundle;
 
-public class LoginCommand implements Command {
+public class LoginCommand extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private String nameOrMail;
     private String password;
     private User user;
@@ -74,38 +70,29 @@ public class LoginCommand implements Command {
         return true;
     }
 
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
     /**
      * Find and get User form DB
      *
      * @return
      */
     private User getUserFromDB() {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
-            if (!factoryMySql.createUser(connection).isNameOrMailInTable(nameOrMail)) {
+            if (!factoryDB.createUser(connection).isNameOrMailInTable(nameOrMail)) {
                 return null;
             }
             if (nameOrMail.contains("@")) {
-                user = factoryMySql.createUser(connection).getByMail(nameOrMail);
+                user = factoryDB.createUser(connection).getByMail(nameOrMail);
             } else {
-                user = factoryMySql.createUser(connection).getByName(nameOrMail);
+                user = factoryDB.createUser(connection).getByName(nameOrMail);
             }
-            user.setRole(factoryMySql.createRole(connection).getRoleById(user.getId()));
+            user.setRole(factoryDB.createRole(connection).getRoleById(user.getId()));
             return user;
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
         return null;
@@ -128,15 +115,5 @@ public class LoginCommand implements Command {
     private void collectParamsFromRequest(HttpServletRequest request) {
         nameOrMail = request.getParameter("nameOrMail");
         password = request.getParameter("password");
-    }
-
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
     }
 }

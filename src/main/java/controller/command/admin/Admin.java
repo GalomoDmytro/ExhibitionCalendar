@@ -1,9 +1,8 @@
 package controller.command.admin;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Role;
 import entities.User;
 import org.apache.log4j.Logger;
@@ -15,17 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 
-public class Admin implements Command {
+public class Admin extends ServletHelper implements Command {
 
     private String id;
     private String eMail;
     private String role;
     private Integer idAdmin;
-
-    private Connection connection;
-    private FactoryMySql factoryMySql;
 
     private static final Logger LOGGER = Logger.getLogger(Admin.class);
 
@@ -76,15 +71,6 @@ public class Admin implements Command {
         }
     }
 
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
     /**
      * Use userId or userMail to find User and
      * change Role
@@ -92,17 +78,17 @@ public class Admin implements Command {
      * @return
      */
     private boolean changeRole() {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             if (id != null && id.trim().length() > 0) {
-                factoryMySql.createRole(connection)
+                factoryDB.createRole(connection)
                         .updateRole(Integer.valueOf(id), getRole());
                 LOGGER.info("Admin with id: " + idAdmin
                         + " has change role for user with id " + id
                         + " to Role: " + getRole());
             } else if (eMail != null) {
-                User user = factoryMySql.createUser(connection).getByMail(eMail);
-                factoryMySql.createRole(connection).updateRole(user.getId(), getRole());
+                User user = factoryDB.createUser(connection).getByMail(eMail);
+                factoryDB.createRole(connection).updateRole(user.getId(), getRole());
                 LOGGER.info("Admin with id: " + idAdmin
                         + " has change role for user with eMail " + eMail
                         + " to Role: " + getRole());
@@ -112,7 +98,7 @@ public class Admin implements Command {
             LOGGER.error(exception);
             return false;
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
         return true;
     }
@@ -124,28 +110,28 @@ public class Admin implements Command {
      * @param req
      */
     private void showRole(HttpServletRequest req) {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             User user = null;
             if (id != null && id.trim().length() > 0) {
-                user = factoryMySql.createUser(connection)
+                user = factoryDB.createUser(connection)
                         .getById(Integer.valueOf(id));
                 if (user.getId() == 1) {
                     return; // unsigned user
                 }
             } else if (eMail != null) {
-                user = factoryMySql.createUser(connection)
+                user = factoryDB.createUser(connection)
                         .getByMail(eMail);
             }
             if (user != null) {
-                user.setRole(factoryMySql.createRole(connection)
+                user.setRole(factoryDB.createRole(connection)
                         .getRoleById(user.getId()));
                 req.setAttribute("showRole", user);
             }
         } catch (Exception exception) {
 
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -168,14 +154,5 @@ public class Admin implements Command {
         }
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 
 }

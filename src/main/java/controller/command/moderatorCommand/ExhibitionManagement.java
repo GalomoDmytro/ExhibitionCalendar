@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Exhibition;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
@@ -13,14 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-public class ExhibitionManagement implements Command {
-
-    private Connection connection;
-    private FactoryMySql factoryMySql;
+public class ExhibitionManagement extends ServletHelper implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(ExhibitionManagement.class);
 
@@ -51,11 +46,11 @@ public class ExhibitionManagement implements Command {
 
     private void deleteById(HttpServletRequest req) {
         Integer idCenter = Integer.parseInt(req.getParameter("idDelete"));
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            if (factoryMySql.createExhibitionContract(connection)
+            if (factoryDB.createExhibitionContract(connection)
                     .getAllContractsForExhibition(idCenter).isEmpty()) {
-                factoryMySql.createExhibition(connection)
+                factoryDB.createExhibition(connection)
                         .deleteById(Integer.valueOf(idCenter));
             } else {
                 req.setAttribute("errorDeleting"
@@ -64,12 +59,12 @@ public class ExhibitionManagement implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
     private void showAll(HttpServletRequest req) {
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             List<Exhibition> exhibitionCenterList = getAllFromDb();
             setLangTagsToExhibition(exhibitionCenterList);
@@ -80,7 +75,7 @@ public class ExhibitionManagement implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -93,7 +88,7 @@ public class ExhibitionManagement implements Command {
     private void setLangTagsToExhibition(List<Exhibition> exhibitionList)
             throws DBException {
         for (Exhibition exhibition : exhibitionList) {
-            Map<String, String> expoLang = factoryMySql
+            Map<String, String> expoLang = factoryDB
                     .createDescriptionTable(connection)
                     .getAllDescription(exhibition);
             String langTags = "";
@@ -112,10 +107,10 @@ public class ExhibitionManagement implements Command {
      */
     private void specificSearch(HttpServletRequest request) {
         String looking = request.getParameter("searchField");
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             List<Exhibition> exhibitionList
-                    = factoryMySql.createExhibition(connection)
+                    = factoryDB.createExhibition(connection)
                     .getExhibitionBySearch(looking);
             setLangTagsToExhibition(exhibitionList);
             if (exhibitionList != null) {
@@ -124,7 +119,7 @@ public class ExhibitionManagement implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
 
     }
@@ -137,29 +132,11 @@ public class ExhibitionManagement implements Command {
      */
     private List<Exhibition> getAllFromDb() throws DBException {
         try {
-            return factoryMySql.createExhibition(connection).getAllExhibition();
+            return factoryDB.createExhibition(connection).getAllExhibition();
         } catch (Exception exception) {
             LOGGER.error(exception);
             throw new DBException(exception);
         }
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

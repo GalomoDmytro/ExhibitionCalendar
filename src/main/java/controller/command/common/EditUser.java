@@ -12,7 +12,8 @@ import java.io.IOException;
 public class EditUser implements Command {
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(Links.USER_EDIT_PAGE);
 
         dispatcher.forward(req, resp);

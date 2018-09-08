@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Exhibition;
 import entities.ExhibitionCenter;
 import org.apache.log4j.Logger;
@@ -13,13 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
-public class CombineExWithExCenter implements Command {
+public class CombineExWithExCenter extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private String idExhibition;
     private String expoCenterId;
 
@@ -28,7 +24,6 @@ public class CombineExWithExCenter implements Command {
 
     private static final Logger LOGGER = Logger
             .getLogger(CombineExWithExCenter.class);
-
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
@@ -55,16 +50,16 @@ public class CombineExWithExCenter implements Command {
         req.setAttribute("combFrom", FROM_EXPO);
         req.setAttribute("combFromId", idExhibition);
 
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             List<ExhibitionCenter> exhibitionCentersList
-                    = factoryMySql.createExhibitionCenter(connection)
+                    = factoryDB.createExhibitionCenter(connection)
                     .getAllExhibitionCenter();
             req.setAttribute("list", exhibitionCentersList);
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -73,34 +68,15 @@ public class CombineExWithExCenter implements Command {
         req.setAttribute("combFrom", FROM_CENTER);
         req.setAttribute("combFromId", expoCenterId);
 
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             List<Exhibition> exhibitionList
-                    = factoryMySql.createExhibition(connection).getAllExhibition();
+                    = factoryDB.createExhibition(connection).getAllExhibition();
             req.setAttribute("list", exhibitionList);
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
-        }
-    }
-
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
+            closeConnection(LOGGER);
         }
     }
 }

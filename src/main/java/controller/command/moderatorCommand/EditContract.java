@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Contract;
 import entities.Exhibition;
 import entities.ExhibitionCenter;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,10 +26,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class EditContract implements Command {
+public class EditContract extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private Integer idContract;
     private String dateFromLine;
     private String dateToLine;
@@ -79,11 +75,11 @@ public class EditContract implements Command {
             return;
         }
 
-        handleConnection();
+        handleConnection(LOGGER);
         try {
             Contract contract = prepareContractToUpdate();
-            factoryMySql.createExhibitionContract(connection).setLockContractTable();
-            factoryMySql.createExhibitionContract(connection).updateContract(contract);
+            factoryDB.createExhibitionContract(connection).setLockContractTable();
+            factoryDB.createExhibitionContract(connection).updateContract(contract);
             changeSuccessful = true;
             LOGGER.info("Moderator id: " + idModerator
                     + " update contract id: " + contract.getId()
@@ -93,12 +89,12 @@ public class EditContract implements Command {
             changeSuccessful = false;
         } finally {
             try {
-                factoryMySql.createExhibitionCenter(connection).unlockTable();
+                factoryDB.createExhibitionCenter(connection).unlockTable();
             } catch (DBException e) {
                 LOGGER.error(e);
             }
 
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -229,18 +225,18 @@ public class EditContract implements Command {
      * @param req
      */
     private void getDataForRequest(HttpServletRequest req) {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
 
             if (idContract != null) {
-                Contract contract = factoryMySql.createExhibitionContract(connection)
+                Contract contract = factoryDB.createExhibitionContract(connection)
                         .getExhibitionContractById(idContract);
-                Exhibition exhibition = factoryMySql.createExhibition(connection)
+                Exhibition exhibition = factoryDB.createExhibition(connection)
                         .getExhibitionById(contract
                                 .getExhibitionId());
                 getLangTagsFroExhibition(exhibition);
-                ExhibitionCenter exhibitionCenter = factoryMySql
+                ExhibitionCenter exhibitionCenter = factoryDB
                         .createExhibitionCenter(connection)
                         .getExhibitionCenterById(contract.getExCenterId());
                 getPhonesExhibitionCenter(exhibitionCenter);
@@ -251,7 +247,7 @@ public class EditContract implements Command {
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -281,7 +277,7 @@ public class EditContract implements Command {
 
     private void getPhonesExhibitionCenter(ExhibitionCenter exhibitionCenter)
             throws DBException {
-        List<String> phonesExhibitionCenter = factoryMySql
+        List<String> phonesExhibitionCenter = factoryDB
                 .createExhibitionCenterPhone(connection)
                 .getPhones(exhibitionCenter.getId());
         exhibitionCenter.setPhone(phonesExhibitionCenter);
@@ -300,7 +296,7 @@ public class EditContract implements Command {
     }
 
     private void getLangTagsFroExhibition(Exhibition exhibition) throws DBException {
-        Map<String, String> expoLang = factoryMySql
+        Map<String, String> expoLang = factoryDB
                 .createDescriptionTable(connection)
                 .getAllDescription(exhibition);
         String langTags = "";
@@ -310,22 +306,4 @@ public class EditContract implements Command {
         exhibition.setLanguageTags(langTags);
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

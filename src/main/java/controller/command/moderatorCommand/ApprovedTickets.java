@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Ticket;
 import org.apache.log4j.Logger;
 
@@ -11,18 +10,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
 /**
  * Servlet show all approved ticket
  */
-public class ApprovedTickets implements Command {
+public class ApprovedTickets extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private List<Ticket> ticketList;
 
     private static final Logger LOGGER = Logger.getLogger(ApprovedTickets.class);
@@ -45,34 +40,16 @@ public class ApprovedTickets implements Command {
     }
 
     private void readData() {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
-            ticketList = factoryMySql.createTicket(connection)
+            ticketList = factoryDB.createTicket(connection)
                     .getAllApprovedTickets();
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }

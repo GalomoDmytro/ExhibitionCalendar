@@ -1,9 +1,8 @@
 package controller.command.moderatorCommand;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.ExhibitionCenter;
 import exceptions.DBException;
 import org.apache.log4j.Logger;
@@ -14,13 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
-public class EditCenter implements Command {
-
-    private Connection connection;
-    private FactoryMySql factoryMySql;
+public class EditCenter extends ServletHelper implements Command {
 
     private Integer idCenter;
     private String title;
@@ -74,12 +69,12 @@ public class EditCenter implements Command {
     }
 
     private void readDataFromDB() {
-        handleConnection();
+        handleConnection(LOGGER);
 
         try {
-            exhibitionCenter = factoryMySql.createExhibitionCenter(connection)
+            exhibitionCenter = factoryDB.createExhibitionCenter(connection)
                     .getExhibitionCenterById(idCenter);
-            phoneList = factoryMySql.createExhibitionCenterPhone(connection)
+            phoneList = factoryDB.createExhibitionCenterPhone(connection)
                     .getPhones(exhibitionCenter.getId());
             if (phoneList.size() < 2) {
                 phoneList.add("");
@@ -87,7 +82,7 @@ public class EditCenter implements Command {
         } catch (Exception exception) {
             LOGGER.info(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -100,21 +95,21 @@ public class EditCenter implements Command {
                 .seteMail(eMail)
                 .setWebPage(webPage)
                 .build();
-        handleConnection();
+        handleConnection(LOGGER);
         try {
-            factoryMySql.createExhibitionCenter(connection).setLockExhibitionCenterTable();
+            factoryDB.createExhibitionCenter(connection).setLockExhibitionCenterTable();
             connection.setAutoCommit(false);
 
-            factoryMySql.createExhibitionCenter(connection)
+            factoryDB.createExhibitionCenter(connection)
                     .updateExhibitionCenter(exhibitionCenter);
-            factoryMySql.createExhibitionCenterPhone(connection)
+            factoryDB.createExhibitionCenterPhone(connection)
                     .deletePhone(exhibitionCenter.getId());
             if (phone1 != null) {
-                factoryMySql.createExhibitionCenterPhone(connection)
+                factoryDB.createExhibitionCenterPhone(connection)
                         .insertPhone(exhibitionCenter.getId(), phone1);
             }
             if (phone2 != null) {
-                factoryMySql.createExhibitionCenterPhone(connection)
+                factoryDB.createExhibitionCenterPhone(connection)
                         .insertPhone(exhibitionCenter.getId(), phone2);
             }
             connection.commit();
@@ -126,11 +121,11 @@ public class EditCenter implements Command {
             LOGGER.error(exception);
         } finally {
             try {
-                factoryMySql.createExhibitionCenter(connection).unlockTable();
+                factoryDB.createExhibitionCenter(connection).unlockTable();
             } catch (DBException e) {
                 LOGGER.info(e);
             }
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
@@ -140,7 +135,6 @@ public class EditCenter implements Command {
         }
 
         readDataFromDB();
-
     }
 
     private void readDataToUpdate(HttpServletRequest req) {
@@ -156,26 +150,7 @@ public class EditCenter implements Command {
     private void setExpoCenterDataToReq(HttpServletRequest req) {
         req.setAttribute("idEdit", idCenter);
         req.setAttribute("exhibitionCenter", exhibitionCenter);
-
         req.setAttribute("phones", phoneList);
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.info(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.info(exception);
-        }
-    }
 }

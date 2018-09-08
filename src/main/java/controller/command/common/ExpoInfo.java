@@ -1,9 +1,8 @@
 package controller.command.common;
 
 import controller.command.Command;
+import controller.command.ServletHelper;
 import controller.command.util.Links;
-import dao.Connection.ConnectionPoolMySql;
-import dao.mysql.FactoryMySql;
 import entities.Contract;
 import entities.Exhibition;
 import entities.ExhibitionCenter;
@@ -15,20 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.*;
 
-public class ExpoInfo implements Command {
+public class ExpoInfo extends ServletHelper implements Command {
 
-    private Connection connection;
-    private FactoryMySql factoryMySql;
     private Integer idContact;
     private Exhibition exhibition;
     private ExhibitionCenter exhibitionCenter;
     private Contract contract;
     private List<String> listDescriptions;
-
-    private String lang;
 
     private static final Logger LOGGER = Logger.getLogger(ExpoInfo.class);
 
@@ -61,11 +55,6 @@ public class ExpoInfo implements Command {
             idContact = (Integer) session.getAttribute("idContract");
         }
 
-        if (session.getAttribute("langBundle") != null) {
-            lang = (String) session.getAttribute("langBundle");
-        } else {
-            lang = "ENG";
-        }
     }
 
     private void setDataToReq(HttpServletRequest request) {
@@ -79,50 +68,32 @@ public class ExpoInfo implements Command {
      * Get Contract, Exhibition, ExhibitionCenter from DB
      */
     private void getEntities() {
-        handleConnection();
+        handleConnection(LOGGER);
         contract = new Contract();
         exhibition = new Exhibition();
         exhibitionCenter = new ExhibitionCenter();
 
         try {
             if (idContact != null) {
-                factoryMySql.createExhibitionContract(connection).prepareCEC(contract, exhibition,
+                factoryDB.createExhibitionContract(connection).prepareCEC(contract, exhibition,
                         exhibitionCenter, idContact);
                 getDescription();
             }
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
-            closeConnection();
+            closeConnection(LOGGER);
         }
     }
 
     private void getDescription() throws Exception {
-        Map<String, String> descriptionAll = factoryMySql.createDescriptionTable(connection)
-                    .getAllDescriptionById(exhibition.getId());
+        Map<String, String> descriptionAll = factoryDB.createDescriptionTable(connection)
+                .getAllDescriptionById(exhibition.getId());
 
         listDescriptions = new ArrayList<>(descriptionAll.values());
-        if(listDescriptions == null) {
+        if (listDescriptions == null) {
             listDescriptions = Collections.emptyList();
         }
     }
 
-    private void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
-
-    private void handleConnection() {
-        try {
-            connection = ConnectionPoolMySql.getInstance().getConnection();
-            factoryMySql = new FactoryMySql();
-        } catch (Exception exception) {
-            LOGGER.error(exception);
-        }
-    }
 }
