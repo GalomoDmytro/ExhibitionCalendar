@@ -102,6 +102,50 @@ public class TicketMySql implements TicketDao {
         }
     }
 
+    @Override
+    public int getQuantityApproved()
+            throws DBException {
+        int count;
+        try (PreparedStatement statement =
+                     connection.prepareStatement(QUERIES
+                             .getString("ticket.getQuantityApproved"))) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+        } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getQuantityApproved();");
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
+
+        return count;
+    }
+
+    @Override
+    public List<Ticket> getAllApprovedLimit(int startLimit, int endLimit)
+            throws DBException {
+        List<Ticket> tickets;
+        try (PreparedStatement statement =
+                     connection.prepareStatement(QUERIES
+                             .getString("ticket.getAllApprovedLimit"))) {
+            statement.setInt(1, startLimit);
+            statement.setInt(2, endLimit);
+            ResultSet resultSet = statement.executeQuery();
+            tickets = parseTicketSet(resultSet);
+        } catch (SQLException exception) {
+            LOGGER.info("Catch exception. When getAllApprovedLimit(" + startLimit + ", "
+                    + endLimit + ");");
+            LOGGER.error(exception);
+            throw new DBException(exception);
+        }
+
+        if (tickets == null || tickets.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return tickets;
+    }
+
     /**
      * Get all tickets from ticket table
      *
@@ -285,7 +329,7 @@ public class TicketMySql implements TicketDao {
             tickets = parseTicketSet(resultSet);
         } catch (SQLException exception) {
             LOGGER.info("Catch exception. When getTicketForUserOnContract(" + user
-                    +", " + contract + ");");
+                    + ", " + contract + ");");
             LOGGER.error(exception);
             throw new DBException(exception);
         }

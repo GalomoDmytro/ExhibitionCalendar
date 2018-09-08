@@ -168,6 +168,72 @@ public class TicketMySqlTest {
     }
 
     @Test
+    public void getQuantityApproved() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+        insertDependedTables(factoryMySql);
+
+        Ticket ticket = new Ticket().emptyTicket();
+        ticket.setHasChecked(true);
+        ticket.setContractId(1);
+        ticket.setUserId(1);
+
+        try {
+            // insert approved tickets in table
+            factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .insertTicket(ticket);
+            factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .insertTicket(ticket);
+            // insert not approved tickets in table
+            ticket.setHasChecked(false);
+            factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .insertTicket(ticket);
+
+            int countApproved = factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .getQuantityApproved();
+
+            assertEquals(2, countApproved);
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
+    }
+
+    @Test
+    public void getAllApprovedLimit() {
+        FactoryMySql factoryMySql = new FactoryMySql();
+        insertDependedTables(factoryMySql);
+
+        Ticket ticket = new Ticket().emptyTicket();
+        ticket.setHasChecked(true);
+        ticket.setContractId(1);
+        ticket.setUserId(1);
+
+        try {
+            // insert approved tickets in table
+            factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .insertTicket(ticket);
+            factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .insertTicket(ticket);
+            factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .insertTicket(ticket);
+            // insert not approved tickets in table
+            ticket.setHasChecked(false);
+            factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .insertTicket(ticket);
+
+            // ask 3 ticket from table, start from pos. 1(in query: Limit 1, 3)
+            List<Ticket> ticketsList = factoryMySql.createTicket(connection, QUERIES_MY_SQL_TEST)
+                    .getAllApprovedLimit(1, 3);
+
+            // expect 2 ticket in list
+            assertEquals(2, ticketsList.size());
+        } catch (Exception e) {
+            System.out.println(e);
+            fail();
+        }
+    }
+
+    @Test
     public void getCountSoldTicketForDateTest() {
         FactoryMySql factoryMySql = new FactoryMySql();
 
@@ -418,7 +484,7 @@ public class TicketMySqlTest {
             // number of surviving tickets
             assertEquals(1, ticketList.size());
             // id of surviving tickets
-            assertEquals(2, (int)ticketLeft.getId());
+            assertEquals(2, (int) ticketLeft.getId());
         } catch (Exception e) {
             System.out.println(e);
             fail();

@@ -6,6 +6,7 @@
    <head>
       <title>Create Contract</title>
       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
    </head>
    <body>
       <header>
@@ -56,6 +57,26 @@
                   </c:forEach>
                   </tr>
                </table>
+               <br/>
+                  <div>
+                      <ul class="pagination">
+
+                         <c:forEach begin="1" end="${numberOfPages}" var="i">
+                            <c:choose>
+                               <c:when test="${currentPage eq i}">
+                                  <li class="page-item active"><a class="page-link">
+                                      ${i}<span class="sr-only" ></span></a>
+                                  </li>
+                               </c:when>
+                               <c:otherwise>
+                                  <li class="page-item"><a class="page-link"
+                                     href="${pageContext.request.contextPath}/controller?command=approvedTicket&currentPage=${i}">${i}</a>
+                                  </li>
+                               </c:otherwise>
+                            </c:choose>
+                         </c:forEach>
+                      </ul>
+                  </div>
                <br/>
                <a class="blueButton" href="${pageContext.request.contextPath}/controller?command=moderatorHome">moderator home</a>
             </section>

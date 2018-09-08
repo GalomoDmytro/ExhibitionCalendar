@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Home extends ServletHelper implements Command {
+    
     private String date;
     private String searchLine;
     private int countExhibitions;

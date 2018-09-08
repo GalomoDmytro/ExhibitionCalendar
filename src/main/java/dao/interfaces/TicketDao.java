@@ -134,4 +134,22 @@ public interface TicketDao {
      * @throws DBException
      */
     int getCountSoldTicketForDate(Date date, Integer idContract) throws DBException;
+
+    /**
+     * Get quantity all approved tickets
+     *
+     * @return quantity sold tickets
+     * @throws DBException
+     */
+    int getQuantityApproved() throws DBException;
+
+    /**
+     * Get List of Tickets with Limit select from ticket Table
+     *
+     * @param startLim
+     * @param endLim
+     * @return
+     * @throws DBException
+     */
+    List<Ticket> getAllApprovedLimit(int startLim, int endLim) throws DBException;
 }
