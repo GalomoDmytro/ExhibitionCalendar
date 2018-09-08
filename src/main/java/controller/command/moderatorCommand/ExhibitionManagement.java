@@ -27,11 +27,15 @@ public class ExhibitionManagement implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher;
-        handleConnection();
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.MODERATOR_MANAGE_EXPO_PAGE);
 
-        dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_EXPO_PAGE);
+        getExhibitionsToShow(req);
 
+        dispatcher.forward(req, resp);
+    }
+
+    private void getExhibitionsToShow(HttpServletRequest req) {
         if (req.getParameter("search") != null
                 && (req.getParameter("searchField") == null
                 || req.getParameter("searchField").trim().length() == 0)) {
@@ -43,12 +47,11 @@ public class ExhibitionManagement implements Command {
         if (req.getParameter("idDelete") != null) {
             deleteById(req);
         }
-
-        dispatcher.forward(req, resp);
     }
 
     private void deleteById(HttpServletRequest req) {
         Integer idCenter = Integer.parseInt(req.getParameter("idDelete"));
+        handleConnection();
         try {
             if (factoryMySql.createExhibitionContract(connection)
                     .getAllContractsForExhibition(idCenter).isEmpty()) {
@@ -56,7 +59,7 @@ public class ExhibitionManagement implements Command {
                         .deleteById(Integer.valueOf(idCenter));
             } else {
                 req.setAttribute("errorDeleting"
-                        , "Have contract for this exhibition. No Delete! ");
+                        , "Have contract for this exhibition. Do Not Delete! ");
             }
         } catch (Exception exception) {
             LOGGER.error(exception);
@@ -66,6 +69,7 @@ public class ExhibitionManagement implements Command {
     }
 
     private void showAll(HttpServletRequest req) {
+        handleConnection();
         try {
             List<Exhibition> exhibitionCenterList = getAllFromDb();
             setLangTagsToExhibition(exhibitionCenterList);
@@ -80,9 +84,15 @@ public class ExhibitionManagement implements Command {
         }
     }
 
-    private void setLangTagsToExhibition(List<Exhibition> exhibitionCenterList)
+    /**
+     * Find all Language Key for Descriptions
+     *
+     * @param exhibitionList List of Exhibitions
+     * @throws DBException
+     */
+    private void setLangTagsToExhibition(List<Exhibition> exhibitionList)
             throws DBException {
-        for (Exhibition exhibition : exhibitionCenterList) {
+        for (Exhibition exhibition : exhibitionList) {
             Map<String, String> expoLang = factoryMySql
                     .createDescriptionTable(connection)
                     .getAllDescription(exhibition);
@@ -94,9 +104,15 @@ public class ExhibitionManagement implements Command {
         }
     }
 
+    /**
+     * Get search parameter from search field  and
+     * look matches in Exhibition Table for this parameter
+     *
+     * @param request
+     */
     private void specificSearch(HttpServletRequest request) {
         String looking = request.getParameter("searchField");
-
+        handleConnection();
         try {
             List<Exhibition> exhibitionList
                     = factoryMySql.createExhibition(connection)
@@ -113,6 +129,12 @@ public class ExhibitionManagement implements Command {
 
     }
 
+    /**
+     * Get all Exhibitions from DB
+     *
+     * @return List of Exhibitions
+     * @throws DBException
+     */
     private List<Exhibition> getAllFromDb() throws DBException {
         try {
             return factoryMySql.createExhibition(connection).getAllExhibition();

@@ -27,23 +27,25 @@ public class ExpoCenterManagement implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher;
-        handleConnection();
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
 
-        dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
-        if (req.getParameter("search") != null && (req.getParameter("searchField") == null)) {
-
-            showAll(req);
-        } else if (req.getParameter("search") != null) {
-            specificSearch(req);
-        }
+        getExhibitionsCentersToShow(req);
 
         if (req.getParameter("idDelete") != null) {
             deleteById(req);
         }
 
-
         dispatcher.forward(req, resp);
+    }
+
+    private void getExhibitionsCentersToShow(HttpServletRequest req) {
+        if (req.getParameter("search") != null
+                && (req.getParameter("searchField") == null)) {
+            showAll(req);
+        } else if (req.getParameter("search") != null) {
+            specificSearch(req);
+        }
     }
 
     private void showAll(HttpServletRequest req) {
@@ -51,7 +53,7 @@ public class ExpoCenterManagement implements Command {
         try {
             List<ExhibitionCenter> exhibitionCenterList = getAllFromDb();
 
-            for(ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
+            for (ExhibitionCenter exhibitionCenter : exhibitionCenterList) {
             }
 
             setPhones(exhibitionCenterList);
@@ -98,7 +100,6 @@ public class ExpoCenterManagement implements Command {
 
     private void specificSearch(HttpServletRequest request) {
 
-        // TODO: refactor search
         String looking = request.getParameter("searchField");
         handleConnection();
         try {
@@ -120,7 +121,8 @@ public class ExpoCenterManagement implements Command {
 
     private List<ExhibitionCenter> getAllFromDb() throws DBException {
         try {
-            return factoryMySql.createExhibitionCenter(connection).getAllExhibitionCenter();
+            return factoryMySql.createExhibitionCenter(connection)
+                    .getAllExhibitionCenter();
         } catch (Exception exception) {
             LOGGER.info(exception);
             throw new DBException(exception);

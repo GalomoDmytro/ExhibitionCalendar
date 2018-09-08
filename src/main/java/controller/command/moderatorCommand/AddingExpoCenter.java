@@ -19,6 +19,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Servlet response  for manage creating and put new ExhibitionCenter in DB
+ */
 public class AddingExpoCenter implements Command {
 
     private Connection connection;
@@ -39,9 +42,9 @@ public class AddingExpoCenter implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         getDataFromSession(req);
-        RequestDispatcher dispatcher;
 
-        dispatcher = req.getRequestDispatcher(Links.MODERATOR_ADD_EXPO_CENTER_PAGE);
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.MODERATOR_ADD_EXPO_CENTER_PAGE);
 
         collectParamsFromRequest(req);
 
@@ -52,6 +55,11 @@ public class AddingExpoCenter implements Command {
         dispatcher.forward(req, resp);
     }
 
+    /**
+     * Inserting ExpoCenter in DB
+     *
+     * @param request
+     */
     private void addNewExpoCenter(HttpServletRequest request) {
         if (!inputDataIsValid(request)) {
             return;
@@ -85,6 +93,9 @@ public class AddingExpoCenter implements Command {
         }
     }
 
+    /**
+     * Fill ExhibitionCenter with proper data
+     */
     private void prepareExhibitionCenter() {
         exCenter = new ExhibitionCenter.Builder()
                 .setTitle(title)
@@ -120,6 +131,11 @@ public class AddingExpoCenter implements Command {
         idModerator = (Integer) session.getAttribute("userId");
     }
 
+    /**
+     * Checking data from HttpServletRequest
+     * @param req
+     * @return false if data not valid
+     */
     private boolean inputDataIsValid(HttpServletRequest req) {
         if (!titleIsValid(req)) {
             return false;

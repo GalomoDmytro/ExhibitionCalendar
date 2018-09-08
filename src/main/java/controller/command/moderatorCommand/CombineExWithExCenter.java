@@ -37,13 +37,17 @@ public class CombineExWithExCenter implements Command {
 
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_COMBO_EXPO_WITH_HALL_PAGE);
 
+        startFormContract(req);
+
+        dispatcher.forward(req, resp);
+    }
+
+    private void startFormContract(HttpServletRequest req) {
         if (req.getParameter("expoCenterId") != null) {
             combineWithCenter(req);
         } else {
             combineWithExpo(req);
         }
-
-        dispatcher.forward(req, resp);
     }
 
     private void combineWithExpo(HttpServletRequest req) {

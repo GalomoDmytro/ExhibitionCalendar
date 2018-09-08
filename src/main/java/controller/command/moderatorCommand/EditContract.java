@@ -53,7 +53,7 @@ public class EditContract implements Command {
                 .getRequestDispatcher(Links.MODERATOR_EDIT_CONTRACT_PAGE);
 
         collectDataFromReq(req);
-        setDataInForm(req);
+        getDataForRequest(req);
 
         if (req.getParameter("saveChangesContract") != null) {
             updateContractInfo(req);
@@ -179,6 +179,11 @@ public class EditContract implements Command {
         return true;
     }
 
+    /**
+     * Checking input data
+     *
+     * @return true if data valid
+     */
     private boolean dateValid() {
         if (dateFromLine == null || dateToLine == null) {
             return false;
@@ -196,6 +201,13 @@ public class EditContract implements Command {
         return true;
     }
 
+    /**
+     * Check if date in right order
+     *
+     * @param from date ex. start
+     * @param to   date ex. end
+     * @return true if  date in right order
+     */
     private boolean isDateInOrder(String from, String to) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -210,7 +222,13 @@ public class EditContract implements Command {
         return false;
     }
 
-    private void setDataInForm(HttpServletRequest req) {
+    /**
+     * Get Contract, Exhibition, ExhibitionCenter and set
+     * set them to request
+     *
+     * @param req
+     */
+    private void getDataForRequest(HttpServletRequest req) {
         handleConnection();
 
         try {
@@ -237,6 +255,14 @@ public class EditContract implements Command {
         }
     }
 
+    /**
+     * Prepare data to put in form in .jsp file
+     *
+     * @param contract
+     * @param exhibition
+     * @param exhibitionCenter
+     * @param req
+     */
     private void setDataToForm(Contract contract, Exhibition exhibition,
                                ExhibitionCenter exhibitionCenter,
                                HttpServletRequest req) {

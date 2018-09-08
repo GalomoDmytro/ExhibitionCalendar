@@ -1,6 +1,5 @@
 package controller.command.moderatorCommand;
 
-
 import controller.command.Command;
 import controller.command.util.Links;
 import dao.Connection.ConnectionPoolMySql;
@@ -18,6 +17,9 @@ import java.sql.Connection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Work with tickets waiting for approval by the moderator
+ */
 public class WaitApprovalTicket implements Command {
 
     private Connection connection;

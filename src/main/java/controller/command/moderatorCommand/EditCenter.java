@@ -43,20 +43,24 @@ public class EditCenter implements Command {
 
         getIdModerator(req);
 
+        dispatcher = choseRequestDestination(req);
+
+        dispatcher.forward(req, resp);
+    }
+
+    private RequestDispatcher choseRequestDestination(HttpServletRequest req) {
+        RequestDispatcher dispatcher;
         if (req.getParameter("editExpoCenter") != null) {
             editExhibitionCenter(req);
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_MANAGE_CENTER_PAGE);
         } else if (req.getParameter("deniedEdit") != null) {
-
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_PAGE);
         } else {
-
             readDataFromReqOnFirstStart(req);
             setExpoCenterDataToReq(req);
             dispatcher = req.getRequestDispatcher(Links.MODERATOR_EDIT_CENTER_PAGE);
         }
-
-        dispatcher.forward(req, resp);
+        return dispatcher;
     }
 
     private void getIdModerator(HttpServletRequest req) {
@@ -77,7 +81,7 @@ public class EditCenter implements Command {
                     .getExhibitionCenterById(idCenter);
             phoneList = factoryMySql.createExhibitionCenterPhone(connection)
                     .getPhones(exhibitionCenter.getId());
-            if(phoneList.size() < 2) {
+            if (phoneList.size() < 2) {
                 phoneList.add("");
             }
         } catch (Exception exception) {
@@ -89,7 +93,7 @@ public class EditCenter implements Command {
 
     private void changeExpoCenterData() {
 
-         exhibitionCenter = new ExhibitionCenter.Builder()
+        exhibitionCenter = new ExhibitionCenter.Builder()
                 .setId(idCenter)
                 .setTitle(title)
                 .setAddress(address)
@@ -105,11 +109,11 @@ public class EditCenter implements Command {
                     .updateExhibitionCenter(exhibitionCenter);
             factoryMySql.createExhibitionCenterPhone(connection)
                     .deletePhone(exhibitionCenter.getId());
-            if(phone1 != null) {
+            if (phone1 != null) {
                 factoryMySql.createExhibitionCenterPhone(connection)
                         .insertPhone(exhibitionCenter.getId(), phone1);
             }
-            if(phone2 != null) {
+            if (phone2 != null) {
                 factoryMySql.createExhibitionCenterPhone(connection)
                         .insertPhone(exhibitionCenter.getId(), phone2);
             }

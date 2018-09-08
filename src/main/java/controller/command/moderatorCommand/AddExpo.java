@@ -50,6 +50,11 @@ public class AddExpo implements Command {
         idModerator = (Integer) session.getAttribute("userId");
     }
 
+    /**
+     * Contain methods to put Exhibition in DB
+     *
+     * @param request
+     */
     private void addNewExpo(HttpServletRequest request) {
         if (!inputDataIsValid()) {
             LOGGER.error("input val is not valid");
@@ -61,6 +66,11 @@ public class AddExpo implements Command {
         insertInDB(request);
     }
 
+    /**
+     * Insert Exhibition and description for Exhibition in DB
+     *
+     * @param request
+     */
     private void insertInDB(HttpServletRequest request) {
         handleConnection();
         try {
@@ -72,7 +82,7 @@ public class AddExpo implements Command {
                     + " insert new exhibition: " + exhibition
                     + " with description: " + expoDescription
                     + " for language: " + descriptionKeyLang);
-            request.setAttribute("confirmAdd", "Exhibition center added ");
+            request.setAttribute("confirmAdd", "Exhibition center added");
         } catch (Exception exception) {
             LOGGER.error(exception);
         } finally {
@@ -80,6 +90,7 @@ public class AddExpo implements Command {
         }
     }
 
+    // check description language key length.
     private void checkDescriptionLangKey() {
         if (descriptionKeyLang.length() > 15) {
             descriptionKeyLang = descriptionKeyLang.substring(0, 15);
@@ -92,6 +103,10 @@ public class AddExpo implements Command {
         exhibition.setImgSrc(expoImg);
     }
 
+    /**
+     * Check data from request
+     * @return true if data valid
+     */
     private boolean inputDataIsValid() {
         if (!titleValid()) {
             return false;

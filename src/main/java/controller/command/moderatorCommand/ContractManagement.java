@@ -25,23 +25,28 @@ public class ContractManagement implements Command {
     private static final Logger LOGGER = Logger.getLogger(ContractManagement.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
         dispatcher = req.getRequestDispatcher(Links.MODERATOR_CONTRACT_PAGE);
 
-        if (req.getParameter("search") != null && (req.getParameter("searchField") == null
-                || req.getParameter("searchField").trim().length() == 0)) {
-            showAll(req);
-        } else if (req.getParameter("search") != null) {
-            specificSearch(req);
-        }
+        choseWhatToShow(req);
 
         if (req.getParameter("idDelete") != null) {
             deleteById(req);
         }
 
         dispatcher.forward(req, resp);
+    }
+
+    private void choseWhatToShow(HttpServletRequest req) {
+        if (req.getParameter("search") != null && (req.getParameter("searchField") == null
+                || req.getParameter("searchField").trim().length() == 0)) {
+            showAll(req);
+        } else if (req.getParameter("search") != null) {
+            specificSearch(req);
+        }
     }
 
     private void showAll(HttpServletRequest req) {
@@ -64,11 +69,14 @@ public class ContractManagement implements Command {
             String idContractDel = req.getParameter("idDelete");
             if (idContractDel != null) {
                 int idC = Integer.parseInt(idContractDel);
-                List<Ticket> soldTickets = factoryMySql.createTicket(connection).getAllTicketsForContract(idC);
+                List<Ticket> soldTickets = factoryMySql
+                        .createTicket(connection).getAllTicketsForContract(idC);
                 if(soldTickets.isEmpty()) {
-                    factoryMySql.createExhibitionContract(connection).deleteContractById(idC);
+                    factoryMySql.createExhibitionContract(connection)
+                            .deleteContractById(idC);
                 } else {
-                    req.setAttribute("errorDeleting", "Сan not be deleted. Already sold some tickets!");
+                    req.setAttribute("errorDeleting",
+                            "Сan not be deleted. Already sold some tickets!");
                 }
             }
         } catch (Exception exception) {

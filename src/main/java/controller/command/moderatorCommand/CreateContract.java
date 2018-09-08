@@ -45,13 +45,12 @@ public class CreateContract implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher;
+
+        RequestDispatcher dispatcher = req
+                .getRequestDispatcher(Links.MODERATOR_CREATE_CONTRACT_PAGE);
+
         getIdModerator(req);
-
-        dispatcher = req.getRequestDispatcher(Links.MODERATOR_CREATE_CONTRACT_PAGE);
-
         collectDataFromRequest(req);
-
         showExhibitionInfo(req);
         showExhibitionCenterInfo(req);
 

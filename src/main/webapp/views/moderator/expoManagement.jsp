@@ -16,7 +16,7 @@
       <center>
          <div class="content">
             <section class="main">
-               <h1>Moderator: Expo Center Management</h1>
+               <h1>Moderator: Expo Management</h1>
                <br>
                <form action="${pageContext.request.contextPath}/controller?command=expoManagement" method="post">
                   Search<input type="text" name="searchField">
@@ -51,13 +51,12 @@
                         <td>
                         <form action="${pageContext.request.contextPath}/controller?command=editExposition" method="post">
                             <input type="hidden" name="expoId" value="<c:out value='${expo.id}'/>">
-                            <input type="submit" value="Edit"/>
+                            <input  class="submitBtn" type="submit" value="Edit"/>
                         </form>
-                           &nbsp;&nbsp;&nbsp;&nbsp;
-                           <a href="${pageContext.request.contextPath}/controller?command=expoManagement&idDelete=<c:out value='${expo.id}'/>">Delete</a>
+                           <a class="resetBtn" href="${pageContext.request.contextPath}/controller?command=expoManagement&idDelete=<c:out value='${expo.id}'/>">Delete</a>
                            &nbsp;&nbsp;&nbsp;&nbsp;
 
-                           <a href="${pageContext.request.contextPath}/controller?command=combineExpoWithCenter&idExhibition=<c:out value='${expo.id}'/>">Form_contract</a>
+                           <a  class="submitBtn" href="${pageContext.request.contextPath}/controller?command=combineExpoWithCenter&idExhibition=<c:out value='${expo.id}'/>">Form_contract</a>
                         </td>
                      </tr>
                   </c:forEach>

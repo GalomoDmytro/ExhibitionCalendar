@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Servlet show all approved ticket
+ */
 public class ApprovedTickets implements Command {
 
     private Connection connection;
@@ -35,8 +38,6 @@ public class ApprovedTickets implements Command {
 
         dispatcher.forward(req, resp);
     }
-
-
 
     private void setDataToReq(HttpServletRequest req) {
 

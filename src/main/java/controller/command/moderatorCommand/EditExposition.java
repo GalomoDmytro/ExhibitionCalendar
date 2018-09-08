@@ -42,13 +42,13 @@ public class EditExposition implements Command {
         RequestDispatcher dispatcher = req
                 .getRequestDispatcher(Links.MODERATOR_EDIT_EXHIBITION_PAGE);
 
-        getIdModerator(req);
+        getDataFromSession(req);
 
         getDataFromReq(req);
 
         getDataFromDB();
 
-        choseAction(req);
+        checkIfBtnEditExpoHasPressed(req);
 
         setDataToReq(req);
 
@@ -61,29 +61,27 @@ public class EditExposition implements Command {
         }
     }
 
-    private void getIdModerator(HttpServletRequest req) {
+    private void getDataFromSession(HttpServletRequest req) {
         HttpSession session = req.getSession();
         idModerator = (Integer) session.getAttribute("userId");
     }
 
-    private void choseAction(HttpServletRequest request) {
+    private void checkIfBtnEditExpoHasPressed(HttpServletRequest request) {
         if (request.getParameter("editExpo") != null) {
-
             collectDataToSave(request);
-
             goModeratorHome = saveData(request);
-
-            LOGGER.info("btn save pressed");
         }
     }
 
+    /**
+     * Update Exposition Table and Describe Table
+     *
+     * @param request
+     * @return true if don't catch any exception
+     */
     private boolean saveData(HttpServletRequest request) {
         handleConnection();
-        Exhibition exhibition = new Exhibition.Builder()
-                .setId(exhibitionId)
-                .setTitle(title)
-                .setImgSrc(imgSrc)
-                .build();
+        Exhibition exhibition = prepareExhibition();
 
         try {
             factoryMySql.createExhibition(connection).setLockExhibitionTable();
@@ -98,6 +96,7 @@ public class EditExposition implements Command {
                         .insertDescriptionById(entry.getKey(), entry.getValue(), exhibitionId);
             }
             connection.commit();
+            connection.setAutoCommit(true);
             LOGGER.info("Moderator id: " + idModerator
                     + " has set new data to expoId: " + exhibition.getId()
                     + " New data: " + exhibition);
@@ -106,11 +105,6 @@ public class EditExposition implements Command {
             LOGGER.error(e);
             return false;
         } finally {
-            try {
-                connection.setAutoCommit(true);
-            } catch (Exception e) {
-                LOGGER.error(e);
-            }
             try {
                 factoryMySql.createTicket(connection).unlockTable();
             } catch (Exception e) {
@@ -121,6 +115,14 @@ public class EditExposition implements Command {
         }
 
         return true;
+    }
+
+    private Exhibition prepareExhibition() {
+        return new Exhibition.Builder()
+                .setId(exhibitionId)
+                .setTitle(title)
+                .setImgSrc(imgSrc)
+                .build();
     }
 
     private void collectDataToSave(HttpServletRequest request) {
@@ -135,18 +137,21 @@ public class EditExposition implements Command {
             }
         }
 
-        if (request.getParameter("newTextLabel") != null &&
-                request.getParameter("newTextDescription") != null
-                && request.getParameter("newTextLabel").length() > 0
-                && request.getParameter("newTextDescription").length() > 0
-                && request.getParameter("newTextLabel").length() > 0
-        ) {
+        if (isDescribeParamGood(request)) {
             descriptionToSave.put(request.getParameter("newTextLabel"),
                     request.getParameter("newTextDescription"));
         }
 
         title = request.getParameter("title");
         imgSrc = request.getParameter("imgSrc");
+    }
+
+    private boolean isDescribeParamGood(HttpServletRequest request) {
+        return request.getParameter("newTextLabel") != null &&
+                request.getParameter("newTextDescription") != null
+                && request.getParameter("newTextLabel").length() > 0
+                && request.getParameter("newTextDescription").length() > 0
+                && request.getParameter("newTextLabel").length() > 0;
     }
 
     private void getDataFromDB() {
