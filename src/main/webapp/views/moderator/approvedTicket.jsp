@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page errorPage="../utility/error.jsp" %>
+<c:choose>
+   <c:when test="${langBundle == null}">
+      <fmt:setBundle basename="strings_ru"/>
+   </c:when>
+   <c:otherwise>
+      <fmt:setBundle basename="${langBundle}"/>
+   </c:otherwise>
+</c:choose>
 <html>
    <head>
-      <title>Create Contract</title>
+      <title>ApprovedTickets</title>
       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
       <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
    </head>
@@ -17,7 +26,7 @@
       <center>
          <div class="content">
             <section class="main">
-               <h1>Approved Ticket</h1>
+               <h1><fmt:message key="title.approvedTicket"/></h1>
                <br>
                <h2>Edit contract:</h2>
                <table border="1" cellpadding="8">

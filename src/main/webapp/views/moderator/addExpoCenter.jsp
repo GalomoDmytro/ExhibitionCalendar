@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page errorPage="../utility/error.jsp" %>
-
+<c:choose>
+   <c:when test="${langBundle == null}">
+      <fmt:setBundle basename="strings_ru"/>
+   </c:when>
+   <c:otherwise>
+      <fmt:setBundle basename="${langBundle}"/>
+   </c:otherwise>
+</c:choose>
 <html>
    <head>
       <title>ExpoCenter</title>
@@ -17,7 +25,7 @@
       <center>
          <div class="content">
             <section class="main">
-               <h1>Add Exhibition Center</h1>
+               <h1><fmt:message key="title.addExhibitionCenter"/></h1>
                <br>
                ${confirmAdd}
                <br>
