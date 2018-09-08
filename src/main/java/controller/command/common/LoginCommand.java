@@ -26,9 +26,6 @@ public class LoginCommand extends ServletHelper implements Command {
     private static final ResourceBundle QUERIES = ResourceBundle
             .getBundle("strings_error_eng");
 
-    public LoginCommand() {
-    }
-
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

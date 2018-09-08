@@ -35,19 +35,26 @@ public class RegistrationCommand extends ServletHelper implements Command {
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("strings_error_eng");
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         collectParamsFromRequest(req);
 
         RequestDispatcher dispatcher;
+        dispatcher = tryToRegister(req);
+
+        dispatcher.forward(req, resp);
+    }
+
+    private RequestDispatcher tryToRegister(HttpServletRequest req) {
+        RequestDispatcher dispatcher;
         if (isDataGood(req)) {
             addNewUserToDB();
-            declareRole(req, resp);
+            declareRole(req);
             dispatcher = req.getRequestDispatcher(Links.HOME_PAGE);
         } else {
             dispatcher = req.getRequestDispatcher(Links.REGISTRATION_PAGE);
         }
-
-        dispatcher.forward(req, resp);
+        return dispatcher;
     }
 
     private boolean isDataGood(HttpServletRequest req) {
@@ -118,7 +125,8 @@ public class RegistrationCommand extends ServletHelper implements Command {
         handleConnection(LOGGER);
         try {
             if (factoryDB.createUser(connection).isNameInTable(name)) {
-                req.setAttribute("errorNameProfile", QUERIES.getString("ERROR_NAME_ALREADY_EXIST"));
+                req.setAttribute("errorNameProfile", QUERIES
+                        .getString("ERROR_NAME_ALREADY_EXIST"));
                 return false;
             }
         } catch (Exception exception) {
@@ -235,12 +243,12 @@ public class RegistrationCommand extends ServletHelper implements Command {
         return true;
     }
 
-    private void declareRole(HttpServletRequest req, HttpServletResponse resp) {
+    private void declareRole(HttpServletRequest req) {
         HttpSession session = req.getSession(true);
         session.setAttribute("role", Role.USER);
 
         if (user.getId() != null) {
-            session.setAttribute("idUser", user.getId());
+            session.setAttribute("userId", user.getId());
         }
     }
 
