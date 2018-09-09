@@ -17,7 +17,6 @@
          <div class="content">
             <section class="main">
                <h1>Admin page</h1>
-               <h2>${role}</h2>
                <!-- Registration form-->
                <p>Set role to user</p>
                <form action="${pageContext.request.contextPath}/controller?command=admin" method="post">
