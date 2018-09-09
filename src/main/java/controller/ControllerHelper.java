@@ -11,20 +11,13 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Accepts input and converts it to commands for the model
  */
 public class ControllerHelper {
 
-    private Map<String, Command> commandMap = new HashMap<>();
     private static final Logger LOGGER = Logger.getLogger(ControllerHelper.class);
-
-    ControllerHelper() {
-        initCommandMap();
-    }
 
     /**
      * Searches the servlet responsible for the command received from the req
@@ -36,38 +29,87 @@ public class ControllerHelper {
     Command getCommand(HttpServletRequest req, HttpServletResponse resp) {
         String commandName = req.getParameter("command");
 
-        if (commandMap.get(commandName) != null) {
-            return commandMap.get(commandName);
-        }
-
-        return new Home();
+            return commandsMapping(commandName);
     }
 
-    private void initCommandMap() {
-        commandMap.put("home", new Home());
-        commandMap.put("login", new LoginCommand());
-        commandMap.put("registration", new RegistrationCommand());
-        commandMap.put("logout", new LogoutCommand());
-        commandMap.put("admin", new Admin());
-        commandMap.put("moderatorHome", new ModeratorHome());
-        commandMap.put("addExpoCenter", new AddingExpoCenter());
-        commandMap.put("expoCenterManagement", new ExpoCenterManagement());
-        commandMap.put("editExpositionCenter", new EditCenter());
-        commandMap.put("addExposition", new AddExpo());
-        commandMap.put("expoManagement", new ExhibitionManagement());
-        commandMap.put("editExposition", new EditExposition());
-        commandMap.put("combineExpoWithCenter", new CombineExWithExCenter());
-        commandMap.put("createContract", new CreateContract());
-        commandMap.put("contractManagement", new ContractManagement());
-        commandMap.put("editContract", new EditContract());
-        commandMap.put("purchase", new Purchase());
-        commandMap.put("expoInfo", new ExpoInfo());
-        commandMap.put("userHome", new UserHome());
-        commandMap.put("changeLang", new ChangeLanguage());
-        commandMap.put("checkOut", new CheckOut());
-        commandMap.put("purchaseProcessing", new PurchaseProcessing());
-        commandMap.put("waitApprovalTicket", new WaitApprovalTicket());
-        commandMap.put("approvedTicket", new ApprovedTickets());
+    private Command commandsMapping(String commandName) {
+        LOGGER.info("in go  " + commandName);
+        switch (commandName) {
+            case "home":
+                return new Home();
+
+            case "login":
+                return new LoginCommand();
+
+            case "registration":
+                return new RegistrationCommand();
+
+            case "logout":
+                return new LogoutCommand();
+
+            case "admin":
+                return new Admin();
+
+            case "moderatorHome":
+                return new ModeratorHome();
+
+            case "addExpoCenter":
+                return new AddingExpoCenter();
+
+            case "expoCenterManagement":
+                return new ExpoCenterManagement();
+
+            case "editExpositionCenter":
+                return new EditCenter();
+
+            case "addExposition":
+                return new AddExpo();
+
+            case "expoManagement":
+                return new ExhibitionManagement();
+
+            case "editExposition":
+                return new EditExposition();
+
+            case "combineExpoWithCenter":
+                return new CombineExWithExCenter();
+
+            case "createContract":
+                return new ContractManagement();
+
+            case "contractManagement":
+                return new CreateContract();
+
+            case "editContract":
+                return new EditContract();
+
+            case "purchase":
+                return new Purchase();
+
+            case "expoInfo":
+                return new ExpoInfo();
+
+            case "userHome":
+                return new UserHome();
+
+            case "changeLang":
+                return new ChangeLanguage();
+
+            case "checkOut":
+                return new CheckOut();
+
+            case "purchaseProcessing":
+                return new PurchaseProcessing();
+
+            case "waitApprovalTicket":
+                return new WaitApprovalTicket();
+
+            case "approvedTicket":
+                return new ApprovedTickets();
+
+            default:
+                return new Home();
+        }
     }
 
 }
