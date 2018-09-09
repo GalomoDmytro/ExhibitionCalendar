@@ -30,7 +30,7 @@ public abstract class ServletHelper {
     }
 
     /**
-     * Get connection for DB and create factoryDB
+     * Get connection to DB and create factoryDB
      *
      * @param logger
      */

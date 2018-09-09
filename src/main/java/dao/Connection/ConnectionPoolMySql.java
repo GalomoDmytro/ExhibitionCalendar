@@ -20,13 +20,19 @@ import java.util.ResourceBundle;
  */
 public class ConnectionPoolMySql implements ConnectionPoolDao {
 
-    private GenericObjectPool connectionPool = null;
+    private GenericObjectPool connectionPool;
+    private DataSource dataSource;
     private static final Logger LOGGER = Logger.getLogger(PasswordHandler.class);
     private static final ResourceBundle QUERIES = ResourceBundle.getBundle("DBConnection");
     private volatile static ConnectionPoolMySql instance = null;
 
 
     private ConnectionPoolMySql() {
+        try {
+            dataSource = setUp();
+        } catch (Exception e) {
+            LOGGER.error(e);
+        }
     }
 
     public static ConnectionPoolMySql getInstance() {
@@ -42,7 +48,6 @@ public class ConnectionPoolMySql implements ConnectionPoolDao {
 
     public Connection getConnection() throws DBException {
         try {
-            DataSource dataSource = setUp();
             return dataSource.getConnection();
         } catch (Exception exception) {
             LOGGER.error(exception);
