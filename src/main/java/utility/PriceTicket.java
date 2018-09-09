@@ -4,6 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class PriceTicket {
 
     public PriceTicket() {

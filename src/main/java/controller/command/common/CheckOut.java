@@ -18,6 +18,8 @@ import java.sql.Date;
 
 /**
  * Servlet processes payment
+ *
+ * @author Dmytro Galomko
  */
 public class CheckOut extends ServletHelper implements Command {
 

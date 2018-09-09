@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class Contract {
 
     private Integer id;

@@ -2,6 +2,8 @@ package controller.command.util;
 
 /**
  * contains all pages involved in project
+ *
+ * @author Dmytro Galomko
  */
 public class Links {
 

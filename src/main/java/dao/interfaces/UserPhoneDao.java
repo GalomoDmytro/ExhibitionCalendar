@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Defines methods for work with user_phone table
+ *
+ * @author Dmytro Galomko
  */
 public interface UserPhoneDao {
 

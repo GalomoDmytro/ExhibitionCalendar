@@ -7,12 +7,15 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
+/**
+ * @author Dmytro Galomko
+ */
 @WebFilter(
         filterName = "EncodingFilter",
         initParams = {
-        @WebInitParam(name="encoding", value="UTF-8", description = "Encoding Param"),
-        @WebInitParam(name="content", value="text/html; charset=UTF-8", description = "Content Param")
-    })
+                @WebInitParam(name = "encoding", value = "UTF-8", description = "Encoding Param"),
+                @WebInitParam(name = "content", value = "text/html; charset=UTF-8", description = "Content Param")
+        })
 public class EncodingFilter implements Filter {
     private String code;
     private String content;

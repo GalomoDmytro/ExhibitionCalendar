@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class UserMySql implements UserDao {
 
     private final Connection connection;

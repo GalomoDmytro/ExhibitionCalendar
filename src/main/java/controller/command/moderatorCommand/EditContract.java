@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class EditContract extends ServletHelper implements Command {
 
     private Integer idContract;

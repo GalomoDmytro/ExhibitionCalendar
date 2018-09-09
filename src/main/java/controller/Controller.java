@@ -13,6 +13,8 @@ import java.io.IOException;
 /**
  * Accepts input from doGet, and doPost.
  * Send Http Servlet request and response to ControllerHelper
+ *
+ * @author Dmytro Galomko
  */
 @WebServlet(urlPatterns = {"/controller"})
 public class Controller extends HttpServlet {

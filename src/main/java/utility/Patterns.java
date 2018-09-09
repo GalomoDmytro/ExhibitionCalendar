@@ -1,5 +1,8 @@
 package utility;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class Patterns {
     /* PASSWORD
    * start-of-string

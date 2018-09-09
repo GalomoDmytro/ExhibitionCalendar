@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Accepts input and converts it to commands for the model
+ *
+ * @author Dmytro Galomko
  */
 public class ControllerHelper {
 

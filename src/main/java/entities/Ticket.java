@@ -3,6 +3,9 @@ package entities;
 import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class Ticket {
 
     private Integer id;

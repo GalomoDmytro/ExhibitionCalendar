@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Defines methods for work with exhibition_center_phone table
+ *
+ * @author Dmytro Galomko
  */
 public interface PhoneExhibitionCenterDao {
 

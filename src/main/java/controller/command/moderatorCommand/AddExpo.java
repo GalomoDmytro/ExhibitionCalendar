@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class AddExpo extends ServletHelper implements Command {
 
     private String expoTitle;

@@ -1,4 +1,5 @@
 package controller.filter;
+
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -8,6 +9,8 @@ import java.io.IOException;
 
 /**
  * Prevent Cross-Site Scripting
+ *
+ * @author Dmytro Galomko
  */
 
 @WebFilter(

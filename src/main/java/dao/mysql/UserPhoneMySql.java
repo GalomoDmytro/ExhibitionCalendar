@@ -14,6 +14,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class UserPhoneMySql implements UserPhoneDao {
 
     private static final String FIELD_MAIL = "email";

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  * Help prevent Cross-Site Scripting
+ *
+ * @author Dmytro Galomko
  */
 public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
@@ -50,7 +52,6 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
     private String stripXSS(String value) {
 
         if (value != null) {
-            // TODO: ESAPI library ?
 
             // Avoid null characters
             value = value.replaceAll("", "");

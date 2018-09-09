@@ -1,5 +1,8 @@
 package utility;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class JSPError {
 
     public static final String ERROR_TITLE = "Oops, some trouble with title";

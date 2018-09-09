@@ -3,6 +3,9 @@ package utility;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
+/**
+ * @author Dmytro Galomko
+ */
 public final class PasswordHandler {
 
     private static final Logger LOGGER = Logger.getLogger(PasswordHandler.class);

@@ -12,6 +12,8 @@ import java.io.IOException;
 /**
  * Responsible for installing and changing
  * the language bundle in the session
+ *
+ * @author Dmytro Galomko
  */
 public class ChangeLanguage implements Command {
 

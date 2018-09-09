@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * Defines methods for work with exhibition table
+ *
+ * @author Dmytro Galomko
  */
 public interface ExhibitionDao {
 

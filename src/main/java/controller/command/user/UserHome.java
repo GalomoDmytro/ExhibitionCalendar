@@ -17,6 +17,8 @@ import java.util.List;
 
 /**
  * Servlet responsible for User home page
+ *
+ * @author Dmytro Galomko
  */
 public class UserHome extends ServletHelper implements Command {
 

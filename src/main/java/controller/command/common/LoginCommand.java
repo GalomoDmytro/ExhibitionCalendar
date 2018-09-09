@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class LoginCommand extends ServletHelper implements Command {
 
     private String nameOrMail;

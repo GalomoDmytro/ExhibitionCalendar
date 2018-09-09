@@ -1,5 +1,8 @@
 package exceptions;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class DBException extends Exception {
 
     public DBException(Throwable ex) {

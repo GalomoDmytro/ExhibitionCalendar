@@ -9,6 +9,8 @@ import java.sql.Connection;
 
 /**
  * Contains methods common to most servlets
+ *
+ * @author Dmytro Galomko
  */
 public abstract class ServletHelper {
     protected Connection connection;

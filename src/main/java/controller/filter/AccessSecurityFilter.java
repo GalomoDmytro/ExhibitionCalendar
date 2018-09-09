@@ -14,6 +14,8 @@ import java.io.IOException;
 
 /**
  * Сheck user has access to the requested page.
+ *
+ * @author Dmytro Galomko
  */
 @WebFilter(
         filterName = "AccessSecurityFilter",

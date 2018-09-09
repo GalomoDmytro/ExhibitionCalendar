@@ -19,6 +19,8 @@ import java.util.List;
 
 /**
  * Servlet response  for manage creating and put new ExhibitionCenter in DB
+ *
+ * @author Dmytro Galomko
  */
 public class AddingExpoCenter extends ServletHelper implements Command {
 

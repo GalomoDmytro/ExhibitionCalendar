@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class LogoutCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(LogoutCommand.class);
 

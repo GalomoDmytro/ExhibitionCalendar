@@ -6,6 +6,8 @@ import exceptions.DBException;
 
 /**
  * Defines methods for work with role table
+ *
+ * @author Dmytro Galomko
  */
 public interface RoleDao {
     /**

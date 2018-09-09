@@ -5,6 +5,9 @@ import dao.interfaces.*;
 import java.sql.Connection;
 import java.util.ResourceBundle;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class FactoryMySql implements FactoryDao {
 
     public FactoryMySql() {

@@ -12,6 +12,8 @@ import java.io.IOException;
 
 /**
  * Prohibits access through the address bar
+ *
+ * @author Dmytro Galomko
  */
 
 @WebFilter(

@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Defines methods for work with ticket table
+ *
+ * @author Dmytro Galomko
  */
 public interface TicketDao {
 

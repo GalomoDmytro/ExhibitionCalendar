@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Servlet show all approved ticket
+ *
+ * @author Dmytro Galomko
  */
 public class ApprovedTickets extends ServletHelper implements Command {
 

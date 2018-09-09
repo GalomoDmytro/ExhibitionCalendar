@@ -11,6 +11,9 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class TicketMySql implements TicketDao {
     private final Connection connection;
     private final ResourceBundle QUERIES;

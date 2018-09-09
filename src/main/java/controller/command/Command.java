@@ -8,6 +8,8 @@ import java.io.IOException;
 /**
  * Interface realisation implies executing
  * command defined by ControllerHelper in Controller
+ *
+ * @author Dmytro Galomko
  */
 
 public interface Command {

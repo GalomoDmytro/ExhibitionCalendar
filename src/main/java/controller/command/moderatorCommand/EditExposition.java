@@ -16,6 +16,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class EditExposition extends ServletHelper implements Command {
 
     private Integer exhibitionId;

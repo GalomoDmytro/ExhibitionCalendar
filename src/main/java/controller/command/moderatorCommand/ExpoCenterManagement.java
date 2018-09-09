@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class ExpoCenterManagement extends ServletHelper implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(ExpoCenterManagement.class);

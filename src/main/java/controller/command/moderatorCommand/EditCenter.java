@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class EditCenter extends ServletHelper implements Command {
 
     private Integer idCenter;

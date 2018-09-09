@@ -7,6 +7,8 @@ import java.util.Map;
 
 /**
  * Defines methods for work with Description table
+ *
+ * @author Dmytro Galomko
  */
 public interface DescriptionTableDao {
 

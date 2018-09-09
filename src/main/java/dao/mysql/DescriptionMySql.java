@@ -1,6 +1,5 @@
 package dao.mysql;
 
-import controller.command.moderatorCommand.EditExposition;
 import dao.interfaces.DescriptionTableDao;
 import entities.Exhibition;
 import exceptions.DBException;
@@ -12,6 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class DescriptionMySql implements DescriptionTableDao {
 
     private final ResourceBundle QUERIES;

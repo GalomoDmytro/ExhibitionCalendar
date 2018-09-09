@@ -21,6 +21,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class Purchase extends ServletHelper implements Command {
 
     private String userId;

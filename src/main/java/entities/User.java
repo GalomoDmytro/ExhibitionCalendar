@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class User {
 
     private Integer id;

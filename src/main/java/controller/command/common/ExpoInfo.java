@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class ExpoInfo extends ServletHelper implements Command {
 
     private Integer idContact;

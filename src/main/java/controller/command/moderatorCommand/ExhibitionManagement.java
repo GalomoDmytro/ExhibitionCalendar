@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class ExhibitionManagement extends ServletHelper implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(ExhibitionManagement.class);

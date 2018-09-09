@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Defines methods for work with exhibition_contract table
+ *
+ * @author Dmytro Galomko
  */
 public interface ExhibitionContractDao {
 

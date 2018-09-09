@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class Admin extends ServletHelper implements Command {
 
     private String id;

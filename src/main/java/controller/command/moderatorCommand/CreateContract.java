@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class CreateContract extends ServletHelper implements Command {
 
     private String combineFrom;

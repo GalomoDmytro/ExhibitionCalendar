@@ -14,6 +14,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class PhoneExhibitionCenterMySql implements PhoneExhibitionCenterDao {
 
     private final Connection connection;

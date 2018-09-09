@@ -17,6 +17,8 @@ import java.util.List;
 
 /**
  * Work with tickets waiting for approval by the moderator
+ *
+ * @author Dmytro Galomko
  */
 public class WaitApprovalTicket extends ServletHelper implements Command {
 

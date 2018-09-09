@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
  * Interface realisation implies
  * returning objects to work with specific
  * table from database
+ *
+ * @author Dmytro Galomko
  */
 public interface FactoryDao {
 

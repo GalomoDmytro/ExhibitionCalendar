@@ -2,6 +2,9 @@ package entities;
 
 import java.util.Objects;
 
+/**
+ * @author Dmytro Galomko
+ */
 public class Exhibition {
 
     private Integer id;

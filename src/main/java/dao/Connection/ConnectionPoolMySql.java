@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 /**
  * Singleton
  * Serves to get the connection to the database
+ *
+ * @author Dmytro Galomko
  */
 public class ConnectionPoolMySql implements ConnectionPoolDao {
 
