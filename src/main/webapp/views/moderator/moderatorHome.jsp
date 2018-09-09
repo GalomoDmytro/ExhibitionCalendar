@@ -28,29 +28,29 @@
                <h1><fmt:message key="title.moderatorHome"/></h1>
                <br>
                <form action="${pageContext.request.contextPath}/controller?command=expoCenterManagement" method="post">
-                  <input type="submit" value="Expo Center management">
+                  <input type="submit" value='<fmt:message key="title.expoCenterManagement"/>'>
                </form>
                <form action="${pageContext.request.contextPath}/controller?command=expoManagement" method="post">
-                  <input type="submit" value="Expo Management">
+                  <input type="submit" value='<fmt:message key="title.expoManagement"/>'>
                </form>
                <form action="${pageContext.request.contextPath}/controller?command=contractManagement" method="post">
-                  <input type="submit" value="Contract Management">
+                  <input type="submit" value='<fmt:message key="title.contractManagement"/>'>
                </form>
                <form action="${pageContext.request.contextPath}/controller?command=addExpoCenter" method="post">
-                  <input type="submit" value="Create Expo center">
+                  <input type="submit" value='<fmt:message key="title.addExhibitionCenter"/>'>
                </form>
                <form action="${pageContext.request.contextPath}/controller?command=addExposition" method="post">
-                  <input type="submit" value="Create Expo">
+                  <input type="submit" value='<fmt:message key="title.addExhibition"/>'>
                </form>
                <form action="${pageContext.request.contextPath}/controller?command=waitApprovalTicket" method="post">
-                  <input type="submit" value="Wait Approval Ticket">
+                  <input type="submit" value='<fmt:message key="title.waitApproval"/>'>
                </form>
                <form action="${pageContext.request.contextPath}/controller?command=approvedTicket" method="post">
-                  <input type="submit" value="Approved Ticket">
+                  <input type="submit" value='<fmt:message key="title.approvedTicket"/>'>
                </form>
                <br/>
                <form action="${pageContext.request.contextPath}/controller?command=home" method="post">
-                  <input type="submit" value="Go home">
+                  <input type="submit" value='<fmt:message key="btn.goHome"/>'>
                </form>
             </section>
          </div>
