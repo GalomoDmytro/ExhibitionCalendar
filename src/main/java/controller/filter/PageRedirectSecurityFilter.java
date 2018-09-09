@@ -1,5 +1,6 @@
 package controller.filter;
 
+import controller.command.util.Links;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -29,13 +30,11 @@ public class PageRedirectSecurityFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
-
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
-
-        chain.doFilter(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(Links.HOME_PAGE);
+        dispatcher.forward(httpRequest, httpResponse);
     }
 
     public void destroy() {

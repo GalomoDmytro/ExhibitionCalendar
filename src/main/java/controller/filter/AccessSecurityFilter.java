@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Сhecks or the user has access to the requested page.
+ * Сheck user has access to the requested page.
  */
 @WebFilter(
         filterName = "AccessSecurityFilter",
@@ -127,7 +127,8 @@ public class AccessSecurityFilter implements Filter {
         return false;
     }
 
-    private void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    private void redirect(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
 
         if (command != null) {
             switch (command) {

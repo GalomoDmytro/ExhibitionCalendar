@@ -1,6 +1,5 @@
 package controller.filter;
 
-import controller.command.moderatorCommand.EditCenter;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
