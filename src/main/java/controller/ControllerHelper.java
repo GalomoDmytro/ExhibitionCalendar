@@ -29,7 +29,7 @@ public class ControllerHelper {
     Command getCommand(HttpServletRequest req, HttpServletResponse resp) {
         String commandName = req.getParameter("command");
 
-            return commandsMapping(commandName);
+        return commandsMapping(commandName);
     }
 
     private Command commandsMapping(String commandName) {
@@ -75,10 +75,10 @@ public class ControllerHelper {
                 return new CombineExWithExCenter();
 
             case "createContract":
-                return new ContractManagement();
+                return new CreateContract();
 
             case "contractManagement":
-                return new CreateContract();
+                return new ContractManagement();
 
             case "editContract":
                 return new EditContract();
