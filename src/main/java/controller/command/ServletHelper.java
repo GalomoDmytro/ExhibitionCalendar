@@ -7,7 +7,10 @@ import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 
-public class ServletHelper {
+/**
+ * Contains methods common to most servlets
+ */
+public abstract class ServletHelper {
     protected Connection connection;
     protected FactoryDao factoryDB;
 

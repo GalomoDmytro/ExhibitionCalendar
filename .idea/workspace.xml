@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9b9344a-0044-4dc6-bafe-b4c615e51e46" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/strings_eng.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/strings_eng.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/admin/changeRoleAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/admin/changeRoleAdmin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/command/ServletHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/command/ServletHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/PasswordHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/PasswordHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Patterns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Patterns.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,7 +26,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="1" />
-          <entry key="java" value="127" />
+          <entry key="java" value="133" />
           <entry key="jsp" value="26" />
           <entry key="properties" value="17" />
           <entry key="txt" value="2" />
@@ -38,7 +36,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="127" />
+          <entry key="JAVA" value="133" />
           <entry key="JSP" value="26" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="17" />
@@ -48,7 +46,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="74" />
-          <entry key="java" value="4343" />
+          <entry key="java" value="4379" />
           <entry key="jsp" value="205" />
           <entry key="properties" value="446" />
           <entry key="xml" value="10" />
@@ -56,7 +54,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4343" />
+          <entry key="JAVA" value="4379" />
           <entry key="JSP" value="205" />
           <entry key="PLAIN_TEXT" value="74" />
           <entry key="Properties" value="446" />
@@ -76,11 +74,50 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/ServletHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+            <state relative-caret-position="-67">
+              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/exceptions/DBException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="44">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utility/Patterns.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utility/JSPError.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="44">
+              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utility/PriceTicket.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-286">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -89,15 +126,6 @@
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1320" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/views/admin/changeRoleAdmin.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-217">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-            </state>
           </provider>
         </entry>
       </file>
@@ -117,15 +145,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="279">
               <caret line="50" column="19" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/addExposition.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="27" column="56" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -160,8 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/controller/filter/EncodingFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/filter/AccessSecurityFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/util/Links.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/common/PurchaseProcessing.java" />
         <option value="$PROJECT_DIR$/src/main/resources/MySqlDB_TEST.properties" />
@@ -183,7 +200,6 @@
         <option value="$PROJECT_DIR$/src/main/java/controller/command/common/ExpoInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/AddExpo.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ContractManagement.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/command/ServletHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/common/RegistrationCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/command/common/LoginCommand.java" />
         <option value="$PROJECT_DIR$/src/test/java/controller/command/common/LoginCommandTest.java" />
@@ -211,6 +227,9 @@
         <option value="$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/views/admin/changeRoleAdmin.jsp" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/command/ServletHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utility/PasswordHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utility/Patterns.java" />
       </list>
     </option>
   </component>
@@ -300,46 +319,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="command" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="command" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="command" type="462c0819:PsiDirectoryNode" />
-              <item name="moderatorCommand" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="command" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="utility" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
@@ -385,12 +365,6 @@
             <path>
               <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
               <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exhibition_calendar" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Exhibition Calendar" type="462c0819:PsiDirectoryNode" />
               <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -402,7 +376,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536444651133" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536481368802" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
@@ -418,7 +392,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TicketMySqlTest.getAllApprovedLimit">
+  <component name="RunManager" selected="JUnit.All in Exhibition Calendar">
     <configuration name="All in Exhibition Calendar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Exhibition Calendar" />
       <option name="PACKAGE_NAME" value="" />
@@ -498,10 +472,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in Exhibition Calendar" />
         <item itemvalue="JUnit.TicketMySqlTest.getAllApprovedLimit" />
         <item itemvalue="JUnit.TicketMySqlTest.getQuantityApproved" />
         <item itemvalue="JUnit.LoginCommandTest.wrongPasswordOrUser" />
-        <item itemvalue="JUnit.All in Exhibition Calendar" />
         <item itemvalue="JUnit.HomeTest" />
       </list>
     </recent_temporary>
@@ -517,9 +491,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TicketMySqlTest_getQuantityApproved - 2018.09.08 at 18h 38m 33s.xml">
-      <configuration name="TicketMySqlTest.getQuantityApproved" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TicketMySqlTest_getQuantityApproved - 2018.09.08 at 18h 41m 08s.xml">
       <configuration name="TicketMySqlTest.getQuantityApproved" configurationId="JUnit" />
     </history-entry>
@@ -547,9 +518,12 @@
     <history-entry file="TicketMySqlTest_getAllApprovedLimit - 2018.09.09 at 01h 04m 35s.xml">
       <configuration name="TicketMySqlTest.getAllApprovedLimit" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="All_in_Exhibition_Calendar - 2018.09.09 at 10h 56m 39s.xml">
+      <configuration name="All in Exhibition Calendar" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17590618" />
@@ -587,45 +561,13 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/AddingExpoCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/CombineExWithExCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/ContractManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/CreateContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/moderatorCommand/EditContract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -682,16 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="38" column="42" lean-forward="true" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/ServletHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -915,13 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="48" column="84" selection-start-line="48" selection-start-column="84" selection-end-line="48" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/views/admin/changeRoleAdmin.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-217">
@@ -954,6 +879,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/views/moderator/moderatorHome.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="48" column="84" selection-start-line="48" selection-start-column="84" selection-end-line="48" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/command/ServletHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-67">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/exceptions/DBException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/JSPError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/PriceTicket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-286">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/PasswordHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Patterns.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
         </state>
       </provider>
     </entry>
